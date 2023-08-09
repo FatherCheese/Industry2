@@ -1,0 +1,76 @@
+tile.industry.ore.copper.stone.name=Stone Copper Ore
+tile.industry.ore.copper.stone.desc=Copper nuggets embedded in stone.
+tile.industry.ore.copper.basalt.name=Basalt Copper Ore
+tile.industry.ore.copper.basalt.desc=Copper nuggets embedded in basalt.
+tile.industry.ore.copper.limestone.name=Limestone Copper Ore
+tile.industry.ore.copper.limestone.desc=Copper nuggets embedded in limestone.
+tile.industry.ore.copper.granite.name=Granite Copper Ore
+tile.industry.ore.copper.granite.desc=Copper nuggets embedded in granite.
+
+tile.industry.ore.tin.stone.name=Stone Tin Ore
+tile.industry.ore.tin.stone.desc=Tin Nuggets embedded in stone.
+tile.industry.ore.tin.basalt.name=Basalt Tin Ore
+tile.industry.ore.tin.basalt.desc=Tin Nuggets embedded in basalt.
+tile.industry.ore.tin.limestone.name=Limestone Tin Ore
+tile.industry.ore.tin.limestone.desc=Tin Nuggets embedded in limestone.
+tile.industry.ore.tin.granite.name=Granite Tin Ore
+tile.industry.ore.tin.granite.desc=Tin Nuggets embedded in granite.
+
+tile.industry.ore.uranium.stone.name=Stone Uranium Ore
+tile.industry.ore.uranium.stone.desc=A chunk of uranium embedded in stone.
+tile.industry.ore.uranium.basalt.name=Basalt Uranium Ore
+tile.industry.ore.uranium.basalt.desc=A chunk of uranium embedded in basalt.
+tile.industry.ore.uranium.limestone.name=Limestone Uranium Ore
+tile.industry.ore.uranium.limestone.desc=A chunk of uranium embedded in limestone.
+tile.industry.ore.uranium.granite.name=Granite Uranium Ore
+tile.industry.ore.uranium.granite.desc=A chunk of uranium embedded in granite.
+
+tile.industry.block.copper.name=Block of Copper
+tile.industry.block.copper.desc=A solid block of copper. Shocking!
+tile.industry.block.tin.name=Block of Tin
+tile.industry.block.tin.desc=A solid block of tin.
+tile.industry.block.uranium.name=Block of Uranium
+tile.industry.block.uranium.desc=A solid block of uranium. Spicy!
+
+tile.industry.cable.copper.name=Copper Cable
+tile.industry.cable.copper.desc=You're not supposed to be here.
+tile.industry.cable.tin.name=Tin Cable
+tile.industry.cable.tin.desc=As a matter of fact... you're not.
+tile.industry.cable.gold.name=Gold Cable
+tile.industry.cable.gold.desc=Get back where you belong and forget about all of this.
+tile.industry.cable.steel.name=Steel Cable
+tile.industry.cable.steel.desc=Until... we meet... again.
+
+item.industry.ore.raw.copper.name=Raw Copper Ore
+item.industry.ore.raw.copper.desc=A chunk of unprocessed copper. Can be smelted into a copper ingot.
+item.industry.ore.raw.tin.name=Raw Tin Ore
+item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
+
+item.industry.dust.copper.name=Copper Dust
+item.industry.dust.copper.desc=A pile of macerated copper. Can be smelted into a copper ingot.
+item.industry.dust.tin.name=Tin Dust
+item.industry.dust.tin.desc=A pile of macerated tin. Can be smelted into a tin ingot.
+item.industry.dust.bronze.name=Bronze Dust
+item.industry.dust.bronze.desc=A pile of macerated bronze. Can be smelted into a bronze ingot.
+item.industry.dust.iron.name=Iron Dust
+item.industry.dust.iron.desc=A pile of macerated iron. Can be smelted into an iron ingot.
+item.industry.dust.gold.name=Gold Dust
+item.industry.dust.gold.desc=A pile of macerated gold. Can be smelted into a gold ingot.
+
+item.industry.cable.copper.name=Copper Cable
+item.industry.cable.copper.desc=A 3 foot long length of copper cable.
+item.industry.cable.tin.name=Tin Cable
+item.industry.cable.tin.desc=A 3 foot long length of tin cable.
+item.industry.cable.gold.name=Gold Cable
+item.industry.cable.gold.desc=A 3 foot long length of gold cable.
+item.industry.cable.steel.name=Steel Cable
+item.industry.cable.steel.desc=A 3 foot long length of steel cable.
+
+item.industry.cable.insulated.copper.name=Insulated Copper Cable
+item.industry.cable.insulated.copper.desc=A 3 foot long length of insulated copper cable.
+item.industry.cable.insulated.tin.name=Insulated Tin Cable
+item.industry.cable.insulated.tin.desc=A 3 foot long length of insulated tin cable.
+item.industry.cable.insulated.gold.name=Insulated Gold Cable
+item.industry.cable.insulated.gold.desc=A 3 foot long length of insulated gold cable.
+item.industry.cable.insulated.steel.name=Insulated Steel Cable
+item.industry.cable.insulated.steel.desc=A 3 foot long length of insulated steel cable.

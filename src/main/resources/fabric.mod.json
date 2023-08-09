@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "industry",
+  "version": "${version}",
+
+  "name": "Industry2",
+  "description": "This mod adds industrial machines for your minecraft world.",
+  "authors": [
+    "Turnip Labs",
+    "Cookie Cakes"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "turniplabs.industry.Industry2Kt::init"
+      }
+    ]
+  },
+  "mixins": [
+    "industry.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.7",
+    "fabric-language-kotlin": "*"
+  },
+  "suggests": {
+  }
+}

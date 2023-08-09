@@ -13,9 +13,10 @@ pluginManagement {
             name = 'Babric'
             url = 'https://maven.glass-launcher.net/babric'
         }
-        maven {
-            name = 'Quilt'
-            url = 'https://maven.quiltmc.org/repository/release'
-        }
+    }
+
+    plugins {
+        id 'babric-loom' version '1.1.+'
+        id "org.jetbrains.kotlin.jvm" version kotlin_version
     }
 }
