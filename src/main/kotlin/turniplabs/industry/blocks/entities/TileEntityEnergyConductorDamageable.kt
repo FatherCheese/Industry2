@@ -19,7 +19,7 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
     private var maxMachineHealth: Int = 100
     private var healAmount: Int = 1
     private var machineHealth: Int = maxMachineHealth
-    private var hasBeenDamagedInLastTick: Boolean = false;
+    private var hasBeenDamagedInLastTick: Boolean = false
 
     override val getMachineHealth: Int
         get() = machineHealth

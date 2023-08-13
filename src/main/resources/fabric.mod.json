@@ -21,7 +21,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "turniplabs.industry.Industry2Kt::init"
+        "value": "turniplabs.industry.Industry2"
       }
     ]
   },

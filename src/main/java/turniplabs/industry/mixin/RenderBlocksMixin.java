@@ -8,17 +8,17 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.energyapi.util.RenderWire;
-import turniplabs.industry.blocks.BlockCable;
+import turniplabs.industry.blocks.cables.BlockCable;
+import turniplabs.industry.blocks.models.CableModel;
 
 @Mixin(value = RenderBlocks.class, remap = false)
 public class RenderBlocksMixin {
 
     @Shadow private WorldSource blockAccess;
 
-    @Inject(method = "renderBlockByRenderType", at = @At("TAIL"), cancellable = true)
-    private void industry_renderCables(Block block, int renderType, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        if (block instanceof BlockCable)
-            cir.setReturnValue(RenderWire.render((RenderBlocks) ((Object)this), blockAccess, x, y, z, block, 0));
+    @Inject(method = "renderBlockByRenderType", at = @At("HEAD"), cancellable = true)
+    void industry_renderCable(Block block, int renderType, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
+        if (renderType == 32)
+            cir.setReturnValue(new CableModel().renderCable((RenderBlocks) (Object) this, blockAccess, (BlockCable) block, x, y, z));
     }
 }

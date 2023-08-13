@@ -1,6 +1,5 @@
-package turniplabs.industry.blocks
+package turniplabs.industry.blocks.cables
 
-import net.minecraft.core.block.Block
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.enums.EnumDropCause
@@ -8,7 +7,9 @@ import net.minecraft.core.item.ItemStack
 import net.minecraft.core.world.World
 import turniplabs.industry.Industry2
 
-class BlockTinOre(key: String?, id: Int, material: Material?) : Block(key, id, material) {
+class BlockCableGoldInsulated(key: String?, id: Int, material: Material?, capacity: Int, transfer: Int, dangerLevel: Int) :
+    BlockCable(key, id, material, capacity, transfer, dangerLevel) {
+
     override fun getBreakResult(
         world: World?,
         dropCause: EnumDropCause?,
@@ -17,11 +18,7 @@ class BlockTinOre(key: String?, id: Int, material: Material?) : Block(key, id, m
         z: Int,
         meta: Int,
         tileEntity: TileEntity?
-    ): Array<ItemStack>? {
-        return when (dropCause) {
-            EnumDropCause.SILK_TOUCH, EnumDropCause.PICK_BLOCK -> arrayOf(ItemStack(this))
-            EnumDropCause.PROPER_TOOL -> arrayOf(ItemStack(Industry2.rawTinOre))
-            else -> null
-        }
+    ): Array<ItemStack> {
+        return arrayOf(ItemStack(Industry2.itemInsulatedGoldCable))
     }
 }

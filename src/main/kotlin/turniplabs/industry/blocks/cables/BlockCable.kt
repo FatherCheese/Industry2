@@ -1,11 +1,9 @@
-package turniplabs.industry.blocks
+package turniplabs.industry.blocks.cables
 
 import net.minecraft.core.block.BlockTileEntity
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
-import net.minecraft.core.enums.EnumDropCause
-import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.lang.I18n
 import net.minecraft.core.net.command.TextFormatting
@@ -13,22 +11,18 @@ import net.minecraft.core.world.World
 import sunsetsatellite.energyapi.EnergyAPI
 import sunsetsatellite.sunsetutils.util.ICustomDescription
 import turniplabs.industry.blocks.entities.TileEntityCable
-import turniplabs.industry.items.ModItems
 
-class BlockCable(
+open class BlockCable(
     key: String?,
     id: Int,
-    material:
-    Material?,
+    material: Material?,
     private val capacity: Int,
-    private val energy: Int,
     private val transfer: Int,
-    private val dangerLevel: Int,
-    private val breakResult: Item
+    private val dangerLevel: Int
 ) : BlockTileEntity(key, id, material), ICustomDescription {
 
     override fun getNewBlockEntity(): TileEntity {
-        return TileEntityCable(capacity, energy, transfer, dangerLevel)
+        return TileEntityCable(capacity, 0, transfer, dangerLevel)
     }
 
     override fun getDescription(p0: ItemStack?): String {
@@ -47,24 +41,7 @@ class BlockCable(
         return false
     }
 
-    override fun getRenderBlockPass(): Int {
-        return 31
-    }
-
     override fun isOpaqueCube(): Boolean {
         return false
-    }
-
-    override fun getBreakResult(
-        world: World?,
-        dropCause: EnumDropCause?,
-        x: Int,
-        y: Int,
-        z: Int,
-        meta: Int,
-        tileEntity: TileEntity?
-    ): Array<ItemStack> {
-        ModItems
-        return arrayOf(ItemStack(breakResult))
     }
 }
