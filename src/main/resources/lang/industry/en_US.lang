@@ -49,6 +49,10 @@ tile.industry.machine.casing.name=Machine Casing
 tile.industry.machine.casing.desc=
 tile.industry.machine.casing.advanced.name=Advanced Machine Casing
 tile.industry.machine.casing.advanced.desc=
+tile.industry.machine.generator.name=Generator
+tile.industry.machine.generator.desc=
+tile.industry.machine.furnace.name=Electric Furnace
+tile.industry.machine.furnace.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=
@@ -109,3 +113,6 @@ item.industry.insulated.cable.gold.name=Insulated Gold Cable
 item.industry.insulated.cable.gold.desc=
 item.industry.insulated.cable.steel.name=Insulated Steel Cable
 item.industry.insulated.cable.steel.desc=
+
+item.industry.tool.battery.redstone.name=Redstone Battery
+item.industry.tool.battery.redstone.desc=

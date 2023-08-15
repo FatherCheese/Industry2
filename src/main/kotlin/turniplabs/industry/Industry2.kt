@@ -7,8 +7,10 @@ import net.minecraft.client.sound.block.BlockSounds
 import net.minecraft.core.block.Block
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.block.tag.BlockTags
+import net.minecraft.core.crafting.recipe.RecipesFurnace
 import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemPlaceable
+import net.minecraft.core.item.ItemStack
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import turniplabs.halplibe.helper.BlockHelper
@@ -19,6 +21,11 @@ import turniplabs.industry.blocks.BlockTinOre
 import turniplabs.industry.blocks.BlockUraniumOre
 import turniplabs.industry.blocks.cables.*
 import turniplabs.industry.blocks.entities.TileEntityCable
+import turniplabs.industry.blocks.entities.TileEntityElectricFurnace
+import turniplabs.industry.blocks.entities.TileEntityGenerator
+import turniplabs.industry.blocks.machines.BlockElectricFurnace
+import turniplabs.industry.blocks.machines.BlockGenerator
+import turniplabs.industry.items.ItemBatteryRedstone
 
 
 class Industry2: ModInitializer {
@@ -40,7 +47,7 @@ class Industry2: ModInitializer {
 		/* BLOCKS */
 
 		// Ores
-		val oreCopperStone: Block? = BlockHelper.createBlock(
+		val oreCopperStone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCopperOre("industry.ore.copper.stone", nextBlockID(), Material.stone),
 			"ore_copper_stone.png",
@@ -50,7 +57,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreCopperBasalt: Block? = BlockHelper.createBlock(
+		val oreCopperBasalt: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCopperOre("industry.ore.copper.basalt", nextBlockID(), Material.stone),
 			"ore_copper_basalt.png",
@@ -60,7 +67,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreCopperLimestone: Block? = BlockHelper.createBlock(
+		val oreCopperLimestone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCopperOre("industry.ore.copper.limestone", nextBlockID(), Material.stone),
 			"ore_copper_limestone.png",
@@ -70,7 +77,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreCopperGranite: Block? = BlockHelper.createBlock(
+		val oreCopperGranite: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCopperOre("industry.ore.copper.granite", nextBlockID(), Material.stone),
 			"ore_copper_granite.png",
@@ -80,7 +87,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreTinStone: Block? = BlockHelper.createBlock(
+		val oreTinStone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockTinOre("industry.ore.tin.stone", nextBlockID(), Material.stone),
 			"ore_tin_stone.png",
@@ -90,7 +97,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreTinBasalt: Block? = BlockHelper.createBlock(
+		val oreTinBasalt: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockTinOre("industry.ore.tin.basalt", nextBlockID(), Material.stone),
 			"ore_tin_basalt.png",
@@ -100,7 +107,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreTinLimestone: Block? = BlockHelper.createBlock(
+		val oreTinLimestone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockTinOre("industry.ore.tin.limestone", nextBlockID(), Material.stone),
 			"ore_tin_limestone.png",
@@ -110,7 +117,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreTinGranite: Block? = BlockHelper.createBlock(
+		val oreTinGranite: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockTinOre("industry.ore.tin.granite", nextBlockID(), Material.stone),
 			"ore_tin_granite.png",
@@ -120,7 +127,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreUraniumStone: Block? = BlockHelper.createBlock(
+		val oreUraniumStone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockUraniumOre("industry.ore.uranium.stone", nextBlockID(), Material.stone),
 			"ore_uranium_stone.png",
@@ -130,7 +137,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreUraniumBasalt: Block? = BlockHelper.createBlock(
+		val oreUraniumBasalt: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockUraniumOre("industry.ore.uranium.basalt", nextBlockID(), Material.stone),
 			"ore_uranium_basalt.png",
@@ -140,7 +147,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreUraniumLimestone: Block? = BlockHelper.createBlock(
+		val oreUraniumLimestone: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockUraniumOre("industry.ore.uranium.limestone", nextBlockID(), Material.stone),
 			"ore_uranium_limestone.png",
@@ -150,7 +157,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreUraniumGranite: Block? = BlockHelper.createBlock(
+		val oreUraniumGranite: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockUraniumOre("industry.ore.uranium.granite", nextBlockID(), Material.stone),
 			"ore_uranium_granite.png",
@@ -161,7 +168,7 @@ class Industry2: ModInitializer {
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
 		// Blocks
-		val copperBlock: Block? = BlockHelper.createBlock(
+		val copperBlock: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.block.copper", nextBlockID(), Material.metal),
 			"block_copper_top.png",
@@ -173,7 +180,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val tinBlock: Block? = BlockHelper.createBlock(
+		val tinBlock: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.block.tin", nextBlockID(), Material.metal),
 			"block_tin_top.png",
@@ -185,7 +192,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val bronzeBlock: Block? = BlockHelper.createBlock(
+		val bronzeBlock: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.block.bronze", nextBlockID(), Material.metal),
 			"block_bronze_top.png",
@@ -197,7 +204,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val uraniumBlock: Block? = BlockHelper.createBlock(
+		val uraniumBlock: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.block.uranium", nextBlockID(), Material.metal),
 			"block_uranium_top.png",
@@ -210,7 +217,7 @@ class Industry2: ModInitializer {
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
 
 		// Cables
-		val copperCable: Block? = BlockHelper.createBlock(
+		val copperCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableCopper("industry.cable.copper", nextBlockID(), Material.metal, 32, 32, 2),
 			"block_copper_top.png",
@@ -220,7 +227,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val tinCable: Block? = BlockHelper.createBlock(
+		val tinCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableTin("industry.cable.tin", nextBlockID(), Material.metal, 16, 16, 1),
 			"block_tin_top.png",
@@ -230,7 +237,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val goldCable: Block? = BlockHelper.createBlock(
+		val goldCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableGold("industry.cable.gold", nextBlockID(), Material.metal, 512, 512, 6),
 			"block_gold_top.png",
@@ -240,9 +247,9 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val steelCable: Block? = BlockHelper.createBlock(
+		val steelCable: Block = BlockHelper.createBlock(
 			MOD_ID,
-			BlockCableGold("industry.cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8),
+			BlockCableSteel("industry.cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8),
 			"block_steel_top.png",
 			BlockSounds.METAL,
 			1.0f,
@@ -251,7 +258,7 @@ class Industry2: ModInitializer {
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
 
 		// Insulated Cables
-		val insulatedCopperCable: Block? = BlockHelper.createBlock(
+		val insulatedCopperCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableCopperInsulated("industry.cable.copper", nextBlockID(), Material.cloth, 32, 32, 0),
 			"insulated_cable_sides.png",
@@ -261,7 +268,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val insulatedTinCable: Block? = BlockHelper.createBlock(
+		val insulatedTinCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableTinInsulated("industry.cable.tin", nextBlockID(), Material.cloth, 16, 16, 0),
 			"insulated_cable_sides.png",
@@ -271,7 +278,7 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val insulatedGoldCable: Block? = BlockHelper.createBlock(
+		val insulatedGoldCable: Block = BlockHelper.createBlock(
 			MOD_ID,
 			BlockCableGoldInsulated("industry.cable.gold", nextBlockID(), Material.cloth, 512, 512, 0),
 			"insulated_cable_sides.png",
@@ -281,9 +288,9 @@ class Industry2: ModInitializer {
 			0.0f
 		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val insulatedSteelCable: Block? = BlockHelper.createBlock(
+		val insulatedSteelCable: Block = BlockHelper.createBlock(
 			MOD_ID,
-			BlockCableGoldInsulated("industry.cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0),
+			BlockCableSteelInsulated("industry.cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0),
 			"insulated_cable_sides.png",
 			BlockSounds.CLOTH,
 			1.0f,
@@ -292,7 +299,7 @@ class Industry2: ModInitializer {
 		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
 		// Machines
-		val machineCasing: Block? = BlockHelper.createBlock(
+		val machineCasing: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.machine.casing", nextBlockID(), Material.metal),
 			"machine_casing_basic.png",
@@ -302,10 +309,40 @@ class Industry2: ModInitializer {
 			0.0f
 		)
 
-		val machineCasingAdvanced: Block? = BlockHelper.createBlock(
+		val machineCasingAdvanced: Block = BlockHelper.createBlock(
 			MOD_ID,
 			Block("industry.machine.casing.advanced", nextBlockID(), Material.metal),
 			"machine_casing_advanced.png",
+			BlockSounds.METAL,
+			3.5f,
+			10.0f,
+			0.0f
+		)
+
+		val machineGenerator: Block = BlockHelper.createBlock(
+			MOD_ID,
+			BlockGenerator("industry.machine.generator", nextBlockID(), Material.metal),
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
+			"machine_generator.png",
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
+			BlockSounds.METAL,
+			3.5f,
+			10.0f,
+			0.0f
+		)
+
+		val machineElectricFurnace: Block = BlockHelper.createBlock(
+			MOD_ID,
+			BlockElectricFurnace("industry.machine.furnace", nextBlockID(), Material.metal),
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
+			"machine_furnace.png",
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
+			"machine_casing_basic.png",
 			BlockSounds.METAL,
 			3.5f,
 			10.0f,
@@ -388,10 +425,37 @@ class Industry2: ModInitializer {
 			"insulated.cable.steel",
 			"cable_insulated_steel.png"
 		)
+
+		// Tools
+		val itemBatteryRedstone: Item = ItemHelper.createItem(
+			MOD_ID,
+			ItemBatteryRedstone(nextItemID()),
+			"tool.battery.redstone"
+		)
 	}
 
 	override fun onInitialize() {
 		LOGGER.info("Industry 2 initialized. Have fun!")
+
+		RecipesFurnace.smelting().addSmelting(oreCopperStone.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(oreCopperBasalt.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(oreCopperLimestone.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(oreCopperGranite.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(oreTinStone.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(oreTinBasalt.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(oreTinLimestone.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(oreTinGranite.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(oreUraniumStone.id, ItemStack(rawUranium))
+		RecipesFurnace.smelting().addSmelting(oreUraniumBasalt.id, ItemStack(rawUranium))
+		RecipesFurnace.smelting().addSmelting(oreUraniumLimestone.id, ItemStack(rawUranium))
+		RecipesFurnace.smelting().addSmelting(oreUraniumGranite.id, ItemStack(rawUranium))
+		RecipesFurnace.smelting().addSmelting(rawCopperOre.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(copperDust.id, ItemStack(copperIngot))
+		RecipesFurnace.smelting().addSmelting(rawTinOre.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(tinDust.id, ItemStack(tinIngot))
+		RecipesFurnace.smelting().addSmelting(bronzeDust.id, ItemStack(bronzeIngot))
+		RecipesFurnace.smelting().addSmelting(ironDust.id, ItemStack(Item.ingotIron))
+		RecipesFurnace.smelting().addSmelting(goldDust.id, ItemStack(Item.ingotGold))
 
 		BlockModelDispatcher.getInstance().addDispatch(copperCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(insulatedCopperCable, BlockModelRenderBlocks(32))
@@ -402,6 +466,8 @@ class Industry2: ModInitializer {
 		BlockModelDispatcher.getInstance().addDispatch(steelCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(insulatedSteelCable, BlockModelRenderBlocks(32))
 
-		EntityHelper.createTileEntity(TileEntityCable::class.java, "cable")
+		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
+		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
+		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
 	}
 }
