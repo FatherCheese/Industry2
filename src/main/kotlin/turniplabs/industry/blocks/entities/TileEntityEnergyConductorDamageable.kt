@@ -46,8 +46,10 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
         super.updateEntity()
 
         // Destroy itself on 1 health
-        if (machineHealth < 1)
+        if (machineHealth < 1) {
             worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 0.25f)
+            worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0)
+        }
 
         if (machineHealth < maxMachineHealth) {
             for (run in 0 until random.nextInt(6)) {
@@ -56,6 +58,7 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
                 val z = zCoord.toDouble() * random.nextDouble()
 
                 worldObj.spawnParticle("smoke", x, y, z, 0.0, 0.0, 0.0)
+                worldObj.spawnParticle("flame", x, y, z, 0.0, 0.0, 0.0)
             }
 
             // Heal itself over time

@@ -51,8 +51,12 @@ tile.industry.machine.casing.advanced.name=Advanced Machine Casing
 tile.industry.machine.casing.advanced.desc=
 tile.industry.machine.generator.name=Generator
 tile.industry.machine.generator.desc=
+tile.industry.machine.generator.solar.name=Solar Generator
+tile.industry.machine.generator.solar.desc=
 tile.industry.machine.furnace.name=Electric Furnace
 tile.industry.machine.furnace.desc=
+tile.industry.machine.macerator.name=Macerator
+tile.industry.machine.macerator.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=

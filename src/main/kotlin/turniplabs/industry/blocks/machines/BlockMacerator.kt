@@ -14,26 +14,26 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.EnergyAPI
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.TileEntityElectricFurnace
-import turniplabs.industry.gui.ContainerElectricFurnace
-import turniplabs.industry.gui.GuiElectricFurnace
+import turniplabs.industry.blocks.entities.TileEntityMacerator
+import turniplabs.industry.gui.ContainerMacerator
+import turniplabs.industry.gui.GuiMacerator
 
-class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
+class BlockMacerator(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
 
     init {
         setupInstance(this)
     }
 
+    override fun getNewBlockEntity(): TileEntity {
+        return TileEntityMacerator()
+    }
+
     private val machineTexture: Array<IntArray> = arrayOf(
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_furnace.png"),
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_furnace_on.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_macerator.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_macerator_on.png"),
         TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_casing_basic.png")
     )
-
-    override fun getNewBlockEntity(): TileEntity {
-        return TileEntityElectricFurnace()
-    }
 
     override fun onBlockRemoval(world: World?, x: Int, y: Int, z: Int) {
         val inventory: IInventory = world?.getBlockTileEntity(x, y, z) as IInventory
@@ -71,15 +71,15 @@ class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTi
     }
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
-        if (!world?.isClientSide!!) {
-            val tileEntity: TileEntityElectricFurnace = world.getBlockTileEntity(x, y, z) as TileEntityElectricFurnace
+        if (!world!!.isClientSide) {
+            val tileEntity: TileEntityMacerator = world.getBlockTileEntity(x, y, z) as TileEntityMacerator
 
             tileEntity ?: return false
             EnergyAPI.displayGui(
                 player,
-                GuiElectricFurnace(player?.inventory, tileEntity),
-                ContainerElectricFurnace(player?.inventory, tileEntity),
-                player?.inventory
+                GuiMacerator(player!!.inventory, tileEntity),
+                ContainerMacerator(player.inventory, tileEntity),
+                player.inventory
             )
         }
         return true
@@ -96,7 +96,7 @@ class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTi
         5 = east
          */
 
-        val tileEntity: TileEntityElectricFurnace = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityElectricFurnace
+        val tileEntity: TileEntityMacerator = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityMacerator
         val metadata: Int = blockAccess.getBlockMetadata(x, y, z)
         val index = Sides.orientationLookUpHorizontal[6 * metadata + side.id]
         if (index != 2)
@@ -110,14 +110,14 @@ class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTi
     }
 
     companion object {
-        private var instance: BlockElectricFurnace? = null
+        private var instance: BlockMacerator? = null
 
-        private fun setupInstance(machine: BlockElectricFurnace) {
+        private fun setupInstance(machine: BlockMacerator) {
             instance = machine
         }
 
-        private fun getInstance(): BlockElectricFurnace {
-            return instance ?: throw NullPointerException("Instance of BlockElectricFurnace hasn't been setup!")
+        private fun getInstance(): BlockMacerator {
+            return instance ?: throw NullPointerException("Instance of BlockMacerator hasn't been setup!")
         }
 
         fun updateBlockState(active: Boolean, world: World, x: Int, y: Int, z: Int) {

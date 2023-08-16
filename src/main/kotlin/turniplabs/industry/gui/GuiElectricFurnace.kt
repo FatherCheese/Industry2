@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11
 import turniplabs.industry.blocks.entities.TileEntityElectricFurnace
 
 class GuiElectricFurnace(container: InventoryPlayer?, private val tileEntity: TileEntityElectricFurnace) :
-    GuiContainer(ContainerElectricFurnace(container!!, tileEntity)) {
+    GuiContainer(ContainerElectricFurnace(container, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/machine.png")
@@ -29,7 +29,7 @@ class GuiElectricFurnace(container: InventoryPlayer?, private val tileEntity: Ti
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
         fontRenderer.drawString("Electric Furnace", 46, 6, 4210752)
-        fontRenderer.drawString("Invewntory", 8, (ySize - 96) + 2, 4210752)
+        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 
     override fun drawScreen(x: Int, y: Int, renderPartialTicks: Float) {

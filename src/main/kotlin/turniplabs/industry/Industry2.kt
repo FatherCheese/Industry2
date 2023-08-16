@@ -13,20 +13,21 @@ import net.minecraft.core.item.ItemPlaceable
 import net.minecraft.core.item.ItemStack
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import turniplabs.halplibe.helper.BlockHelper
+import turniplabs.halplibe.helper.BlockBuilder
 import turniplabs.halplibe.helper.EntityHelper
 import turniplabs.halplibe.helper.ItemHelper
 import turniplabs.industry.blocks.BlockCopperOre
 import turniplabs.industry.blocks.BlockTinOre
 import turniplabs.industry.blocks.BlockUraniumOre
-import turniplabs.industry.blocks.cables.*
-import turniplabs.industry.blocks.entities.TileEntityCable
-import turniplabs.industry.blocks.entities.TileEntityElectricFurnace
-import turniplabs.industry.blocks.entities.TileEntityGenerator
+import turniplabs.industry.blocks.cables.BlockCableCopper
+import turniplabs.industry.blocks.cables.BlockCableGold
+import turniplabs.industry.blocks.cables.BlockCableTin
+import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.BlockElectricFurnace
 import turniplabs.industry.blocks.machines.BlockGenerator
+import turniplabs.industry.blocks.machines.BlockMacerator
+import turniplabs.industry.blocks.machines.BlockSolarGenerator
 import turniplabs.industry.items.ItemBatteryRedstone
-
 
 class Industry2: ModInitializer {
 
@@ -47,307 +48,168 @@ class Industry2: ModInitializer {
 		/* BLOCKS */
 
 		// Ores
-		val oreCopperStone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCopperOre("industry.ore.copper.stone", nextBlockID(), Material.stone),
-			"ore_copper_stone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		private val oreBuilder = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.STONE)
+			.setHardness(3.5f)
+			.setResistance(5.0f)
+			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val oreCopperBasalt: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCopperOre("industry.ore.copper.basalt", nextBlockID(), Material.stone),
-			"ore_copper_basalt.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreCopperStone: Block = oreBuilder
+			.setTextures("ore_copper_stone.png")
+			.build(BlockCopperOre("ore.copper.stone", nextBlockID(), Material.stone))
 
-		val oreCopperLimestone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCopperOre("industry.ore.copper.limestone", nextBlockID(), Material.stone),
-			"ore_copper_limestone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreCopperBasalt: Block = oreBuilder
+			.setTextures("ore_copper_basalt.png")
+			.build(BlockCopperOre("ore.copper.basalt", nextBlockID(), Material.stone))
 
-		val oreCopperGranite: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCopperOre("industry.ore.copper.granite", nextBlockID(), Material.stone),
-			"ore_copper_granite.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreCopperLimestone: Block = oreBuilder
+			.setTextures("ore_copper_limestone.png")
+			.build(BlockCopperOre("ore.copper.limestone", nextBlockID(), Material.stone))
 
-		val oreTinStone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockTinOre("industry.ore.tin.stone", nextBlockID(), Material.stone),
-			"ore_tin_stone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreCopperGranite: Block = oreBuilder
+			.setTextures("ore_copper_granite.png")
+			.build(BlockCopperOre("ore.copper.granite", nextBlockID(), Material.stone))
 
-		val oreTinBasalt: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockTinOre("industry.ore.tin.basalt", nextBlockID(), Material.stone),
-			"ore_tin_basalt.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreTinStone: Block = oreBuilder
+			.setTextures("ore_tin_stone.png")
+			.build(BlockTinOre("ore.tin.stone", nextBlockID(), Material.stone))
 
-		val oreTinLimestone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockTinOre("industry.ore.tin.limestone", nextBlockID(), Material.stone),
-			"ore_tin_limestone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreTinBasalt: Block = oreBuilder
+			.setTextures("ore_tin_basalt.png")
+			.build(BlockTinOre("ore.tin.basalt", nextBlockID(), Material.stone))
 
-		val oreTinGranite: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockTinOre("industry.ore.tin.granite", nextBlockID(), Material.stone),
-			"ore_tin_granite.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreTinLimestone: Block = oreBuilder
+			.setTextures("ore_tin_limestone.png")
+			.build(BlockTinOre("ore.tin.limestone", nextBlockID(), Material.stone))
 
-		val oreUraniumStone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockUraniumOre("industry.ore.uranium.stone", nextBlockID(), Material.stone),
-			"ore_uranium_stone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreTinGranite: Block = oreBuilder
+			.setTextures("ore_tin_granite.png")
+			.build(BlockTinOre("ore.tin.granite", nextBlockID(), Material.stone))
 
-		val oreUraniumBasalt: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockUraniumOre("industry.ore.uranium.basalt", nextBlockID(), Material.stone),
-			"ore_uranium_basalt.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreUraniumStone: Block = oreBuilder
+			.setTextures("ore_uranium_stone.png")
+			.build(BlockUraniumOre("ore.uranium.stone", nextBlockID(), Material.stone))
 
-		val oreUraniumLimestone: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockUraniumOre("industry.ore.uranium.limestone", nextBlockID(), Material.stone),
-			"ore_uranium_limestone.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreUraniumBasalt: Block = oreBuilder
+			.setTextures("ore_uranium_basalt.png")
+			.build(BlockUraniumOre("ore.uranium.basalt", nextBlockID(), Material.stone))
 
-		val oreUraniumGranite: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockUraniumOre("industry.ore.uranium.granite", nextBlockID(), Material.stone),
-			"ore_uranium_granite.png",
-			BlockSounds.STONE,
-			3.0f,
-			5.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val oreUraniumLimestone: Block = oreBuilder
+			.setTextures("ore_uranium_limestone.png")
+			.build(BlockUraniumOre("ore.uranium.limestone", nextBlockID(), Material.stone))
+
+		val oreUraniumGranite: Block = oreBuilder
+			.setTextures("ore_uranium_granite.png")
+			.build(BlockUraniumOre("ore.uranium.granite", nextBlockID(), Material.stone))
 
 		// Blocks
-		val copperBlock: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.block.copper", nextBlockID(), Material.metal),
-			"block_copper_top.png",
-			"block_copper_bottom.png",
-			"block_copper_sides.png",
-			BlockSounds.METAL,
-			5.0f,
-			10.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		private val blockBuilder = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 
-		val tinBlock: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.block.tin", nextBlockID(), Material.metal),
-			"block_tin_top.png",
-			"block_tin_bottom.png",
-			"block_tin_sides.png",
-			BlockSounds.METAL,
-			5.0f,
-			10.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val copperBlock: Block = blockBuilder
+			.setTopTexture("block_copper_top.png")
+			.setSides("block_copper_sides.png")
+			.setBottomTexture("block_copper_bottom.png")
+			.build(Block("block.copper", nextBlockID(), Material.metal))
 
-		val bronzeBlock: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.block.bronze", nextBlockID(), Material.metal),
-			"block_bronze_top.png",
-			"block_bronze_bottom.png",
-			"block_bronze_sides.png",
-			BlockSounds.METAL,
-			5.0f,
-			10.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val tinBlock: Block = blockBuilder
+			.setTopTexture("block_tin_top.png")
+			.setSides("block_tin_sides.png")
+			.setBottomTexture("block_tin_bottom.png")
+			.build(Block("block.tin", nextBlockID(), Material.metal))
 
-		val uraniumBlock: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.block.uranium", nextBlockID(), Material.metal),
-			"block_uranium_top.png",
-			"block_uranium_bottom.png",
-			"block_uranium_sides.png",
-			BlockSounds.METAL,
-			5.0f,
-			10.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE)
+		val bronzeBlock: Block = blockBuilder
+			.setTopTexture("block_bronze_top.png")
+			.setSides("block_bronze_sides.png")
+			.setBottomTexture("block_bronze_bottom.png")
+			.build(Block("block.bronze", nextBlockID(), Material.metal))
+
+		val uraniumBlock: Block = blockBuilder
+			.setTopTexture("block_uranium_top.png")
+			.setSides("block_uranium_sides.png")
+			.setBottomTexture("block_uranium_bottom.png")
+			.build(Block("block.uranium", nextBlockID(), Material.metal))
 
 		// Cables
-		val copperCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableCopper("industry.cable.copper", nextBlockID(), Material.metal, 32, 32, 2),
-			"block_copper_top.png",
-			BlockSounds.METAL,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
+		private val cableBuilder = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(1.0f)
+			.setTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val tinCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableTin("industry.cable.tin", nextBlockID(), Material.metal, 16, 16, 1),
-			"block_tin_top.png",
-			BlockSounds.METAL,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
+		val copperCable: Block = cableBuilder
+			.setTextures("block_copper_top.png")
+			.build(BlockCableCopper("cable.copper", nextBlockID(), Material.metal, 32, 32, 2))
 
-		val goldCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableGold("industry.cable.gold", nextBlockID(), Material.metal, 512, 512, 6),
-			"block_gold_top.png",
-			BlockSounds.METAL,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
+		val tinCable: Block = cableBuilder
+			.setTextures("block_tin_top.png")
+			.build(BlockCableTin("cable.tin", nextBlockID(), Material.metal, 16, 16, 1))
 
-		val steelCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableSteel("industry.cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8),
-			"block_steel_top.png",
-			BlockSounds.METAL,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.NOT_IN_CREATIVE_MENU)
+		val goldCable: Block = cableBuilder
+			.setTextures(17, 4)
+			.build(BlockCableGold("cable.gold", nextBlockID(), Material.metal, 512, 512, 6))
+
+		val steelCable: Block = cableBuilder
+			.setTextures(19, 4)
+			.build(BlockCableGold("cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8))
 
 		// Insulated Cables
-		val insulatedCopperCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableCopperInsulated("industry.cable.copper", nextBlockID(), Material.cloth, 32, 32, 0),
-			"insulated_cable_sides.png",
-			BlockSounds.CLOTH,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
+		private val insulatedCableBuilder = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.CLOTH)
+			.setHardness(1.0f)
+			.setTags(BlockTags.NOT_IN_CREATIVE_MENU)
 
-		val insulatedTinCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableTinInsulated("industry.cable.tin", nextBlockID(), Material.cloth, 16, 16, 0),
-			"insulated_cable_sides.png",
-			BlockSounds.CLOTH,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
+		val insulatedCopperCable: Block = insulatedCableBuilder
+			.setTextures("insulated_cable_copper.png")
+			.build(BlockCableCopper("cable.copper", nextBlockID(), Material.cloth, 32, 32, 0))
 
-		val insulatedGoldCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableGoldInsulated("industry.cable.gold", nextBlockID(), Material.cloth, 512, 512, 0),
-			"insulated_cable_sides.png",
-			BlockSounds.CLOTH,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
+		val insulatedTinCable: Block = insulatedCableBuilder
+			.setTextures("insulated_cable_tin.png")
+			.build(BlockCableTin("cable.tin", nextBlockID(), Material.metal, 16, 16, 0))
 
-		val insulatedSteelCable: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockCableSteelInsulated("industry.cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0),
-			"insulated_cable_sides.png",
-			BlockSounds.CLOTH,
-			1.0f,
-			0.0f,
-			0.0f
-		).withTags(BlockTags.NOT_IN_CREATIVE_MENU)
+		val insulatedGoldCable: Block = insulatedCableBuilder
+			.setTextures("insulated_cable_gold.png")
+			.build(BlockCableGold("cable.gold", nextBlockID(), Material.cloth, 512, 512, 0))
+
+		val insulatedSteelCable: Block = insulatedCableBuilder
+			.setTextures("insulated_cable_steel.png")
+			.build(BlockCableGold("cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0))
 
 		// Machines
-		val machineCasing: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.machine.casing", nextBlockID(), Material.metal),
-			"machine_casing_basic.png",
-			BlockSounds.METAL,
-			3.5f,
-			10.0f,
-			0.0f
-		)
+		private val machineBuilder = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
 
-		val machineCasingAdvanced: Block = BlockHelper.createBlock(
-			MOD_ID,
-			Block("industry.machine.casing.advanced", nextBlockID(), Material.metal),
-			"machine_casing_advanced.png",
-			BlockSounds.METAL,
-			3.5f,
-			10.0f,
-			0.0f
-		)
+		val machineCasing: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
+			.build(Block("machine.casing", nextBlockID(), Material.metal))
 
-		val machineGenerator: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockGenerator("industry.machine.generator", nextBlockID(), Material.metal),
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			"machine_generator.png",
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			BlockSounds.METAL,
-			3.5f,
-			10.0f,
-			0.0f
-		)
+		val machineCasingAdvanced: Block = machineBuilder
+			.setTextures("machine_casing_advanced.png")
+			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
+			.build(Block("machine.casing.advanced", nextBlockID(), Material.metal))
 
-		val machineElectricFurnace: Block = BlockHelper.createBlock(
-			MOD_ID,
-			BlockElectricFurnace("industry.machine.furnace", nextBlockID(), Material.metal),
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			"machine_furnace.png",
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			"machine_casing_basic.png",
-			BlockSounds.METAL,
-			3.5f,
-			10.0f,
-			0.0f
-		)
+		val machineGenerator: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.build(BlockGenerator("machine.generator", nextBlockID(), Material.metal))
+
+		val machineSolarGenerator: Block = machineBuilder
+			.setTopTexture("machine_generator_solar.png")
+			.setSides("machine_casing_basic.png")
+			.setBottomTexture("machine_casing_basic.png")
+			.build(BlockSolarGenerator("machine.generator.solar", nextBlockID(), Material.metal))
+
+		val machineElectricFurnace: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.build(BlockElectricFurnace("machine.furnace", nextBlockID(), Material.metal))
+
+		val machineMacerator: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.build(BlockMacerator("machine.macerator", nextBlockID(), Material.metal))
 
 		/* ITEMS */
 
@@ -431,7 +293,7 @@ class Industry2: ModInitializer {
 			MOD_ID,
 			ItemBatteryRedstone(nextItemID()),
 			"tool.battery.redstone"
-		)
+		).setMaxStackSize(1)
 	}
 
 	override fun onInitialize() {
@@ -458,16 +320,18 @@ class Industry2: ModInitializer {
 		RecipesFurnace.smelting().addSmelting(goldDust.id, ItemStack(Item.ingotGold))
 
 		BlockModelDispatcher.getInstance().addDispatch(copperCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedCopperCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(tinCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedTinCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(goldCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedGoldCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(steelCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedCopperCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedTinCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedGoldCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(insulatedSteelCable, BlockModelRenderBlocks(32))
 
 		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
-		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
 		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
+		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
+		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
+		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
 	}
 }

@@ -1,8 +1,5 @@
 package turniplabs.industry.blocks.entities
 
-import com.mojang.nbt.CompoundTag
-import com.mojang.nbt.ListTag
-import net.minecraft.core.crafting.recipe.RecipesFurnace
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
@@ -10,13 +7,14 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.machines.BlockElectricFurnace
+import turniplabs.industry.blocks.machines.BlockMacerator
+import turniplabs.industry.recipes.RecipesMacerator
 
-class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInventory {
-    private var contents: Array<ItemStack?>
+class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
-    private var currentSmeltTime = 0
-    private val maxSmeltTime = 128
+    private var contents: Array<ItemStack?>
+    private var currentCrushTime = 0
+    private val maxCrushTime = 128
 
     init {
         setCapacity(1024)
@@ -63,7 +61,7 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     }
 
     override fun getInvName(): String {
-        return "ElectricFurnace"
+        return "Macerator"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -71,7 +69,9 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     }
 
     override fun canInteractWith(entityPlayer: EntityPlayer?): Boolean {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) return false
+        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+            return false
+
         return entityPlayer!!.distanceToSqr(
             (xCoord + 0.5f).toDouble(),
             (yCoord + 0.5f).toDouble(),
@@ -81,7 +81,7 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
 
     override fun updateEntity() {
         super.updateEntity()
-        val hasEnergy: Boolean = energy > 0
+        val hasEnergy = energy > 0
         var machineUpdated = false
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
@@ -92,28 +92,28 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineElectricFurnace.id &&
-                currentSmeltTime == 0 &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineMacerator.id &&
+                currentCrushTime == 0 &&
                 contents[0] == null
-                ) {
-                BlockElectricFurnace.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
+            ) {
+                BlockMacerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
         }
 
-        if (hasEnergy && canSmelt()) {
-            ++currentSmeltTime
+        if (hasEnergy && canCrush()) {
+            ++currentCrushTime
             --energy
             active = true
 
-            if (currentSmeltTime == maxSmeltTime) {
-                currentSmeltTime = 0
-                smeltItem()
+            if (currentCrushTime == maxCrushTime) {
+                currentCrushTime = 0
+                crushItem()
                 active = false
                 machineUpdated = true
             }
         } else {
-            currentSmeltTime = 0
+            currentCrushTime = 0
             active = false
         }
 
@@ -124,46 +124,10 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
             worldObj.markBlockDirty(xCoord, yCoord, zCoord)
     }
 
-    override fun readFromNBT(compoundTag: CompoundTag?) {
-        super.readFromNBT(compoundTag)
-        val nbtTagList = compoundTag!!.getList("Items")
-
-        contents = arrayOfNulls(sizeInventory)
-        for (i in 0 until nbtTagList.tagCount()) {
-            val compoundTag2: CompoundTag = nbtTagList.tagAt(i) as CompoundTag
-            val byte: Int = compoundTag2.getByte("Slot").toInt()
-
-            if (byte >= 0 && byte < contents.size)
-                contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
-        }
-
-        currentSmeltTime = compoundTag.getShort("CookTime").toInt()
-        energy = compoundTag.getShort("energy").toInt()
-    }
-
-    override fun writeToNBT(compoundTag: CompoundTag?) {
-        super.writeToNBT(compoundTag)
-        compoundTag?.putShort("CookTime", currentSmeltTime.toShort())
-        compoundTag?.putShort("energy", energy.toShort())
-
-        val listTag = ListTag()
-        for (i in contents.indices) {
-            if (contents[i] != null) {
-                val compoundTag2 = CompoundTag()
-
-                compoundTag2.putByte("Slot", i.toByte())
-                contents[i]!!.writeToNBT(compoundTag2)
-                listTag.addTag(compoundTag2)
-            }
-        }
-        compoundTag!!.put("Items", listTag)
-    }
-
-
-    private fun canSmelt(): Boolean {
+    private fun canCrush(): Boolean {
         if (contents[0] == null) return false
 
-        val itemStack: ItemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack = RecipesMacerator.getResult(contents[0]!!.item.id) ?: return false
 
         return when {
             contents[2] == null -> true
@@ -173,9 +137,9 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         }
     }
 
-    private fun smeltItem() {
-        if (canSmelt()) {
-            val itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id)
+    private fun crushItem() {
+        if (canCrush()) {
+            val itemStack: ItemStack = RecipesMacerator.getResult(contents[0]!!.item.id)
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
@@ -191,6 +155,6 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxSmeltTime == 0) 0 else (currentSmeltTime * i) / maxSmeltTime
+        return if (maxCrushTime == 0) 0 else (currentCrushTime * i) / maxCrushTime
     }
 }
