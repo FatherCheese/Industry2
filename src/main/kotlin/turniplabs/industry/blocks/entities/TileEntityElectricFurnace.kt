@@ -13,16 +13,18 @@ import turniplabs.industry.Industry2
 import turniplabs.industry.blocks.machines.BlockElectricFurnace
 
 class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInventory {
-    private var contents: Array<ItemStack?>
     var active = false
+    private var contents: Array<ItemStack?>
     private var currentSmeltTime = 0
     private val maxSmeltTime = 128
 
     init {
+        contents = arrayOfNulls(3)
+
         setCapacity(1024)
         setTransfer(0)
         setMaxReceive(32)
-        contents = arrayOfNulls(3)
+
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
     }
@@ -49,9 +51,11 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
             if (contents[i]!!.stackSize == 0) {
                 contents[i] = null
             }
+
             onInventoryChanged()
             itemStack
-        } else return null
+        } else
+            return null
     }
 
     override fun setInventorySlotContents(i: Int, itemStack: ItemStack?) {
@@ -71,7 +75,9 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     }
 
     override fun canInteractWith(entityPlayer: EntityPlayer?): Boolean {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) return false
+        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+            return false
+
         return entityPlayer!!.distanceToSqr(
             (xCoord + 0.5f).toDouble(),
             (yCoord + 0.5f).toDouble(),
@@ -138,13 +144,13 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         }
 
         currentSmeltTime = compoundTag.getShort("CookTime").toInt()
-        energy = compoundTag.getShort("energy").toInt()
+        energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
         compoundTag?.putShort("CookTime", currentSmeltTime.toShort())
-        compoundTag?.putShort("energy", energy.toShort())
+        compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
         for (i in contents.indices) {
@@ -161,7 +167,8 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
 
 
     private fun canSmelt(): Boolean {
-        if (contents[0] == null) return false
+        if (contents[0] == null)
+            return false
 
         val itemStack: ItemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id) ?: return false
 
@@ -191,6 +198,7 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxSmeltTime == 0) 0 else (currentSmeltTime * i) / maxSmeltTime
+        return if (maxSmeltTime == 0) 0
+        else (currentSmeltTime * i) / maxSmeltTime
     }
 }

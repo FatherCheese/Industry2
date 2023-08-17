@@ -57,6 +57,8 @@ tile.industry.machine.furnace.name=Electric Furnace
 tile.industry.machine.furnace.desc=
 tile.industry.machine.macerator.name=Macerator
 tile.industry.machine.macerator.desc=
+tile.industry.machine.compressor.name=Compressor
+tile.industry.machine.compressor.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=

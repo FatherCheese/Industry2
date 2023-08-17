@@ -2,32 +2,31 @@ package turniplabs.industry.blocks.entities
 
 import com.mojang.nbt.CompoundTag
 import com.mojang.nbt.ListTag
-import net.minecraft.core.crafting.LookupFuelFurnace
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
-import sunsetsatellite.energyapi.api.LookupFuelEnergy
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.blocks.machines.BlockGenerator
+import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.machines.BlockCompressor
+import turniplabs.industry.recipes.RecipesCompressor
 
-class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
+class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentBurnTime = 0
-    private var maxBurnTime = 0
-    private var currentFuel: ItemStack? = null
+    private var currentCompression = 0
+    private val maxCompression = 128
 
     init {
-        setCapacity(1024)
-        setTransfer(32)
-        setMaxReceive(0)
-        contents = arrayOfNulls(2)
+        contents = arrayOfNulls(3)
 
-        for (dir: Direction in Direction.values())
-            setConnection(dir, Connection.OUTPUT)
+        setCapacity(1024)
+        setTransfer(0)
+        setMaxReceive(32)
+
+        for (dir in Direction.values())
+            setConnection(dir, Connection.INPUT)
     }
 
     override fun getSizeInventory(): Int {
@@ -66,7 +65,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "IndustryGenerator"
+        return "Compressor"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -74,7 +73,9 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
     }
 
     override fun canInteractWith(entityPlayer: EntityPlayer?): Boolean {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) return false
+        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+            return false
+
         return entityPlayer!!.distanceToSqr(
             (xCoord + 0.5f).toDouble(),
             (yCoord + 0.5f).toDouble(),
@@ -82,46 +83,46 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         ) <= 64.0f
     }
 
-    // TODO - this eats fuel because there's nothing stopping it if the generator is full, also the texture won't update
-    // I've tried rewriting it and it just won't work if I do
     override fun updateEntity() {
         super.updateEntity()
-
-        if (getStackInSlot(0) != null && getStackInSlot(0)?.item is ItemEnergyContainer) {
-            provide(getStackInSlot(0), getMaxProvide(), false)
-            onInventoryChanged()
-        }
+        val hasEnergy: Boolean = energy > 0
+        var machineUpdated = false
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
-            receive(getStackInSlot(1), getMaxReceive(), false)
+            val stack: ItemStack? = getStackInSlot(1)
+
+            receive(stack, maxReceive, false)
             onInventoryChanged()
         }
 
-        if (currentBurnTime > 0) {
-            --currentBurnTime
-            modifyEnergy(getEnergyYieldForItem(currentFuel))
-        }
-
-        if (currentBurnTime == 0) {
-            currentBurnTime = getBurnTimeFromItem(contents[1]) / 5
-            maxBurnTime = currentBurnTime
-
-            if (currentBurnTime > 0) {
-                active = true
-                BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
-                
-                currentFuel = contents[1]
-                onInventoryChanged()
-
-                if (contents[1] != null) {
-                    --contents[1]!!.stackSize
-                    if (contents[1]?.stackSize == 0) contents[1] = null
-                }
-            } else  {
-                active = false
-                currentFuel = null
+        if (!worldObj.isClientSide) {
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCompressor.id &&
+                currentCompression == 0 &&
+                contents[0] == null
+                ) {
+                BlockCompressor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
+                machineUpdated = true
             }
         }
+
+        if (hasEnergy && canCompress()) {
+            ++currentCompression
+            --energy
+            active = true
+
+            if (currentCompression == maxCompression) {
+                currentCompression = 0
+                compressItem()
+                active = false
+                machineUpdated = true
+            }
+        } else {
+            currentCompression = 0
+            active = false
+        }
+
+        if (machineUpdated)
+            onInventoryChanged()
 
         if (active)
             worldObj.markBlockDirty(xCoord, yCoord, zCoord)
@@ -140,13 +141,13 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentBurnTime = compoundTag.getShort("CookTime").toInt()
+        currentCompression = compoundTag.getShort("Compression").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("CookTime", currentBurnTime.toShort())
+        compoundTag?.putShort("Compression", currentCompression.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
@@ -162,15 +163,39 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-    private fun canBurn(): Boolean {
-        return energy != capacity
+    private fun canCompress(): Boolean {
+        if (contents[0] == null)
+            return false
+
+        val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id) ?: return false
+
+        return when {
+            contents[2] == null -> true
+            !contents[2]!!.isItemEqual(itemStack) -> false
+            contents[2]!!.stackSize < itemStack.maxStackSize -> true
+            else -> contents[2]!!.stackSize < itemStack.maxStackSize
+        }
     }
 
-    private fun getEnergyYieldForItem(itemStack: ItemStack?): Int {
-        return if (itemStack == null) 0 else LookupFuelEnergy.fuelEnergy().getEnergyYield(itemStack.item.id)
+    private fun compressItem() {
+        if (canCompress()) {
+            val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id)
+
+            if (contents[2] == null)
+                contents[2] = itemStack.copy()
+            else
+                if (contents[2]!!.itemID == itemStack.itemID)
+                    ++contents[2]!!.stackSize
+
+            --contents[0]!!.stackSize
+
+            if (contents[0]!!.stackSize <= 0)
+                contents[0] = null
+        }
     }
 
-    private fun getBurnTimeFromItem(itemStack: ItemStack?): Int {
-        return if (itemStack == null) 0 else LookupFuelFurnace.instance.getFuelYield(itemStack.item.id)
+    fun getProgressScaled(i: Int): Int {
+        return if (maxCompression == 0) 0
+        else (currentCompression * i) / maxCompression
     }
 }

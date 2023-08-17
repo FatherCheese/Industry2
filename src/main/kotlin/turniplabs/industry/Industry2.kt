@@ -23,10 +23,7 @@ import turniplabs.industry.blocks.cables.BlockCableCopper
 import turniplabs.industry.blocks.cables.BlockCableGold
 import turniplabs.industry.blocks.cables.BlockCableTin
 import turniplabs.industry.blocks.entities.*
-import turniplabs.industry.blocks.machines.BlockElectricFurnace
-import turniplabs.industry.blocks.machines.BlockGenerator
-import turniplabs.industry.blocks.machines.BlockMacerator
-import turniplabs.industry.blocks.machines.BlockSolarGenerator
+import turniplabs.industry.blocks.machines.*
 import turniplabs.industry.items.ItemBatteryRedstone
 
 class Industry2: ModInitializer {
@@ -211,6 +208,10 @@ class Industry2: ModInitializer {
 			.setTextures("machine_casing_basic.png")
 			.build(BlockMacerator("machine.macerator", nextBlockID(), Material.metal))
 
+		val machineCompressor: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.build(BlockCompressor("machine.compressor", nextBlockID(), Material.metal))
+
 		/* ITEMS */
 
 		// Ores
@@ -333,5 +334,6 @@ class Industry2: ModInitializer {
 		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
 		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
 		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
+		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
 	}
 }

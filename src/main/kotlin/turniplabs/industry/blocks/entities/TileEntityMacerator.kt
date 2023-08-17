@@ -1,5 +1,7 @@
 package turniplabs.industry.blocks.entities
 
+import com.mojang.nbt.CompoundTag
+import com.mojang.nbt.ListTag
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
@@ -123,6 +125,42 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
         if (active)
             worldObj.markBlockDirty(xCoord, yCoord, zCoord)
     }
+
+    override fun readFromNBT(compoundTag: CompoundTag?) {
+        super.readFromNBT(compoundTag)
+        val nbtTagList = compoundTag!!.getList("Items")
+
+        contents = arrayOfNulls(sizeInventory)
+        for (i in 0 until nbtTagList.tagCount()) {
+            val compoundTag2: CompoundTag = nbtTagList.tagAt(i) as CompoundTag
+            val byte: Int = compoundTag2.getByte("Slot").toInt()
+
+            if (byte >= 0 && byte < contents.size)
+                contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
+        }
+
+        currentCrushTime = compoundTag.getShort("CookTime").toInt()
+        energy = compoundTag.getShort("Energy").toInt()
+    }
+
+    override fun writeToNBT(compoundTag: CompoundTag?) {
+        super.writeToNBT(compoundTag)
+        compoundTag?.putShort("CookTime", currentCrushTime.toShort())
+        compoundTag?.putShort("Energy", energy.toShort())
+
+        val listTag = ListTag()
+        for (i in contents.indices) {
+            if (contents[i] != null) {
+                val compoundTag2 = CompoundTag()
+
+                compoundTag2.putByte("Slot", i.toByte())
+                contents[i]!!.writeToNBT(compoundTag2)
+                listTag.addTag(compoundTag2)
+            }
+        }
+        compoundTag!!.put("Items", listTag)
+    }
+
 
     private fun canCrush(): Boolean {
         if (contents[0] == null) return false
