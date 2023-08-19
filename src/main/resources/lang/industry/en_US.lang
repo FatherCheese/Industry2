@@ -59,6 +59,8 @@ tile.industry.machine.macerator.name=Macerator
 tile.industry.machine.macerator.desc=
 tile.industry.machine.compressor.name=Compressor
 tile.industry.machine.compressor.desc=
+tile.industry.machine.cutter.name=Cutter
+tile.industry.machine.cutter.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=

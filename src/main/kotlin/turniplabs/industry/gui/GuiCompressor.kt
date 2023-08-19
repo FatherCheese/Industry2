@@ -40,10 +40,7 @@ class GuiCompressor(inventory: InventoryPlayer?, private val tileEntity: TileEnt
         val text = StringBuilder()
         if ((x > (scrnX + 56)) && (x < (scrnX + 72))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                text.append(TextFormatting.WHITE).append("Energy: ")
-                    .append(TextFormatting.LIGHT_GRAY).append(tileEntity.energy)
-                    .append(TextFormatting.WHITE).append(" / ")
-                    .append(TextFormatting.LIGHT_GRAY).append(tileEntity.capacity)
+                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)

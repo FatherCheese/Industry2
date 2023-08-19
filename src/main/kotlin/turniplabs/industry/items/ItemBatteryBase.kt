@@ -1,8 +1,10 @@
 package turniplabs.industry.items
 
 import net.minecraft.core.item.ItemStack
+import net.minecraft.core.net.command.TextFormatting
 import sunsetsatellite.energyapi.EnergyAPI
 import sunsetsatellite.energyapi.template.items.ItemBattery
+import sunsetsatellite.sunsetutils.util.ICustomDescription
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
 
@@ -16,7 +18,7 @@ open class ItemBatteryBase(
     midTexture: String,
     midEmptyTexture: String,
     emptyTexture: String
-) : ItemBattery(i) {
+) : ItemBattery(i), ICustomDescription {
     private var textureCoordinates: Array<IntArray?> = arrayOfNulls(5)
 
     init {
@@ -43,5 +45,10 @@ open class ItemBatteryBase(
 
         setIconCoord(textureCoordinates[mapped]!![0], textureCoordinates[mapped]!![1])
         return iconIndex
+    }
+
+    override fun getDescription(p0: ItemStack?): String {
+        val text = StringBuilder()
+        return text.append("${TextFormatting.WHITE}Max Transfer: ${TextFormatting.LIGHT_GRAY}IN: $baseReceive${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}OUT: $baseProvide").toString()
     }
 }

@@ -9,14 +9,14 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.machines.BlockCompressor
-import turniplabs.industry.recipes.RecipesCompressor
+import turniplabs.industry.blocks.machines.BlockCutter
+import turniplabs.industry.recipes.RecipesCutter
 
-class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
+class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentCompression = 0
-    private val maxCompression = 128
+    private var currentCutTime = 0
+    private val maxCutTime = 128
 
     init {
         contents = arrayOfNulls(3)
@@ -67,7 +67,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "Compressor"
+        return "Cutter"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -98,28 +98,28 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCompressor.id &&
-                currentCompression == 0 &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCutter.id &&
+                currentCutTime == 0 &&
                 contents[0] == null
-                ) {
-                BlockCompressor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
+            ) {
+                BlockCutter.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
         }
 
-        if (hasEnergy && canCompress()) {
-            ++currentCompression
+        if (hasEnergy && canCut()) {
+            ++currentCutTime
             --energy
             active = true
 
-            if (currentCompression == maxCompression) {
-                currentCompression = 0
-                compressItem()
+            if (currentCutTime == maxCutTime) {
+                currentCutTime = 0
+                cutItem()
                 active = false
                 machineUpdated = true
             }
         } else {
-            currentCompression = 0
+            currentCutTime = 0
             active = false
         }
 
@@ -143,13 +143,13 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentCompression = compoundTag.getShort("Compression").toInt()
+        currentCutTime = compoundTag.getShort("Cut").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("Compression", currentCompression.toShort())
+        compoundTag?.putShort("Cut", currentCutTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
@@ -165,11 +165,11 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-    private fun canCompress(): Boolean {
+    private fun canCut(): Boolean {
         if (contents[0] == null)
             return false
 
-        val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id) ?: return false
 
         return when {
             contents[2] == null -> true
@@ -179,9 +179,9 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         }
     }
 
-    private fun compressItem() {
-        if (canCompress()) {
-            val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id)
+    private fun cutItem() {
+        if (canCut()) {
+            val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id)
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
@@ -197,7 +197,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxCompression == 0) 0
-        else (currentCompression * i) / maxCompression
+        return if (maxCutTime == 0) 0
+        else (currentCutTime * i) / maxCutTime
     }
 }

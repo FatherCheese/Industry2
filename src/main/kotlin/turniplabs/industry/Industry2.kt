@@ -9,7 +9,6 @@ import net.minecraft.core.block.material.Material
 import net.minecraft.core.block.tag.BlockTags
 import net.minecraft.core.crafting.recipe.RecipesFurnace
 import net.minecraft.core.item.Item
-import net.minecraft.core.item.ItemPlaceable
 import net.minecraft.core.item.ItemStack
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -25,6 +24,7 @@ import turniplabs.industry.blocks.cables.BlockCableTin
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.*
 import turniplabs.industry.items.ItemBatteryRedstone
+import turniplabs.industry.items.ItemCable
 
 class Industry2: ModInitializer {
 
@@ -212,6 +212,10 @@ class Industry2: ModInitializer {
 			.setTextures("machine_casing_basic.png")
 			.build(BlockCompressor("machine.compressor", nextBlockID(), Material.metal))
 
+		val machineCutter: Block = machineBuilder
+			.setTextures("machine_casing_basic.png")
+			.build(BlockCutter("machine.cutter", nextBlockID(), Material.metal))
+
 		/* ITEMS */
 
 		// Ores
@@ -243,22 +247,25 @@ class Industry2: ModInitializer {
 		// Cables
 		val itemCopperCable: Item? = ItemHelper.createItem(
 			MOD_ID,
-			ItemPlaceable("cable.copper", nextItemID(), copperCable),
+			ItemCable("cable.copper", nextItemID(), copperCable),
 			"cable.copper",
 			"cable_copper.png"
 		)
 		val itemTinCable: Item = ItemHelper.createItem(
-			MOD_ID, ItemPlaceable("cable.tin", nextItemID(), tinCable),
+			MOD_ID,
+			ItemCable("cable.tin", nextItemID(), tinCable),
 			"cable.tin",
 			"cable_tin.png"
 		)
 		val itemGoldCable: Item = ItemHelper.createItem(
-			MOD_ID, ItemPlaceable("cable.gold", nextItemID(), goldCable),
+			MOD_ID,
+			ItemCable("cable.gold", nextItemID(), goldCable),
 			"cable.gold",
 			"cable_gold.png"
 		)
 		val itemSteelCable: Item = ItemHelper.createItem(
-			MOD_ID, ItemPlaceable("cable.steel", nextItemID(), steelCable),
+			MOD_ID,
+			ItemCable("cable.steel", nextItemID(), steelCable),
 			"cable.steel",
 			"cable_steel.png"
 		)
@@ -266,25 +273,25 @@ class Industry2: ModInitializer {
 		// Insulated Cables
 		val itemInsulatedCopperCable: Item = ItemHelper.createItem(
 			MOD_ID,
-			ItemPlaceable("insulated.cable.copper", nextItemID(), insulatedCopperCable),
+			ItemCable("insulated.cable.copper", nextItemID(), insulatedCopperCable),
 			"insulated.cable.copper",
 			"cable_insulated_copper.png"
 		)
 		val itemInsulatedTinCable: Item = ItemHelper.createItem(
 			MOD_ID,
-			ItemPlaceable("insulated.cable.tin", nextItemID(), insulatedTinCable),
+			ItemCable("insulated.cable.tin", nextItemID(), insulatedTinCable),
 			"insulated.cable.tin",
 			"cable_insulated_tin.png"
 		)
 		val itemInsulatedGoldCable: Item = ItemHelper.createItem(
 			MOD_ID,
-			ItemPlaceable("insulated.cable.gold", nextItemID(), insulatedGoldCable),
+			ItemCable("insulated.cable.gold", nextItemID(), insulatedGoldCable),
 			"insulated.cable.gold",
 			"cable_insulated_gold.png"
 		)
 		val itemInsulatedSteelCable: Item = ItemHelper.createItem(
 			MOD_ID,
-			ItemPlaceable("insulated.cable.steel", nextItemID(), insulatedSteelCable),
+			ItemCable("insulated.cable.steel", nextItemID(), insulatedSteelCable),
 			"insulated.cable.steel",
 			"cable_insulated_steel.png"
 		)
@@ -335,5 +342,6 @@ class Industry2: ModInitializer {
 		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
 		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
 		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
+		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
 	}
 }

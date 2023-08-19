@@ -5,10 +5,10 @@ import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntityElectricFurnace
+import turniplabs.industry.blocks.entities.TileEntityCutter
 
-class GuiElectricFurnace(container: InventoryPlayer?, private val tileEntity: TileEntityElectricFurnace) :
-    GuiContainer(ContainerElectricFurnace(container, tileEntity)) {
+class GuiCutter(inventory: InventoryPlayer?, private val tileEntity: TileEntityCutter) :
+    GuiContainer(ContainerCutter(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/machine.png")
@@ -28,7 +28,7 @@ class GuiElectricFurnace(container: InventoryPlayer?, private val tileEntity: Ti
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Electric Furnace", 46, 6, 4210752)
+        fontRenderer.drawString("Cutting Machine", 46, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 
@@ -40,7 +40,7 @@ class GuiElectricFurnace(container: InventoryPlayer?, private val tileEntity: Ti
         val text = StringBuilder()
         if ((x > (scrnX + 56)) && (x < (scrnX + 72))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
+                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy} ${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)

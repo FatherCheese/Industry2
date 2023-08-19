@@ -47,10 +47,7 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
         val text = StringBuilder()
         if ((x > (scrnX + 80)) && (x < (scrnX + 96))) {
             if (y > (scrnY + 57) && y < (scrnY + 66)) {
-                text.append(TextFormatting.WHITE).append("Energy: ")
-                    .append(TextFormatting.LIGHT_GRAY).append(tileEntity.energy)
-                    .append(TextFormatting.WHITE).append(" / ")
-                    .append(TextFormatting.LIGHT_GRAY).append(tileEntity.capacity)
+                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)
@@ -64,8 +61,7 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
         // Sun/Moon generated energy description
         if (x > (scrnX + 84) && x < (scrnX + 92)) {
             if (y > (scrnY + 21) && y < (scrnY + 29)) {
-                text.append(TextFormatting.WHITE).append("Generating: ")
-                    .append(TextFormatting.LIGHT_GRAY).append(tileEntity.generatedEnergy)
+                text.append("${TextFormatting.WHITE}Generating: ${TextFormatting.LIGHT_GRAY}${tileEntity.generatedEnergy}/t")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)

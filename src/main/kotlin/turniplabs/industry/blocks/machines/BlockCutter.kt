@@ -14,16 +14,16 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.EnergyAPI
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.TileEntityCompressor
-import turniplabs.industry.gui.ContainerCompressor
-import turniplabs.industry.gui.GuiCompressor
+import turniplabs.industry.blocks.entities.TileEntityCutter
+import turniplabs.industry.gui.ContainerCutter
+import turniplabs.industry.gui.GuiCutter
 
-class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
+class BlockCutter(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
 
     private val machineTexture: Array<IntArray> = arrayOf(
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_compressor.png"),
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_compressor_on.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_cutter.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_cutter_on.png"),
         TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_casing_basic.png")
     )
 
@@ -32,7 +32,7 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
     }
 
     override fun getNewBlockEntity(): TileEntity {
-        return TileEntityCompressor()
+        return TileEntityCutter()
     }
 
     override fun onBlockRemoval(world: World?, x: Int, y: Int, z: Int) {
@@ -72,13 +72,13 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world!!.isClientSide) {
-            val tileEntity: TileEntityCompressor = world.getBlockTileEntity(x, y, z) as TileEntityCompressor
+            val tileEntity: TileEntityCutter = world.getBlockTileEntity(x, y, z) as TileEntityCutter
 
             tileEntity ?: return false
             EnergyAPI.displayGui(
                 player,
-                GuiCompressor(player?.inventory, tileEntity),
-                ContainerCompressor(player?.inventory, tileEntity),
+                GuiCutter(player?.inventory, tileEntity),
+                ContainerCutter(player?.inventory, tileEntity),
                 player?.inventory
             )
         }
@@ -96,7 +96,7 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
         5 = east
          */
 
-        val tileEntity: TileEntityCompressor = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityCompressor
+        val tileEntity: TileEntityCutter = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityCutter
         val metadata: Int = blockAccess.getBlockMetadata(x, y, z)
         val index = Sides.orientationLookUpHorizontal[6 * metadata + side.id]
         if (index != 2)
@@ -110,18 +110,18 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
     }
 
     companion object {
-        private var instance: BlockCompressor? = null
+        private var instance: BlockCutter? = null
 
-        private fun setupInstance(machine: BlockCompressor) {
+        fun setupInstance(machine: BlockCutter) {
             instance = machine
         }
 
-        private fun getInstance(): BlockCompressor {
-            return instance ?: throw NullPointerException("Instance of BlockCompress hasn't been setup!")
+        private fun getInstance(): BlockCutter {
+            return instance ?: throw NullPointerException("Instance of BlockCutter hasn't been setup!")
         }
 
         fun updateBlockState(active: Boolean, world: World, x: Int, y: Int, z: Int) {
-            val metaData: Int = world.getBlockMetadata(x, y, z)
+            val metadata: Int = world.getBlockMetadata(x, y, z)
             val tileEntity: TileEntity? = world.getBlockTileEntity(x, y, z)
 
             if (tileEntity == null)
@@ -132,7 +132,7 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
                 if (!active) world.setBlockMetadataWithNotify(x, y, z, 0)
 
                 getInstance().keepInventory = false
-                world.setBlockMetadataWithNotify(x, y, z, metaData)
+                world.setBlockMetadataWithNotify(x, y, z, metadata)
                 tileEntity.validate()
                 world.setBlockTileEntity(x, y, z, tileEntity)
             }
