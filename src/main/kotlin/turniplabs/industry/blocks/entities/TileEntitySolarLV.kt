@@ -3,11 +3,11 @@ package turniplabs.industry.blocks.entities
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 
-class TileEntitySolarGenerator() : TileEntitySolarBase(1) {
+class TileEntitySolarLV : TileEntitySolarBase(4) {
 
     init {
-        setCapacity(1024)
-        setTransfer(1)
+        setCapacity(8192)
+        setTransfer(16)
         setMaxReceive(0)
 
         for (dir: Direction in Direction.values())
@@ -15,6 +15,6 @@ class TileEntitySolarGenerator() : TileEntitySolarBase(1) {
     }
 
     override fun getInvName(): String {
-        return "SolarGenerator"
+        return "LVSolarArray"
     }
 }

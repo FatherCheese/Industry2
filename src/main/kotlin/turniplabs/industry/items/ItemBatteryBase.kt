@@ -27,11 +27,11 @@ open class ItemBatteryBase(
         baseReceive = receive
         val modID = Industry2.MOD_ID
 
-        textureCoordinates[0] = TextureHelper.registerItemTexture(modID, fullTexture)
-        textureCoordinates[1] = TextureHelper.registerItemTexture(modID, midFullTexture)
-        textureCoordinates[2] = TextureHelper.registerItemTexture(modID, midTexture)
-        textureCoordinates[3] = TextureHelper.registerItemTexture(modID, midEmptyTexture)
-        textureCoordinates[4] = TextureHelper.registerItemTexture(modID, emptyTexture)
+        textureCoordinates[0] = TextureHelper.getOrCreateItemTexture(modID, fullTexture)
+        textureCoordinates[1] = TextureHelper.getOrCreateItemTexture(modID, midFullTexture)
+        textureCoordinates[2] = TextureHelper.getOrCreateItemTexture(modID, midTexture)
+        textureCoordinates[3] = TextureHelper.getOrCreateItemTexture(modID, midEmptyTexture)
+        textureCoordinates[4] = TextureHelper.getOrCreateItemTexture(modID, emptyTexture)
     }
 
     override fun getIconIndex(itemstack: ItemStack?): Int {
@@ -47,8 +47,10 @@ open class ItemBatteryBase(
         return iconIndex
     }
 
-    override fun getDescription(p0: ItemStack?): String {
+    override fun getDescription(itemstack: ItemStack): String {
         val text = StringBuilder()
-        return text.append("${TextFormatting.WHITE}Max Transfer: ${TextFormatting.LIGHT_GRAY}IN: $baseReceive${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}OUT: $baseProvide").toString()
+
+        return text.append("${TextFormatting.WHITE}Max Transfer: ${TextFormatting.LIGHT_GRAY}IN: $baseReceive${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}OUT: $baseProvide\n")
+            .append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${getEnergy(itemstack)}${TextFormatting.WHITE} / ${baseCapacity}").toString()
     }
 }

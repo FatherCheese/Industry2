@@ -10,11 +10,14 @@
     "Cookie Cakes"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://github.com/FatherCheese/Industry2",
+    "sources": "https://github.com/FatherCheese/Industry2",
+    "issues": "https://github.com/FatherCheese/Industry2/issues"
   },
 
   "license": "CC0-1.0",
+
+  "icon": "assets/industry/icon.png",
 
   "environment": "*",
   "entrypoints": {

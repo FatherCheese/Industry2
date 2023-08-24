@@ -33,50 +33,43 @@ class CableModel : RenderBlocks() {
                 blockAccess.getBlockTileEntity(x, y, z - 1) is IEnergy
 
         // Credit to UselessBullets & Apollo from the modding Discord for help!
-        // TODO (fix hitboxes and the circling, and add corners)
-        val xValMin = when {
-            aPosX && aNegX -> 0.0f
-            aPosX -> 0.5f
-            aNegX -> 0.0f
-            else -> boundMin1
+        // TODO (fix hitboxes and add corners)
+        when {
+            aPosX -> {
+                if (aNegX) {
+                    blockCable.setBlockBounds(0.0f, boundMin1, boundMin1, 1.0f, boundMax1, boundMax1)
+                } else {
+                    blockCable.setBlockBounds(0.5f, boundMin1, boundMin1, 1.0f, boundMax1, boundMax1)
+                }
+            }
+            aNegX -> {
+                blockCable.setBlockBounds(0.0f, boundMin1, boundMin1, 0.5f, boundMax1, boundMax1)
+            }
+            aPosY -> {
+                if (aNegY) {
+                    blockCable.setBlockBounds(boundMin1, 0.0f, boundMin1, boundMax1, 1.0f, boundMax1)
+                } else {
+                    blockCable.setBlockBounds(boundMin1, 0.5f, boundMin1, boundMax1, 1.0f, boundMax1)
+                }
+            }
+            aNegY -> {
+                blockCable.setBlockBounds(boundMin1, 0.0f, boundMin1, boundMax1, 0.5f, boundMax1)
+            }
+            aPosZ -> {
+                if (aNegZ) {
+                    blockCable.setBlockBounds(boundMin1, boundMin1, 0.0f, boundMax1, boundMax1, 1.0f)
+                } else {
+                    blockCable.setBlockBounds(boundMin1, boundMin1, 0.5f, boundMax1, boundMax1, 1.0f)
+                }
+            }
+            aNegZ -> {
+                blockCable.setBlockBounds(boundMin1, boundMin1, 0.0f, boundMax1, boundMax1, 0.5f)
+            }
+            else -> {
+                blockCable.setBlockBounds(boundMin1, boundMin1, boundMin1, boundMax1, boundMax1, boundMax1)
+            }
         }
 
-        val yValMin = when {
-            aPosY && aNegY -> 0.0f
-            aPosY -> 0.5f
-            aNegY -> 0.0f
-            else -> boundMin1
-        }
-
-        val zValMin = when {
-            aPosZ && aNegZ -> 0.0f
-            aPosZ -> 0.5f
-            aNegZ -> 0.0f
-            else -> boundMin1
-        }
-
-        val xValMax = when {
-            aPosX && aNegX -> 1.0f
-            aPosX -> 1.0f
-            aNegX -> 0.5f
-            else -> boundMax1
-        }
-
-        val yValMax = when {
-            aPosY && aNegY -> 1.0f
-            aPosY -> 1.0f
-            aNegY -> 0.5f
-            else -> boundMax1
-        }
-
-        val zValMax = when {
-            aPosZ && aNegZ -> 1.0f
-            aPosZ -> 1.0f
-            aNegZ -> 0.5f
-            else -> boundMax1
-        }
-
-        blockCable.setBlockBounds(xValMin, yValMin, zValMin, xValMax, yValMax, zValMax)
         renderBlocks.renderStandardBlock(blockCable, x, y, z)
 
         return true

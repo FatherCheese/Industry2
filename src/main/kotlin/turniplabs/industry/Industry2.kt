@@ -25,6 +25,7 @@ import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.*
 import turniplabs.industry.items.ItemBatteryRedstone
 import turniplabs.industry.items.ItemCable
+import turniplabs.industry.items.ItemCell
 
 class Industry2: ModInitializer {
 
@@ -108,25 +109,25 @@ class Industry2: ModInitializer {
 
 		val copperBlock: Block = blockBuilder
 			.setTopTexture("block_copper_top.png")
-			.setSides("block_copper_sides.png")
+			.setSideTextures("block_copper_sides.png")
 			.setBottomTexture("block_copper_bottom.png")
 			.build(Block("block.copper", nextBlockID(), Material.metal))
 
 		val tinBlock: Block = blockBuilder
 			.setTopTexture("block_tin_top.png")
-			.setSides("block_tin_sides.png")
+			.setSideTextures("block_tin_sides.png")
 			.setBottomTexture("block_tin_bottom.png")
 			.build(Block("block.tin", nextBlockID(), Material.metal))
 
 		val bronzeBlock: Block = blockBuilder
 			.setTopTexture("block_bronze_top.png")
-			.setSides("block_bronze_sides.png")
+			.setSideTextures("block_bronze_sides.png")
 			.setBottomTexture("block_bronze_bottom.png")
 			.build(Block("block.bronze", nextBlockID(), Material.metal))
 
 		val uraniumBlock: Block = blockBuilder
 			.setTopTexture("block_uranium_top.png")
-			.setSides("block_uranium_sides.png")
+			.setSideTextures("block_uranium_sides.png")
 			.setBottomTexture("block_uranium_bottom.png")
 			.build(Block("block.uranium", nextBlockID(), Material.metal))
 
@@ -176,45 +177,106 @@ class Industry2: ModInitializer {
 
 		// Machines
 		private val machineBuilder = BlockBuilder(MOD_ID)
+			.setTopBottomTexture("machine_casing_basic.png")
+			.setEastTexture("machine_casing_basic.png")
+			.setSouthTexture("machine_casing_basic.png")
+			.setWestTexture("machine_casing_basic.png")
 			.setBlockSound(BlockSounds.METAL)
 			.setHardness(5.0f)
 			.setResistance(10.0f)
 
-		val machineCasing: Block = machineBuilder
+		val machineCasing: Block = blockBuilder
 			.setTextures("machine_casing_basic.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
 			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 			.build(Block("machine.casing", nextBlockID(), Material.metal))
 
-		val machineCasingAdvanced: Block = machineBuilder
+		val machineCasingAdvanced: Block = blockBuilder
 			.setTextures("machine_casing_advanced.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
 			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 			.build(Block("machine.casing.advanced", nextBlockID(), Material.metal))
 
 		val machineGenerator: Block = machineBuilder
-			.setTextures("machine_casing_basic.png")
+			.setNorthTexture("machine_generator.png")
 			.build(BlockGenerator("machine.generator", nextBlockID(), Material.metal))
 
-		val machineSolarGenerator: Block = machineBuilder
+		val machineGeothermalGenerator: Block = machineBuilder
+			.setNorthTexture("machine_generator_geothermal.png")
+			.build(BlockGeothermalGenerator("machine.generator.geothermal", nextBlockID(), Material.metal))
+
+		val machineSolarGenerator: Block = blockBuilder
 			.setTopTexture("machine_generator_solar.png")
-			.setSides("machine_casing_basic.png")
+			.setSideTextures("machine_casing_basic.png")
 			.setBottomTexture("machine_casing_basic.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
 			.build(BlockSolarGenerator("machine.generator.solar", nextBlockID(), Material.metal))
 
+		val machineSolarArrayLV: Block = blockBuilder
+			.setTopTexture("lv_solar_array.png")
+			.setSideTextures("lv_batbox.png")
+			.setBottomTexture("lv_batbox.png")
+			.setBlockSound(BlockSounds.WOOD)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+			.build(BlockSolarArrayLV("machine.array.lv", nextBlockID(), Material.wood))
+
+		val machineSolarArrayMV: Block = blockBuilder
+			.setTopTexture("mv_solar_array.png")
+			.setSideTextures("mv_batbox.png")
+			.setBottomTexture("mv_batbox.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+			.build(BlockSolarArrayMV("machine.array.mv", nextBlockID(), Material.metal))
+
+		val machineSolarArrayHV: Block = blockBuilder
+			.setTopTexture("machine_generator_solar.png")
+			.setSideTextures("hv_batbox.png")
+			.setBottomTexture("hv_batbox.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+			.build(BlockSolarArrayHV("machine.array.hv", nextBlockID(), Material.metal))
+
+		val machineSolarArraySHV: Block = blockBuilder
+			.setTopTexture("machine_generator_solar.png")
+			.setSideTextures("shv_batbox.png")
+			.setBottomTexture("shv_batbox.png")
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+			.build(BlockSolarArraySHV("machine.array.shv", nextBlockID(), Material.metal))
+
 		val machineElectricFurnace: Block = machineBuilder
-			.setTextures("machine_casing_basic.png")
+			.setNorthTexture("machine_furnace.png")
 			.build(BlockElectricFurnace("machine.furnace", nextBlockID(), Material.metal))
 
 		val machineMacerator: Block = machineBuilder
-			.setTextures("machine_casing_basic.png")
+			.setNorthTexture("machine_macerator.png")
 			.build(BlockMacerator("machine.macerator", nextBlockID(), Material.metal))
 
 		val machineCompressor: Block = machineBuilder
-			.setTextures("machine_casing_basic.png")
+			.setNorthTexture("machine_compressor.png")
 			.build(BlockCompressor("machine.compressor", nextBlockID(), Material.metal))
 
 		val machineCutter: Block = machineBuilder
-			.setTextures("machine_casing_basic.png")
+			.setNorthTexture("machine_cutter.png")
 			.build(BlockCutter("machine.cutter", nextBlockID(), Material.metal))
+
+		// Miscellaneous
+		val hardenedCoal: Block = BlockBuilder(MOD_ID)
+			.setTextures("hardened_coal.png")
+			.setHardness(10.0f)
+			.setResistance(60.0f)
+			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
+			.build(Block("block.coal.hardened", nextBlockID(), Material.stone))
 
 		/* ITEMS */
 
@@ -229,6 +291,7 @@ class Industry2: ModInitializer {
 		val bronzeDust: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "dust.bronze", "dust_bronze.png")
 		val ironDust: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "dust.iron", "dust_iron.png")
 		val goldDust: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "dust.gold", "dust_gold.png")
+		val coalDust: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "dust.coal", "dust_coal.png")
 
 		// Ingots
 		val copperIngot: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingot.copper", "ingot_copper.png")
@@ -302,6 +365,11 @@ class Industry2: ModInitializer {
 			ItemBatteryRedstone(nextItemID()),
 			"tool.battery.redstone"
 		).setMaxStackSize(1)
+
+		val emptyCell: Item = ItemHelper.createItem(MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
+		val waterCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")
+		val lavaCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.lava", "cell_lava.png")
+		val uraniumCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.uranium", "cell_uranium.png")
 	}
 
 	override fun onInitialize() {
@@ -338,8 +406,12 @@ class Industry2: ModInitializer {
 
 		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
 		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
-		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
 		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
+		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
+		EntityHelper.createTileEntity(TileEntitySolarLV::class.java, "LVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarMV::class.java, "MVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarHV::class.java, "HVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarSHV::class.java, "SHVSolarArray")
 		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
 		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
 		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")

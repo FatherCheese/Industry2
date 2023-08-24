@@ -15,6 +15,7 @@ object RecipesCompressor {
         addRecipe(Item.ingotGold.id, ItemStack(Industry2.goldPlate, 2))
         addRecipe(Item.ingotSteel.id, ItemStack(Industry2.steelPlate, 2))
         addRecipe(Industry2.rawUranium.id, ItemStack(Industry2.uraniumIngot))
+        addRecipe(Industry2.hardenedCoal.id, ItemStack(Item.diamond))
     }
 
     fun addRecipe(input: Int, output: ItemStack) {

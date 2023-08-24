@@ -5,12 +5,13 @@ import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.TileEntitySolarBase
 
-class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEntitySolarGenerator) :
+class GuiSolarGenerator(inventory: InventoryPlayer?, private var tileEntity: TileEntitySolarBase) :
     GuiContainer(ContainerSolarGenerator(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
+
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator_solar.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
@@ -22,7 +23,11 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
         val power: Double = (tileEntity.energy.toFloat() / tileEntity.capacity.toFloat()).toDouble()
         drawTexturedModalRect(textX + 80, textY + 57, 176, 0, (power * 16).toInt(), 8)
 
-        // Turns the image to the moon if it's night or blocked
+        // Sun display
+        drawTexturedModalRect(textX + 84, textY + 21, 176, 8, 8, 8)
+
+        // Currently cut, would check the generated energy and display a sun or moon, but it's broken due to arrays.
+        /*
         if (tileEntity.generatedEnergy > 0) drawTexturedModalRect(
             textX + 84,
             textY + 21,
@@ -31,6 +36,7 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
             8,
             8
         ) else drawTexturedModalRect(textX + 84, textY + 21, 184, 8, 8, 8)
+        */
     }
 
     override fun drawGuiContainerForegroundLayer() {
@@ -58,7 +64,8 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
             }
         }
 
-        // Sun/Moon generated energy description
+        // ALSO CUT! Would show the generated energy a tick when hovering above the sun/moon
+        /*
         if (x > (scrnX + 84) && x < (scrnX + 92)) {
             if (y > (scrnY + 21) && y < (scrnY + 29)) {
                 text.append("${TextFormatting.WHITE}Generating: ${TextFormatting.LIGHT_GRAY}${tileEntity.generatedEnergy}/t")
@@ -71,5 +78,6 @@ class GuiSolarGenerator(inventory: InventoryPlayer?, private val tileEntity: Til
                 GL11.glEnable(GL11.GL_CULL_FACE)
             }
         }
+        */
     }
 }

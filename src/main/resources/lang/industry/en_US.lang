@@ -51,8 +51,18 @@ tile.industry.machine.casing.advanced.name=Advanced Machine Casing
 tile.industry.machine.casing.advanced.desc=
 tile.industry.machine.generator.name=Generator
 tile.industry.machine.generator.desc=
+tile.industry.machine.generator.geothermal.name=Geothermal Generator
+tile.industry.machine.generator.geothermal.desc=
 tile.industry.machine.generator.solar.name=Solar Generator
 tile.industry.machine.generator.solar.desc=
+tile.industry.machine.array.lv.name=LV Solar Array
+tile.industry.machine.array.lv.desc=
+tile.industry.machine.array.mv.name=MV Solar Array
+tile.industry.machine.array.mv.desc=
+tile.industry.machine.array.hv.name=HV Solar Array
+tile.industry.machine.array.hv.desc=
+tile.industry.machine.array.shv.name=SHV Solar Array
+tile.industry.machine.array.shv.desc=
 tile.industry.machine.furnace.name=Electric Furnace
 tile.industry.machine.furnace.desc=
 tile.industry.machine.macerator.name=Macerator
@@ -61,6 +71,9 @@ tile.industry.machine.compressor.name=Compressor
 tile.industry.machine.compressor.desc=
 tile.industry.machine.cutter.name=Cutter
 tile.industry.machine.cutter.desc=
+
+tile.industry.block.coal.hardened.name=Hardened Block of Coal
+tile.industry.block.coal.hardened.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=
@@ -79,6 +92,8 @@ item.industry.dust.iron.name=Iron Dust
 item.industry.dust.iron.desc=
 item.industry.dust.gold.name=Gold Dust
 item.industry.dust.gold.desc=
+item.industry.dust.coal.name=Coal Dust
+item.industry.dust.coal.desc=
 
 item.industry.ingot.copper.name=Copper Ingot
 item.industry.ingot.copper.desc=
@@ -124,3 +139,19 @@ item.industry.insulated.cable.steel.desc=
 
 item.industry.tool.battery.redstone.name=Redstone Battery
 item.industry.tool.battery.redstone.desc=
+
+item.industry.cell.empty.name=Cell
+item.industry.cell.empty.desc=
+item.industry.cell.water.name=Water Cell
+item.industry.cell.water.desc=
+item.industry.cell.lava.name=Lava Cell
+item.industry.cell.lava.desc=
+item.industry.cell.uranium.name=Uranium Cell
+item.industry.cell.uranium.desc=
+
+item.industry.ingredient.coalball.name=Coal Ball
+item.industry.ingredient.coalball.desc=
+item.industry.ingredient.coalball.compressed.name=Compressed Coal Ball
+item.industry.ingredient.coalball.compressed.desc=
+item.industry.ingredient.coalchunk.name=Compressed Coal Chunk
+item.industry.ingredient.coalchunk.desc=

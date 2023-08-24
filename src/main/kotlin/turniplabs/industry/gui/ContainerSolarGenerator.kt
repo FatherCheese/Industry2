@@ -4,9 +4,9 @@ import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.TileEntitySolarBase
 
-class ContainerSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntitySolarGenerator): ContainerEnergy() {
+class ContainerSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntitySolarBase): ContainerEnergy() {
 
     init {
         tile = tileEntity
@@ -26,6 +26,6 @@ class ContainerSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntit
     }
 
     override fun isUsableByPlayer(entityPlayer: EntityPlayer?): Boolean {
-        return (tile as TileEntitySolarGenerator).canInteractWith(entityPlayer)
+        return (tile as TileEntitySolarBase).canInteractWith(entityPlayer)
     }
 }
