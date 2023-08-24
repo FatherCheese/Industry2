@@ -1,14 +1,14 @@
 package turniplabs.industry.gui
 
 import net.minecraft.core.player.inventory.InventoryPlayer
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.TileEntitySolarHV
 
-class GuiSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntitySolarGenerator) :
+class GuiSolarArrayHV(inventory: InventoryPlayer?, tileEntity: TileEntitySolarHV) :
 GuiSolarBase(inventory, tileEntity) {
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Solar Generator", 46, 6, 4210752)
+        fontRenderer.drawString("HV Solar Array", 46, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 }

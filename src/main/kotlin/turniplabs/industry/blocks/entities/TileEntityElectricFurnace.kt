@@ -170,6 +170,9 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         if (contents[0] == null)
             return false
 
+        if (contents[0]!!.item == null)
+            return false
+
         val itemStack: ItemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id) ?: return false
 
         return when {

@@ -6,7 +6,7 @@ import net.minecraft.core.player.inventory.slot.Slot
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
 import turniplabs.industry.blocks.entities.TileEntitySolarBase
 
-class ContainerSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntitySolarBase): ContainerEnergy() {
+class ContainerSolarBase(inventory: InventoryPlayer?, tileEntity: TileEntitySolarBase): ContainerEnergy() {
 
     init {
         tile = tileEntity

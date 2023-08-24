@@ -7,7 +7,7 @@ class TileEntitySolarMV : TileEntitySolarBase(16){
 
     init {
         setCapacity(300000)
-        setTransfer(128)
+        setTransfer(32)
         setMaxReceive(0)
 
         for (dir: Direction in Direction.values())

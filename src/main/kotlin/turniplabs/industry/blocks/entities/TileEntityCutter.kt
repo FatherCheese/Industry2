@@ -169,6 +169,9 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         if (contents[0] == null)
             return false
 
+        if (contents[0]!!.item == null)
+            return false
+
         val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id) ?: return false
 
         return when {

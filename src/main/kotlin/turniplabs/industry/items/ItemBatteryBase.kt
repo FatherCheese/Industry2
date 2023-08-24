@@ -26,6 +26,7 @@ open class ItemBatteryBase(
         baseProvide = provide
         baseReceive = receive
         val modID = Industry2.MOD_ID
+        maxStackSize = 1
 
         textureCoordinates[0] = TextureHelper.getOrCreateItemTexture(modID, fullTexture)
         textureCoordinates[1] = TextureHelper.getOrCreateItemTexture(modID, midFullTexture)

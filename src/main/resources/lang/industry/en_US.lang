@@ -72,7 +72,7 @@ tile.industry.machine.compressor.desc=
 tile.industry.machine.cutter.name=Cutter
 tile.industry.machine.cutter.desc=
 
-tile.industry.block.coal.hardened.name=Hardened Block of Coal
+tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=
 
 item.industry.ore.raw.copper.name=Raw Copper Ore

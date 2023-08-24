@@ -7,7 +7,7 @@ import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
 import sunsetsatellite.energyapi.EnergyAPI
 import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
-import turniplabs.industry.gui.ContainerSolarGenerator
+import turniplabs.industry.gui.ContainerSolarBase
 import turniplabs.industry.gui.GuiSolarGenerator
 
 class BlockSolarGenerator(key: String?, id: Int, material: Material?) : BlockTileEntity(key, id, material) {
@@ -23,7 +23,7 @@ class BlockSolarGenerator(key: String?, id: Int, material: Material?) : BlockTil
             tileEntity ?: return false
             EnergyAPI.displayGui(
                 player, GuiSolarGenerator(player?.inventory, tileEntity),
-                ContainerSolarGenerator(player?.inventory, tileEntity),
+                ContainerSolarBase(player?.inventory, tileEntity),
                 player?.inventory
             )
         }
