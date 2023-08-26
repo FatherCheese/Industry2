@@ -4,9 +4,9 @@ class ItemBatteryRedstone(
     i: Int,
 ) : ItemBatteryBase(
     i,
-    1024,
-    32,
-    32,
+    2048,
+    16,
+    16,
     "battery_redstone_4.png",
     "battery_redstone_3.png",
     "battery_redstone_2.png",

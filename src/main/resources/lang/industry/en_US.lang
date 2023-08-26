@@ -55,6 +55,7 @@ tile.industry.machine.generator.geothermal.name=Geothermal Generator
 tile.industry.machine.generator.geothermal.desc=
 tile.industry.machine.generator.solar.name=Solar Generator
 tile.industry.machine.generator.solar.desc=
+
 tile.industry.machine.array.lv.name=LV Solar Array
 tile.industry.machine.array.lv.desc=
 tile.industry.machine.array.mv.name=MV Solar Array
@@ -63,6 +64,16 @@ tile.industry.machine.array.hv.name=HV Solar Array
 tile.industry.machine.array.hv.desc=
 tile.industry.machine.array.shv.name=SHV Solar Array
 tile.industry.machine.array.shv.desc=
+
+tile.industry.machine.batbox.lv.name=LV Batbox
+tile.industry.machine.batbox.lv.desc=
+tile.industry.machine.batbox.mv.name=MV Batbox
+tile.industry.machine.batbox.mv.desc=
+tile.industry.machine.batbox.hv.name=HV Batbox
+tile.industry.machine.batbox.hv.desc=
+tile.industry.machine.batbox.shv.name=SHV Batbox
+tile.industry.machine.batbox.shv.desc=
+
 tile.industry.machine.furnace.name=Electric Furnace
 tile.industry.machine.furnace.desc=
 tile.industry.machine.macerator.name=Macerator
@@ -139,6 +150,8 @@ item.industry.insulated.cable.steel.desc=
 
 item.industry.tool.battery.redstone.name=Redstone Battery
 item.industry.tool.battery.redstone.desc=
+item.industry.tool.battery.advanced.name=Advanced Battery
+item.industry.tool.battery.advanced.desc=
 
 item.industry.cell.empty.name=Cell
 item.industry.cell.empty.desc=
@@ -149,9 +162,7 @@ item.industry.cell.lava.desc=
 item.industry.cell.uranium.name=Uranium Cell
 item.industry.cell.uranium.desc=
 
-item.industry.ingredient.coalball.name=Coal Ball
-item.industry.ingredient.coalball.desc=
-item.industry.ingredient.coalball.compressed.name=Compressed Coal Ball
-item.industry.ingredient.coalball.compressed.desc=
-item.industry.ingredient.coalchunk.name=Compressed Coal Chunk
-item.industry.ingredient.coalchunk.desc=
+item.industry.ingredient.circuit.name=Circuit
+item.industry.ingredient.circuit.desc=
+item.industry.ingredient.advancedcircuit.name=
+item.industry.ingredient.advancedcircuit.desc=

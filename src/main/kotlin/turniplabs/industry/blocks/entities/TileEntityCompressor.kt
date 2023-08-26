@@ -172,19 +172,19 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         if (contents[0]!!.item == null)
             return false
 
-        val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack? = RecipesCompressor.getResult(contents[0]!!.item.id)
 
         return when {
             contents[2] == null -> true
             !contents[2]!!.isItemEqual(itemStack) -> false
             contents[2]!!.stackSize < inventoryStackLimit && contents[2]!!.stackSize < contents[2]!!.maxStackSize -> true
-            else -> contents[2]!!.stackSize < itemStack.maxStackSize
+            else -> contents[2]!!.stackSize < itemStack!!.maxStackSize
         }
     }
 
     private fun compressItem() {
         if (canCompress()) {
-            val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id)
+            val itemStack: ItemStack = RecipesCompressor.getResult(contents[0]!!.item.id) ?: return
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
@@ -200,7 +200,6 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxCompression == 0) 0
-        else (currentCompression * i) / maxCompression
+        return if (maxCompression == 0) 0 else (currentCompression * i) / maxCompression
     }
 }

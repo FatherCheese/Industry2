@@ -184,7 +184,7 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
 
     private fun cutItem() {
         if (canCut()) {
-            val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id)
+            val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id) ?: return
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
@@ -200,7 +200,6 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxCutTime == 0) 0
-        else (currentCutTime * i) / maxCutTime
+        return if (maxCutTime == 0) 0 else (currentCutTime * i) / maxCutTime
     }
 }

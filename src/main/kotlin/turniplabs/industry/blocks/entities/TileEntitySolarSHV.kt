@@ -6,7 +6,7 @@ import sunsetsatellite.sunsetutils.util.Direction
 class TileEntitySolarSHV : TileEntitySolarBase(256) {
 
     init {
-        setCapacity(40000000)
+        setCapacity(32768)
         setTransfer(1024)
         setMaxReceive(0)
 

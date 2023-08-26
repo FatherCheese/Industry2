@@ -34,7 +34,10 @@
 
   "depends": {
     "fabricloader": ">=0.14.7",
-    "fabric-language-kotlin": "*"
+    "fabric-language-kotlin": "*",
+    "halplibe": ">=2.1.5",
+    "sunsetutils": ">=1.7.1",
+    "energyapi": ">=1.1.4"
   },
   "suggests": {
   }

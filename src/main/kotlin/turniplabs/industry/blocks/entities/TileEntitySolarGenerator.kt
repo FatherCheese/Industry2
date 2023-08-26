@@ -7,7 +7,7 @@ class TileEntitySolarGenerator() : TileEntitySolarBase(1) {
 
     init {
         setCapacity(1024)
-        setTransfer(1)
+        setTransfer(8)
         setMaxReceive(0)
 
         for (dir: Direction in Direction.values())

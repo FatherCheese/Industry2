@@ -7,6 +7,7 @@ import net.minecraft.client.sound.block.BlockSounds
 import net.minecraft.core.block.Block
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.block.tag.BlockTags
+import net.minecraft.core.crafting.CraftingManager
 import net.minecraft.core.crafting.recipe.RecipesFurnace
 import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemStack
@@ -23,6 +24,7 @@ import turniplabs.industry.blocks.cables.BlockCableGold
 import turniplabs.industry.blocks.cables.BlockCableTin
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.*
+import turniplabs.industry.items.ItemBatteryAdvanced
 import turniplabs.industry.items.ItemBatteryRedstone
 import turniplabs.industry.items.ItemCable
 import turniplabs.industry.items.ItemCell
@@ -185,6 +187,11 @@ class Industry2: ModInitializer {
 			.setHardness(5.0f)
 			.setResistance(10.0f)
 
+		private val machineBuilderBlank = BlockBuilder(MOD_ID)
+			.setBlockSound(BlockSounds.METAL)
+			.setHardness(5.0f)
+			.setResistance(10.0f)
+
 		val machineCasing: Block = blockBuilder
 			.setTextures("machine_casing_basic.png")
 			.setBlockSound(BlockSounds.METAL)
@@ -209,13 +216,10 @@ class Industry2: ModInitializer {
 			.setNorthTexture("machine_generator_geothermal.png")
 			.build(BlockGeothermalGenerator("machine.generator.geothermal", nextBlockID(), Material.metal))
 
-		val machineSolarGenerator: Block = blockBuilder
+		val machineSolarGenerator: Block = machineBuilderBlank
 			.setTopTexture("machine_generator_solar.png")
 			.setSideTextures("machine_casing_basic.png")
 			.setBottomTexture("machine_casing_basic.png")
-			.setBlockSound(BlockSounds.METAL)
-			.setHardness(5.0f)
-			.setResistance(10.0f)
 			.build(BlockSolarGenerator("machine.generator.solar", nextBlockID(), Material.metal))
 
 		val machineSolarArrayLV: Block = blockBuilder
@@ -227,32 +231,50 @@ class Industry2: ModInitializer {
 			.setResistance(10.0f)
 			.build(BlockSolarArrayLV("machine.array.lv", nextBlockID(), Material.wood))
 
-		val machineSolarArrayMV: Block = blockBuilder
+		val machineSolarArrayMV: Block = machineBuilderBlank
 			.setTopTexture("mv_solar_array.png")
 			.setSideTextures("mv_batbox.png")
 			.setBottomTexture("mv_batbox.png")
-			.setBlockSound(BlockSounds.METAL)
-			.setHardness(5.0f)
-			.setResistance(10.0f)
 			.build(BlockSolarArrayMV("machine.array.mv", nextBlockID(), Material.metal))
 
-		val machineSolarArrayHV: Block = blockBuilder
+		val machineSolarArrayHV: Block = machineBuilderBlank
 			.setTopTexture("machine_generator_solar.png")
 			.setSideTextures("hv_batbox.png")
 			.setBottomTexture("hv_batbox.png")
-			.setBlockSound(BlockSounds.METAL)
-			.setHardness(5.0f)
-			.setResistance(10.0f)
 			.build(BlockSolarArrayHV("machine.array.hv", nextBlockID(), Material.metal))
 
-		val machineSolarArraySHV: Block = blockBuilder
+		val machineSolarArraySHV: Block = machineBuilderBlank
 			.setTopTexture("machine_generator_solar.png")
 			.setSideTextures("shv_batbox.png")
 			.setBottomTexture("shv_batbox.png")
-			.setBlockSound(BlockSounds.METAL)
+			.build(BlockSolarArraySHV("machine.array.shv", nextBlockID(), Material.metal))
+
+		val batboxLV: Block = blockBuilder
+			.setTopTexture("lv_batbox_input.png")
+			.setBottomTexture("lv_batbox.png")
+			.setSideTextures("lv_batbox.png")
+			.setBlockSound(BlockSounds.WOOD)
 			.setHardness(5.0f)
 			.setResistance(10.0f)
-			.build(BlockSolarArraySHV("machine.array.shv", nextBlockID(), Material.metal))
+			.build(BlockBatboxLV("machine.batbox.lv", nextBlockID(), Material.wood))
+
+		val batboxMV: Block = machineBuilderBlank
+			.setTopTexture("mv_batbox_input.png")
+			.setBottomTexture("mv_batbox.png")
+			.setSideTextures("mv_batbox.png")
+			.build(BlockBatboxMV("machine.batbox.mv", nextBlockID(), Material.metal))
+
+		val batboxHV: Block = machineBuilderBlank
+			.setTopTexture("hv_batbox_input.png")
+			.setBottomTexture("hv_batbox.png")
+			.setSideTextures("hv_batbox.png")
+			.build(BlockBatboxHV("machine.batbox.hv", nextBlockID(), Material.metal))
+
+		val batboxSHV: Block = machineBuilderBlank
+			.setTopTexture("shv_batbox_input.png")
+			.setBottomTexture("shv_batbox.png")
+			.setSideTextures("shv_batbox.png")
+			.build(BlockBatboxSHV("machine.batbox.shv", nextBlockID(), Material.metal))
 
 		val machineElectricFurnace: Block = machineBuilder
 			.setNorthTexture("machine_furnace.png")
@@ -364,16 +386,51 @@ class Industry2: ModInitializer {
 			MOD_ID,
 			ItemBatteryRedstone(nextItemID()),
 			"tool.battery.redstone"
-		).setMaxStackSize(1)
+		)
+
+		val itemBatteryAdvanced: Item = ItemHelper.createItem(
+			MOD_ID,
+			ItemBatteryAdvanced(nextItemID()),
+			"tool.battery.advanced",
+		)
 
 		val emptyCell: Item = ItemHelper.createItem(MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
 		val waterCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")
 		val lavaCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.lava", "cell_lava.png")
 		val uraniumCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.uranium", "cell_uranium.png")
+
+		// Materials
+		val circuit: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.circuit", "circuit.png")
+		val circuitAdvanced: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.advancedcircuit", "circuit_advanced.png")
 	}
 
 	override fun onInitialize() {
 		LOGGER.info("Industry 2 initialized. Have fun!")
+
+		BlockModelDispatcher.getInstance().addDispatch(copperCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(tinCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(goldCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(steelCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedCopperCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedTinCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedGoldCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(insulatedSteelCable, BlockModelRenderBlocks(32))
+
+		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
+		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
+		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
+		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
+		EntityHelper.createTileEntity(TileEntitySolarLV::class.java, "LVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarMV::class.java, "MVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarHV::class.java, "HVSolarArray")
+		EntityHelper.createTileEntity(TileEntitySolarSHV::class.java, "SHVSolarArray")
+		EntityHelper.createTileEntity(TIleEntityBatboxLV::class.java, "BatboxLV")
+		EntityHelper.createTileEntity(TIleEntityBatboxMV::class.java, "BatboxMV")
+		EntityHelper.createTileEntity(TIleEntityBatboxHV::class.java, "BatboxHV")
+		EntityHelper.createTileEntity(TIleEntityBatboxSHV::class.java, "BatboxSHV")
+		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
+		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
+		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
 
 		RecipesFurnace.smelting().addSmelting(oreCopperStone.id, ItemStack(copperIngot))
 		RecipesFurnace.smelting().addSmelting(oreCopperBasalt.id, ItemStack(copperIngot))
@@ -395,25 +452,64 @@ class Industry2: ModInitializer {
 		RecipesFurnace.smelting().addSmelting(ironDust.id, ItemStack(Item.ingotIron))
 		RecipesFurnace.smelting().addSmelting(goldDust.id, ItemStack(Item.ingotGold))
 
-		BlockModelDispatcher.getInstance().addDispatch(copperCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(tinCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(goldCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(steelCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedCopperCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedTinCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedGoldCable, BlockModelRenderBlocks(32))
-		BlockModelDispatcher.getInstance().addDispatch(insulatedSteelCable, BlockModelRenderBlocks(32))
-
-		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
-		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
-		EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
-		EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
-		EntityHelper.createTileEntity(TileEntitySolarLV::class.java, "LVSolarArray")
-		EntityHelper.createTileEntity(TileEntitySolarMV::class.java, "MVSolarArray")
-		EntityHelper.createTileEntity(TileEntitySolarHV::class.java, "HVSolarArray")
-		EntityHelper.createTileEntity(TileEntitySolarSHV::class.java, "SHVSolarArray")
-		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
-		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
-		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(copperBlock),
+			"111", "111", "111",
+			'1', copperIngot
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(tinBlock),
+			"111", "111", "111",
+			'1', tinIngot
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(bronzeBlock),
+			"111", "111", "111",
+			'1', bronzeIngot
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(uraniumBlock),
+			"111", "111", "111",
+			'1', uraniumIngot
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineCasing),
+			"111", "1#1", "111",
+			'1', ironPlate
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineCasingAdvanced),
+			"111", "1#1", "111",
+			'1', steelPlate
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineGenerator),
+			"1", "2", "3",
+			'1', itemBatteryRedstone,
+			'2', machineCasing,
+			'3', Block.furnaceStoneIdle
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineGeothermalGenerator),
+			"121", "121", "343",
+			'1', Block.glass,
+			'2', emptyCell,
+			'3', steelPlate,
+			'4', machineGenerator
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineSolarGenerator),
+			"121", "212", "343",
+			'1', coalDust,
+			'2', Block.glass,
+			'3', circuit,
+			'4', machineGenerator
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineSolarArrayLV),
+			"111", "121", "111",
+			'1', machineSolarGenerator,
+			'2', batboxLV
+		)
 	}
 }

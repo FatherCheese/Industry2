@@ -66,6 +66,14 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	ivy {
+		url = "https://github.com/ToufouMaster"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 dependencies {
@@ -88,6 +96,12 @@ dependencies {
 	// Energy API
 	modImplementation "sunsetutils:sunsetutils:1.7.1"
 	modImplementation "energyapi:energyapi:${project.energyapi_version}"
+
+	// Guidebook++
+	modImplementation "guidebookpp:guidebookpp:1.5.5"
+
+	// BTWaila
+	modImplementation "btwaila:btwaila:0.2.2"
 
 	var log4jVersion = "2.20.0"
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")

@@ -18,8 +18,8 @@ object RecipesCutter {
         recipeList[input] = output
     }
 
-    fun getResult(i: Int): ItemStack {
-        return recipeList[i] as ItemStack
+    fun getResult(i: Int): ItemStack? {
+        return recipeList[i] as ItemStack?
     }
 
     fun getRecipeList(): HashMap<Any?, Any?> {

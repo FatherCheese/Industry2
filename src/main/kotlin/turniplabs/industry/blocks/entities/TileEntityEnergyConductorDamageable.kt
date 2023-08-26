@@ -48,7 +48,6 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
         // Destroy itself on 1 health
         if (machineHealth < 1) {
             worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 0.25f)
-            worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0)
         }
 
         if (machineHealth < maxMachineHealth) {

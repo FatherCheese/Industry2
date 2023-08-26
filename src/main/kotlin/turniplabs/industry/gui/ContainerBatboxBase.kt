@@ -4,13 +4,14 @@ import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
-import turniplabs.industry.blocks.entities.TileEntitySolarBase
+import turniplabs.industry.blocks.entities.TileEntityBatboxBase
 
-class ContainerSolarBase(inventory: InventoryPlayer?, tileEntity: TileEntitySolarBase) : ContainerEnergy() {
+class ContainerBatboxBase(inventory: InventoryPlayer?, tileEntity: TileEntityBatboxBase) : ContainerEnergy() {
 
     init {
         tile = tileEntity
-        addSlot(Slot(tileEntity, 0, 80, 35))
+        addSlot(Slot(tileEntity, 0, 80, 17))
+        addSlot(Slot(tileEntity, 1, 80, 53))
 
         for (ySlot in 0..2) for (xSlot in 0..8)
             addSlot(
@@ -26,6 +27,6 @@ class ContainerSolarBase(inventory: InventoryPlayer?, tileEntity: TileEntitySola
     }
 
     override fun isUsableByPlayer(entityPlayer: EntityPlayer?): Boolean {
-        return (tile as TileEntitySolarBase).canInteractWith(entityPlayer)
+        return (tile as TileEntityBatboxBase).canInteractWith(entityPlayer)
     }
 }

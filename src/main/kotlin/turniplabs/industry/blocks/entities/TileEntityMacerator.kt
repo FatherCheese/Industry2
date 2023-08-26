@@ -19,10 +19,12 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
     private val maxCrushTime = 128
 
     init {
+        contents = arrayOfNulls(3)
+
         setCapacity(1024)
         setTransfer(0)
         setMaxReceive(32)
-        contents = arrayOfNulls(3)
+
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
     }
@@ -49,9 +51,11 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
             if (contents[i]!!.stackSize == 0) {
                 contents[i] = null
             }
+
             onInventoryChanged()
             itemStack
-        } else return null
+        } else
+            return null
     }
 
     override fun setInventorySlotContents(i: Int, itemStack: ItemStack?) {
@@ -83,7 +87,7 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
 
     override fun updateEntity() {
         super.updateEntity()
-        val hasEnergy = energy > 0
+        val hasEnergy: Boolean = energy > 0
         var machineUpdated = false
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
@@ -161,7 +165,6 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-
     private fun canCrush(): Boolean {
         if (contents[0] == null)
             return false
@@ -169,19 +172,19 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
         if (contents[0]!!.item == null)
             return false
 
-        val itemStack: ItemStack = RecipesMacerator.getResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack? = RecipesMacerator.getResult(contents[0]!!.item.id)
 
         return when {
             contents[2] == null -> true
             !contents[2]!!.isItemEqual(itemStack) -> false
             contents[2]!!.stackSize < inventoryStackLimit && contents[2]!!.stackSize < contents[2]!!.maxStackSize -> true
-            else -> contents[2]!!.stackSize < itemStack.maxStackSize
+            else -> contents[2]!!.stackSize < itemStack!!.maxStackSize
         }
     }
 
     private fun crushItem() {
         if (canCrush()) {
-            val itemStack: ItemStack = RecipesMacerator.getResult(contents[0]!!.item.id)
+            val itemStack: ItemStack = RecipesMacerator.getResult(contents[0]!!.item.id) ?: return
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
