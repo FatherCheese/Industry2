@@ -51,6 +51,14 @@ repositories {
 		metadataSources { artifact() }
 	}
 	ivy {
+		url = "https://github.com/Turnip-Labs"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
+	ivy {
 		url = "https://piston-data.mojang.com"
 		patternLayout {
 			artifact "v1/[organisation]/[revision]/[module].jar"
@@ -83,7 +91,8 @@ dependencies {
 	modRuntimeOnly "objects:client:43db9b498cb67058d2e12d394e6507722e71bb45" // https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
 	modImplementation "fabric-loader:fabric-loader:${project.loader_version}"
 
-	modImplementation "com.github.Turnip-Labs:bta-halplibe:${project.halplibe_version}"
+	// Helper library
+	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
 
 	modImplementation "ModMenu:ModMenu:2.0.0"
 
@@ -94,7 +103,7 @@ dependencies {
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
 
 	// Energy API
-	modImplementation "sunsetutils:sunsetutils:1.7.1"
+	modImplementation "sunsetutils:sunsetutils:1.8.2"
 	modImplementation "energyapi:energyapi:${project.energyapi_version}"
 
 	// Guidebook++
@@ -107,7 +116,8 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-api:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-1.2-api:${log4jVersion}")
-	implementation("log4j:apache-log4j-extras:1.2.17")
+
+	implementation("org.apache.commons:commons-lang3:3.12.0")
 
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.flk_version}+kotlin.${project.kotlin_version}") {
 		exclude(group: "net.fabricmc", module: "fabric-loader")

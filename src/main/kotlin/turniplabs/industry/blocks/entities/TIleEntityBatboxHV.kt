@@ -6,7 +6,7 @@ import sunsetsatellite.sunsetutils.util.Direction
 class TIleEntityBatboxHV() : TileEntityBatboxBase() {
 
     init {
-        this.setCapacity(32768)
+        this.setCapacity(65536)
         this.setTransfer(512)
         this.setMaxReceive(512)
 

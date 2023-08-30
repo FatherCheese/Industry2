@@ -64,17 +64,18 @@ class ItemCell(id: Int) : Item(id) {
         }
     }
 
-    private fun useCell(entityPlayer: EntityPlayer, returnedItem: ItemStack?): Boolean {
-        return when {
-            entityPlayer.inventory.getCurrentItem().stackSize <= 1 -> {
-                entityPlayer.inventory.setInventorySlotContents(entityPlayer.inventory.currentItem, returnedItem)
+    fun useCell(player: EntityPlayer, itemToGive: ItemStack): Boolean {
+        return if (player.inventory.getCurrentItem().stackSize <= 1) {
+            player.inventory.setInventorySlotContents(player.inventory.currentItem, itemToGive)
+            true
+        } else {
+            player.inventory.insertItem(itemToGive, true)
+            if (itemToGive.stackSize < 1) {
+                player.inventory.getCurrentItem().consumeItem(player)
                 true
+            } else {
+                false
             }
-            entityPlayer.inventory.addItemStackToInventory(returnedItem) -> {
-                entityPlayer.inventory.getCurrentItem().consumeItem(entityPlayer)
-                true
-            }
-            else -> false
         }
     }
 }

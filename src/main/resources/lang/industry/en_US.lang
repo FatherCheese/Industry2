@@ -152,6 +152,10 @@ item.industry.tool.battery.redstone.name=Redstone Battery
 item.industry.tool.battery.redstone.desc=
 item.industry.tool.battery.advanced.name=Advanced Battery
 item.industry.tool.battery.advanced.desc=
+item.industry.tool.battery.crystal.name=Crystal Battery
+item.industry.tool.battery.crystal.desc=
+item.industry.tool.battery.lapis.name=Lapis Battery
+item.industry.tool.battery.lapis.desc=
 
 item.industry.cell.empty.name=Cell
 item.industry.cell.empty.desc=

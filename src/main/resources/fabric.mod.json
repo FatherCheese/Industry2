@@ -4,19 +4,17 @@
   "version": "${version}",
 
   "name": "Industry2",
-  "description": "This mod adds industrial machines for your minecraft world.",
+  "description": "This mod adds industrial machines to automate your Minecraft world!",
   "authors": [
     "Turnip Labs",
     "Cookie Cakes"
   ],
   "contact": {
-    "homepage": "https://github.com/FatherCheese/Industry2",
-    "sources": "https://github.com/FatherCheese/Industry2",
-    "issues": "https://github.com/FatherCheese/Industry2/issues"
+    "homepage": "",
+    "sources": ""
   },
 
   "license": "CC0-1.0",
-
   "icon": "assets/industry/icon.png",
 
   "environment": "*",
@@ -34,10 +32,7 @@
 
   "depends": {
     "fabricloader": ">=0.14.7",
-    "fabric-language-kotlin": "*",
-    "halplibe": ">=2.1.5",
-    "sunsetutils": ">=1.7.1",
-    "energyapi": ">=1.1.4"
+    "fabric-language-kotlin": "*"
   },
   "suggests": {
   }

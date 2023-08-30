@@ -24,10 +24,7 @@ import turniplabs.industry.blocks.cables.BlockCableGold
 import turniplabs.industry.blocks.cables.BlockCableTin
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.*
-import turniplabs.industry.items.ItemBatteryAdvanced
-import turniplabs.industry.items.ItemBatteryRedstone
-import turniplabs.industry.items.ItemCable
-import turniplabs.industry.items.ItemCell
+import turniplabs.industry.items.*
 
 class Industry2: ModInitializer {
 
@@ -387,11 +384,20 @@ class Industry2: ModInitializer {
 			ItemBatteryRedstone(nextItemID()),
 			"tool.battery.redstone"
 		)
-
 		val itemBatteryAdvanced: Item = ItemHelper.createItem(
 			MOD_ID,
 			ItemBatteryAdvanced(nextItemID()),
 			"tool.battery.advanced",
+		)
+		val itemBatteryCrystal: Item = ItemHelper.createItem(
+			MOD_ID,
+			ItemBatteryCrystal(nextItemID()),
+			"tool.battery.crystal",
+		)
+		val itemBatteryLapis: Item = ItemHelper.createItem(
+			MOD_ID,
+			ItemBatteryLapis(nextItemID()),
+			"tool.battery.lapis",
 		)
 
 		val emptyCell: Item = ItemHelper.createItem(MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
@@ -510,6 +516,52 @@ class Industry2: ModInitializer {
 			"111", "121", "111",
 			'1', machineSolarGenerator,
 			'2', batboxLV
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineSolarArrayMV),
+			"111", "121", "111",
+			'1', machineSolarArrayLV,
+			'2', batboxMV
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineSolarArrayHV),
+			"111", "121", "111",
+			'1', machineSolarArrayMV,
+			'2', batboxHV
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineSolarArraySHV),
+			"111", "121", "111",
+			'1', machineSolarArrayHV,
+			'2', batboxSHV
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(batboxLV),
+			"121", "333", "111",
+			'1', Block.planksOak,
+			'2', itemTinCable,
+			'3', itemBatteryRedstone
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(batboxMV),
+			"121", "333", "111",
+			'1', copperPlate,
+			'2', itemCopperCable,
+			'3', itemBatteryAdvanced
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(batboxHV),
+			"121", "333", "111",
+			'1', ironPlate,
+			'2', itemGoldCable,
+			'3', itemBatteryCrystal
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(batboxSHV),
+			"121", "333", "111",
+			'1', steelPlate,
+			'2', itemSteelCable,
+			'3', itemBatteryLapis
 		)
 	}
 }
