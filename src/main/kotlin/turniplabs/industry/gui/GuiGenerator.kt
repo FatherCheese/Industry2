@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11
 import turniplabs.industry.blocks.entities.TileEntityGenerator
 
 class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEntityGenerator) :
-    GuiContainer(ContainerGenerator(inventory, tileEntity)) {
-
+    GuiContainer(ContainerGenerator(inventory, tileEntity))
+{
     override fun drawGuiContainerBackgroundLayer(f: Float) {
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
@@ -20,7 +20,10 @@ class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEnti
         drawTexturedModalRect(textX, textY, 0, 0, xSize, ySize)
 
         val power: Double = (tileEntity.energy.toFloat() / tileEntity.capacity.toFloat()).toDouble()
-        drawTexturedModalRect(textX + 80, textY + 39, 176, 0, (power * 16).toInt(), 8)
+        drawTexturedModalRect(textX + 8, textY + 39, 176, 14, (power * 16).toInt(), 8)
+
+        val burnTime: Int = (tileEntity.getBurnTime(12))
+        drawTexturedModalRect(textX + 81, (textY + 19 + 12) - burnTime, 176, 12 - burnTime, 14, burnTime)
     }
 
     override fun drawGuiContainerForegroundLayer() {
@@ -35,7 +38,7 @@ class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEnti
         super.drawScreen(x, y, renderPartialTicks)
 
         val text = StringBuilder()
-        if ((x > (scrnX + 80)) && (x < (scrnX + 96))) {
+        if ((x > (scrnX + 8)) && (x < (scrnX + 24))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
                 text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 

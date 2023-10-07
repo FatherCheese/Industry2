@@ -10,7 +10,8 @@ class ContainerSolarBase(inventory: InventoryPlayer?, tileEntity: TileEntitySola
 
     init {
         tile = tileEntity
-        addSlot(Slot(tileEntity, 0, 80, 35))
+        addSlot(Slot(tileEntity, 0, 8, 17))
+        addSlot(Slot(tileEntity, 1, 8, 53))
 
         for (ySlot in 0..2) for (xSlot in 0..8)
             addSlot(

@@ -10,6 +10,17 @@ open class TileEntitySolarBase(private val voltage: Int): TileEntityBatteryBox()
 
     override fun updateEntity() {
         super.updateEntity()
+
+        if (getStackInSlot(0) != null && getStackInSlot(0)?.item is ItemEnergyContainer) {
+            provide(getStackInSlot(0), getMaxProvide(), false)
+            onInventoryChanged()
+        }
+
+        if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
+            receive(getStackInSlot(1), getMaxReceive(), false)
+            onInventoryChanged()
+        }
+
         if (energy < capacity && isFacingSky()) {
             generatedEnergy = 2 * voltage
 
@@ -30,11 +41,6 @@ open class TileEntitySolarBase(private val voltage: Int): TileEntityBatteryBox()
 
         if (!isFacingSky())
             generatedEnergy = 0
-
-        if (getStackInSlot(0) != null && getStackInSlot(0)?.item is ItemEnergyContainer) {
-            provide(getStackInSlot(0), getMaxProvide(), false)
-            onInventoryChanged()
-        }
     }
 
     private fun isFacingSky(): Boolean {

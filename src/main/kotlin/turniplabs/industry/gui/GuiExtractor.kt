@@ -5,10 +5,10 @@ import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntityCompressor
+import turniplabs.industry.blocks.entities.TileEntityExtractor
 
-class GuiCompressor(inventory: InventoryPlayer?, private val tileEntity: TileEntityCompressor) :
-    GuiContainer(ContainerCompressor(inventory, tileEntity)) {
+class GuiExtractor(inventory: InventoryPlayer?, private val tileEntity: TileEntityExtractor) :
+    GuiContainer(ContainerExtractor(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/machine_single.png")
@@ -28,7 +28,7 @@ class GuiCompressor(inventory: InventoryPlayer?, private val tileEntity: TileEnt
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Compressor", 46, 6, 4210752)
+        fontRenderer.drawString("Extractor", 46, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 
@@ -40,7 +40,7 @@ class GuiCompressor(inventory: InventoryPlayer?, private val tileEntity: TileEnt
         val text = StringBuilder()
         if ((x > (scrnX + 8)) && (x < (scrnX + 24))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
+                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy} ${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)

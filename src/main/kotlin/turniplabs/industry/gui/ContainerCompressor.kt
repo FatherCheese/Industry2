@@ -12,8 +12,8 @@ class ContainerCompressor(inventory: InventoryPlayer?, tileEntity: TileEntityCom
     init {
         tile = tileEntity
 
-        addSlot(Slot(tileEntity, 0, 56, 17))
-        addSlot(Slot(tileEntity, 1, 56, 53))
+        addSlot(Slot(tileEntity, 0, 56, 35))
+        addSlot(Slot(tileEntity, 1, 8, 17))
         addSlot(SlotFurnace(inventory?.player, tileEntity, 2, 116, 35))
 
         for (ySlot in 0..2) for (xSlot in 0..8)

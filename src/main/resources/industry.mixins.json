@@ -4,6 +4,7 @@
   "package": "turniplabs.industry.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChunkDecoratorOverworldMixin",
     "RenderBlocksMixin"
   ],
   "client": [

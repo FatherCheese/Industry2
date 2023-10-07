@@ -86,6 +86,13 @@ tile.industry.machine.cutter.desc=
 tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=
 
+tile.industry.leaves.rubber.name=Rubber-Tree Leaves
+tile.industry.leaves.rubber.desc=
+tile.industry.log.rubber.name=Rubber-Tree Log
+tile.industry.log.rubber.desc=
+tile.industry.sapling.rubber.name=Rubber-Tree Sapling
+tile.industry.sapling.rubber.desc=
+
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=
 item.industry.ore.raw.tin.name=Raw Tin Ore
@@ -157,6 +164,11 @@ item.industry.tool.battery.crystal.desc=
 item.industry.tool.battery.lapis.name=Lapis Battery
 item.industry.tool.battery.lapis.desc=
 
+item.industry.tool.tap.name=Tree Tap
+item.industry.tool.tap.desc=
+item.industry.tool.multimeter.name=Multi-Meter
+item.industry.tool.multimeter.desc=
+
 item.industry.cell.empty.name=Cell
 item.industry.cell.empty.desc=
 item.industry.cell.water.name=Water Cell
@@ -168,5 +180,5 @@ item.industry.cell.uranium.desc=
 
 item.industry.ingredient.circuit.name=Circuit
 item.industry.ingredient.circuit.desc=
-item.industry.ingredient.advancedcircuit.name=
+item.industry.ingredient.advancedcircuit.name=Advanced Circuit
 item.industry.ingredient.advancedcircuit.desc=

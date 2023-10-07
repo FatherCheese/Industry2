@@ -24,7 +24,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         setCapacity(1024)
         setTransfer(32)
         setMaxReceive(0)
-        contents = arrayOfNulls(2)
+        contents = arrayOfNulls(3)
 
         for (dir: Direction in Direction.values())
             setConnection(dir, Connection.OUTPUT)
@@ -103,19 +103,19 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         }
 
         if (currentBurnTime == 0) {
-            currentBurnTime = getBurnTimeFromItem(contents[1]) / 5
+            currentBurnTime = getBurnTimeFromItem(contents[2]) / 5
             maxBurnTime = currentBurnTime
 
             if (currentBurnTime > 0) {
                 active = true
                 BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 
-                currentFuel = contents[1]
+                currentFuel = contents[2]
                 onInventoryChanged()
 
-                if (contents[1] != null) {
-                    --contents[1]!!.stackSize
-                    if (contents[1]?.stackSize == 0) contents[1] = null
+                if (contents[2] != null) {
+                    --contents[2]!!.stackSize
+                    if (contents[2]?.stackSize == 0) contents[2] = null
                 }
             } else  {
                 active = false
@@ -160,6 +160,11 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
             }
         }
         compoundTag!!.put("Items", listTag)
+    }
+
+    // Burn time, used by GuiGenerator
+    fun getBurnTime(i: Int): Int {
+        return if (maxBurnTime == 0) 0 else currentBurnTime * i / maxBurnTime
     }
 
     private fun canBurn(): Boolean {

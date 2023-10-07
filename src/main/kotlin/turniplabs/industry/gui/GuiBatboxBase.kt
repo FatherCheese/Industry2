@@ -10,7 +10,7 @@ import turniplabs.industry.blocks.entities.TileEntityBatboxBase
 open class GuiBatboxBase(inventory: InventoryPlayer?, private val tileEntity: TileEntityBatboxBase) : GuiContainer(ContainerBatboxBase(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
-        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator.png")
+        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/batbox.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
 

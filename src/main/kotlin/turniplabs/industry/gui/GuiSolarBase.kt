@@ -4,14 +4,16 @@ import net.minecraft.client.gui.GuiContainer
 import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
+import net.minecraft.core.world.World
 import org.lwjgl.opengl.GL11
 import turniplabs.industry.blocks.entities.TileEntitySolarBase
 
 open class GuiSolarBase(inventory: InventoryPlayer?, private var tileEntity: TileEntitySolarBase) :
 GuiContainer(ContainerSolarBase(inventory, tileEntity)) {
-
     // Thanks to MartinSVK12 for fixing the generated energy stuff!
     override fun drawGuiContainerBackgroundLayer(f: Float) {
+        val world: World = mc.theWorld
+
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator_solar.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
@@ -21,18 +23,20 @@ GuiContainer(ContainerSolarBase(inventory, tileEntity)) {
         drawTexturedModalRect(textX, textY, 0, 0, xSize, ySize)
 
         val power: Double = (tileEntity.energy.toFloat() / tileEntity.capacity.toFloat()).toDouble()
-        drawTexturedModalRect(textX + 80, textY + 57, 176, 0, (power * 16).toInt(), 8)
+        drawTexturedModalRect(textX + 8, textY + 39, 176, 8, (power * 16).toInt(), 8)
 
         // Checks the generated energy, if it's above 0 display a sun, else it displays a moon
-        // Cut for now!
         if (tileEntity.generatedEnergy > 0) drawTexturedModalRect(
             textX + 84,
-            textY + 21,
+            textY + 33,
             176,
-            8,
+            0,
             8,
             8
-        ) else drawTexturedModalRect(textX + 84, textY + 21, 184, 8, 8, 8)
+        ) else drawTexturedModalRect(textX + 84, textY + 33, 184, 0, 8, 8)
+
+        // Daylight bar(?)
+        drawTexturedModalRect(textX + 76, textY + 47, 176, 16, (world.worldTime % world.worldType.dayNightCycleLengthTicks / 1000).toInt(), 4)
     }
 
     override fun drawScreen(x: Int, y: Int, renderPartialTicks: Float) {
@@ -41,8 +45,8 @@ GuiContainer(ContainerSolarBase(inventory, tileEntity)) {
         super.drawScreen(x, y, renderPartialTicks)
 
         val text = StringBuilder()
-        if ((x > (scrnX + 80)) && (x < (scrnX + 96))) {
-            if (y > (scrnY + 57) && y < (scrnY + 66)) {
+        if ((x > (scrnX + 8)) && (x < (scrnX + 24))) {
+            if (y > (scrnY + 39) && y < (scrnY + 47)) {
                 text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 
                 val guiTooltip = GuiTooltip(mc)
@@ -55,9 +59,8 @@ GuiContainer(ContainerSolarBase(inventory, tileEntity)) {
         }
 
         // Displays text when hovering over the celestial bodies
-        // Also cut!
         if (x > (scrnX + 84) && x < (scrnX + 92)) {
-            if (y > (scrnY + 21) && y < (scrnY + 29)) {
+            if (y > (scrnY + 33) && y < (scrnY + 41)) {
                 text.append("${TextFormatting.WHITE}Generating: ${TextFormatting.LIGHT_GRAY}${tileEntity.generatedEnergy}/t")
 
                 val guiTooltip = GuiTooltip(mc)

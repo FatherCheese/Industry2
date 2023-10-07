@@ -1,17 +1,15 @@
 package turniplabs.industry.recipes
 
-import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemStack
 import turniplabs.industry.Industry2
 
-object RecipesCutter {
+object RecipesExtractor {
     private val recipeList = HashMap<Any?, Any?>()
 
     init {
-        addRecipe(Industry2.copperIngot.id, ItemStack(Industry2.itemCopperCable, 4))
-        addRecipe(Industry2.tinIngot.id, ItemStack(Industry2.itemTinCable, 4))
-        addRecipe(Item.ingotGold.id, ItemStack(Industry2.itemGoldCable, 4))
-        addRecipe(Item.ingotSteel.id, ItemStack(Industry2.itemSteelCable, 4))
+        addRecipe(Industry2.rubberLog.id, ItemStack(Industry2.rubber, 1))
+        addRecipe(Industry2.rubberSapling.id, ItemStack(Industry2.rubber, 1))
+        addRecipe(Industry2.resin.id, ItemStack(Industry2.rubber, 3))
     }
 
     fun addRecipe(input: Int, output: ItemStack) {

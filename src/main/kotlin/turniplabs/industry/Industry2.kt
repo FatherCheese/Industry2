@@ -1,6 +1,8 @@
 package turniplabs.industry
 
 import net.fabricmc.api.ModInitializer
+import net.minecraft.client.render.block.color.BlockColorDispatcher
+import net.minecraft.client.render.block.color.BlockColorLeaves
 import net.minecraft.client.render.block.model.BlockModelDispatcher
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks
 import net.minecraft.client.sound.block.BlockSounds
@@ -11,14 +13,13 @@ import net.minecraft.core.crafting.CraftingManager
 import net.minecraft.core.crafting.recipe.RecipesFurnace
 import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemStack
+import net.minecraft.core.item.tool.ItemToolPickaxe
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import turniplabs.halplibe.helper.BlockBuilder
 import turniplabs.halplibe.helper.EntityHelper
 import turniplabs.halplibe.helper.ItemHelper
-import turniplabs.industry.blocks.BlockCopperOre
-import turniplabs.industry.blocks.BlockTinOre
-import turniplabs.industry.blocks.BlockUraniumOre
+import turniplabs.industry.blocks.*
 import turniplabs.industry.blocks.cables.BlockCableCopper
 import turniplabs.industry.blocks.cables.BlockCableGold
 import turniplabs.industry.blocks.cables.BlockCableTin
@@ -27,6 +28,17 @@ import turniplabs.industry.blocks.machines.*
 import turniplabs.industry.items.*
 
 class Industry2: ModInitializer {
+
+	/*
+	TODO : More Machines
+	TODO : Make machine textures consistent
+	TODO : Log resin
+	TODO : Fix cable model (add fake bounding box?)
+	TODO : Mod Support
+	TODO : Lang file descriptions
+	TODO : Reactor Stuff
+	TODO : Configs (IDs, world gen, .etc)
+	*/
 
 	companion object {
 		const val MOD_ID: String = "industry"
@@ -241,7 +253,7 @@ class Industry2: ModInitializer {
 			.build(BlockSolarArrayHV("machine.array.hv", nextBlockID(), Material.metal))
 
 		val machineSolarArraySHV: Block = machineBuilderBlank
-			.setTopTexture("machine_generator_solar.png")
+			.setTopTexture("shv_solar_array.png")
 			.setSideTextures("shv_batbox.png")
 			.setBottomTexture("shv_batbox.png")
 			.build(BlockSolarArraySHV("machine.array.shv", nextBlockID(), Material.metal))
@@ -289,13 +301,40 @@ class Industry2: ModInitializer {
 			.setNorthTexture("machine_cutter.png")
 			.build(BlockCutter("machine.cutter", nextBlockID(), Material.metal))
 
+		val machineExtractor: Block = machineBuilder
+			.setNorthTexture("machine_extractor.png")
+			.build(BlockExtractor("machine.extractor", nextBlockID(), Material.metal))
+
 		// Miscellaneous
 		val hardenedCoal: Block = BlockBuilder(MOD_ID)
 			.setTextures("hardened_coal.png")
+			.setBlockSound(BlockSounds.STONE)
 			.setHardness(10.0f)
 			.setResistance(60.0f)
 			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 			.build(Block("block.coal.hardened", nextBlockID(), Material.stone))
+
+		val rubberLeaves: Block = BlockBuilder(MOD_ID)
+			.setTextures(2, 20)
+			.setBlockSound(BlockSounds.GRASS)
+			.setHardness(0.2f)
+			.setLightOpacity(1)
+			.setTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
+			.build(BlockLeavesRubber("leaves.rubber", nextBlockID(), Material.leaves, false))
+
+		val rubberLog: Block = BlockBuilder(MOD_ID)
+			.setSideTextures("log_rubber.png")
+			.setTopBottomTexture("log_rubber_top.png")
+			.setBlockSound(BlockSounds.WOOD)
+			.setHardness(2.0f)
+			.setTags(BlockTags.FENCES_CONNECT, BlockTags.MINEABLE_BY_AXE)
+			.build(BlockLogRubber("log.rubber", nextBlockID()))
+
+		val rubberSapling: Block = BlockBuilder(MOD_ID)
+			.setTextures("sapling_rubber.png")
+			.setBlockSound(BlockSounds.GRASS)
+			.setTags(BlockTags.BROKEN_BY_FLUIDS)
+			.build(BlockSaplingRubber("sapling.rubber", nextBlockID()))
 
 		/* ITEMS */
 
@@ -400,18 +439,36 @@ class Industry2: ModInitializer {
 			"tool.battery.lapis",
 		)
 
+		val treeTap: Item = ItemHelper.createItem(MOD_ID, ItemTap(nextItemID()), "tool.tap", "tree_tap.png")
+
 		val emptyCell: Item = ItemHelper.createItem(MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
 		val waterCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")
 		val lavaCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.lava", "cell_lava.png")
 		val uraniumCell: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "cell.uranium", "cell_uranium.png")
 
 		// Materials
+		val resin: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.resin", "resin.png")
+		val rubber: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.rubber", "rubber.png")
 		val circuit: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.circuit", "circuit.png")
 		val circuitAdvanced: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.advancedcircuit", "circuit_advanced.png")
 	}
 
 	override fun onInitialize() {
 		LOGGER.info("Industry 2 initialized. Have fun!")
+
+		ItemToolPickaxe.miningLevels[oreCopperBasalt] = 1
+		ItemToolPickaxe.miningLevels[oreCopperStone] = 1
+		ItemToolPickaxe.miningLevels[oreCopperLimestone] = 1
+		ItemToolPickaxe.miningLevels[oreCopperGranite] = 1
+		ItemToolPickaxe.miningLevels[oreTinBasalt] = 1
+		ItemToolPickaxe.miningLevels[oreTinStone] = 1
+		ItemToolPickaxe.miningLevels[oreTinLimestone] = 1
+		ItemToolPickaxe.miningLevels[oreTinGranite] = 1
+		ItemToolPickaxe.miningLevels[oreUraniumBasalt] = 2
+		ItemToolPickaxe.miningLevels[oreUraniumStone] = 2
+		ItemToolPickaxe.miningLevels[oreUraniumLimestone] = 2
+		ItemToolPickaxe.miningLevels[oreUraniumGranite] = 2
+		ItemToolPickaxe.miningLevels[hardenedCoal] = 3
 
 		BlockModelDispatcher.getInstance().addDispatch(copperCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(tinCable, BlockModelRenderBlocks(32))
@@ -421,6 +478,9 @@ class Industry2: ModInitializer {
 		BlockModelDispatcher.getInstance().addDispatch(insulatedTinCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(insulatedGoldCable, BlockModelRenderBlocks(32))
 		BlockModelDispatcher.getInstance().addDispatch(insulatedSteelCable, BlockModelRenderBlocks(32))
+		BlockModelDispatcher.getInstance().addDispatch(rubberSapling, BlockModelRenderBlocks(1))
+
+		BlockColorDispatcher.getInstance().addDispatch(rubberLeaves, BlockColorLeaves("pine"))
 
 		EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
 		EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
@@ -437,6 +497,7 @@ class Industry2: ModInitializer {
 		EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
 		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
 		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
+		EntityHelper.createTileEntity(TileEntityExtractor::class.java, "Extractor")
 
 		RecipesFurnace.smelting().addSmelting(oreCopperStone.id, ItemStack(copperIngot))
 		RecipesFurnace.smelting().addSmelting(oreCopperBasalt.id, ItemStack(copperIngot))
@@ -563,5 +624,43 @@ class Industry2: ModInitializer {
 			'2', itemSteelCable,
 			'3', itemBatteryLapis
 		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineElectricFurnace),
+			"#1#", "232", "#4#",
+			'1', circuit,
+			'2', Item.dustRedstone,
+			'3', machineCasing,
+			'4', Block.furnaceStoneIdle
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineMacerator),
+			"111", "232", "#4#",
+			'1', Item.flint,
+			'2', Block.cobbleStone,
+			'3', machineCasing,
+			'4', circuit
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineCompressor),
+			"1#1", "121", "131",
+			'1', Block.stone,
+			'2', machineCasing,
+			'3', circuit
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineCutter),
+			"1#1", "121", "131",
+			'1', Item.ingotIron,
+			'2', machineCasing,
+			'3', circuit
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(hardenedCoal),
+			"121", "232", "121",
+			'1', Item.nethercoal,
+			'2', coalDust,
+			'3', Block.obsidian
+		)
+		CraftingManager.getInstance().addShapelessRecipe(ItemStack(Block.planksOakPainted, 4, 7), rubberLog)
 	}
 }

@@ -9,14 +9,14 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.machines.BlockCutter
-import turniplabs.industry.recipes.RecipesCutter
+import turniplabs.industry.blocks.machines.BlockExtractor
+import turniplabs.industry.recipes.RecipesExtractor
 
-class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
+class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentCutTime = 0
-    private val maxCutTime = 128
+    private var currentExtractTime = 0
+    private val maxExtractTime = 128
 
     init {
         contents = arrayOfNulls(3)
@@ -67,7 +67,7 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "Cutter"
+        return "Extractor"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -98,27 +98,27 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCutter.id &&
-                currentCutTime == 0 &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineExtractor.id &&
+                currentExtractTime == 0 &&
                 contents[0] == null
             ) {
-                BlockCutter.updateBlockState(false, worldObj, xCoord, yCoord, zCoord)
+                BlockExtractor.updateBlockState(false, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
 
-            if (hasEnergy && canCut()) {
-                ++currentCutTime
+            if (hasEnergy && canExtract()) {
+                ++currentExtractTime
                 --energy
                 active = true
 
-                if (currentCutTime == maxCutTime) {
-                    currentCutTime = 0
-                    cutItem()
+                if (currentExtractTime == maxExtractTime) {
+                    currentExtractTime = 0
+                    extractItem()
                     active = false
                     machineUpdated = true
                 }
                 else {
-                    currentCutTime = 0
+                    currentExtractTime = 0
                     active = false
                 }
 
@@ -144,13 +144,13 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentCutTime = compoundTag.getShort("Cut").toInt()
+        currentExtractTime = compoundTag.getShort("Extract").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("Cut", currentCutTime.toShort())
+        compoundTag?.putShort("Extract", currentExtractTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
@@ -166,14 +166,14 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-    private fun canCut(): Boolean {
+    private fun canExtract(): Boolean {
         if (contents[0] == null)
             return false
 
         if (contents[0]!!.item == null)
             return false
 
-        val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack = RecipesExtractor.getResult(contents[0]!!.item.id) ?: return false
 
         return when {
             contents[2] == null -> true
@@ -183,9 +183,9 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         }
     }
 
-    private fun cutItem() {
-        if (canCut()) {
-            val itemStack: ItemStack = RecipesCutter.getResult(contents[0]!!.item.id) ?: return
+    private fun extractItem() {
+        if (canExtract()) {
+            val itemStack: ItemStack = RecipesExtractor.getResult(contents[0]!!.item.id) ?: return
 
             if (contents[2] == null)
                 contents[2] = itemStack.copy()
@@ -201,6 +201,6 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxCutTime == 0) 0 else (currentCutTime * i) / maxCutTime
+        return if (currentExtractTime == 0) 0 else (currentExtractTime * i) / maxExtractTime
     }
 }

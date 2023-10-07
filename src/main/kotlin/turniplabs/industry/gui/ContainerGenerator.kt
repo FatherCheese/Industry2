@@ -10,8 +10,9 @@ class ContainerGenerator(inventory: InventoryPlayer?, tileEntity: TileEntityGene
 
     init {
         tile = tileEntity
-        addSlot(Slot(tileEntity, 0, 80, 17))
-        addSlot(Slot(tileEntity, 1, 80, 53))
+        addSlot(Slot(tileEntity, 0, 8, 17))
+        addSlot(Slot(tileEntity, 1, 8, 53))
+        addSlot(Slot(tileEntity, 2, 80, 35))
 
         for (ySlot in 0..2) for (xSlot in 0..8)
             addSlot(

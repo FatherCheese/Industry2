@@ -5,9 +5,9 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
 import net.minecraft.core.player.inventory.slot.SlotFurnace
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
-import turniplabs.industry.blocks.entities.TileEntityCutter
+import turniplabs.industry.blocks.entities.TileEntityExtractor
 
-class ContainerCutter(inventory: InventoryPlayer?, tileEntity: TileEntityCutter): ContainerEnergy() {
+class ContainerExtractor(inventory: InventoryPlayer?, tileEntity: TileEntityExtractor) : ContainerEnergy() {
 
     init {
         tile = tileEntity
@@ -30,6 +30,6 @@ class ContainerCutter(inventory: InventoryPlayer?, tileEntity: TileEntityCutter)
     }
 
     override fun isUsableByPlayer(entityPlayer: EntityPlayer?): Boolean {
-        return (tile as TileEntityCutter).canInteractWith(entityPlayer)
+        return (tile as TileEntityExtractor).canInteractWith(entityPlayer)
     }
 }
