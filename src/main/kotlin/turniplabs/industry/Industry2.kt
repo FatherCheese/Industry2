@@ -32,12 +32,15 @@ class Industry2: ModInitializer {
 	/*
 	TODO : More Machines
 	TODO : Make machine textures consistent
+	TODO : Change machines to return power
 	TODO : Log resin
 	TODO : Fix cable model (add fake bounding box?)
+	TODO : Make machines drop inventory on break
 	TODO : Mod Support
 	TODO : Lang file descriptions
 	TODO : Reactor Stuff
 	TODO : Configs (IDs, world gen, .etc)
+	TODO : MP Support
 	*/
 
 	companion object {
@@ -305,6 +308,15 @@ class Industry2: ModInitializer {
 			.setNorthTexture("machine_extractor.png")
 			.build(BlockExtractor("machine.extractor", nextBlockID(), Material.metal))
 
+		val machineRecycler: Block = machineBuilderBlank
+			.setTopTexture("machine_recycler.png")
+			.setBottomTexture("machine_casing_basic.png")
+			.setEastTexture("machine_casing_basic.png")
+			.setSouthTexture("machine_casing_basic.png")
+			.setWestTexture("machine_casing_basic.png")
+			.setNorthTexture("machine_compressor.png")
+			.build(BlockRecycler("machine.recycler", nextBlockID(), Material.metal))
+
 		// Miscellaneous
 		val hardenedCoal: Block = BlockBuilder(MOD_ID)
 			.setTextures("hardened_coal.png")
@@ -451,6 +463,9 @@ class Industry2: ModInitializer {
 		val rubber: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.rubber", "rubber.png")
 		val circuit: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.circuit", "circuit.png")
 		val circuitAdvanced: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "ingredient.advancedcircuit", "circuit_advanced.png")
+
+		// Miscellaneous
+		val scrap: Item = ItemHelper.createItem(MOD_ID, Item(nextItemID()), "scrap", "scrap.png").withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 	}
 
 	override fun onInitialize() {
@@ -498,6 +513,7 @@ class Industry2: ModInitializer {
 		EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
 		EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
 		EntityHelper.createTileEntity(TileEntityExtractor::class.java, "Extractor")
+		EntityHelper.createTileEntity(TileEntityRecycler::class.java, "Recycler")
 
 		RecipesFurnace.smelting().addSmelting(oreCopperStone.id, ItemStack(copperIngot))
 		RecipesFurnace.smelting().addSmelting(oreCopperBasalt.id, ItemStack(copperIngot))
@@ -651,6 +667,13 @@ class Industry2: ModInitializer {
 			ItemStack(machineCutter),
 			"1#1", "121", "131",
 			'1', Item.ingotIron,
+			'2', machineCasing,
+			'3', circuit
+		)
+		CraftingManager.getInstance().addRecipe(
+			ItemStack(machineExtractor),
+			"121", "131",
+			'1', treeTap,
 			'2', machineCasing,
 			'3', circuit
 		)

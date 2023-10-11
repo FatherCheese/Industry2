@@ -82,6 +82,10 @@ tile.industry.machine.compressor.name=Compressor
 tile.industry.machine.compressor.desc=
 tile.industry.machine.cutter.name=Cutter
 tile.industry.machine.cutter.desc=
+tile.industry.machine.extractor.name=Extractor
+tile.industry.machine.extractor.desc=
+tile.industry.machine.recycler.name=Recycler
+tile.industry.machine.recycler.desc=
 
 tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=
@@ -178,7 +182,14 @@ item.industry.cell.lava.desc=
 item.industry.cell.uranium.name=Uranium Cell
 item.industry.cell.uranium.desc=
 
+item.industry.ingredient.resin.name=Resin
+item.industry.ingredient.resin.desc=
+item.industry.ingredient.rubber.name=Rubber
+item.industry.ingredient.rubber.desc=
 item.industry.ingredient.circuit.name=Circuit
 item.industry.ingredient.circuit.desc=
 item.industry.ingredient.advancedcircuit.name=Advanced Circuit
 item.industry.ingredient.advancedcircuit.desc=
+
+item.industry.scrap.name=Scrap
+item.industry.scrap.desc=

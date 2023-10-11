@@ -9,14 +9,14 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.machines.BlockExtractor
-import turniplabs.industry.recipes.RecipesExtractor
+import turniplabs.industry.IndustryTags
+import turniplabs.industry.blocks.machines.BlockRecycler
 
-class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
+class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentExtractTime = 0
-    private val maxExtractTime = 128
+    private var currentMachineTime = 0
+    private val maxMachineTime = 128
 
     init {
         contents = arrayOfNulls(4)
@@ -67,7 +67,7 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "Extractor"
+        return "Recycler"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -83,6 +83,35 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
             (yCoord + 0.5f).toDouble(),
             (zCoord + 0.5f).toDouble()
         ) <= 64.0f
+    }
+
+    private fun canProduce(): Boolean {
+        if (contents[2] == null)
+            return false
+
+        if (contents[2]!!.item == null)
+            return false
+
+        if (contents[2]!!.item.hasTag(IndustryTags.PREVENT_ITEM_RECYCLING))
+            return false
+
+        return when {
+            contents[3] == null -> true
+            contents[3]!!.stackSize < inventoryStackLimit && contents[3]!!.stackSize < contents[3]!!.maxStackSize -> true
+            else -> false
+        }
+    }
+
+    private fun produceItem() {
+        if (canProduce()) {
+            if (contents[3] == null && random.nextInt(4) == 0)
+                contents[3] = ItemStack(Industry2.scrap, 1)
+
+            --contents[2]!!.stackSize
+
+            if (contents[2]!!.stackSize <= 0)
+                contents[2] = null
+        }
     }
 
     override fun updateEntity() {
@@ -103,36 +132,35 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineExtractor.id &&
-                currentExtractTime == 0 &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineRecycler.id &&
+                currentMachineTime == 0 &&
                 contents[2] == null
-            ) {
-                BlockExtractor.updateBlockState(false, worldObj, xCoord, yCoord, zCoord)
+                ) {
+                BlockRecycler.updateBlockState(false, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
 
-            if (hasEnergy && canExtract()) {
-                ++currentExtractTime
+            if (hasEnergy && canProduce()) {
+                ++currentMachineTime
                 --energy
                 active = true
 
-                if (currentExtractTime == maxExtractTime) {
-                    currentExtractTime = 0
-                    extractItem()
+                if (currentMachineTime == maxMachineTime) {
+                    currentMachineTime = 0
+                    produceItem()
                     active = false
                     machineUpdated = true
                 }
             }
-                else {
-                    currentExtractTime = 0
-                    active = false
-                }
+            else {
+                currentMachineTime = 0
+                active = false
+            }
+            if (machineUpdated)
+                onInventoryChanged()
 
-                if (machineUpdated)
-                    onInventoryChanged()
-
-                if (active)
-                    worldObj.markBlockDirty(xCoord, yCoord, zCoord)
+            if (active)
+                worldObj.markBlockDirty(xCoord, yCoord, zCoord)
         }
     }
 
@@ -149,13 +177,13 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentExtractTime = compoundTag.getShort("Extract").toInt()
+        currentMachineTime = compoundTag.getShort("Production").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("Extract", currentExtractTime.toShort())
+        compoundTag?.putShort("Production", currentMachineTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
@@ -171,41 +199,7 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-    private fun canExtract(): Boolean {
-        if (contents[2] == null)
-            return false
-
-        if (contents[2]!!.item == null)
-            return false
-
-        val itemStack: ItemStack = RecipesExtractor.getResult(contents[2]!!.item.id) ?: return false
-
-        return when {
-            contents[3] == null -> true
-            !contents[3]!!.isItemEqual(itemStack) -> false
-            contents[3]!!.stackSize < inventoryStackLimit && contents[3]!!.stackSize < contents[3]!!.maxStackSize -> true
-            else -> contents[3]!!.stackSize < itemStack.maxStackSize
-        }
-    }
-
-    private fun extractItem() {
-        if (canExtract()) {
-            val itemStack: ItemStack = RecipesExtractor.getResult(contents[2]!!.item.id) ?: return
-
-            if (contents[3] == null)
-                contents[3] = itemStack.copy()
-            else
-                if (contents[3]!!.itemID == itemStack.itemID)
-                    ++contents[3]!!.stackSize
-
-            --contents[2]!!.stackSize
-
-            if (contents[2]!!.stackSize <= 0)
-                contents[2] = null
-        }
-    }
-
     fun getProgressScaled(i: Int): Int {
-        return if (currentExtractTime == 0) 0 else (currentExtractTime * i) / maxExtractTime
+        return if (currentMachineTime == 0) 0 else (currentMachineTime * i) / maxMachineTime
     }
 }

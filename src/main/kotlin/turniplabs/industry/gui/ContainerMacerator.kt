@@ -12,9 +12,10 @@ class ContainerMacerator(inventory: InventoryPlayer?, tileEntity: TileEntityMace
     init {
         tile = tileEntity
 
-        addSlot(Slot(tileEntity, 0, 56, 35))
-        addSlot(Slot(tileEntity, 1, 8, 17))
-        addSlot(SlotFurnace(inventory?.player, tileEntity, 2, 116, 35))
+        addSlot(Slot(tileEntity, 0, 8, 17))
+        addSlot(Slot(tileEntity, 1, 8, 53))
+        addSlot(Slot(tileEntity, 2, 56, 35))
+        addSlot(SlotFurnace(inventory?.player, tileEntity, 3, 116, 35))
 
         for (ySlot in 0..2) for (xSlot in 0..8)
             addSlot(

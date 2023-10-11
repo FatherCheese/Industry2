@@ -19,10 +19,10 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
     private val maxSmeltTime = 128
 
     init {
-        contents = arrayOfNulls(3)
+        contents = arrayOfNulls(4)
 
         setCapacity(1024)
-        setTransfer(0)
+        setTransfer(32)
         setMaxReceive(32)
 
         for (dir in Direction.values())
@@ -90,6 +90,11 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         val hasEnergy: Boolean = energy > 0
         var machineUpdated = false
 
+        if (getStackInSlot(0) != null && getStackInSlot(0)?.item is ItemEnergyContainer) {
+            provide(getStackInSlot(0), getMaxProvide(), false)
+            onInventoryChanged()
+        }
+
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
             val stack: ItemStack? = getStackInSlot(1)
 
@@ -100,7 +105,7 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         if (!worldObj.isClientSide) {
             if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineElectricFurnace.id &&
                 currentSmeltTime == 0 &&
-                contents[0] == null
+                contents[2] == null
                 ) {
                 BlockElectricFurnace.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
@@ -167,36 +172,36 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
 
 
     private fun canSmelt(): Boolean {
-        if (contents[0] == null)
+        if (contents[2] == null)
             return false
 
-        if (contents[0]!!.item == null)
+        if (contents[2]!!.item == null)
             return false
 
-        val itemStack: ItemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id) ?: return false
+        val itemStack: ItemStack = RecipesFurnace.smelting().getSmeltingResult(contents[2]!!.item.id) ?: return false
 
         return when {
-            contents[2] == null -> true
-            !contents[2]!!.isItemEqual(itemStack) -> false
-            contents[2]!!.stackSize < inventoryStackLimit && contents[2]!!.stackSize < contents[2]!!.maxStackSize -> true
-            else -> contents[2]!!.stackSize < itemStack.maxStackSize
+            contents[3] == null -> true
+            !contents[3]!!.isItemEqual(itemStack) -> false
+            contents[3]!!.stackSize < inventoryStackLimit && contents[3]!!.stackSize < contents[3]!!.maxStackSize -> true
+            else -> contents[3]!!.stackSize < itemStack.maxStackSize
         }
     }
 
     private fun smeltItem() {
         if (canSmelt()) {
-            val itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[0]!!.item.id)
+            val itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[2]!!.item.id)
 
-            if (contents[2] == null)
-                contents[2] = itemStack.copy()
+            if (contents[3] == null)
+                contents[3] = itemStack.copy()
             else
-                if (contents[2]!!.itemID == itemStack.itemID)
-                    ++contents[2]!!.stackSize
+                if (contents[3]!!.itemID == itemStack.itemID)
+                    ++contents[3]!!.stackSize
 
-            --contents[0]!!.stackSize
+            --contents[2]!!.stackSize
 
-            if (contents[0]!!.stackSize <= 0)
-                contents[0] = null
+            if (contents[2]!!.stackSize <= 0)
+                contents[2] = null
         }
     }
 
