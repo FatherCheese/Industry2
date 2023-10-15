@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.machines.BlockCutter
 import turniplabs.industry.recipes.RecipesCutter
 
@@ -16,7 +16,7 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
     private var currentCutTime = 0
-    private val maxCutTime = 128
+    private val maxCutTime = 160
 
     init {
         contents = arrayOfNulls(4)
@@ -103,7 +103,7 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCutter.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCutter.id &&
                 currentCutTime == 0 &&
                 contents[2] == null
             ) {

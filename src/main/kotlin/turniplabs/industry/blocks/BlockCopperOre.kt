@@ -6,9 +6,10 @@ import net.minecraft.core.block.material.Material
 import net.minecraft.core.enums.EnumDropCause
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.world.World
-import turniplabs.industry.Industry2
+import turniplabs.industry.items.IndustryItems
 
 class BlockCopperOre(key: String?, id: Int, material: Material?) : Block(key, id, material) {
+
     override fun getBreakResult(
         world: World?,
         dropCause: EnumDropCause?,
@@ -20,7 +21,7 @@ class BlockCopperOre(key: String?, id: Int, material: Material?) : Block(key, id
     ): Array<ItemStack>? {
         return when (dropCause) {
             EnumDropCause.SILK_TOUCH, EnumDropCause.PICK_BLOCK -> arrayOf(ItemStack(this))
-            EnumDropCause.PROPER_TOOL -> arrayOf(ItemStack(Industry2.rawCopperOre))
+            EnumDropCause.PROPER_TOOL -> arrayOf(ItemStack(IndustryItems.rawCopperOre))
             else -> null
         }
     }

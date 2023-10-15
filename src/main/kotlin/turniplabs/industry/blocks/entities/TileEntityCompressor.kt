@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.machines.BlockCompressor
 import turniplabs.industry.recipes.RecipesCompressor
 
@@ -16,7 +16,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
     private var currentCompression = 0
-    private val maxCompression = 128
+    private val maxCompression = 160
 
     init {
         contents = arrayOfNulls(4)
@@ -103,7 +103,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineCompressor.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCompressor.id &&
                 currentCompression == 0 &&
                 contents[2] == null
                 ) {

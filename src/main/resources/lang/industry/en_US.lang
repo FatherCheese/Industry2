@@ -159,6 +159,10 @@ item.industry.insulated.cable.gold.desc=
 item.industry.insulated.cable.steel.name=Insulated Steel Cable
 item.industry.insulated.cable.steel.desc=
 
+item.industry.tool.hammer.name=Hammer
+item.industry.tool.hammer.desc=
+item.industry.tool.cutter.name=Wire Cutters
+item.industry.tool.cutter.desc=
 item.industry.tool.battery.redstone.name=Redstone Battery
 item.industry.tool.battery.redstone.desc=
 item.industry.tool.battery.advanced.name=Advanced Battery

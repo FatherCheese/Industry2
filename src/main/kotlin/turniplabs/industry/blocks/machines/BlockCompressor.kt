@@ -4,6 +4,8 @@ import net.minecraft.core.block.BlockTileEntityRotatable
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
+import net.minecraft.core.enums.EnumDropCause
+import net.minecraft.core.item.ItemStack
 import net.minecraft.core.util.helper.Side
 import net.minecraft.core.util.helper.Sides
 import net.minecraft.core.world.World
@@ -69,6 +71,18 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
             else texCoordToIndex(machineTexture[0][0], machineTexture[0][1]).also { atlasIndices[index] = it }
 
         return atlasIndices[index]
+    }
+
+    override fun getBreakResult(
+        world: World?,
+        dropCause: EnumDropCause?,
+        x: Int,
+        y: Int,
+        z: Int,
+        meta: Int,
+        tileEntity: TileEntity?
+    ): Array<ItemStack> {
+        return super.getBreakResult(world, dropCause, x, y, z, meta, tileEntity)
     }
 
     companion object {

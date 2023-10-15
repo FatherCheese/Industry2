@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.machines.BlockExtractor
 import turniplabs.industry.recipes.RecipesExtractor
 
@@ -16,7 +16,7 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
     private var currentExtractTime = 0
-    private val maxExtractTime = 128
+    private val maxExtractTime = 160
 
     init {
         contents = arrayOfNulls(4)
@@ -103,7 +103,7 @@ class TileEntityExtractor : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineExtractor.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineExtractor.id &&
                 currentExtractTime == 0 &&
                 contents[2] == null
             ) {

@@ -8,15 +8,16 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.Industry2
 import turniplabs.industry.IndustryTags
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.machines.BlockRecycler
+import turniplabs.industry.items.IndustryItems
 
 class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
     private var currentMachineTime = 0
-    private val maxMachineTime = 128
+    private val maxMachineTime = 160
 
     init {
         contents = arrayOfNulls(4)
@@ -105,7 +106,7 @@ class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
     private fun produceItem() {
         if (canProduce()) {
             if (contents[3] == null && random.nextInt(4) == 0)
-                contents[3] = ItemStack(Industry2.scrap, 1)
+                contents[3] = ItemStack(IndustryItems.scrap)
 
             --contents[2]!!.stackSize
 
@@ -132,7 +133,7 @@ class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineRecycler.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineRecycler.id &&
                 currentMachineTime == 0 &&
                 contents[2] == null
                 ) {

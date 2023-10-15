@@ -7,7 +7,6 @@ import net.minecraft.core.block.material.Material
 import net.minecraft.core.enums.EnumDropCause
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.world.World
-import turniplabs.industry.Industry2
 
 class BlockLeavesRubber(key: String?, id: Int, material: Material?, flag: Boolean) : BlockLeavesBase(key, id, material, flag) {
 
@@ -28,6 +27,6 @@ class BlockLeavesRubber(key: String?, id: Int, material: Material?, flag: Boolea
     }
 
     override fun getSapling(): Block {
-        return Industry2.rubberSapling
+        return IndustryBlocks.rubberSapling
     }
 }

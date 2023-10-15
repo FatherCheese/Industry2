@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import turniplabs.industry.Industry2;
+import turniplabs.industry.blocks.IndustryBlocks;
 
 import java.util.Random;
 
@@ -32,7 +33,6 @@ public class ChunkDecoratorOverworldMixin {
         int ind_chunkZ = chunk.zPosition;
         int ind_x = ind_chunkX * 16;
         int ind_z = ind_chunkZ * 16;
-        int ind_y = this.world.getHeightValue(ind_x + 16, ind_z + 16);
 
         Random ind_rand = new Random(this.world.getRandomSeed());
 
@@ -40,7 +40,7 @@ public class ChunkDecoratorOverworldMixin {
             int copX = ind_x + ind_rand.nextInt(16);
             int copY = ind_minY + ind_rand.nextInt(rangeY / 2);
             int copZ = ind_z + ind_rand.nextInt(16);
-            new WorldFeatureOre(Industry2.Companion.getOreCopperStone().id, 8, true)
+            new WorldFeatureOre(IndustryBlocks.INSTANCE.getOreCopperStone().id, 8, true)
                     .generate(world, ind_rand, copX, copY, copZ);
         }
 
@@ -48,7 +48,7 @@ public class ChunkDecoratorOverworldMixin {
             int tinX = ind_x + ind_rand.nextInt(16);
             int tinY = ind_minY + ind_rand.nextInt(rangeY / 2);
             int tinZ = ind_z + ind_rand.nextInt(16);
-            new WorldFeatureOre(Industry2.Companion.getOreTinStone().id, 8, true)
+            new WorldFeatureOre(IndustryBlocks.INSTANCE.getOreTinStone().id, 8, true)
                     .generate(world, ind_rand, tinX, tinY, tinZ);
         }
 
@@ -56,7 +56,7 @@ public class ChunkDecoratorOverworldMixin {
             int uraniumX = ind_x + ind_rand.nextInt(16);
             int uraniumY = ind_minY + ind_rand.nextInt(rangeY / 8);
             int uraniumZ = ind_z + ind_rand.nextInt(16);
-            new WorldFeatureOre(Industry2.Companion.getOreUraniumStone().id, 2, true)
+            new WorldFeatureOre(IndustryBlocks.INSTANCE.getOreUraniumStone().id, 2, true)
                     .generate(world, ind_rand, uraniumX, uraniumY, uraniumZ);
         }
     }

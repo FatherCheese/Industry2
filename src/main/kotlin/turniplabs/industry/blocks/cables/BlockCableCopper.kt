@@ -5,7 +5,7 @@ import net.minecraft.core.block.material.Material
 import net.minecraft.core.enums.EnumDropCause
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.world.World
-import turniplabs.industry.Industry2
+import turniplabs.industry.items.IndustryItems
 
 class BlockCableCopper(key: String?, id: Int, material: Material?, capacity: Int, transfer: Int, dangerLevel: Int) :
     BlockCable(key, id, material, capacity, transfer, dangerLevel) {
@@ -19,6 +19,6 @@ class BlockCableCopper(key: String?, id: Int, material: Material?, capacity: Int
         meta: Int,
         tileEntity: TileEntity?
     ): Array<ItemStack> {
-        return arrayOf(ItemStack(Industry2.itemCopperCable))
+        return arrayOf(ItemStack(IndustryItems.itemCopperCable))
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.machines.BlockMacerator
 import turniplabs.industry.recipes.RecipesMacerator
 
@@ -16,7 +16,7 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
     private var currentCrushTime = 0
-    private val maxCrushTime = 128
+    private val maxCrushTime = 160
 
     init {
         contents = arrayOfNulls(4)
@@ -103,7 +103,7 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == Industry2.machineMacerator.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineMacerator.id &&
                 currentCrushTime == 0 &&
                 contents[2] == null
             ) {

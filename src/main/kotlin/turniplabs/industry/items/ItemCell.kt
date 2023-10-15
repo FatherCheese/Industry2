@@ -8,7 +8,6 @@ import net.minecraft.core.item.ItemStack
 import net.minecraft.core.util.helper.MathHelper
 import net.minecraft.core.util.phys.Vec3d
 import net.minecraft.core.world.World
-import turniplabs.industry.Industry2
 
 class ItemCell(id: Int) : Item(id) {
 
@@ -45,14 +44,14 @@ class ItemCell(id: Int) : Item(id) {
                     return itemstack
 
                 if (world.getBlockMaterial(mopX, mopY, mopZ) === Material.water && world.getBlockMetadata(mopX, mopY, mopZ) == 0) {
-                    if (useCell(entityplayer, ItemStack(Industry2.waterCell))) {
+                    if (useCell(entityplayer, ItemStack(IndustryItems.waterCell))) {
                         world.setBlockWithNotify(mopX, mopY, mopZ, 0)
                         entityplayer.swingItem()
                     }
                 } else
                     if (world.getBlockMaterial(mopX, mopY, mopZ) === Material.lava && world.getBlockMetadata(mopX, mopY, mopZ) == 0 && useCell(
                         entityplayer, ItemStack(
-                            Industry2.lavaCell
+                            IndustryItems.lavaCell
                         )
                     )
                 ) {

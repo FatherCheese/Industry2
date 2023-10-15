@@ -82,8 +82,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         ) <= 64.0f
     }
 
-    // TODO - this eats fuel because there's nothing stopping it if the generator is full, also the texture won't update
-    // I've tried rewriting it and it just won't work if I do
+    // TODO : Texture won't update properly
     override fun updateEntity() {
         super.updateEntity()
 
@@ -102,7 +101,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
             modifyEnergy(getEnergyYieldForItem(currentFuel))
         }
 
-        if (currentBurnTime == 0) {
+        if (currentBurnTime == 0 && energy != capacity) {
             currentBurnTime = getBurnTimeFromItem(contents[2]) / 5
             maxBurnTime = currentBurnTime
 
