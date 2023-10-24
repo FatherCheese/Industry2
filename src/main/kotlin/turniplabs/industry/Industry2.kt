@@ -12,11 +12,10 @@ class Industry2: ModInitializer {
 
 	/*
 	TODO : More Machines
-	TODO : Make machine textures consistent
-	TODO : Change machines to return power
 	TODO : Log resin
 	TODO : Fix cable model (add fake bounding box?)
 	TODO : Make machines drop inventory on break
+	TODO : Make the textures more consistent
 	TODO : Mod Support
 	TODO : Lang file descriptions
 	TODO : Reactor Stuff
@@ -31,7 +30,7 @@ class Industry2: ModInitializer {
 
 	override fun onInitialize() {
 
-		// Do not touch this! It's a bug fix for class loading issues.
+		// Do not touch this! It's a bug fix for class loading issues. Thanks Useless!
 		try {
 			Class.forName("net.minecraft.core.block.Block")
 			Class.forName("net.minecraft.core.item.Item")

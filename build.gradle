@@ -82,14 +82,6 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
-	ivy {
-		url = "https://github.com/UselessBullets"
-		patternLayout {
-			artifact "[organisation]/releases/download/v[revision]/[module]-[revision].jar"
-			m2compatible = true
-		}
-		metadataSources { artifact() }
-	}
 }
 
 dependencies {
@@ -118,10 +110,7 @@ dependencies {
 	modImplementation "guidebookpp:guidebookpp:1.5.6"
 
 	// BTWaila
-	modImplementation "btwaila:btwaila:0.2.2"
-
-	// Prismatic Libe
-	modImplementation "BTA_Babric_PrismaticLibe:prismaticlibe:${project.prismatic_version}"
+	modImplementation "btwaila:btwaila:0.3.0"
 
 	var log4jVersion = "2.20.0"
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")

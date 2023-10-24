@@ -5,27 +5,21 @@ import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
-import sunsetsatellite.energyapi.EnergyAPI
-import turniplabs.industry.blocks.entities.TIleEntityBatboxSHV
-import turniplabs.industry.gui.ContainerBatboxBase
-import turniplabs.industry.gui.GuiBatboxSHV
+import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
+import turniplabs.industry.blocks.entities.TileEntityBatboxSHV
 
 class BlockBatboxSHV(key: String?, id: Int, material: Material?) : BlockTileEntity(key, id, material) {
 
     override fun getNewBlockEntity(): TileEntity {
-        return TIleEntityBatboxSHV()
+        return TileEntityBatboxSHV()
     }
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world!!.isClientSide) {
-            val tileEntity: TIleEntityBatboxSHV = world.getBlockTileEntity(x, y, z) as TIleEntityBatboxSHV ?: return false
+            val tileEntity: TileEntityBatboxSHV = world.getBlockTileEntity(x, y, z) as TileEntityBatboxSHV
 
-            EnergyAPI.displayGui(
-                player,
-                GuiBatboxSHV(player?.inventory, tileEntity),
-                ContainerBatboxBase(player?.inventory, tileEntity),
-                player?.inventory
-            )
+            tileEntity ?: return false
+            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
         }
         return true
     }

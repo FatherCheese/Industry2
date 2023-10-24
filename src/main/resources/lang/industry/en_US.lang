@@ -53,6 +53,8 @@ tile.industry.machine.generator.name=Generator
 tile.industry.machine.generator.desc=
 tile.industry.machine.generator.geothermal.name=Geothermal Generator
 tile.industry.machine.generator.geothermal.desc=
+tile.industry.machine.generator.watermill.name=Watermill
+tile.industry.machine.generator.watermill.desc=
 tile.industry.machine.generator.solar.name=Solar Generator
 tile.industry.machine.generator.solar.desc=
 

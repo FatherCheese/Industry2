@@ -3,7 +3,7 @@ package turniplabs.industry.blocks.entities
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 
-class TIleEntityBatboxSHV() : TileEntityBatboxBase() {
+class TileEntityBatboxSHV() : TileEntityBatboxBase() {
 
     init {
         this.setCapacity(131072)

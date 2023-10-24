@@ -10,12 +10,10 @@ import net.minecraft.core.util.helper.Side
 import net.minecraft.core.util.helper.Sides
 import net.minecraft.core.world.World
 import net.minecraft.core.world.WorldSource
-import sunsetsatellite.energyapi.EnergyAPI
+import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
 import turniplabs.industry.blocks.entities.TileEntityCompressor
-import turniplabs.industry.gui.ContainerCompressor
-import turniplabs.industry.gui.GuiCompressor
 
 class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
@@ -39,12 +37,7 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
             val tileEntity: TileEntityCompressor = world.getBlockTileEntity(x, y, z) as TileEntityCompressor
 
             tileEntity ?: return false
-            EnergyAPI.displayGui(
-                player,
-                GuiCompressor(player?.inventory, tileEntity),
-                ContainerCompressor(player?.inventory, tileEntity),
-                player?.inventory
-            )
+            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
         }
         return true
     }

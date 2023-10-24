@@ -5,10 +5,8 @@ import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
-import sunsetsatellite.energyapi.EnergyAPI
+import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
-import turniplabs.industry.gui.ContainerSolarBase
-import turniplabs.industry.gui.GuiSolarGenerator
 
 class BlockSolarGenerator(key: String?, id: Int, material: Material?) : BlockTileEntity(key, id, material) {
 
@@ -18,13 +16,10 @@ class BlockSolarGenerator(key: String?, id: Int, material: Material?) : BlockTil
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world?.isClientSide!!) {
-            val tileEntity: TileEntitySolarGenerator = world.getBlockTileEntity(x, y, z) as TileEntitySolarGenerator ?: return false
+            val tileEntity: TileEntitySolarGenerator = world.getBlockTileEntity(x, y, z) as TileEntitySolarGenerator
 
-            EnergyAPI.displayGui(
-                player, GuiSolarGenerator(player?.inventory, tileEntity),
-                ContainerSolarBase(player?.inventory, tileEntity),
-                player?.inventory
-            )
+            tileEntity ?: return false
+            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
         }
         return true
     }

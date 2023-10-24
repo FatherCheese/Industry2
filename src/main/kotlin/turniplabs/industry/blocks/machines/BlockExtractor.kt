@@ -8,12 +8,10 @@ import net.minecraft.core.util.helper.Side
 import net.minecraft.core.util.helper.Sides
 import net.minecraft.core.world.World
 import net.minecraft.core.world.WorldSource
-import sunsetsatellite.energyapi.EnergyAPI
+import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
 import turniplabs.industry.blocks.entities.TileEntityExtractor
-import turniplabs.industry.gui.ContainerExtractor
-import turniplabs.industry.gui.GuiExtractor
 
 class BlockExtractor(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
@@ -37,12 +35,7 @@ class BlockExtractor(key: String?, id: Int, material: Material?) : BlockTileEnti
             val tileEntity: TileEntityExtractor = world.getBlockTileEntity(x, y, z) as TileEntityExtractor
 
             tileEntity ?: return false
-            EnergyAPI.displayGui(
-                player,
-                GuiExtractor(player?.inventory, tileEntity),
-                ContainerExtractor(player?.inventory, tileEntity),
-                player?.inventory
-            )
+            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
         }
         return true
     }

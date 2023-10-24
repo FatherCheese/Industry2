@@ -47,6 +47,10 @@ object IndustryRecipes {
             "111", "111", "111",
             '1', IndustryItems.tinIngot
         ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.bronzeBlock), arrayOf(
+            "111", "111", "111",
+            '1', IndustryItems.bronzeIngot
+        ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.uraniumBlock), arrayOf(
             "111", "111", "111",
             '1', IndustryItems.uraniumIngot
@@ -64,6 +68,18 @@ object IndustryRecipes {
             '1', IndustryItems.batteryRedstone,
             '2', IndustryBlocks.machineCasing,
             '3', Block.furnaceStoneIdle
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.machineWatermill), arrayOf(
+            "121", "232", "121",
+            '1', Item.stick,
+            '2', Block.planksOak,
+            '3', IndustryBlocks.machineGenerator
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.machineWatermill), arrayOf(
+            "121", "232", "121",
+            '1', Item.stick,
+            '2', Block.planksOakPainted,
+            '3', IndustryBlocks.machineGenerator
         ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.machineGeothermalGenerator), arrayOf(
             "121", "121", "343",

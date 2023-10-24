@@ -2,32 +2,31 @@ package turniplabs.industry.blocks.entities
 
 import com.mojang.nbt.CompoundTag
 import com.mojang.nbt.ListTag
-import net.minecraft.core.crafting.LookupFuelFurnace
+import net.minecraft.core.block.Block
 import net.minecraft.core.entity.player.EntityPlayer
+import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
-import sunsetsatellite.energyapi.api.LookupFuelEnergy
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
-import turniplabs.industry.blocks.machines.BlockGenerator
+import turniplabs.industry.recipes.fuels.WatermillFuel
 
-class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
-    var active = false
+class TileEntityWatermill : TileEntityEnergyConductor(), IInventory {
     private var contents: Array<ItemStack?>
-    private var currentBurnTime = 0
-    private var maxBurnTime = 0
-    private var currentFuel: ItemStack? = null
+    var currentFuelTime = 0
+    val maxFuelTime = 8192
 
     init {
         setCapacity(1024)
         setTransfer(32)
         setMaxReceive(0)
+
         contents = arrayOfNulls(3)
 
-        for (dir: Direction in Direction.values())
-            setConnection(dir, Connection.OUTPUT)
+        setConnection(Direction.Y_POS, Connection.OUTPUT)
+        setConnection(Direction.Y_NEG, Connection.OUTPUT)
     }
 
     override fun getSizeInventory(): Int {
@@ -66,7 +65,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "IndustryGenerator"
+        return "Watermill"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -82,7 +81,10 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         ) <= 64.0f
     }
 
-    // TODO : Texture won't update properly
+    private fun getFuelTimeFromItem(itemStack: ItemStack?): Int {
+        return if (itemStack == null) 0 else WatermillFuel.getResult(itemStack.item.id)!!
+    }
+
     override fun updateEntity() {
         super.updateEntity()
 
@@ -91,35 +93,48 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
             onInventoryChanged()
         }
 
-        if (currentBurnTime > 0) {
-            --currentBurnTime
-            modifyEnergy(getEnergyYieldForItem(currentFuel))
+        for (xWater in xCoord - 1..xCoord + 1)
+            for (yWater in yCoord - 1..yCoord + 1)
+                for (zWater in zCoord - 1..zCoord + 1)
+                    if (
+                        worldObj.getBlockId(xWater, yWater, zWater) == Block.fluidWaterFlowing.id ||
+                        worldObj.getBlockId(xWater, yWater, zWater) == Block.fluidWaterStill.id
+                    )
+                        currentFuelTime = maxFuelTime
+
+        if (currentFuelTime > 0 && energy != capacity) {
+            --currentFuelTime
+            ++energy
         }
 
-        if (currentBurnTime == 0 && energy != capacity) {
-            currentBurnTime = getBurnTimeFromItem(contents[2]) / 5
-            maxBurnTime = currentBurnTime
+        if (currentFuelTime == 0 && energy != capacity) {
+            if (contents[2] != null && WatermillFuel.getFuelList().containsKey(contents[2]!!.item.id)) {
+                currentFuelTime = getFuelTimeFromItem(contents[2])
+                --contents[2]!!.stackSize
 
-            if (currentBurnTime > 0) {
-                active = true
-                BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
-                
-                currentFuel = contents[2]
-                onInventoryChanged()
-
-                if (contents[2] != null) {
-                    --contents[2]!!.stackSize
-                    if (contents[2]?.stackSize == 0)
-                        contents[2] = null
-                }
-            } else  {
-                active = false
-                currentFuel = null
+                if (contents[2]?.stackSize == 0)
+                    contents[2] = null
             }
         }
 
-        if (active)
-            worldObj.markBlockDirty(xCoord, yCoord, zCoord)
+        if (currentFuelTime in 1 until 7680 && contents[2] != null) {
+            if (WatermillFuel.getFuelList().containsKey(contents[2]!!.item.id)) {
+                onInventoryChanged()
+
+                currentFuelTime += getFuelTimeFromItem(contents[2])
+
+                if (contents[2]!!.item == Item.bucketWater) {
+                    --contents[2]!!.stackSize
+
+                    contents[2] = ItemStack(Item.bucket)
+                }
+                else
+                    --contents[2]!!.stackSize
+
+                if (contents[2]?.stackSize == 0)
+                    contents[2] = null
+            }
+        }
     }
 
     override fun readFromNBT(compoundTag: CompoundTag?) {
@@ -135,13 +150,13 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentBurnTime = compoundTag.getShort("CookTime").toInt()
+        currentFuelTime = compoundTag.getShort("FuelTime").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("CookTime", currentBurnTime.toShort())
+        compoundTag?.putShort("FuelTime", currentFuelTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
@@ -157,20 +172,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
         compoundTag!!.put("Items", listTag)
     }
 
-    // Burn time, used by GuiGenerator
-    fun getBurnTime(i: Int): Int {
-        return if (maxBurnTime == 0) 0 else currentBurnTime * i / maxBurnTime
-    }
-
-    private fun canBurn(): Boolean {
-        return energy != capacity
-    }
-
-    private fun getEnergyYieldForItem(itemStack: ItemStack?): Int {
-        return if (itemStack == null) 0 else LookupFuelEnergy.fuelEnergy().getEnergyYield(itemStack.item.id)
-    }
-
-    private fun getBurnTimeFromItem(itemStack: ItemStack?): Int {
-        return if (itemStack == null) 0 else LookupFuelFurnace.instance.getFuelYield(itemStack.item.id)
+    fun getFuelTime(i: Int): Int {
+        return currentFuelTime * i / maxFuelTime
     }
 }

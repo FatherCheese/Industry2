@@ -7,6 +7,7 @@ import net.minecraft.core.block.Block
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.block.tag.BlockTags
 import net.minecraft.core.item.tool.ItemToolPickaxe
+import sunsetsatellite.energyapi.EnergyAPI
 import turniplabs.halplibe.helper.BlockBuilder
 import turniplabs.halplibe.helper.EntityHelper
 import turniplabs.industry.Industry2
@@ -15,6 +16,7 @@ import turniplabs.industry.blocks.cables.BlockCableGold
 import turniplabs.industry.blocks.cables.BlockCableTin
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.machines.*
+import turniplabs.industry.gui.*
 
 object IndustryBlocks {
 
@@ -190,6 +192,11 @@ object IndustryBlocks {
         .setNorthTexture("machine_generator.png")
         .build(BlockGenerator("machine.generator", nextBlockID(), Material.metal))
 
+    val machineWatermill: Block = machineBuilderBlank
+        .setTopBottomTexture("machine_casing_basic.png")
+        .setSideTextures("machine_generator_watermill.png")
+        .build(BlockWatermill("machine.generator.watermill", nextBlockID(), Material.metal))
+
     val machineGeothermalGenerator: Block = machineBuilder
         .setNorthTexture("machine_generator_geothermal.png")
         .build(BlockGeothermalGenerator("machine.generator.geothermal", nextBlockID(), Material.metal))
@@ -329,22 +336,47 @@ object IndustryBlocks {
         ItemToolPickaxe.miningLevels[oreUraniumBasalt] = 2
         ItemToolPickaxe.miningLevels[oreUraniumLimestone] = 2
         ItemToolPickaxe.miningLevels[oreUraniumGranite] = 2
+        ItemToolPickaxe.miningLevels[copperBlock] = 2
+        ItemToolPickaxe.miningLevels[tinBlock] = 2
+        ItemToolPickaxe.miningLevels[bronzeBlock] = 2
+        ItemToolPickaxe.miningLevels[uraniumBlock] = 2
         ItemToolPickaxe.miningLevels[hardenedCoal] = 3
+    }
+
+    private fun addToGUI() {
+        EnergyAPI.addToNameGuiMap("IndustryGenerator", GuiGenerator::class.java, TileEntityGenerator::class.java, ContainerGenerator::class.java)
+        EnergyAPI.addToNameGuiMap("Watermill", GuiWatermill::class.java, TileEntityWatermill::class.java, ContainerWatermill::class.java)
+        EnergyAPI.addToNameGuiMap("ElectricFurnace", GuiElectricFurnace::class.java, TileEntityElectricFurnace::class.java, ContainerElectricFurnace::class.java)
+        EnergyAPI.addToNameGuiMap("SolarGenerator", GuiSolarGenerator::class.java, TileEntitySolarGenerator::class.java, ContainerSolarBase::class.java)
+        EnergyAPI.addToNameGuiMap("LVSolarArray", GuiSolarArrayLV::class.java, TileEntitySolarLV::class.java, ContainerSolarBase::class.java)
+        EnergyAPI.addToNameGuiMap("MVSolarArray", GuiSolarArrayMV::class.java, TileEntitySolarMV::class.java, ContainerSolarBase::class.java)
+        EnergyAPI.addToNameGuiMap("HVSolarArray", GuiSolarArrayHV::class.java, TileEntitySolarHV::class.java, ContainerSolarBase::class.java)
+        EnergyAPI.addToNameGuiMap("SHVSolarArray", GuiSolarArraySHV::class.java, TileEntitySolarSHV::class.java, ContainerSolarBase::class.java)
+        EnergyAPI.addToNameGuiMap("BatboxLV", GuiBatboxLV::class.java, TileEntityBatboxLV::class.java, ContainerBatboxBase::class.java)
+        EnergyAPI.addToNameGuiMap("BatboxMV", GuiBatboxMV::class.java, TileEntityBatboxMV::class.java, ContainerBatboxBase::class.java)
+        EnergyAPI.addToNameGuiMap("BatboxHV", GuiBatboxHV::class.java, TileEntityBatboxHV::class.java, ContainerBatboxBase::class.java)
+        EnergyAPI.addToNameGuiMap("BatboxSHV", GuiBatboxSHV::class.java, TileEntityBatboxSHV::class.java, ContainerBatboxBase::class.java)
+        EnergyAPI.addToNameGuiMap("Macerator", GuiMacerator::class.java, TileEntityMacerator::class.java, ContainerMacerator::class.java)
+        EnergyAPI.addToNameGuiMap("Compressor", GuiCompressor::class.java, TileEntityCompressor::class.java, ContainerCompressor::class.java)
+        EnergyAPI.addToNameGuiMap("Cutter", GuiCutter::class.java, TileEntityCutter::class.java, ContainerCutter::class.java)
+        EnergyAPI.addToNameGuiMap("Extractor", GuiExtractor::class.java, TileEntityExtractor::class.java, ContainerExtractor::class.java)
+        EnergyAPI.addToNameGuiMap("Recycler", GuiRecycler::class.java, TileEntityRecycler::class.java, ContainerRecycler::class.java)
     }
 
     private fun createTileEntities() {
         EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
         EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
+        EntityHelper.createTileEntity(TileEntityWatermill::class.java, "Watermill")
         EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
         EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
         EntityHelper.createTileEntity(TileEntitySolarLV::class.java, "LVSolarArray")
         EntityHelper.createTileEntity(TileEntitySolarMV::class.java, "MVSolarArray")
         EntityHelper.createTileEntity(TileEntitySolarHV::class.java, "HVSolarArray")
         EntityHelper.createTileEntity(TileEntitySolarSHV::class.java, "SHVSolarArray")
-        EntityHelper.createTileEntity(TIleEntityBatboxLV::class.java, "BatboxLV")
-        EntityHelper.createTileEntity(TIleEntityBatboxMV::class.java, "BatboxMV")
-        EntityHelper.createTileEntity(TIleEntityBatboxHV::class.java, "BatboxHV")
-        EntityHelper.createTileEntity(TIleEntityBatboxSHV::class.java, "BatboxSHV")
+        EntityHelper.createTileEntity(TileEntityBatboxLV::class.java, "BatboxLV")
+        EntityHelper.createTileEntity(TileEntityBatboxMV::class.java, "BatboxMV")
+        EntityHelper.createTileEntity(TileEntityBatboxHV::class.java, "BatboxHV")
+        EntityHelper.createTileEntity(TileEntityBatboxSHV::class.java, "BatboxSHV")
         EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
         EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
         EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
@@ -383,6 +415,7 @@ object IndustryBlocks {
         machineCasing
         machineCasingAdvanced
         machineGenerator
+        machineWatermill
         machineGeothermalGenerator
         machineSolarGenerator
         machineSolarArrayLV
@@ -406,6 +439,7 @@ object IndustryBlocks {
         rubberSapling
 
         pickaxeLevels()
+        addToGUI()
         createTileEntities()
     }
 }

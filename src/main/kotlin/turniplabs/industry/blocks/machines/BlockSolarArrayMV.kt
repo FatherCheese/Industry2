@@ -5,10 +5,8 @@ import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
-import sunsetsatellite.energyapi.EnergyAPI
+import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.industry.blocks.entities.TileEntitySolarMV
-import turniplabs.industry.gui.ContainerSolarBase
-import turniplabs.industry.gui.GuiSolarArrayMV
 
 class BlockSolarArrayMV(key: String?, id: Int, material: Material?) : BlockTileEntity(key, id, material) {
 
@@ -21,11 +19,7 @@ class BlockSolarArrayMV(key: String?, id: Int, material: Material?) : BlockTileE
             val tileEntity: TileEntitySolarMV = world.getBlockTileEntity(x, y, z) as TileEntitySolarMV
 
             tileEntity ?: return false
-            EnergyAPI.displayGui(
-                player, GuiSolarArrayMV(player?.inventory, tileEntity),
-                ContainerSolarBase(player?.inventory, tileEntity),
-                player?.inventory
-            )
+            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
         }
         return true
     }
