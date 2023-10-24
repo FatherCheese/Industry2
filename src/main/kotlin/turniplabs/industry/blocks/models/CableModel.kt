@@ -34,43 +34,24 @@ class CableModel : RenderBlocks() {
 
         // Credit to UselessBullets & Apollo from the modding Discord for help!
         // TODO (fix hitboxes and add corners)
-        when {
-            aPosX -> {
-                if (aNegX) {
-                    blockCable.setBlockBounds(0.0f, boundMin1, boundMin1, 1.0f, boundMax1, boundMax1)
-                } else {
-                    blockCable.setBlockBounds(0.5f, boundMin1, boundMin1, 1.0f, boundMax1, boundMax1)
-                }
-            }
-            aNegX -> {
-                blockCable.setBlockBounds(0.0f, boundMin1, boundMin1, 0.5f, boundMax1, boundMax1)
-            }
-            aPosY -> {
-                if (aNegY) {
-                    blockCable.setBlockBounds(boundMin1, 0.0f, boundMin1, boundMax1, 1.0f, boundMax1)
-                } else {
-                    blockCable.setBlockBounds(boundMin1, 0.5f, boundMin1, boundMax1, 1.0f, boundMax1)
-                }
-            }
-            aNegY -> {
-                blockCable.setBlockBounds(boundMin1, 0.0f, boundMin1, boundMax1, 0.5f, boundMax1)
-            }
-            aPosZ -> {
-                if (aNegZ) {
-                    blockCable.setBlockBounds(boundMin1, boundMin1, 0.0f, boundMax1, boundMax1, 1.0f)
-                } else {
-                    blockCable.setBlockBounds(boundMin1, boundMin1, 0.5f, boundMax1, boundMax1, 1.0f)
-                }
-            }
-            aNegZ -> {
-                blockCable.setBlockBounds(boundMin1, boundMin1, 0.0f, boundMax1, boundMax1, 0.5f)
-            }
-            else -> {
-                blockCable.setBlockBounds(boundMin1, boundMin1, boundMin1, boundMax1, boundMax1, boundMax1)
-            }
+        blockCable.setBlockBounds(boundMin1 - 0.0001f, boundMin1 - 0.0001f, boundMin1 - 0.0001f, boundMax1 + 0.0001f, boundMax1 + 0.0001f, boundMax1 + 0.0001f)
+
+        renderBlocks.renderStandardBlock(blockCable, x, y, z);
+        if (aPosX || aNegX){
+            blockCable.setBlockBounds(0.5f + if (aNegX) -0.5f else 0.0f, boundMin1, boundMin1, 0.5f + if (aPosX) 0.5f else 0.0f, boundMax1, boundMax1)
+            renderBlocks.renderStandardBlock(blockCable, x, y, z);
+        }
+        if (aNegY || aPosY){
+            blockCable.setBlockBounds(boundMin1, 0.5f + if (aNegY) -0.5f else 0.0f, boundMin1, boundMax1, 0.5f + if (aPosY) 0.5f else 0.0f, boundMax1)
+            renderBlocks.renderStandardBlock(blockCable, x, y, z);
+        }
+        if (aNegZ || aPosZ){
+            blockCable.setBlockBounds(boundMin1,boundMin1, 0.5f + if (aNegZ) -0.5f else 0.0f, boundMax1, boundMax1, 0.5f + if (aPosZ) 0.5f else 0.0f)
+            renderBlocks.renderStandardBlock(blockCable, x, y, z);
         }
 
-        renderBlocks.renderStandardBlock(blockCable, x, y, z)
+
+        blockCable.setBlockBounds(0.15f, 0.15f, 0.15f, 0.85f, 0.85f, 0.85f)
 
         return true
     }
