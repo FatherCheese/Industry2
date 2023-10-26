@@ -11,7 +11,7 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.TileEntityGenerator
+import turniplabs.industry.blocks.entities.TileEntityGeothermal
 
 class BlockGeothermalGenerator(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
@@ -27,12 +27,12 @@ class BlockGeothermalGenerator(key: String?, id: Int, material: Material?) : Blo
     }
 
     override fun getNewBlockEntity(): TileEntity {
-        return TileEntityGenerator()
+        return TileEntityGeothermal()
     }
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world?.isClientSide!!) {
-            val tileEntity: TileEntityGenerator = world.getBlockTileEntity(x, y, z) as TileEntityGenerator
+            val tileEntity: TileEntityGeothermal = world.getBlockTileEntity(x, y, z) as TileEntityGeothermal
 
             tileEntity ?: return false
             (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
@@ -51,7 +51,7 @@ class BlockGeothermalGenerator(key: String?, id: Int, material: Material?) : Blo
         5 = east
          */
 
-        val tileEntity: TileEntityGenerator = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityGenerator
+        val tileEntity: TileEntityGeothermal = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityGeothermal
         val metadata: Int = blockAccess.getBlockMetadata(x, y, z)
         val index = Sides.orientationLookUpHorizontal[6 * metadata + side.id]
         if (index != 2)
@@ -75,7 +75,7 @@ class BlockGeothermalGenerator(key: String?, id: Int, material: Material?) : Blo
         }
 
         private fun getInstance(): BlockGeothermalGenerator {
-            return instance ?: throw NullPointerException("Instance of BlockGenerator hasn't been setup!")
+            return instance ?: throw NullPointerException("Instance of BlockGeothermalGenerator hasn't been setup!")
         }
 
         fun updateBlockState(active: Boolean, world: World, x: Int, y: Int, z: Int) {

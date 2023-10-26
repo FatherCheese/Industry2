@@ -13,11 +13,10 @@ class Industry2: ModInitializer {
 	/*
 	TODO : More Machines
 	TODO : Log resin
-	TODO : Fix cable model (add fake bounding box?)
-	TODO : Make machines drop inventory on break
+	TODO : Make machines drop inventory
 	TODO : Make the textures more consistent
-	TODO : Mod Support
 	TODO : Lang file descriptions
+	TODO : Mod Support
 	TODO : Reactor Stuff
 	TODO : Configs (IDs, world gen, .etc)
 	TODO : MP Support

@@ -3,19 +3,20 @@ package turniplabs.industry.recipes.fuels
 import net.minecraft.core.item.Item
 import turniplabs.industry.items.IndustryItems
 
-object WatermillFuel {
+object GeothermalFuel {
     private val fuelList = HashMap<Any?, Any?>()
 
     init {
-        addFuel(Item.bucketWater.id, 1000)
-        addFuel(IndustryItems.waterCell.id, 1000)
+        addFuel(Item.bucketLava.id, 2000)
+        addFuel(IndustryItems.lavaCell.id, 2000)
+        addFuel(Item.nethercoal.id, 1000)
     }
 
-    fun addFuel(input: Int, yield: Int) {
-        fuelList[input] = yield
+    fun addFuel(input: Int, time: Int) {
+        fuelList[input] = time
     }
 
-    fun getResult(i: Int): Int? {
+    fun getFuelResult(i: Int): Int? {
         return if (fuelList[i] == null) 0 else fuelList[i] as Int?
     }
 

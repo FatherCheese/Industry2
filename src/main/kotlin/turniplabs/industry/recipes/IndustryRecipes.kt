@@ -81,6 +81,11 @@ object IndustryRecipes {
             '2', Block.planksOakPainted,
             '3', IndustryBlocks.machineGenerator
         ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.machineWindmill), arrayOf(
+            "1#1", "#2#", "1#1",
+            '1', IndustryBlocks.tinBlock,
+            '2', IndustryBlocks.machineGenerator
+        ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.machineGeothermalGenerator), arrayOf(
             "121", "121", "343",
             '1', Block.glass,

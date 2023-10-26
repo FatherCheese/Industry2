@@ -197,6 +197,10 @@ object IndustryBlocks {
         .setSideTextures("machine_generator_watermill.png")
         .build(BlockWatermill("machine.generator.watermill", nextBlockID(), Material.metal))
 
+    val machineWindmill: Block = machineBuilder
+        .setNorthTexture("machine_generator_windmill.png")
+        .build(BlockWindmill("machine.generator.windmill", nextBlockID(), Material.metal))
+
     val machineGeothermalGenerator: Block = machineBuilder
         .setNorthTexture("machine_generator_geothermal.png")
         .build(BlockGeothermalGenerator("machine.generator.geothermal", nextBlockID(), Material.metal))
@@ -346,6 +350,8 @@ object IndustryBlocks {
     private fun addToGUI() {
         EnergyAPI.addToNameGuiMap("IndustryGenerator", GuiGenerator::class.java, TileEntityGenerator::class.java, ContainerGenerator::class.java)
         EnergyAPI.addToNameGuiMap("Watermill", GuiWatermill::class.java, TileEntityWatermill::class.java, ContainerWatermill::class.java)
+        EnergyAPI.addToNameGuiMap("Windmill", GuiWindmill::class.java, TileEntityWindmill::class.java, ContainerWindmill::class.java)
+        EnergyAPI.addToNameGuiMap("Geothermal", GuiGeothermal::class.java, TileEntityGeothermal::class.java, ContainerGeothermal::class.java)
         EnergyAPI.addToNameGuiMap("ElectricFurnace", GuiElectricFurnace::class.java, TileEntityElectricFurnace::class.java, ContainerElectricFurnace::class.java)
         EnergyAPI.addToNameGuiMap("SolarGenerator", GuiSolarGenerator::class.java, TileEntitySolarGenerator::class.java, ContainerSolarBase::class.java)
         EnergyAPI.addToNameGuiMap("LVSolarArray", GuiSolarArrayLV::class.java, TileEntitySolarLV::class.java, ContainerSolarBase::class.java)
@@ -367,6 +373,8 @@ object IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
         EntityHelper.createTileEntity(TileEntityGenerator::class.java, "IndustryGenerator")
         EntityHelper.createTileEntity(TileEntityWatermill::class.java, "Watermill")
+        EntityHelper.createTileEntity(TileEntityWindmill::class.java, "Windmill")
+        EntityHelper.createTileEntity(TileEntityGeothermal::class.java, "Geothermal")
         EntityHelper.createTileEntity(TileEntityElectricFurnace::class.java, "ElectricFurnace")
         EntityHelper.createTileEntity(TileEntitySolarGenerator::class.java, "SolarGenerator")
         EntityHelper.createTileEntity(TileEntitySolarLV::class.java, "LVSolarArray")
@@ -416,6 +424,7 @@ object IndustryBlocks {
         machineCasingAdvanced
         machineGenerator
         machineWatermill
+        machineWindmill
         machineGeothermalGenerator
         machineSolarGenerator
         machineSolarArrayLV

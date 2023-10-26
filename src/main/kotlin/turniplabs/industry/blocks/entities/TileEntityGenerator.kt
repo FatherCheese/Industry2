@@ -22,7 +22,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
 
     init {
         setCapacity(1024)
-        setTransfer(32)
+        setTransfer(16)
         setMaxReceive(0)
         contents = arrayOfNulls(3)
 
@@ -52,6 +52,7 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
             if (contents[i]!!.stackSize == 0) {
                 contents[i] = null
             }
+
             onInventoryChanged()
             itemStack
         } else return null
@@ -160,10 +161,6 @@ class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
     // Burn time, used by GuiGenerator
     fun getBurnTime(i: Int): Int {
         return if (maxBurnTime == 0) 0 else currentBurnTime * i / maxBurnTime
-    }
-
-    private fun canBurn(): Boolean {
-        return energy != capacity
     }
 
     private fun getEnergyYieldForItem(itemStack: ItemStack?): Int {

@@ -5,11 +5,10 @@ import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntityWatermill
+import turniplabs.industry.blocks.entities.TileEntityGeothermal
 
-class GuiWatermill(inventory: InventoryPlayer, private val tileEntity: TileEntityWatermill) :
-    GuiContainer(ContainerWatermill(inventory, tileEntity))
-{
+class GuiGeothermal(inventory: InventoryPlayer?, private val tileEntity: TileEntityGeothermal) :
+    GuiContainer(ContainerGeothermal(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
         val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator_fluid.png")
@@ -24,12 +23,12 @@ class GuiWatermill(inventory: InventoryPlayer, private val tileEntity: TileEntit
         drawTexturedModalRect(textX + 8, textY + 39, 176, 0, (power * 16).toInt(), 8)
 
         val fuelTime: Int = (tileEntity.getFuelTime(16))
-        drawTexturedModalRect(textX + 80, (textY + 17 + 16) - fuelTime, 176, 23 - fuelTime, 16, fuelTime)
+        drawTexturedModalRect(textX + 80, (textY + 17 + 16) - fuelTime, 192, 23 - fuelTime, 16, fuelTime)
     }
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Watermill", 64, 6, 4210752)
+        fontRenderer.drawString("Geothermal Generator", 64, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 
@@ -54,7 +53,7 @@ class GuiWatermill(inventory: InventoryPlayer, private val tileEntity: TileEntit
 
         if ((x > (scrnX + 83)) && (x < (scrnX + 93))) {
             if ((y > (scrnY + 20)) && (y < scrnY + 31)) {
-                text.append("${TextFormatting.WHITE}Water: ${TextFormatting.LIGHT_GRAY}${tileEntity.currentFuelTime}${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}${tileEntity.maxFuelTime}")
+                text.append("${TextFormatting.WHITE}Heat: ${TextFormatting.LIGHT_GRAY}${tileEntity.currentFuelTime}${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}${tileEntity.maxFuelTime}")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)
