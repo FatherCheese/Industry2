@@ -5,6 +5,7 @@ import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
+import sunsetsatellite.energyapi.EnergyAPI
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.industry.blocks.entities.TileEntityWindmill
 
@@ -20,7 +21,7 @@ class BlockWindmill(key: String?, id: Int, material: Material?) : BlockTileEntit
             val tileEntity: TileEntityWindmill = world.getBlockTileEntity(x, y, z) as TileEntityWindmill
 
             tileEntity ?: return false
-            (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
+            EnergyAPI.displayGui(player, tileEntity)
         }
         return true
     }

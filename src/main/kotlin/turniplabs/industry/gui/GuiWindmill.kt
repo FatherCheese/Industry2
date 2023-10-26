@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
 import turniplabs.industry.blocks.entities.TileEntityWindmill
 
-class GuiWindmill(inventory: InventoryPlayer, private val tileEntity: TileEntityWindmill, container: Container?) :
+class GuiWindmill(inventory: InventoryPlayer, private val tileEntity: TileEntityWindmill) :
     GuiContainer(ContainerWindmill(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
