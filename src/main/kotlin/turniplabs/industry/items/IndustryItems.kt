@@ -96,6 +96,7 @@ object IndustryItems {
     // Tools
     val hammer: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemHammer(nextItemID()), "tool.hammer", "hammer.png")
     val cutter: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCutter(nextItemID()), "tool.cutter", "cutter.png")
+    val wrench: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemWrench(nextItemID()), "tool.wrench", "wrench.png")
 
     val batteryRedstone: Item = ItemHelper.createItem(
         Industry2.MOD_ID,

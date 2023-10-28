@@ -1,18 +1,19 @@
-package turniplabs.industry.gui
+package turniplabs.industry.gui.batbox
 
 import net.minecraft.client.gui.GuiContainer
 import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntityGenerator
+import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxBase
+import turniplabs.industry.gui.batbox.ContainerBatboxBase
 
-class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEntityGenerator) :
-    GuiContainer(ContainerGenerator(inventory, tileEntity))
-{
+open class GuiBatboxBase(inventory: InventoryPlayer?, private val tileEntity: TileEntityBatboxBase) : GuiContainer(
+    ContainerBatboxBase(inventory, tileEntity)
+) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
-        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator.png")
+        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/batbox.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
 
@@ -21,16 +22,7 @@ class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEnti
         drawTexturedModalRect(textX, textY, 0, 0, xSize, ySize)
 
         val power: Double = (tileEntity.energy.toFloat() / tileEntity.capacity.toFloat()).toDouble()
-        drawTexturedModalRect(textX + 8, textY + 39, 176, 14, (power * 16).toInt(), 8)
-
-        val burnTime: Int = (tileEntity.getBurnTime(12))
-        drawTexturedModalRect(textX + 81, (textY + 19 + 12) - burnTime, 176, 12 - burnTime, 14, burnTime)
-    }
-
-    override fun drawGuiContainerForegroundLayer() {
-        super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Generator", 64, 6, 4210752)
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
+        drawTexturedModalRect(textX + 80, textY + 39, 176, 0, (power * 16).toInt(), 8)
     }
 
     override fun drawScreen(x: Int, y: Int, renderPartialTicks: Float) {
@@ -39,7 +31,7 @@ class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEnti
         super.drawScreen(x, y, renderPartialTicks)
 
         val text = StringBuilder()
-        if ((x > (scrnX + 8)) && (x < (scrnX + 24))) {
+        if ((x > (scrnX + 80)) && (x < (scrnX + 96))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
                 text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
 

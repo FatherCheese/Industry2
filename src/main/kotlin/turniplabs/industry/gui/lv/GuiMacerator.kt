@@ -1,18 +1,17 @@
-package turniplabs.industry.gui
+package turniplabs.industry.gui.lv
 
 import net.minecraft.client.gui.GuiContainer
 import net.minecraft.client.gui.GuiTooltip
 import net.minecraft.core.net.command.TextFormatting
 import net.minecraft.core.player.inventory.InventoryPlayer
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.TileEntityGenerator
+import turniplabs.industry.blocks.entities.lv.TileEntityMacerator
 
-class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEntityGenerator) :
-    GuiContainer(ContainerGenerator(inventory, tileEntity))
-{
+class GuiMacerator(container: InventoryPlayer?, private val tileEntity: TileEntityMacerator) :
+    GuiContainer(ContainerMacerator(container, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
-        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/generator.png")
+        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/machine_single.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
 
@@ -21,15 +20,15 @@ class GuiGenerator(inventory: InventoryPlayer?, private val tileEntity: TileEnti
         drawTexturedModalRect(textX, textY, 0, 0, xSize, ySize)
 
         val power: Double = (tileEntity.energy.toFloat() / tileEntity.capacity.toFloat()).toDouble()
-        drawTexturedModalRect(textX + 8, textY + 39, 176, 14, (power * 16).toInt(), 8)
+        drawTexturedModalRect(textX + 8, textY + 39, 176, 0, (power * 16).toInt(), 8)
 
-        val burnTime: Int = (tileEntity.getBurnTime(12))
-        drawTexturedModalRect(textX + 81, (textY + 19 + 12) - burnTime, 176, 12 - burnTime, 14, burnTime)
+        val progress: Int = tileEntity.getProgressScaled(23)
+        drawTexturedModalRect(textX + 79, textY + 35, 176, 8, progress + 1, 23)
     }
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Generator", 64, 6, 4210752)
+        fontRenderer.drawString("Macerator", 46, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 

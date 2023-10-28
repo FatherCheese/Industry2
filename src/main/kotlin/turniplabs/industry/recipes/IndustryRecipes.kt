@@ -188,10 +188,17 @@ object IndustryRecipes {
             '2', Block.dirt,
             '3', IndustryBlocks.machineCasing
         ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineMacerator), arrayOf(
+            "#1#", "232", "#4#",
+            '1', IndustryBlocks.machineCasingAdvanced,
+            '2', Block.obsidian,
+            '3', IndustryBlocks.machineMacerator,
+            '4', IndustryItems.circuitAdvanced
+        ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.hardenedCoal), arrayOf(
           "121", "232", "121",
             '1', IndustryItems.coalDust,
-            '2', Item.nethercoal,
+            '2', Block.blockCoal,
             '3', Block.obsidian
         ))
         Crafting.createRecipe(ItemStack(IndustryItems.hammer), arrayOf(
@@ -203,6 +210,10 @@ object IndustryRecipes {
             "1#1", "#1#", "2#2",
             '1', IndustryItems.ironPlate,
             '2', Item.ingotIron
+        ))
+        Crafting.createRecipe(ItemStack(IndustryItems.wrench), arrayOf(
+            "1#1", "111", "#1#",
+            '1', IndustryItems.bronzePlate
         ))
         Crafting.createRecipe(ItemStack(IndustryItems.batteryRedstone), arrayOf(
             "#1#", "232", "232",

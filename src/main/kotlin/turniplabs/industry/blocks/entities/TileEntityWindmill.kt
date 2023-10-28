@@ -4,20 +4,22 @@ import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
 import net.minecraft.core.world.Dimension
+import net.minecraft.core.world.type.WorldTypes
 import net.minecraft.core.world.weather.Weather
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
+import kotlin.math.min
 
 class TileEntityWindmill : TileEntityEnergyConductor(), IInventory {
     private var contents: Array<ItemStack?> = arrayOfNulls(2)
-    var generatedEnergy = 1
+    var generatedEnergy = 0
 
     init {
         setCapacity(1024)
-        setTransfer(32)
-        setMaxReceive(32)
+        setTransfer(16)
+        setMaxReceive(16)
 
         for (dir in Direction.values())
             setConnection(dir, Connection.OUTPUT)
@@ -92,23 +94,32 @@ class TileEntityWindmill : TileEntityEnergyConductor(), IInventory {
             onInventoryChanged()
         }
 
-        if (worldObj.dimension == Dimension.nether)
-            generatedEnergy = 0
+        if (energy < capacity) {
 
-        if (worldObj.dimension == Dimension.paradise)
-            generatedEnergy += 2
+            if (yCoord > 96)
+                generatedEnergy = 1 * (yCoord / 64)
 
-        if (yCoord in 1..256)
-            generatedEnergy *= yCoord
-
-        if (worldObj.getCurrentWeather() == Weather.overworldRain ||
-            worldObj.getCurrentWeather() == Weather.overworldRainBlood ||
-            worldObj.getCurrentWeather() == Weather.overworldStorm ||
-            worldObj.getCurrentWeather() == Weather.overworldSnow
+            if (worldObj.getCurrentWeather() == Weather.overworldRain ||
+                worldObj.getCurrentWeather() == Weather.overworldRainBlood ||
+                worldObj.getCurrentWeather() == Weather.overworldStorm ||
+                worldObj.getCurrentWeather() == Weather.overworldSnow
             ) {
-            generatedEnergy *= 2
-        }
+                generatedEnergy * 2
+            }
 
-        modifyEnergy(generatedEnergy)
+            if (worldObj.dimension == Dimension.paradise)
+                generatedEnergy * 2
+
+            if (worldObj.dimension == Dimension.nether || worldObj.worldType == WorldTypes.OVERWORLD_HELL)
+                generatedEnergy = 0
+
+            for (xSides in xCoord - 1..xCoord + 1)
+                for (zSides in zCoord - 1..zCoord + 1)
+                    if (worldObj.getBlockId(xSides, yCoord, zSides) != 0)
+                        generatedEnergy = 0
+
+            if (generatedEnergy > 0)
+                energy = min(energy + generatedEnergy, capacity)
+        }
     }
 }
