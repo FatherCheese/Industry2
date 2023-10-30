@@ -6,9 +6,9 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
 import net.minecraft.core.player.inventory.slot.SlotFurnace
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
-import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
+import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
 
-class ContainerMaceratorRotary(inventory: InventoryPlayer?, tileEntity: TileEntityMaceratorRotary) : ContainerEnergy() {
+class ContainerCompressorSingularity(inventory: InventoryPlayer?, tileEntity: TileEntityCompressorSingularity) : ContainerEnergy() {
 
     init {
         tile = tileEntity

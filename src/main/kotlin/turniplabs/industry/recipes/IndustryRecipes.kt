@@ -191,8 +191,15 @@ object IndustryRecipes {
         Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineMacerator), arrayOf(
             "#1#", "232", "#4#",
             '1', IndustryBlocks.machineCasingAdvanced,
-            '2', Block.obsidian,
+            '2', Block.spikes,
             '3', IndustryBlocks.machineMacerator,
+            '4', IndustryItems.circuitAdvanced
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineCompressor), arrayOf(
+            "121", "131", "141",
+            '1', Block.obsidian,
+            '2', IndustryBlocks.machineCasingAdvanced,
+            '3', IndustryBlocks.machineCompressor,
             '4', IndustryItems.circuitAdvanced
         ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.hardenedCoal), arrayOf(

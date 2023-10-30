@@ -1,4 +1,4 @@
-package turniplabs.industry.gui.lv
+package turniplabs.industry.gui.mv
 
 import net.minecraft.client.gui.GuiContainer
 import net.minecraft.client.gui.GuiTooltip
@@ -9,15 +9,16 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.SlotCrafting
 import org.lwjgl.input.Keyboard
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.IndustryTags
-import turniplabs.industry.blocks.entities.lv.TileEntityRecycler
+import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
 import turniplabs.industry.items.ItemBatteryBase
+import turniplabs.industry.recipes.RecipesCompressor
+import turniplabs.industry.recipes.fuels.AdvancedRedstoneFuel
 
-class GuiRecycler(inventory: InventoryPlayer?, private val tileEntity: TileEntityRecycler) :
-    GuiContainer(ContainerRecycler(inventory, tileEntity)) {
+class GuiCompressorSingularity(inventory: InventoryPlayer?, private val tileEntity: TileEntityCompressorSingularity) :
+    GuiContainer(ContainerCompressorSingularity(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {
-        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/machine_single.png")
+        val texture: Int = mc.renderEngine.getTexture("/assets/industry/gui/advanced_machine.png")
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
         mc.renderEngine.bindTexture(texture)
 
@@ -30,11 +31,14 @@ class GuiRecycler(inventory: InventoryPlayer?, private val tileEntity: TileEntit
 
         val progress: Int = tileEntity.getProgressScaled(23)
         drawTexturedModalRect(textX + 79, textY + 35, 176, 8, progress + 1, 23)
+
+        val redstone: Int = tileEntity.redstone / 341
+        drawTexturedModalRect(textX + 157, (textY + 23 + 24) - redstone, 176, 47 - redstone, 4, redstone)
     }
 
     override fun drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer()
-        fontRenderer.drawString("Recycler", 46, 6, 4210752)
+        fontRenderer.drawString("Singularity Compressor", 64, 6, 4210752)
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752)
     }
 
@@ -46,7 +50,20 @@ class GuiRecycler(inventory: InventoryPlayer?, private val tileEntity: TileEntit
         val text = StringBuilder()
         if ((x > (scrnX + 8)) && (x < (scrnX + 24))) {
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy} ${TextFormatting.WHITE} / ${TextFormatting.WHITE}${tileEntity.capacity}")
+                text.append("${TextFormatting.WHITE}Energy: ${TextFormatting.LIGHT_GRAY}${tileEntity.energy}${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}${tileEntity.capacity}")
+
+                val guiTooltip = GuiTooltip(mc)
+                GL11.glDisable(GL11.GL_LIGHTING)
+                GL11.glCullFace(GL11.GL_CULL_FACE)
+                guiTooltip.render(text.toString(), x, y, 8, -8)
+                GL11.glEnable(GL11.GL_LIGHTING)
+                GL11.glEnable(GL11.GL_CULL_FACE)
+            }
+        }
+
+        if (x > (scrnX + 157) && x < (scrnX + 161)) {
+            if (y > (scrnY + 23) && y < (scrnY + 47)) {
+                text.append("${TextFormatting.WHITE}Redstone: ${TextFormatting.LIGHT_GRAY}${tileEntity.redstone}${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}8192")
 
                 val guiTooltip = GuiTooltip(mc)
                 GL11.glDisable(GL11.GL_LIGHTING)
@@ -159,12 +176,18 @@ class GuiRecycler(inventory: InventoryPlayer?, private val tileEntity: TileEntit
             }
         }
 
-        if (inventorySlots is ContainerRecycler) {
+        val isIngredient: Boolean = RecipesCompressor.getRecipeList().containsKey(clickedItemId)
+        val isRedstone: Boolean = AdvancedRedstoneFuel.getRedstoneFuelList().containsKey(clickedItemId)
+
+        if (inventorySlots is ContainerCompressorSingularity) {
             if (Item.itemsList[clickedItemId] is ItemBatteryBase)
                 target = 1
-            if (stackInSlot != null && !stackInSlot.item.hasTag(IndustryTags.PREVENT_ITEM_RECYCLING))
+            if (isIngredient)
                 target = 2
+            if (isRedstone)
+                target = 3
         }
+
         if (slot != null && slot.allowItemInteraction() && grabbedItem != null && grabbedItem.item.hasInventoryInteraction() && mouseButton == 1) {
             mc.playerController.doInventoryAction(
                 inventorySlots.windowId,

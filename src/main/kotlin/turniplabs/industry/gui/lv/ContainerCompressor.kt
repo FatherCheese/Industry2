@@ -1,5 +1,6 @@
 package turniplabs.industry.gui.lv
 
+import net.minecraft.core.InventoryAction
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
@@ -32,5 +33,43 @@ class ContainerCompressor(inventory: InventoryPlayer?, tileEntity: TileEntityCom
 
     override fun isUsableByPlayer(entityPlayer: EntityPlayer?): Boolean {
         return (tile as TileEntityCompressor).canInteractWith(entityPlayer)
+    }
+
+    override fun getMoveSlots(
+        action: InventoryAction?,
+        slot: Slot,
+        target: Int,
+        player: EntityPlayer?
+    ): MutableList<Int>? {
+        if (slot.id in 0..1)
+            return getSlots(0, 2, false)
+
+        if (action == InventoryAction.MOVE_SIMILAR)
+            if (slot.id in 4..40)
+                return getSlots(4, 36, false)
+        else {
+                if (slot.id in 4..31)
+                    return getSlots(4, 27, false)
+
+                if (slot.id > 31)
+                    return getSlots(32, 9, false)
+            }
+        return null
+    }
+
+    override fun getTargetSlots(action: InventoryAction, slot: Slot, target: Int, player: EntityPlayer?): List<Int>? {
+        if (slot.id in 4..40) { // Entire inventory
+            return when {
+                target == 1 -> getSlots(1, 1, false) // Batteries
+                target == 2 -> getSlots(2, 1, false) // Ingredients
+                slot.id < 32 -> getSlots(32, 9, false) // Inventory > Hotbar
+                else -> getSlots(4, 27, false) // Hotbar > Inventory
+            }
+        }
+
+        return when {
+            slot.id < 0 -> null
+            else -> getSlots(4, 36, false)
+        }
     }
 }

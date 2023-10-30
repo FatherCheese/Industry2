@@ -16,10 +16,10 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
 
     val random = java.util.Random()
 
-    private var maxMachineHealth: Int = 100
-    private var healAmount: Int = 1
+    private val maxMachineHealth = 100
+    private val healAmount = 1
     private var machineHealth: Int = maxMachineHealth
-    private var hasBeenDamagedInLastTick: Boolean = false
+    private var hasBeenDamagedInLastTick = false
 
     override val getMachineHealth: Int
         get() = machineHealth
@@ -36,7 +36,8 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
                 machineHealth -= amount - maxReceive
                 hasBeenDamagedInLastTick = true
             }
-            if (!test) energy += received
+            if (!test)
+                energy += received
             return received
         }
         return 0
@@ -47,7 +48,7 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
 
         // Destroy itself on 1 health
         if (machineHealth < 1) {
-            worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 0.25f)
+            worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 0.75f)
         }
 
         if (machineHealth < maxMachineHealth) {

@@ -11,28 +11,29 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
+import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
 
-class BlockMaceratorRotary(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
-    private var keepInventory = false
+class BlockCompressorSingularity(key: String?, id: Int, material: Material?) :
+    BlockTileEntityRotatable(key, id, material) {
+        var keepInventory = false
 
-    init {
-        setupInstance(this)
-    }
+        init {
+            setupInstance(this)
+        }
 
     private val machineTexture: Array<IntArray> = arrayOf(
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "advanced_machine_macerator.png"),
-        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "advanced_machine_macerator_on.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "advanced_machine_compressor.png"),
+        TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "advanced_machine_compressor_on.png"),
         TextureHelper.getOrCreateBlockTexture(Industry2.MOD_ID, "machine_casing_advanced.png")
     )
 
     override fun getNewBlockEntity(): TileEntity {
-        return TileEntityMaceratorRotary()
+        return TileEntityCompressorSingularity()
     }
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world!!.isClientSide) {
-            val tileEntity: TileEntityMaceratorRotary = world.getBlockTileEntity(x, y, z) as TileEntityMaceratorRotary
+            val tileEntity: TileEntityCompressorSingularity = world.getBlockTileEntity(x, y, z) as TileEntityCompressorSingularity
 
             tileEntity ?: return false
             (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
@@ -51,7 +52,7 @@ class BlockMaceratorRotary(key: String?, id: Int, material: Material?) : BlockTi
         5 = east
          */
 
-        val tileEntity: TileEntityMaceratorRotary = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityMaceratorRotary
+        val tileEntity: TileEntityCompressorSingularity = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityCompressorSingularity
         val metadata: Int = blockAccess.getBlockMetadata(x, y, z)
         val index = Sides.orientationLookUpHorizontal[6 * metadata + side.id]
         if (index != 2)
@@ -65,14 +66,14 @@ class BlockMaceratorRotary(key: String?, id: Int, material: Material?) : BlockTi
     }
 
     companion object {
-        private var instance: BlockMaceratorRotary? = null
+        private var instance: BlockCompressorSingularity? = null
 
-        private fun setupInstance(machine: BlockMaceratorRotary) {
+        private fun setupInstance(machine: BlockCompressorSingularity) {
             instance = machine
         }
 
-        private fun getInstance(): BlockMaceratorRotary {
-            return instance ?: throw NullPointerException("Instance of BlockMaceratorRotary hasn't been setup!")
+        private fun getInstance(): BlockCompressorSingularity {
+            return instance ?: throw NullPointerException("Instance of BlockCompressorSingularity hasn't been setup!")
         }
 
         fun updateBlockState(active: Boolean, world: World, x: Int, y: Int, z: Int) {

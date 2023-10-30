@@ -23,8 +23,8 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         contents = arrayOfNulls(4)
 
         setCapacity(1024)
-        setTransfer(32)
-        setMaxReceive(32)
+        setTransfer(16)
+        setMaxReceive(16)
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
@@ -86,11 +86,15 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         ) <= 64.0f
     }
 
+    private fun isProducible(itemStack: ItemStack?): Boolean {
+        return RecipesCompressor.getRecipeList().containsKey(itemStack!!.item.id)
+    }
+
     private fun canProduce(): Boolean {
         if (contents[2] == null || contents[2]!!.item == null)
             return false
 
-        if (RecipesCompressor.getRecipeList().containsKey(contents[2]!!.item.id)) {
+        if (isProducible(contents[2])) {
             val resultStack: ItemStack? = RecipesCompressor.getResult(contents[2]!!.item.id)
 
             if (contents[3] == null || contents[3]!!.item == resultStack!!.item &&
@@ -132,7 +136,6 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
             val stack: ItemStack? = getStackInSlot(1)
-
             receive(stack, maxReceive, false)
             onInventoryChanged()
         }
@@ -206,6 +209,6 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxMachineTime == 0) 0 else (currentMachineTime * i) / maxMachineTime
+        return (currentMachineTime * i) / maxMachineTime
     }
 }

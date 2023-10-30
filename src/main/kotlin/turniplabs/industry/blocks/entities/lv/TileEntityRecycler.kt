@@ -8,11 +8,11 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
+import turniplabs.industry.IndustryTags
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
 import turniplabs.industry.blocks.machines.lv.BlockRecycler
 import turniplabs.industry.items.IndustryItems
-import turniplabs.industry.recipes.RecipesMacerator
 
 class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
@@ -24,8 +24,8 @@ class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
         contents = arrayOfNulls(4)
 
         setCapacity(1024)
-        setTransfer(32)
-        setMaxReceive(32)
+        setTransfer(16)
+        setMaxReceive(16)
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
@@ -91,16 +91,9 @@ class TileEntityRecycler : TileEntityEnergyConductorDamageable(), IInventory {
         if (contents[2] == null || contents[2]!!.item == null)
             return false
 
-        if (RecipesMacerator.getRecipeList().containsKey(contents[2]!!.item.id)) {
-            val resultStack: ItemStack? = RecipesMacerator.getResult(contents[2]!!.item.id)
+        if (!contents[2]!!.item.hasTag(IndustryTags.PREVENT_ITEM_RECYCLING))
+            return true
 
-            if (contents[3] == null || contents[3]!!.item == resultStack!!.item &&
-                (contents[3]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= contents[3]!!.maxStackSize ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
-            )
-                return true
-        }
         return false
     }
 

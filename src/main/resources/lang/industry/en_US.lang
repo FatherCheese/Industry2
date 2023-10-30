@@ -93,6 +93,8 @@ tile.industry.machine.recycler.desc=
 
 tile.industry.advanced.macerator.name=Rotary Macerator
 tile.industry.advanced.macerator.desc=
+tile.industry.advanced.compressor.name=Singularity Compressor
+tile.industry.advanced.compressor.desc=
 
 tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=

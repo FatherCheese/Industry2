@@ -89,11 +89,15 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
         ) <= 64.0f
     }
 
+    private fun isProducible(itemStack: ItemStack?): Boolean {
+        return RecipesMacerator.getRecipeList().containsKey(itemStack!!.item.id)
+    }
+
     private fun canProduceFirst(): Boolean {
         if (contents[2] == null || contents[2]!!.item == null)
             return false
 
-        if (RecipesMacerator.getRecipeList().containsKey(contents[2]!!.item.id)) {
+        if (isProducible(contents[2])) {
             val resultStack: ItemStack? = RecipesMacerator.getResult(contents[2]!!.item.id)
 
             if (contents[4] == null || contents[4]!!.item == resultStack!!.item &&
@@ -110,7 +114,7 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
         if (contents[3] == null || contents[3]!!.item == null)
             return false
 
-        if (RecipesMacerator.getRecipeList().containsKey(contents[3]!!.item.id)) {
+        if (isProducible(contents[3])) {
             val resultStack: ItemStack? = RecipesMacerator.getResult(contents[3]!!.item.id)
 
             if (contents[5] == null || contents[5]!!.item == resultStack!!.item &&
@@ -177,8 +181,7 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
         if (!worldObj.isClientSide) {
             if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.advancedMachineMacerator.id &&
                 currentMachineTime == 0 &&
-                (contents[2] == null || contents[3] == null)
-            ) {
+                (contents[2] == null || contents[3] == null)) {
                 BlockMaceratorRotary.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
@@ -273,6 +276,6 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
     }
 
     fun getProgressScaled(i: Int): Int {
-        return if (maxMachineTime == 0) 0 else (currentMachineTime * i) / maxMachineTime
+        return (currentMachineTime * i) / maxMachineTime
     }
 }

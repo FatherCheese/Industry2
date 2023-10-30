@@ -20,6 +20,7 @@ import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxLV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxMV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxSHV
 import turniplabs.industry.blocks.entities.lv.*
+import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
 import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
 import turniplabs.industry.blocks.entities.solar.TileEntitySolarHV
 import turniplabs.industry.blocks.entities.solar.TileEntitySolarLV
@@ -34,12 +35,15 @@ import turniplabs.industry.blocks.machines.batbox.BlockBatboxLV
 import turniplabs.industry.blocks.machines.batbox.BlockBatboxMV
 import turniplabs.industry.blocks.machines.batbox.BlockBatboxSHV
 import turniplabs.industry.blocks.machines.lv.*
+import turniplabs.industry.blocks.machines.mv.BlockCompressorSingularity
 import turniplabs.industry.blocks.machines.mv.BlockMaceratorRotary
 import turniplabs.industry.blocks.machines.solar.*
 import turniplabs.industry.gui.*
 import turniplabs.industry.gui.batbox.*
 import turniplabs.industry.gui.lv.*
+import turniplabs.industry.gui.mv.ContainerCompressorSingularity
 import turniplabs.industry.gui.mv.ContainerMaceratorRotary
+import turniplabs.industry.gui.mv.GuiCompressorSingularity
 import turniplabs.industry.gui.mv.GuiMaceratorRotary
 import turniplabs.industry.gui.solar.*
 
@@ -332,6 +336,10 @@ object IndustryBlocks {
         .setNorthTexture("advanced_machine_macerator.png")
         .build(BlockMaceratorRotary("advanced.macerator", nextBlockID(), Material.metal))
 
+    val advancedMachineCompressor: Block = advancedMachineBuilder
+        .setNorthTexture("advanced_machine_compressor.png")
+        .build(BlockCompressorSingularity("advanced.compressor", nextBlockID(), Material.metal))
+
     // Miscellaneous
     val hardenedCoal: Block = BlockBuilder(Industry2.MOD_ID)
         .setTextures("hardened_coal.png")
@@ -406,6 +414,7 @@ object IndustryBlocks {
         EnergyAPI.addToNameGuiMap("Extractor", GuiExtractor::class.java, TileEntityExtractor::class.java, ContainerExtractor::class.java)
         EnergyAPI.addToNameGuiMap("Recycler", GuiRecycler::class.java, TileEntityRecycler::class.java, ContainerRecycler::class.java)
         EnergyAPI.addToNameGuiMap("RotaryMacerator", GuiMaceratorRotary::class.java, TileEntityMaceratorRotary::class.java, ContainerMaceratorRotary::class.java)
+        EnergyAPI.addToNameGuiMap("SingularityCompressor", GuiCompressorSingularity::class.java, TileEntityCompressorSingularity::class.java, ContainerCompressorSingularity::class.java)
     }
 
     private fun createTileEntities() {
@@ -430,6 +439,7 @@ object IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityExtractor::class.java, "Extractor")
         EntityHelper.createTileEntity(TileEntityRecycler::class.java, "Recycler")
         EntityHelper.createTileEntity(TileEntityMaceratorRotary::class.java, "RotaryMacerator")
+        EntityHelper.createTileEntity(TileEntityCompressorSingularity::class.java, "SingularityCompressor")
     }
 
     fun initializeBlocks() {
@@ -482,6 +492,7 @@ object IndustryBlocks {
         machineExtractor
         machineRecycler
         advancedMachineMacerator
+        advancedMachineCompressor
 
         hardenedCoal
         rubberLeaves

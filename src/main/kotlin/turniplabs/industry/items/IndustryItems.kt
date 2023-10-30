@@ -102,22 +102,22 @@ object IndustryItems {
         Industry2.MOD_ID,
         ItemBatteryRedstone(nextItemID()),
         "tool.battery.redstone"
-    )
+    ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryAdvanced: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
         ItemBatteryAdvanced(nextItemID()),
         "tool.battery.advanced",
-    )
+    ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryCrystal: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
         ItemBatteryCrystal(nextItemID()),
         "tool.battery.crystal",
-    )
+    ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryLapis: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
         ItemBatteryLapis(nextItemID()),
         "tool.battery.lapis",
-    )
+    ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
     val treeTap: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemTap(nextItemID()), "tool.tap", "tree_tap.png")
 

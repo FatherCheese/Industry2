@@ -41,7 +41,9 @@ class Industry2: ModInitializer {
 		IndustryBlocks.initializeBlocks()
 		IndustryRecipes.initializeRecipes()
 
-		Item.stick.hasTag(IndustryTags.PREVENT_ITEM_RECYCLING)
-		Item.ammoSnowball.hasTag(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.ammoSnowball.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.flint.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.seedsWheat.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.stick.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 	}
 }

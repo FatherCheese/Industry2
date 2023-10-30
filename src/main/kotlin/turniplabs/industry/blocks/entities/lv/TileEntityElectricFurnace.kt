@@ -23,8 +23,8 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         contents = arrayOfNulls(4)
 
         setCapacity(1024)
-        setTransfer(32)
-        setMaxReceive(32)
+        setTransfer(16)
+        setMaxReceive(16)
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
