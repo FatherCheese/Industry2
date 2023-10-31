@@ -90,11 +90,15 @@ tile.industry.machine.extractor.name=Extractor
 tile.industry.machine.extractor.desc=
 tile.industry.machine.recycler.name=Recycler
 tile.industry.machine.recycler.desc=
+tile.industry.machine.cannery.name=Canning Machine
+tile.industry.machine.cannery.desc=
 
 tile.industry.advanced.macerator.name=Rotary Macerator
 tile.industry.advanced.macerator.desc=
 tile.industry.advanced.compressor.name=Singularity Compressor
 tile.industry.advanced.compressor.desc=
+tile.industry.advanced.cutter.name=Laser Cutter
+tile.industry.advanced.cutter.desc=
 
 tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=
@@ -185,8 +189,6 @@ item.industry.tool.battery.lapis.desc=
 
 item.industry.tool.tap.name=Tree Tap
 item.industry.tool.tap.desc=
-item.industry.tool.multimeter.name=Multi-Meter
-item.industry.tool.multimeter.desc=
 
 item.industry.cell.empty.name=Cell
 item.industry.cell.empty.desc=
@@ -196,6 +198,11 @@ item.industry.cell.lava.name=Lava Cell
 item.industry.cell.lava.desc=
 item.industry.cell.uranium.name=Uranium Cell
 item.industry.cell.uranium.desc=
+
+item.industry.can.empty.name=Empty Can
+item.industry.can.empty.desc=
+item.industry.can.full.name=Filled Can
+item.industry.can.empty.desc=
 
 item.industry.ingredient.resin.name=Resin
 item.industry.ingredient.resin.desc=

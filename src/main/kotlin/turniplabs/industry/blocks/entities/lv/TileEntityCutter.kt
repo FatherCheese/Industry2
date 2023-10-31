@@ -135,17 +135,14 @@ class TileEntityCutter : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
-            val stack: ItemStack? = getStackInSlot(1)
-
-            receive(stack, maxReceive, false)
+            receive(getStackInSlot(1), maxReceive, false)
             onInventoryChanged()
         }
 
         if (!worldObj.isClientSide) {
             if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCutter.id &&
                 currentMachineTime == 0 &&
-                contents[2] == null
-            ) {
+                contents[2] == null) {
                 BlockCutter.updateBlockState(false, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }

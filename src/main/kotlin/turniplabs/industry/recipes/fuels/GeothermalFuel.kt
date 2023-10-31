@@ -9,7 +9,7 @@ object GeothermalFuel {
     init {
         addFuel(Item.bucketLava.id, 2000)
         addFuel(IndustryItems.lavaCell.id, 2000)
-        addFuel(Item.nethercoal.id, 1000)
+        addFuel(Item.nethercoal.id, 500)
     }
 
     fun addFuel(input: Int, time: Int) {

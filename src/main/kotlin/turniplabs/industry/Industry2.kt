@@ -29,7 +29,7 @@ class Industry2: ModInitializer {
 
 	override fun onInitialize() {
 
-		// Do not touch this! It's a bug fix for class loading issues. Thanks Useless!
+		// Do not touch this! It's a bug fix for class loading issues. Thanks, Useless!
 		try {
 			Class.forName("net.minecraft.core.block.Block")
 			Class.forName("net.minecraft.core.item.Item")

@@ -1,6 +1,7 @@
 package turniplabs.industry.items
 
 import net.minecraft.core.item.Item
+import net.minecraft.core.item.ItemFoodStackable
 import net.minecraft.core.item.ItemPlaceable
 import turniplabs.halplibe.helper.ItemHelper
 import turniplabs.industry.Industry2
@@ -42,7 +43,7 @@ object IndustryItems {
     val steelPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.steel", "plate_steel.png")
 
     // Cables
-    val itemCopperCable: Item? = ItemHelper.createItem(
+    val itemCopperCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
         ItemPlaceable("cable.copper", nextItemID(), IndustryBlocks.copperCable),
         "cable.copper",
@@ -125,6 +126,12 @@ object IndustryItems {
     val waterCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")
     val lavaCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.lava", "cell_lava.png")
     val uraniumCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.uranium", "cell_uranium.png")
+
+    val canEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "can.empty", "can.png")
+    val canFull: Item = ItemHelper.createItem(Industry2.MOD_ID,
+        ItemFoodStackable("can.full", nextItemID(), 2, false, 64),
+        "can.full",
+        "can_full.png")
 
     // Materials
     val resin: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingredient.resin", "resin.png")

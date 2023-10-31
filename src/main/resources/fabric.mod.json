@@ -6,8 +6,13 @@
   "name": "Industry2",
   "description": "This mod adds industrial machines to automate your Minecraft world!",
   "authors": [
-    "Turnip Labs",
     "Cookie Cakes"
+  ],
+  "contributors": [
+    "AzureLMAO",
+    "The MidFord",
+    "Useless",
+    "Lyzantra"
   ],
   "contact": {
     "homepage": "",
@@ -32,7 +37,9 @@
 
   "depends": {
     "fabricloader": ">=0.14.7",
-    "fabric-language-kotlin": "*"
+    "fabric-language-kotlin": "*",
+    "halplibe": ">=2.5.0",
+    "energyapi": ">=1.1.9"
   },
   "suggests": {
   }

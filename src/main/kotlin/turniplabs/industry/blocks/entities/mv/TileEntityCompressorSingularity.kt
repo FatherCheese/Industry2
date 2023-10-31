@@ -20,7 +20,7 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
     private var contents: Array<ItemStack?>
     private var currentMachineTime = 0
     private val maxMachineTime = 160
-    private var maxRedstone = 8192
+    private val maxRedstone = 8192
 
     init {
         contents = arrayOfNulls(7)
@@ -89,7 +89,7 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
         ) <= 64.0f
     }
 
-    fun isProducible(itemStack: ItemStack?): Boolean {
+    private fun isProducible(itemStack: ItemStack?): Boolean {
         return RecipesCompressor.getRecipeList().containsKey(itemStack!!.item.id)
     }
 
@@ -173,7 +173,6 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
             val stack: ItemStack? = getStackInSlot(1)
-
             receive(stack, maxReceive, false)
             onInventoryChanged()
         }
@@ -183,6 +182,7 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
                 currentMachineTime == 0 &&
                 (contents[2] == null || contents[3] == null)) {
                 BlockCompressorSingularity.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
+                machineUpdated = true
             }
         }
 

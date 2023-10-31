@@ -10,17 +10,15 @@ import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
-import turniplabs.industry.blocks.machines.lv.BlockCompressor
-import turniplabs.industry.recipes.RecipesCompressor
+import turniplabs.industry.recipes.RecipesCannery
 
-class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
-    var active = false
+class TileEntityCannery : TileEntityEnergyConductorDamageable(), IInventory {
     private var contents: Array<ItemStack?>
     private var currentMachineTime = 0
-    private val maxMachineTime = 160
+    private var maxMachineTime = 160
 
     init {
-        contents = arrayOfNulls(4)
+        contents = arrayOfNulls(5)
 
         setCapacity(1024)
         setTransfer(16)
@@ -68,7 +66,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "Compressor"
+        return "Cannery"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -87,21 +85,24 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     private fun isProducible(itemStack: ItemStack?): Boolean {
-        return RecipesCompressor.getRecipeList().containsKey(itemStack!!.item.id)
+        return RecipesCannery.getRecipeList().containsKey(itemStack!!.item.id)
     }
 
     private fun canProduce(): Boolean {
-        if (contents[2] == null || contents[2]!!.item == null)
+        if ((contents[2] == null || contents[2]!!.item == null) || (contents[3] == null || contents[3]!!.item == null))
             return false
 
         if (isProducible(contents[2])) {
-            val resultStack: ItemStack? = RecipesCompressor.getResult(contents[2]!!.item.id)
+            val resultStack: ItemStack? = RecipesCannery.getResult(contents[2]!!.item.id)
+            val canStack: Int = RecipesCannery.getResult(contents[2]!!.item.id)!!.stackSize
 
-            if (contents[3] == null || contents[3]!!.item == resultStack!!.item &&
-                (contents[3]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= contents[3]!!.maxStackSize ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
-            )
+            if (contents[3]!!.stackSize < canStack || contents[3]!!.stackSize - canStack < 0)
+                return false
+
+            if (contents[4] == null || contents[4]!!.item == resultStack!!.item &&
+                (contents[4]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
+                        contents[4]!!.stackSize + resultStack.stackSize <= contents[4]!!.maxStackSize ||
+                        contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize))
                 return true
         }
         return false
@@ -109,18 +110,23 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
 
     private fun produceItem() {
         if (canProduce()) {
-            val itemStack: ItemStack = RecipesCompressor.getResult(contents[2]!!.item.id) ?: return
+            val itemStack: ItemStack = RecipesCannery.getResult(contents[2]!!.item.id) ?: return
+            val canStack: Int = RecipesCannery.getResult(contents[2]!!.item.id)!!.stackSize
 
-            if (contents[3] == null)
-                contents[3] = itemStack.copy()
+            if (contents[4] == null)
+                contents[4] = itemStack.copy()
             else
-                if (contents[3]!!.itemID == itemStack.itemID)
-                    contents[3]!!.stackSize += itemStack.stackSize
+                if (contents[4]!!.itemID == itemStack.itemID)
+                    contents[4]!!.stackSize += itemStack.stackSize
 
             --contents[2]!!.stackSize
+            contents[3]!!.stackSize -= canStack
 
             if (contents[2]!!.stackSize <= 0)
                 contents[2] = null
+
+            if (contents[3]!!.stackSize <= 0)
+                contents[3] = null
         }
     }
 
@@ -135,41 +141,33 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
         }
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
-            val stack: ItemStack? = getStackInSlot(1)
-            receive(stack, maxReceive, false)
+            receive(getStackInSlot(1), maxReceive, false)
             onInventoryChanged()
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCompressor.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCannery.id &&
                 currentMachineTime == 0 &&
                 contents[2] == null) {
-                BlockCompressor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
-        }
 
-        if (hasEnergy && canProduce()) {
-            ++currentMachineTime
-            --energy
-            active = true
+            if (hasEnergy && canProduce()) {
+                ++currentMachineTime
+                --energy
 
-            if (currentMachineTime == maxMachineTime) {
+                if (currentMachineTime == maxMachineTime) {
+                    currentMachineTime = 0
+                    produceItem()
+                    machineUpdated = true
+                }
+            } else {
                 currentMachineTime = 0
-                produceItem()
-                active = false
-                machineUpdated = true
             }
-        } else {
-            currentMachineTime = 0
-            active = false
+
+            if (machineUpdated)
+                onInventoryChanged()
         }
-
-        if (machineUpdated)
-            onInventoryChanged()
-
-        if (active)
-            worldObj.markBlockDirty(xCoord, yCoord, zCoord)
     }
 
     override fun readFromNBT(compoundTag: CompoundTag?) {
@@ -185,13 +183,13 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentMachineTime = compoundTag.getShort("Compression").toInt()
+        currentMachineTime = compoundTag.getShort("Production").toInt()
         energy = compoundTag.getShort("Energy").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("Compression", currentMachineTime.toShort())
+        compoundTag?.putShort("Production", currentMachineTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
 
         val listTag = ListTag()
