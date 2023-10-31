@@ -16,9 +16,9 @@ import turniplabs.industry.blocks.machines.BlockGenerator
 class TileEntityGenerator: TileEntityEnergyConductor(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentBurnTime = 0
-    private var maxBurnTime = 0
-    private var currentFuel: ItemStack? = null
+    var currentBurnTime = 0
+    var maxBurnTime = 0
+    var currentFuel: ItemStack? = null
 
     init {
         setCapacity(1024)

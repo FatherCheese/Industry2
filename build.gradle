@@ -82,6 +82,14 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	ivy {
+		url = "https://github.com/UselessBullets"
+		patternLayout {
+			artifact "[organisation]/releases/download/b[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 dependencies {
@@ -107,6 +115,9 @@ dependencies {
 	// Energy API
 	modImplementation "sunsetutils:sunsetutils:1.9.0"
 	modImplementation "energyapi:energyapi:${project.energyapi_version}"
+
+	// Terrain API
+	modImplementation "TerrainAPI:terrainapi-beta:${project.terrain_api_version}"
 
 	// Guidebook++
 	modImplementation "guidebookpp:guidebookpp:1.5.6"

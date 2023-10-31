@@ -29,6 +29,12 @@
         "adapter": "kotlin",
         "value": "turniplabs.industry.Industry2"
       }
+    ],
+    "btwaila": [
+      {
+        "adapter": "kotlin",
+        "value": "turniplabs.industry.gui.plugins.WailaPlugin"
+      }
     ]
   },
   "mixins": [
@@ -39,7 +45,8 @@
     "fabricloader": ">=0.14.7",
     "fabric-language-kotlin": "*",
     "halplibe": ">=2.5.0",
-    "energyapi": ">=1.1.9"
+    "energyapi": ">=1.1.9",
+    "terrain-api": ">=1.1.3"
   },
   "suggests": {
   }
