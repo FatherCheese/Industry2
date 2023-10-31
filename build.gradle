@@ -120,7 +120,7 @@ dependencies {
 	modImplementation "TerrainAPI:terrainapi-beta:${project.terrain_api_version}"
 
 	// Guidebook++
-	modImplementation "guidebookpp:guidebookpp:1.5.6"
+	modImplementation "guidebookpp:guidebookpp:1.5.7"
 
 	// BTWaila
 	modImplementation "btwaila:btwaila:0.3.0"

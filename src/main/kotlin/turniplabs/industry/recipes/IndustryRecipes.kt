@@ -202,6 +202,13 @@ object IndustryRecipes {
             '3', IndustryBlocks.machineCompressor,
             '4', IndustryItems.circuitAdvanced
         ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineCutter), arrayOf(
+            "#1#", "232", "#4#",
+            '1', IndustryBlocks.machineCasingAdvanced,
+            '2', Item.quartz,
+            '2', IndustryBlocks.machineCutter,
+            '4', IndustryItems.circuitAdvanced
+        ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.hardenedCoal), arrayOf(
           "121", "232", "121",
             '1', IndustryItems.coalDust,
@@ -271,15 +278,17 @@ object IndustryRecipes {
             '1', IndustryItems.itemInsulatedCopperCable,
             '2', Item.dustRedstone,
             '3', IndustryItems.steelPlate,
-            '4', Item.dustGlowstone
+            '4', Item.quartz
         ))
         Crafting.createRecipe(ItemStack(IndustryItems.circuitAdvanced), arrayOf(
             "111", "234", "111",
             '1', IndustryItems.itemInsulatedCopperCable,
-            '2', Item.dustGlowstone,
+            '2', Item.quartz,
             '3', IndustryItems.steelPlate,
             '4', Item.dustRedstone
         ))
+
+        Crafting.createShapelessRecipe(ItemStack(IndustryItems.bronzeDust, 4), arrayOf(IndustryItems.copperDust, IndustryItems.copperDust, IndustryItems.copperDust, IndustryItems.tinDust))
 
         Crafting.createShapelessRecipe(ItemStack(IndustryItems.copperPlate), arrayOf(IndustryItems.copperIngot, IndustryItems.hammer))
         Crafting.createShapelessRecipe(ItemStack(IndustryItems.tinPlate), arrayOf(IndustryItems.tinIngot, IndustryItems.hammer))

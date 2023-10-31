@@ -10,7 +10,7 @@ import turniplabs.industry.blocks.IndustryBlocks
 
 object IndustryItems {
 
-    private var itemID = 16999
+    private var itemID = 16999;
     private fun nextItemID(): Int {
         return itemID++
     }
@@ -98,6 +98,7 @@ object IndustryItems {
     val hammer: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemHammer(nextItemID()), "tool.hammer", "hammer.png")
     val cutter: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCutter(nextItemID()), "tool.cutter", "cutter.png")
     val wrench: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemWrench(nextItemID()), "tool.wrench", "wrench.png")
+    val treeTap: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemTap(nextItemID()), "tool.tap", "tree_tap.png")
 
     val batteryRedstone: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
@@ -119,8 +120,6 @@ object IndustryItems {
         ItemBatteryLapis(nextItemID()),
         "tool.battery.lapis",
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
-
-    val treeTap: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemTap(nextItemID()), "tool.tap", "tree_tap.png")
 
     val emptyCell: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
     val waterCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")

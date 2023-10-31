@@ -18,9 +18,9 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
     var active = false
     var redstone = 0
     private var contents: Array<ItemStack?>
-    private var currentMachineTime = 0
-    private val maxMachineTime = 160
-    private var maxRedstone = 8192
+    var currentMachineTime = 0
+    val maxMachineTime = 160
+    var maxRedstone = 8192
 
     init {
         contents = arrayOfNulls(7)
@@ -206,7 +206,7 @@ class TileEntityMaceratorRotary : TileEntityEnergyConductorDamageable(), IInvent
             active = true
 
             if (redstone > 0) {
-                currentMachineTime *= redstone / 256
+                currentMachineTime *= (redstone / 2048)
 
                 if (canProduceFirst())
                     redstone -= 16

@@ -5,8 +5,8 @@ import net.minecraft.core.item.Item
 import net.minecraft.core.world.generate.feature.WorldFeatureOre
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import turniplabs.halplibe.helper.SoundHelper
 import turniplabs.industry.blocks.IndustryBlocks
-import turniplabs.industry.gui.plugins.WailaPlugin
 import turniplabs.industry.items.IndustryItems
 import turniplabs.industry.recipes.IndustryRecipes
 import useless.terrainapi.generation.overworld.ChunkDecoratorOverworldAPI
@@ -38,6 +38,8 @@ class Industry2: ModInitializer {
 			Class.forName("net.minecraft.core.item.Item")
 		} catch (ignored: ClassNotFoundException) {}
 
+		IndustryConfig.initializeConfig()
+
 		IndustryItems.initializeItems()
 		IndustryBlocks.initializeBlocks()
 		IndustryRecipes.initializeRecipes()
@@ -45,8 +47,10 @@ class Industry2: ModInitializer {
 		Item.ammoSnowball.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 		Item.flint.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 		Item.olivine.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.quartz.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 		Item.seedsWheat.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 		Item.stick.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+		Item.wheat.withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
 		ChunkDecoratorOverworldAPI.oreFeatures.addFeature(
 			WorldFeatureOre(IndustryBlocks.oreCopperStone.id, 8, true),
@@ -63,6 +67,8 @@ class Industry2: ModInitializer {
 			8,
 			0.25f
 		)
+
+		SoundHelper.addSound(MOD_ID, "zap.wav")
 
 		LOGGER.info("Industry2 has been initialized. Have fun automating!")
 	}

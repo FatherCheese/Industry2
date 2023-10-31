@@ -9,12 +9,12 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.SlotCrafting
 import org.lwjgl.input.Keyboard
 import org.lwjgl.opengl.GL11
-import turniplabs.industry.blocks.entities.mv.TileEntityCutterLaser
+import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
 import turniplabs.industry.items.ItemBatteryBase
 import turniplabs.industry.recipes.RecipesCutter
 import turniplabs.industry.recipes.fuels.AdvancedRedstoneFuel
 
-class GuiCutterLaser(inventory: InventoryPlayer?, private val tileEntity: TileEntityCutterLaser) :
+class GuiCutterLaser(inventory: InventoryPlayer?, private val tileEntity: TileEntityLaserCutter) :
     GuiContainer(ContainerCutterLaser(inventory, tileEntity)) {
 
     override fun drawGuiContainerBackgroundLayer(f: Float) {

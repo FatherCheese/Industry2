@@ -11,7 +11,7 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.mv.TileEntityCutterLaser
+import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
 
 class BlockCutterLaser(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
     private var keepInventory = false
@@ -27,12 +27,12 @@ class BlockCutterLaser(key: String?, id: Int, material: Material?) : BlockTileEn
     }
 
     override fun getNewBlockEntity(): TileEntity {
-        return TileEntityCutterLaser()
+        return TileEntityLaserCutter()
     }
 
     override fun blockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?): Boolean {
         if (!world!!.isClientSide) {
-            val tileEntity: TileEntityCutterLaser = world.getBlockTileEntity(x, y, z) as TileEntityCutterLaser
+            val tileEntity: TileEntityLaserCutter = world.getBlockTileEntity(x, y, z) as TileEntityLaserCutter
 
             tileEntity ?: return false
             (player as IEntityPlayer).displayGuiScreen_energyapi(tileEntity)
@@ -51,7 +51,7 @@ class BlockCutterLaser(key: String?, id: Int, material: Material?) : BlockTileEn
         5 = east
          */
 
-        val tileEntity: TileEntityCutterLaser = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityCutterLaser
+        val tileEntity: TileEntityLaserCutter = blockAccess?.getBlockTileEntity(x, y, z) as TileEntityLaserCutter
         val metadata: Int = blockAccess.getBlockMetadata(x, y, z)
         val index = Sides.orientationLookUpHorizontal[6 * metadata + side.id]
         if (index != 2)

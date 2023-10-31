@@ -5,7 +5,7 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.energyapi.template.tiles.TileEntityBatteryBox
 import kotlin.math.min
 
-open class TileEntitySolarBase(private val voltage: Int): TileEntityBatteryBox() {
+open class TileEntitySolarBase(val solarVoltage: Int): TileEntityBatteryBox() {
     var generatedEnergy = 0
 
     override fun updateEntity() {
@@ -22,15 +22,9 @@ open class TileEntitySolarBase(private val voltage: Int): TileEntityBatteryBox()
         }
 
         if (energy < capacity && isFacingSky()) {
-            generatedEnergy = 2 * voltage
+            generatedEnergy = 2 * solarVoltage
 
-            generatedEnergy -= worldObj.skyDarken * voltage
-
-            if (worldObj.getBlockTemperature(xCoord, zCoord) > 0.85f && worldObj.getBlockHumidity(xCoord, zCoord) < 0.30f)
-                generatedEnergy += 2
-
-            if (worldObj.getBlockTemperature(xCoord, zCoord) < 0.40f && worldObj.getBlockHumidity(xCoord, zCoord) < 0.30f)
-                generatedEnergy -= 2
+            generatedEnergy -= worldObj.skyDarken * solarVoltage
 
             if (generatedEnergy > 0)
                 energy = min(energy + generatedEnergy, capacity)
@@ -40,7 +34,7 @@ open class TileEntitySolarBase(private val voltage: Int): TileEntityBatteryBox()
             generatedEnergy = 0
     }
 
-    private fun isFacingSky(): Boolean {
+    fun isFacingSky(): Boolean {
         for (heightCoord in yCoord + 1..255) {
             val block = Block.getBlock(worldObj.getBlockId(xCoord, heightCoord, zCoord))
             if (block != null && block.isOpaqueCube) return false

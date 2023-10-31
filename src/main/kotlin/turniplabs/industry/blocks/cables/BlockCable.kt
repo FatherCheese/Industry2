@@ -3,11 +3,15 @@ package turniplabs.industry.blocks.cables
 import net.minecraft.core.block.BlockTileEntity
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
+import net.minecraft.core.entity.Entity
+import net.minecraft.core.entity.EntityLiving
 import net.minecraft.core.entity.player.EntityPlayer
+import net.minecraft.core.util.helper.DamageType
 import net.minecraft.core.util.phys.AABB
 import net.minecraft.core.world.World
 import sunsetsatellite.energyapi.api.IEnergy
 import turniplabs.industry.blocks.entities.TileEntityCable
+import java.util.*
 
 open class BlockCable(
     key: String?,
@@ -15,12 +19,11 @@ open class BlockCable(
     material: Material?,
     internal val capacity: Int,
     internal val transfer: Int,
-    internal val dangerLevel: Int
+    private val dangerLevel: Int
 
 ) : BlockTileEntity(key, id, material) {
+
     init {
-        val boundMin1 = 0.375f
-        val boundMax1 = 0.625f
         setBlockBounds(0.25f, 0.25f, 0.25f, 0.75f, 0.75f, 0.75f)
     }
 
@@ -75,5 +78,24 @@ open class BlockCable(
         defaultBox.setBounds(boundMin1 - if (aNegX) offset else 0.0, boundMin1 - if (aNegY) offset else 0.0, boundMin1 - if (aNegZ) offset else 0.0, boundMax1 + if (aPosX) offset else 0.0, boundMax1 + if (aPosY) offset else 0.0, boundMax1 + if (aPosZ) offset else 0.0)
 
         return AABB.getBoundingBoxFromPool(x + defaultBox.minX, y + defaultBox.minY, z + defaultBox.minZ, x + defaultBox.maxX, y + defaultBox.maxY, z + defaultBox.maxZ)
+    }
+
+    override fun onEntityCollidedWithBlock(world: World?, x: Int, y: Int, z: Int, entity: Entity?) {
+        super.onEntityCollidedWithBlock(world, x, y, z, entity)
+        val tile = (world!!.getBlockTileEntity(x, y, z) as IEnergy)
+        if (entity is EntityLiving && dangerLevel > 0) {
+            if (tile.energy > 0 && tile.energy - dangerLevel * 10 > 0) {
+                tile.energy -= dangerLevel * 10
+
+                entity.hurt(null, dangerLevel, DamageType.GENERIC)
+
+                val random = Random()
+                val randX = random.nextDouble() + entity.x
+                val randY = -1 + random.nextDouble() + random.nextInt(2) + entity.y
+                val randZ = random.nextDouble() + entity.z
+                world.spawnParticle("flame", randX, randY, randZ, 0.0, 0.0, 0.0)
+                world.playSoundAtEntity(entity, "industry.zap", 0.1f, 0.8f)
+            }
+        }
     }
 }

@@ -16,8 +16,8 @@ import turniplabs.industry.blocks.machines.lv.BlockElectricFurnace
 class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     private var contents: Array<ItemStack?>
-    private var currentMachineTime = 0
-    private val maxMachineTime = 160
+    var currentMachineTime = 0
+    val maxMachineTime = 160
 
     init {
         contents = arrayOfNulls(4)

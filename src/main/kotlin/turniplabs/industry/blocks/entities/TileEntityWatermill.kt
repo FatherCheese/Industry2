@@ -121,7 +121,7 @@ class TileEntityWatermill : TileEntityEnergyConductor(), IInventory {
             }
         }
 
-        if (currentFuelTime in 1 until 7500 && contents[2] != null) {
+        if (currentFuelTime in 1 until 7000 && contents[2] != null) {
             if (WatermillFuel.getFuelList().containsKey(contents[2]!!.item.id)) {
                 onInventoryChanged()
 

@@ -6,9 +6,9 @@ import net.minecraft.core.player.inventory.InventoryPlayer
 import net.minecraft.core.player.inventory.slot.Slot
 import net.minecraft.core.player.inventory.slot.SlotFurnace
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy
-import turniplabs.industry.blocks.entities.mv.TileEntityCutterLaser
+import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
 
-class ContainerCutterLaser(inventory: InventoryPlayer?, tileEntity: TileEntityCutterLaser) : ContainerEnergy() {
+class ContainerCutterLaser(inventory: InventoryPlayer?, tileEntity: TileEntityLaserCutter) : ContainerEnergy() {
 
     init {
         tile = tileEntity

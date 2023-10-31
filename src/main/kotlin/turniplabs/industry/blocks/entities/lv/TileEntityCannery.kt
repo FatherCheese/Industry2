@@ -14,8 +14,8 @@ import turniplabs.industry.recipes.RecipesCannery
 
 class TileEntityCannery : TileEntityEnergyConductorDamageable(), IInventory {
     private var contents: Array<ItemStack?>
-    private var currentMachineTime = 0
-    private var maxMachineTime = 160
+    var currentMachineTime = 0
+    var maxMachineTime = 160
 
     init {
         contents = arrayOfNulls(5)

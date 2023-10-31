@@ -1,5 +1,6 @@
 package turniplabs.industry.blocks.entities
 
+import com.mojang.nbt.CompoundTag
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor
 import sunsetsatellite.sunsetutils.util.Connection
 import turniplabs.industry.Interfaces.IMachineCondition
@@ -9,8 +10,8 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
 
     /*                             /
     / Energy Ratings:              /
-    / 32RC = Low voltage           /
-    / 256RC = Medium voltage       /
+    / 16RC = Low voltage           /
+    / 32RC = Medium voltage       /
     / 512RC = High voltage         /
     / 1024RC = Super High voltage */
 
@@ -30,16 +31,18 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
 
     override fun receive(dir: sunsetsatellite.sunsetutils.util.Direction?, amount: Int, test: Boolean): Int {
         if (canConnect(dir, Connection.INPUT)) {
-            val received: Int = min(capacity - energy, min(maxReceive, amount))
-
             if (amount > maxReceive && random.nextInt(4) == 0) {
                 machineHealth -= amount - maxReceive
                 hasBeenDamagedInLastTick = true
             }
+
+            val received: Int = min(capacity - energy, min(maxReceive, amount))
             if (!test)
                 energy += received
+
             return received
         }
+
         return 0
     }
 
@@ -47,23 +50,33 @@ open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IM
         super.updateEntity()
 
         // Destroy itself on 1 health
-        if (machineHealth < 1) {
-            worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 0.75f)
-        }
+        if (machineHealth < 1)
+            worldObj.createExplosion(null, xCoord.toDouble(), yCoord.toDouble(), zCoord.toDouble(), 1.0f)
 
         if (machineHealth < maxMachineHealth) {
-            for (run in 0 until random.nextInt(6)) {
-                val x = xCoord.toDouble() * random.nextDouble()
-                val y = yCoord.toDouble() * random.nextDouble()
-                val z = zCoord.toDouble() * random.nextDouble()
+            val x = xCoord.toDouble() + random.nextDouble()
+            val y = yCoord.toDouble() + random.nextDouble()
+            val z = zCoord.toDouble() + random.nextDouble()
 
-                worldObj.spawnParticle("smoke", x, y, z, 0.0, 0.0, 0.0)
-                worldObj.spawnParticle("flame", x, y, z, 0.0, 0.0, 0.0)
-            }
-
-            // Heal itself over time
-            if (!hasBeenDamagedInLastTick && random.nextInt(4) == 0) machineHealth += healAmount
-            hasBeenDamagedInLastTick = false
+            worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0)
+            worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0)
         }
+
+        // Heal itself over time
+        if (!hasBeenDamagedInLastTick && random.nextInt(4) == 0 && machineHealth + healAmount <= maxMachineHealth) {
+            machineHealth += healAmount
+        }
+
+        hasBeenDamagedInLastTick = false
+    }
+
+    override fun readFromNBT(compoundTag: CompoundTag?) {
+        super.readFromNBT(compoundTag)
+        machineHealth = compoundTag!!.getShort("Health").toInt()
+    }
+
+    override fun writeToNBT(compoundTag: CompoundTag?) {
+        super.writeToNBT(compoundTag)
+        compoundTag?.putShort("Health", machineHealth.toShort())
     }
 }

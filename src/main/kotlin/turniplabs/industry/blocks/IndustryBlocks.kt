@@ -11,9 +11,7 @@ import sunsetsatellite.energyapi.EnergyAPI
 import turniplabs.halplibe.helper.BlockBuilder
 import turniplabs.halplibe.helper.EntityHelper
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.cables.BlockCableCopper
-import turniplabs.industry.blocks.cables.BlockCableGold
-import turniplabs.industry.blocks.cables.BlockCableTin
+import turniplabs.industry.blocks.cables.*
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxHV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxLV
@@ -21,7 +19,7 @@ import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxMV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxSHV
 import turniplabs.industry.blocks.entities.lv.*
 import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
-import turniplabs.industry.blocks.entities.mv.TileEntityCutterLaser
+import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
 import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
 import turniplabs.industry.blocks.entities.solar.TileEntitySolarHV
 import turniplabs.industry.blocks.entities.solar.TileEntitySolarLV
@@ -160,7 +158,7 @@ object IndustryBlocks {
 
     val steelCable: Block = cableBuilder
         .setTextures(19, 4)
-        .build(BlockCableGold("cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8))
+        .build(BlockCableSteel("cable.steel", nextBlockID(), Material.metal, 1024, 1024, 8))
 
     // Insulated Cables
     private val insulatedCableBuilder = BlockBuilder(Industry2.MOD_ID)
@@ -183,7 +181,7 @@ object IndustryBlocks {
 
     val insulatedSteelCable: Block = insulatedCableBuilder
         .setTextures("insulated_cable_steel.png")
-        .build(BlockCableGold("cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0))
+        .build(BlockCableSteelInsulated("cable.steel", nextBlockID(), Material.cloth, 1024, 1024, 0))
 
     // Machines
     private val machineBuilder = BlockBuilder(Industry2.MOD_ID)
@@ -198,7 +196,7 @@ object IndustryBlocks {
     private val machineBuilderBlank = BlockBuilder(Industry2.MOD_ID)
         .setBlockSound(BlockSounds.METAL)
         .setHardness(5.0f)
-        .setResistance(10.0f)
+        .setResistance(0.0f)
 
     val machineCasing: Block = blockBuilder
         .setTextures("machine_casing_basic.png")
@@ -245,7 +243,7 @@ object IndustryBlocks {
         .setBottomTexture("lv_batbox.png")
         .setBlockSound(BlockSounds.WOOD)
         .setHardness(5.0f)
-        .setResistance(10.0f)
+        .setResistance(0.0f)
         .build(BlockSolarArrayLV("machine.array.lv", nextBlockID(), Material.wood))
 
     val machineSolarArrayMV: Block = machineBuilderBlank
@@ -272,7 +270,7 @@ object IndustryBlocks {
         .setSideTextures("lv_batbox.png")
         .setBlockSound(BlockSounds.WOOD)
         .setHardness(5.0f)
-        .setResistance(10.0f)
+        .setResistance(0.0f)
         .build(BlockBatboxLV("machine.batbox.lv", nextBlockID(), Material.wood))
 
     val batboxMV: Block = machineBuilderBlank
@@ -423,7 +421,7 @@ object IndustryBlocks {
         EnergyAPI.addToNameGuiMap("Cannery", GuiCannery::class.java, TileEntityCannery::class.java, ContainerCannery::class.java)
         EnergyAPI.addToNameGuiMap("RotaryMacerator", GuiMaceratorRotary::class.java, TileEntityMaceratorRotary::class.java, ContainerMaceratorRotary::class.java)
         EnergyAPI.addToNameGuiMap("SingularityCompressor", GuiCompressorSingularity::class.java, TileEntityCompressorSingularity::class.java, ContainerCompressorSingularity::class.java)
-        EnergyAPI.addToNameGuiMap("LaserCutter", GuiCutterLaser::class.java, TileEntityCutterLaser::class.java, ContainerCutterLaser::class.java)
+        EnergyAPI.addToNameGuiMap("LaserCutter", GuiCutterLaser::class.java, TileEntityLaserCutter::class.java, ContainerCutterLaser::class.java)
     }
 
     private fun createTileEntities() {
@@ -450,7 +448,7 @@ object IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityCannery::class.java, "Cannery")
         EntityHelper.createTileEntity(TileEntityMaceratorRotary::class.java, "RotaryMacerator")
         EntityHelper.createTileEntity(TileEntityCompressorSingularity::class.java, "SingularityCompressor")
-        EntityHelper.createTileEntity(TileEntityCutterLaser::class.java, "LaserCutter")
+        EntityHelper.createTileEntity(TileEntityLaserCutter::class.java, "LaserCutter")
     }
 
     fun initializeBlocks() {

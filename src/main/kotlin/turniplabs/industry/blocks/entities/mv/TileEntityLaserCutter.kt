@@ -14,13 +14,13 @@ import turniplabs.industry.blocks.machines.mv.BlockCutterLaser
 import turniplabs.industry.recipes.RecipesCutter
 import turniplabs.industry.recipes.fuels.AdvancedRedstoneFuel
 
-class TileEntityCutterLaser : TileEntityEnergyConductorDamageable(), IInventory {
+class TileEntityLaserCutter : TileEntityEnergyConductorDamageable(), IInventory {
     var active = false
     var redstone = 0
     private var contents: Array<ItemStack?>
-    private var currentMachineTime = 0
-    private val maxMachineTime = 160
-    private val maxRedstone = 8192
+    var currentMachineTime = 0
+    val maxMachineTime = 160
+    val maxRedstone = 8192
 
     init {
         contents = arrayOfNulls(7)
@@ -205,7 +205,7 @@ class TileEntityCutterLaser : TileEntityEnergyConductorDamageable(), IInventory 
             active = true
 
             if (redstone > 0) {
-                currentMachineTime *= redstone / 256
+                currentMachineTime *= (redstone / 2048)
 
                 if (canProduceFirst())
                     redstone -= 16

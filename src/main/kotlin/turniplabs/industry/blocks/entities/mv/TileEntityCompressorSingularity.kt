@@ -18,9 +18,9 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
     var active = false
     var redstone = 0
     private var contents: Array<ItemStack?>
-    private var currentMachineTime = 0
-    private val maxMachineTime = 160
-    private val maxRedstone = 8192
+    var currentMachineTime = 0
+    val maxMachineTime = 160
+    val maxRedstone = 8192
 
     init {
         contents = arrayOfNulls(7)
@@ -205,7 +205,7 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
             active = true
 
             if (redstone > 0) {
-                currentMachineTime *= redstone / 256
+                currentMachineTime *= (redstone / 2048)
 
                 if (canProduceFirst())
                     redstone -= 16
