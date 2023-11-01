@@ -5,65 +5,65 @@ import net.minecraft.core.item.ItemFoodStackable
 import net.minecraft.core.item.ItemPlaceable
 import turniplabs.halplibe.helper.ItemHelper
 import turniplabs.industry.Industry2
+import turniplabs.industry.IndustryConfig
 import turniplabs.industry.IndustryTags
 import turniplabs.industry.blocks.IndustryBlocks
 
 object IndustryItems {
 
-    private var itemID = 16999;
-    private fun nextItemID(): Int {
-        return itemID++
+    private fun itemID(configItemName: String): Int {
+        return IndustryConfig.cfg.getInt("Item IDs.$configItemName")
     }
 
     // Ores
-    val rawCopperOre: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ore.raw.copper", "raw_copper.png")
-    val rawTinOre: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ore.raw.tin", "raw_tin.png")
-    val rawUranium: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ore.raw.uranium", "raw_uranium.png")
+    val rawCopperOre: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("rawCopper")), "ore.raw.copper", "raw_copper.png")
+    val rawTinOre: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("rawTin")), "ore.raw.tin", "raw_tin.png")
+    val rawUranium: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("rawUranium")), "ore.raw.uranium", "raw_uranium.png")
 
     // Dusts
-    val copperDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.copper", "dust_copper.png")
-    val tinDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.tin", "dust_tin.png")
-    val bronzeDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.bronze", "dust_bronze.png")
-    val ironDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.iron", "dust_iron.png")
-    val goldDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.gold", "dust_gold.png")
-    val coalDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "dust.coal", "dust_coal.png")
+    val copperDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustCopper")), "dust.copper", "dust_copper.png")
+    val tinDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustTin")), "dust.tin", "dust_tin.png")
+    val bronzeDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustBronze")), "dust.bronze", "dust_bronze.png")
+    val ironDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustIron")), "dust.iron", "dust_iron.png")
+    val goldDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustGold")), "dust.gold", "dust_gold.png")
+    val coalDust: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("dustCoal")), "dust.coal", "dust_coal.png")
 
     // Ingots
-    val copperIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingot.copper", "ingot_copper.png")
-    val tinIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingot.tin", "ingot_tin.png")
-    val bronzeIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingot.bronze", "ingot_bronze.png")
-    val uraniumIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingot.uranium", "ingot_uranium.png")
+    val copperIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("ingotCopper")), "ingot.copper", "ingot_copper.png")
+    val tinIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("ingotTin")), "ingot.tin", "ingot_tin.png")
+    val bronzeIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("ingotBronze")), "ingot.bronze", "ingot_bronze.png")
+    val uraniumIngot: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("ingotUranium")), "ingot.uranium", "ingot_uranium.png")
 
     // Plates
-    val copperPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.copper", "plate_copper.png")
-    val tinPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.tin", "plate_tin.png")
-    val bronzePlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.bronze", "plate_bronze.png")
-    val ironPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.iron", "plate_iron.png")
-    val goldPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.gold", "plate_gold.png")
-    val steelPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "plate.steel", "plate_steel.png")
+    val copperPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateCopper")), "plate.copper", "plate_copper.png")
+    val tinPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateTin")), "plate.tin", "plate_tin.png")
+    val bronzePlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateBronze")), "plate.bronze", "plate_bronze.png")
+    val ironPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateIron")), "plate.iron", "plate_iron.png")
+    val goldPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateGold")), "plate.gold", "plate_gold.png")
+    val steelPlate: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("plateSteel")), "plate.steel", "plate_steel.png")
 
     // Cables
     val itemCopperCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("cable.copper", nextItemID(), IndustryBlocks.copperCable),
+        ItemCable("cable.copper", itemID("itemCopperCable"), IndustryBlocks.copperCable),
         "cable.copper",
         "cable_copper.png"
     )
     val itemTinCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("cable.tin", nextItemID(), IndustryBlocks.tinCable),
+        ItemCable("cable.tin", itemID("itemTinCable"), IndustryBlocks.tinCable),
         "cable.tin",
         "cable_tin.png"
     )
     val itemGoldCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("cable.gold", nextItemID(), IndustryBlocks.goldCable),
+        ItemCable("cable.gold", itemID("itemGoldCable"), IndustryBlocks.goldCable),
         "cable.gold",
         "cable_gold.png"
     )
     val itemSteelCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("cable.steel", nextItemID(), IndustryBlocks.steelCable),
+        ItemCable("cable.steel", itemID("itemSteelCable"), IndustryBlocks.steelCable),
         "cable.steel",
         "cable_steel.png"
     )
@@ -71,75 +71,75 @@ object IndustryItems {
     // Insulated Cables
     val itemInsulatedCopperCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("insulated.cable.copper", nextItemID(), IndustryBlocks.insulatedCopperCable),
+        ItemCable("insulated.cable.copper", itemID("itemInsulatedCopperCable"), IndustryBlocks.insulatedCopperCable),
         "insulated.cable.copper",
         "cable_insulated_copper.png"
     )
     val itemInsulatedTinCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("insulated.cable.tin", nextItemID(), IndustryBlocks.insulatedTinCable),
+        ItemCable("insulated.cable.tin", itemID("itemInsulatedTinCable"), IndustryBlocks.insulatedTinCable),
         "insulated.cable.tin",
         "cable_insulated_tin.png"
     )
     val itemInsulatedGoldCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("insulated.cable.gold", nextItemID(), IndustryBlocks.insulatedGoldCable),
+        ItemCable("insulated.cable.gold", itemID("itemInsulatedGoldCable"), IndustryBlocks.insulatedGoldCable),
         "insulated.cable.gold",
         "cable_insulated_gold.png"
     )
     val itemInsulatedSteelCable: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemPlaceable("insulated.cable.steel", nextItemID(), IndustryBlocks.insulatedSteelCable),
+        ItemCable("insulated.cable.steel", itemID("itemInsulatedSteelCable"), IndustryBlocks.insulatedSteelCable),
         "insulated.cable.steel",
         "cable_insulated_steel.png"
     )
 
     // Tools
-    val hammer: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemHammer(nextItemID()), "tool.hammer", "hammer.png")
-    val cutter: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCutter(nextItemID()), "tool.cutter", "cutter.png")
-    val wrench: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemWrench(nextItemID()), "tool.wrench", "wrench.png")
-    val treeTap: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemTap(nextItemID()), "tool.tap", "tree_tap.png")
+    val hammer: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemHammer(itemID("toolHammer")), "tool.hammer", "hammer.png")
+    val cutter: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCutter(itemID("toolCutter")), "tool.cutter", "cutter.png")
+    val wrench: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemWrench(itemID("toolWrench")), "tool.wrench", "wrench.png")
+    val treeTap: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemTap(itemID("toolTreetap")), "tool.tap", "tree_tap.png")
 
     val batteryRedstone: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemBatteryRedstone(nextItemID()),
+        ItemBatteryRedstone(itemID("batteryRedstone")),
         "tool.battery.redstone"
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryAdvanced: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemBatteryAdvanced(nextItemID()),
+        ItemBatteryAdvanced(itemID("batteryAdvanced")),
         "tool.battery.advanced",
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryCrystal: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemBatteryCrystal(nextItemID()),
+        ItemBatteryCrystal(itemID("batteryCrystal")),
         "tool.battery.crystal",
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
     val batteryLapis: Item = ItemHelper.createItem(
         Industry2.MOD_ID,
-        ItemBatteryLapis(nextItemID()),
+        ItemBatteryLapis(itemID("batteryLapis")),
         "tool.battery.lapis",
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
-    val emptyCell: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(nextItemID()), "cell.empty", "cell_empty.png")
-    val waterCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.water", "cell_water.png")
-    val lavaCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.lava", "cell_lava.png")
-    val uraniumCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "cell.uranium", "cell_uranium.png")
+    val emptyCell: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(itemID("cellEmpty")), "cell.empty", "cell_empty.png")
+    val waterCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellWater")), "cell.water", "cell_water.png")
+    val lavaCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellLava")), "cell.lava", "cell_lava.png")
+    val uraniumCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellUranium")), "cell.uranium", "cell_uranium.png")
 
-    val canEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "can.empty", "can.png")
+    val canEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("canEmpty")), "can.empty", "can.png")
     val canFull: Item = ItemHelper.createItem(Industry2.MOD_ID,
-        ItemFoodStackable("can.full", nextItemID(), 2, false, 64),
+        ItemFoodStackable("can.full", itemID("canFood"), 2, false, 64),
         "can.full",
         "can_full.png")
 
     // Materials
-    val resin: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingredient.resin", "resin.png")
-    val rubber: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingredient.rubber", "rubber.png")
-    val circuit: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingredient.circuit", "circuit.png")
-    val circuitAdvanced: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "ingredient.advancedcircuit", "circuit_advanced.png")
+    val resin: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("resin")), "ingredient.resin", "resin.png")
+    val rubber: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("rubber")), "ingredient.rubber", "rubber.png")
+    val circuit: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("circuitBasic")), "ingredient.circuit", "circuit.png")
+    val circuitAdvanced: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("circuitAdvanced")), "ingredient.advancedcircuit", "circuit_advanced.png")
 
     // Miscellaneous
-    val scrap: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(nextItemID()), "scrap", "scrap.png")
+    val scrap: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("scrap")), "scrap", "scrap.png")
         .withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
     fun initializeItems() {

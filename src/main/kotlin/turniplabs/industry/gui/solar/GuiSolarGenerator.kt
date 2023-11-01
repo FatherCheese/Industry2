@@ -1,7 +1,7 @@
 package turniplabs.industry.gui.solar
 
 import net.minecraft.core.player.inventory.InventoryPlayer
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.solar.TileEntitySolarGenerator
 
 class GuiSolarGenerator(inventory: InventoryPlayer?, tileEntity: TileEntitySolarGenerator) :
 GuiSolarBase(inventory, tileEntity) {

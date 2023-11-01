@@ -38,7 +38,7 @@ class Industry2: ModInitializer {
 			Class.forName("net.minecraft.core.item.Item")
 		} catch (ignored: ClassNotFoundException) {}
 
-		IndustryConfig.initializeConfig()
+		IndustryConfig
 
 		IndustryItems.initializeItems()
 		IndustryBlocks.initializeBlocks()

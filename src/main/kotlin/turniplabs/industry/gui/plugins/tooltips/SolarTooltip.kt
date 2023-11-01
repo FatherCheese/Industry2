@@ -6,7 +6,7 @@ import toufoumaster.btwaila.TooltipGroup
 import toufoumaster.btwaila.TooltipRegistry
 import toufoumaster.btwaila.gui.GuiBlockOverlay
 import turniplabs.industry.Industry2
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.solar.TileEntitySolarGenerator
 import turniplabs.industry.blocks.entities.solar.*
 
 object SolarTooltip : IBTWailaCustomBlockTooltip {

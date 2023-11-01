@@ -9,6 +9,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
+import turniplabs.industry.IndustryConfig
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
 import turniplabs.industry.blocks.machines.lv.BlockElectricFurnace
@@ -23,8 +24,8 @@ class TileEntityElectricFurnace: TileEntityEnergyConductorDamageable(), IInvento
         contents = arrayOfNulls(4)
 
         setCapacity(1024)
-        setTransfer(16)
-        setMaxReceive(16)
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"))
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"))
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)

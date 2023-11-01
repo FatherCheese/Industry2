@@ -10,6 +10,7 @@ import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
+import turniplabs.industry.IndustryConfig
 import turniplabs.industry.blocks.machines.BlockGenerator
 import turniplabs.industry.recipes.fuels.GeothermalFuel
 
@@ -21,7 +22,7 @@ class TileEntityGeothermal : TileEntityEnergyConductor(), IInventory {
 
     init {
         setCapacity(1024)
-        setTransfer(16)
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"))
         setMaxReceive(0)
         contents = arrayOfNulls(3)
 

@@ -8,6 +8,7 @@ import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
 import sunsetsatellite.sunsetutils.util.Connection
 import sunsetsatellite.sunsetutils.util.Direction
+import turniplabs.industry.IndustryConfig
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
 import turniplabs.industry.blocks.machines.mv.BlockCompressorSingularity
@@ -26,8 +27,8 @@ class TileEntityCompressorSingularity : TileEntityEnergyConductorDamageable(), I
         contents = arrayOfNulls(7)
 
         setCapacity(4096)
-        setTransfer(32)
-        setMaxReceive(32)
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"))
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"))
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)

@@ -6,7 +6,7 @@ import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.world.World
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
-import turniplabs.industry.blocks.entities.TileEntitySolarGenerator
+import turniplabs.industry.blocks.entities.solar.TileEntitySolarGenerator
 
 class BlockSolarGenerator(key: String?, id: Int, material: Material?) : BlockTileEntity(key, id, material) {
 

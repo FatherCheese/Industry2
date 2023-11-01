@@ -6,9 +6,9 @@ import turniplabs.halplibe.util.toml.Toml
 
 
 object IndustryConfig {
-    private val updater = ConfigUpdater.fromProperties("Low Voltage", "eValues.text")
+    private val updater = ConfigUpdater.fromProperties()
     private val properties = Toml("Industry2's TOML Config")
-    lateinit var cfg: TomlConfigHandler
+    var cfg: TomlConfigHandler
 
     private var blockID = 1000
     private fun nextBlockID(): Int {
@@ -20,12 +20,12 @@ object IndustryConfig {
         return itemID++
     }
 
-    fun initializeConfig() {
-        properties.addCategory("Energy Values", "eValues")
-            .addEntry("Low Voltage", 16)
-            .addEntry("Medium Voltage", 32)
-            .addEntry("High Voltage", 512)
-            .addEntry("Super-High Voltage", 1024)
+    init {
+        properties.addCategory("Energy Values")
+            .addEntry("lowVoltage", 16)
+            .addEntry("mediumVoltage", 32)
+            .addEntry("highVoltage", 512)
+            .addEntry("superHighVoltage", 1024)
 
         properties.addCategory("Block IDs")
             .addEntry("oreCopperStone", nextBlockID())

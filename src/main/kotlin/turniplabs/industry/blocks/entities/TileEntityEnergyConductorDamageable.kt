@@ -9,9 +9,9 @@ import kotlin.math.min
 open class TileEntityEnergyConductorDamageable : TileEntityEnergyConductor(), IMachineCondition {
 
     /*                             /
-    / Energy Ratings:              /
+    / Default Energy Ratings:      /
     / 16RC = Low voltage           /
-    / 32RC = Medium voltage       /
+    / 32RC = Medium voltage        /
     / 512RC = High voltage         /
     / 1024RC = Super High voltage */
 

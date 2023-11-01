@@ -11,7 +11,7 @@ class ItemCable(name: String?, id: Int, blockToPlace: Block?) : ItemPlaceable(na
     private val capacity = (blockToPlace as BlockCable).capacity
     private val transfer = (blockToPlace as BlockCable).transfer
 
-    override fun getDescription(p0: ItemStack?): String {
+    override fun getDescription(itemStack: ItemStack): String {
         val text = StringBuilder()
         return text.append("${TextFormatting.WHITE}Max Transfer: ${TextFormatting.LIGHT_GRAY}IN: $capacity${TextFormatting.WHITE} / ${TextFormatting.LIGHT_GRAY}OUT: $transfer").toString()
     }
