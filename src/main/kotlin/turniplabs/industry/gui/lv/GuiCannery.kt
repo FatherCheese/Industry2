@@ -165,7 +165,7 @@ class GuiCannery(inventory: InventoryPlayer, private val tileEntity: TileEntityC
                 target = 1
             if (isIngredient)
                 target = 2
-            if (Item.itemsList[clickedItemId] == IndustryItems.canEmpty)
+            if (Item.itemsList[clickedItemId] == IndustryItems.canEmpty || Item.itemsList[clickedItemId] == IndustryItems.cellEmpty)
                 target = 3
         }
         if (slot != null && slot.allowItemInteraction() && grabbedItem != null && grabbedItem.item.hasInventoryInteraction() && mouseButton == 1) {

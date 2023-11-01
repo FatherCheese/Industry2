@@ -44,14 +44,14 @@ class ItemCell(id: Int) : Item(id) {
                     return itemstack
 
                 if (world.getBlockMaterial(mopX, mopY, mopZ) === Material.water && world.getBlockMetadata(mopX, mopY, mopZ) == 0) {
-                    if (useCell(entityplayer, ItemStack(IndustryItems.waterCell))) {
+                    if (useCell(entityplayer, ItemStack(IndustryItems.cellWater))) {
                         world.setBlockWithNotify(mopX, mopY, mopZ, 0)
                         entityplayer.swingItem()
                     }
                 } else
                     if (world.getBlockMaterial(mopX, mopY, mopZ) === Material.lava && world.getBlockMetadata(mopX, mopY, mopZ) == 0 && useCell(
                         entityplayer, ItemStack(
-                            IndustryItems.lavaCell
+                            IndustryItems.cellLava
                         )
                     )
                 ) {

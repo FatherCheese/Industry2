@@ -4,10 +4,19 @@ import net.minecraft.core.entity.player.EntityPlayer
 import net.minecraft.core.item.ItemStack
 import net.minecraft.core.player.inventory.IInventory
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer
+import sunsetsatellite.sunsetutils.util.Connection
+import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
 
 open class TileEntityBatboxBase : TileEntityEnergyConductorDamageable(), IInventory {
     private val contents: Array<ItemStack?> = arrayOfNulls(2)
+
+    init {
+        for (dir in Direction.values())
+            this.setConnection(dir, Connection.OUTPUT)
+
+        this.setConnection(Direction.Y_POS, Connection.INPUT)
+    }
 
     override fun getSizeInventory(): Int {
         return contents.size

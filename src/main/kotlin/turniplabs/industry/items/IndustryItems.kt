@@ -2,7 +2,6 @@ package turniplabs.industry.items
 
 import net.minecraft.core.item.Item
 import net.minecraft.core.item.ItemFoodStackable
-import net.minecraft.core.item.ItemPlaceable
 import turniplabs.halplibe.helper.ItemHelper
 import turniplabs.industry.Industry2
 import turniplabs.industry.IndustryConfig
@@ -121,10 +120,10 @@ object IndustryItems {
         "tool.battery.lapis",
     ).withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
-    val emptyCell: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(itemID("cellEmpty")), "cell.empty", "cell_empty.png")
-    val waterCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellWater")), "cell.water", "cell_water.png")
-    val lavaCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellLava")), "cell.lava", "cell_lava.png")
-    val uraniumCell: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellUranium")), "cell.uranium", "cell_uranium.png")
+    val cellEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(itemID("cellEmpty")), "cell.empty", "cell_empty.png")
+    val cellWater: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellWater")), "cell.water", "cell_water.png")
+    val cellLava: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellLava")), "cell.lava", "cell_lava.png")
+    val cellUranium: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellUranium")), "cell.uranium", "cell_uranium.png")
 
     val canEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("canEmpty")), "can.empty", "can.png")
     val canFull: Item = ItemHelper.createItem(Industry2.MOD_ID,
@@ -182,10 +181,10 @@ object IndustryItems {
         batteryCrystal
         batteryLapis
         treeTap
-        emptyCell
-        waterCell
-        lavaCell
-        uraniumCell
+        cellEmpty
+        cellWater
+        cellLava
+        cellUranium
 
         resin
         rubber

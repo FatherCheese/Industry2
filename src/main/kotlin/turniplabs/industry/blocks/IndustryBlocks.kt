@@ -23,6 +23,9 @@ import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
 import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
 import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
 import turniplabs.industry.blocks.entities.solar.*
+import turniplabs.industry.blocks.entities.transformer.TileEntityTransformerHVtoMV
+import turniplabs.industry.blocks.entities.transformer.TileEntityTransformerMVtoLV
+import turniplabs.industry.blocks.entities.transformer.TileEntityTransformerSHVtoHV
 import turniplabs.industry.blocks.machines.BlockGenerator
 import turniplabs.industry.blocks.machines.BlockGeothermalGenerator
 import turniplabs.industry.blocks.machines.BlockWatermill
@@ -36,6 +39,9 @@ import turniplabs.industry.blocks.machines.mv.BlockCompressorSingularity
 import turniplabs.industry.blocks.machines.mv.BlockCutterLaser
 import turniplabs.industry.blocks.machines.mv.BlockMaceratorRotary
 import turniplabs.industry.blocks.machines.solar.*
+import turniplabs.industry.blocks.machines.transformer.BlockTransformerHVtoMV
+import turniplabs.industry.blocks.machines.transformer.BlockTransformerMVtoLV
+import turniplabs.industry.blocks.machines.transformer.BlockTransformerSHVtoHV
 import turniplabs.industry.gui.*
 import turniplabs.industry.gui.batbox.*
 import turniplabs.industry.gui.lv.*
@@ -288,6 +294,24 @@ object IndustryBlocks {
         .setSideTextures("shv_batbox.png")
         .build(BlockBatboxSHV("machine.batbox.shv", blockID("batboxSHV"), Material.metal))
 
+    val transformerMVtoLV: Block = machineBuilderBlank
+        .setTopTexture("mv_batbox_input.png")
+        .setSideTextures("transformer_mv_to_lv.png")
+        .setBottomTexture("lv_batbox_input.png")
+        .build(BlockTransformerMVtoLV("machine.transformer.mvtolv", blockID("transformerMVtoLV"), Material.metal))
+
+    val transformerHVtoMV: Block = machineBuilderBlank
+        .setTopTexture("hv_batbox_input.png")
+        .setSideTextures("transformer_hv_to_mv.png")
+        .setBottomTexture("mv_batbox_input.png")
+        .build(BlockTransformerHVtoMV("machine.transformer.hvtomv", blockID("transformerHVtoMV"), Material.metal))
+
+    val transformerSHVtoHV: Block = machineBuilderBlank
+        .setTopTexture("shv_batbox_input.png")
+        .setSideTextures("transformer_shv_to_hv.png")
+        .setBottomTexture("hv_batbox_input.png")
+        .build(BlockTransformerSHVtoHV("machine.transformer.shvtohv", blockID("transformerSHVtoMV"), Material.metal))
+
     val machineElectricFurnace: Block = machineBuilder
         .setNorthTexture("machine_furnace.png")
         .build(BlockElectricFurnace("machine.furnace", blockID("electricFurnace"), Material.metal))
@@ -437,6 +461,9 @@ object IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityBatboxMV::class.java, "BatboxMV")
         EntityHelper.createTileEntity(TileEntityBatboxHV::class.java, "BatboxHV")
         EntityHelper.createTileEntity(TileEntityBatboxSHV::class.java, "BatboxSHV")
+        EntityHelper.createTileEntity(TileEntityTransformerMVtoLV::class.java, "TransformerMVtoLV")
+        EntityHelper.createTileEntity(TileEntityTransformerHVtoMV::class.java, "TransformerHVtoMV")
+        EntityHelper.createTileEntity(TileEntityTransformerSHVtoHV::class.java, "TransformerSHVtoHV")
         EntityHelper.createTileEntity(TileEntityMacerator::class.java, "Macerator")
         EntityHelper.createTileEntity(TileEntityCompressor::class.java, "Compressor")
         EntityHelper.createTileEntity(TileEntityCutter::class.java, "Cutter")
@@ -491,6 +518,9 @@ object IndustryBlocks {
         batboxMV
         batboxHV
         batboxSHV
+        transformerMVtoLV
+        transformerHVtoMV
+        transformerSHVtoHV
         machineElectricFurnace
         machineMacerator
         machineCompressor

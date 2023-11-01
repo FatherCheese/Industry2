@@ -89,7 +89,7 @@ object IndustryRecipes {
         Crafting.createRecipe(ItemStack(IndustryBlocks.machineGeothermalGenerator), arrayOf(
             "121", "121", "343",
             '1', Block.glass,
-            '2', IndustryItems.emptyCell,
+            '2', IndustryItems.cellEmpty,
             '3', IndustryItems.ironPlate,
             '4', IndustryBlocks.machineGenerator
         ))
@@ -149,6 +149,38 @@ object IndustryRecipes {
             '1', IndustryItems.steelPlate,
             '2', IndustryItems.itemInsulatedSteelCable,
             '3', IndustryItems.batteryLapis
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.transformerMVtoLV), arrayOf(
+            "121", "134", "454",
+            '1', IndustryItems.bronzePlate,
+            '2', IndustryItems.itemInsulatedCopperCable,
+            '3', IndustryItems.batteryRedstone,
+            '4', Block.planksOak,
+            '5', IndustryItems.itemInsulatedTinCable
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.transformerMVtoLV), arrayOf(
+            "121", "134", "454",
+            '1', IndustryItems.bronzePlate,
+            '2', IndustryItems.itemInsulatedCopperCable,
+            '3', IndustryItems.batteryRedstone,
+            '4', Block.planksOakPainted,
+            '5', IndustryItems.itemInsulatedTinCable
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.transformerHVtoMV), arrayOf(
+            "121", "134", "454",
+            '1', IndustryItems.ironPlate,
+            '2', IndustryItems.itemInsulatedGoldCable,
+            '3', IndustryItems.batteryAdvanced,
+            '4', IndustryItems.bronzePlate,
+            '5', IndustryItems.itemInsulatedCopperCable
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.transformerSHVtoHV), arrayOf(
+            "121", "134", "454",
+            '1', IndustryItems.steelPlate,
+            '2', IndustryItems.itemInsulatedSteelCable,
+            '3', IndustryItems.batteryRedstone,
+            '4', IndustryItems.ironPlate,
+            '5', IndustryItems.itemInsulatedGoldCable
         ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.machineElectricFurnace), arrayOf(
             "#1#", "232", "#4#",
@@ -263,7 +295,7 @@ object IndustryRecipes {
             "#1#", "111", "1##",
             '1', Block.planksOakPainted
         ))
-        Crafting.createRecipe(ItemStack(IndustryItems.emptyCell), arrayOf(
+        Crafting.createRecipe(ItemStack(IndustryItems.cellEmpty), arrayOf(
             "#1#", "1#1", "1##",
             '1', IndustryItems.tinIngot
         ))

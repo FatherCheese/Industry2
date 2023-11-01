@@ -17,6 +17,7 @@ class WailaPlugin : BTWailaCustomTootltipPlugin {
         GeothermalGeneratorTooltip.addTooltip()
         SolarTooltip.addTooltip()
         BatboxTooltip.addTooltip()
+        TransformerTooltip.addTooltip()
         ElectricFurnaceTooltip.addTooltip()
         MaceratorTooltip.addTooltip()
         CompressorTooltip.addTooltip()

@@ -78,6 +78,13 @@ tile.industry.machine.batbox.hv.desc=
 tile.industry.machine.batbox.shv.name=SHV Batbox
 tile.industry.machine.batbox.shv.desc=
 
+tile.industry.machine.transformer.mvtolv.name=MV to LV Transformer
+tile.industry.machine.transformer.mvtolv.desc=
+tile.industry.machine.transformer.hvtomv.name=HV to MV Transformer
+tile.industry.machine.transformer.hvtomv.desc=
+tile.industry.machine.transformer.shvtohv.name=SHV to HV Transformer
+tile.industry.machine.transformer.shvtohv.desc=
+
 tile.industry.machine.furnace.name=Electric Furnace
 tile.industry.machine.furnace.desc=
 tile.industry.machine.macerator.name=Macerator

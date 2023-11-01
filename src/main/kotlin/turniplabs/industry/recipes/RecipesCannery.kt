@@ -20,10 +20,16 @@ object RecipesCannery {
         addRecipe(Item.foodStewMushroom, 5)
         addRecipe(Item.foodCake, 7)
         addRecipe(Item.foodAppleGold, 21)
+
+        addSpecialRecipe(IndustryItems.uraniumIngot, IndustryItems.cellUranium, 1)
     }
 
     fun addRecipe(input: Item, canOutputCount: Int) {
         recipeList[input.id] = ItemStack(IndustryItems.canFull, canOutputCount)
+    }
+
+    fun addSpecialRecipe(input: Item, outputItem: Item, outputCount: Int) {
+        recipeList[input.id] = ItemStack(outputItem, outputCount)
     }
 
     fun getResult(i: Int): ItemStack? {

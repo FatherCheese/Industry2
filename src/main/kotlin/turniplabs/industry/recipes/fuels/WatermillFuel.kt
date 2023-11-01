@@ -8,7 +8,7 @@ object WatermillFuel {
 
     init {
         addFuel(Item.bucketWater.id, 1000)
-        addFuel(IndustryItems.waterCell.id, 1000)
+        addFuel(IndustryItems.cellWater.id, 1000)
     }
 
     fun addFuel(input: Int, yield: Int) {

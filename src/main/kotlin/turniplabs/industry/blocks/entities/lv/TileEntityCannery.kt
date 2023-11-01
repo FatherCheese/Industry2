@@ -11,6 +11,7 @@ import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.IndustryConfig
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
+import turniplabs.industry.items.IndustryItems
 import turniplabs.industry.recipes.RecipesCannery
 
 class TileEntityCannery : TileEntityEnergyConductorDamageable(), IInventory {
@@ -86,7 +87,8 @@ class TileEntityCannery : TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     private fun isProducible(itemStack: ItemStack?): Boolean {
-        return RecipesCannery.getRecipeList().containsKey(itemStack!!.item.id)
+        return (RecipesCannery.getRecipeList().containsKey(itemStack!!.item.id) && contents[3]!!.item == IndustryItems.canEmpty) ||
+                (contents[2]!!.item == IndustryItems.uraniumIngot && contents[3]!!.item == IndustryItems.cellEmpty)
     }
 
     private fun canProduce(): Boolean {
