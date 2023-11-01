@@ -12,6 +12,7 @@ import turniplabs.halplibe.helper.BlockBuilder
 import turniplabs.halplibe.helper.EntityHelper
 import turniplabs.industry.Industry2
 import turniplabs.industry.IndustryConfig
+import turniplabs.industry.IndustryTags
 import turniplabs.industry.blocks.cables.*
 import turniplabs.industry.blocks.entities.*
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxHV
@@ -19,9 +20,7 @@ import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxLV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxMV
 import turniplabs.industry.blocks.entities.batbox.TileEntityBatboxSHV
 import turniplabs.industry.blocks.entities.lv.*
-import turniplabs.industry.blocks.entities.mv.TileEntityCompressorSingularity
-import turniplabs.industry.blocks.entities.mv.TileEntityLaserCutter
-import turniplabs.industry.blocks.entities.mv.TileEntityMaceratorRotary
+import turniplabs.industry.blocks.entities.mv.*
 import turniplabs.industry.blocks.entities.solar.*
 import turniplabs.industry.blocks.entities.transformer.TileEntityTransformerHVtoMV
 import turniplabs.industry.blocks.entities.transformer.TileEntityTransformerMVtoLV
@@ -35,9 +34,7 @@ import turniplabs.industry.blocks.machines.batbox.BlockBatboxLV
 import turniplabs.industry.blocks.machines.batbox.BlockBatboxMV
 import turniplabs.industry.blocks.machines.batbox.BlockBatboxSHV
 import turniplabs.industry.blocks.machines.lv.*
-import turniplabs.industry.blocks.machines.mv.BlockCompressorSingularity
-import turniplabs.industry.blocks.machines.mv.BlockCutterLaser
-import turniplabs.industry.blocks.machines.mv.BlockMaceratorRotary
+import turniplabs.industry.blocks.machines.mv.*
 import turniplabs.industry.blocks.machines.solar.*
 import turniplabs.industry.blocks.machines.transformer.BlockTransformerHVtoMV
 import turniplabs.industry.blocks.machines.transformer.BlockTransformerMVtoLV
@@ -195,11 +192,13 @@ object IndustryBlocks {
         .setBlockSound(BlockSounds.METAL)
         .setHardness(5.0f)
         .setResistance(0.0f)
+        .setTags(IndustryTags.REQUIRES_WRENCH)
 
     private val machineBuilderBlank = BlockBuilder(Industry2.MOD_ID)
         .setBlockSound(BlockSounds.METAL)
         .setHardness(5.0f)
         .setResistance(0.0f)
+        .setTags(IndustryTags.REQUIRES_WRENCH)
 
     val machineCasing: Block = blockBuilder
         .setTextures("machine_casing_basic.png")
@@ -353,6 +352,11 @@ object IndustryBlocks {
         .setBlockSound(BlockSounds.METAL)
         .setHardness(5.0f)
         .setResistance(0.0f)
+        .setTags(IndustryTags.REQUIRES_WRENCH)
+
+    val advancedMachineFurnace: Block = advancedMachineBuilder
+        .setNorthTexture("advanced_machine_furnace.png")
+        .build(BlockFurnaceInduction("advanced.furnace", blockID("inductionFurnace"), Material.metal))
 
     val advancedMachineMacerator: Block = advancedMachineBuilder
         .setNorthTexture("advanced_machine_macerator.png")
@@ -365,6 +369,10 @@ object IndustryBlocks {
     val advancedMachineCutter: Block = advancedMachineBuilder
         .setNorthTexture("advanced_machine_cutter.png")
         .build(BlockCutterLaser("advanced.cutter", blockID("laserCutter"), Material.metal))
+
+    val advancedMachineExtractor: Block = advancedMachineBuilder
+        .setNorthTexture("advanced_machine_extractor.png")
+        .build(BlockExtractorCentrifuge("advanced.extractor", blockID("CentrifugeExtractor"), Material.metal))
 
     // Miscellaneous
     val hardenedCoal: Block = BlockBuilder(Industry2.MOD_ID)
@@ -440,10 +448,11 @@ object IndustryBlocks {
         EnergyAPI.addToNameGuiMap("Extractor", GuiExtractor::class.java, TileEntityExtractor::class.java, ContainerExtractor::class.java)
         EnergyAPI.addToNameGuiMap("Recycler", GuiRecycler::class.java, TileEntityRecycler::class.java, ContainerRecycler::class.java)
         EnergyAPI.addToNameGuiMap("Cannery", GuiCannery::class.java, TileEntityCannery::class.java, ContainerCannery::class.java)
+        EnergyAPI.addToNameGuiMap("InductionFurnace", GuiInductionFurnace::class.java, TileEntityInductionFurnace::class.java, ContainerInductionFurnace::class.java)
         EnergyAPI.addToNameGuiMap("RotaryMacerator", GuiMaceratorRotary::class.java, TileEntityMaceratorRotary::class.java, ContainerMaceratorRotary::class.java)
         EnergyAPI.addToNameGuiMap("SingularityCompressor", GuiCompressorSingularity::class.java, TileEntityCompressorSingularity::class.java, ContainerCompressorSingularity::class.java)
         EnergyAPI.addToNameGuiMap("LaserCutter", GuiCutterLaser::class.java, TileEntityLaserCutter::class.java, ContainerCutterLaser::class.java)
-    }
+        EnergyAPI.addToNameGuiMap("CentrifugeExtractor", GuiExtractorCentrifuge::class.java, TileEntityCentrifugeExtractor::class.java, ContainerExtractorCentrifuge::class.java) }
 
     private fun createTileEntities() {
         EntityHelper.createTileEntity(TileEntityCable::class.java, "Cable")
@@ -470,9 +479,11 @@ object IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityExtractor::class.java, "Extractor")
         EntityHelper.createTileEntity(TileEntityRecycler::class.java, "Recycler")
         EntityHelper.createTileEntity(TileEntityCannery::class.java, "Cannery")
+        EntityHelper.createTileEntity(TileEntityInductionFurnace::class.java, "InductionFurnace")
         EntityHelper.createTileEntity(TileEntityMaceratorRotary::class.java, "RotaryMacerator")
         EntityHelper.createTileEntity(TileEntityCompressorSingularity::class.java, "SingularityCompressor")
         EntityHelper.createTileEntity(TileEntityLaserCutter::class.java, "LaserCutter")
+        EntityHelper.createTileEntity(TileEntityCentrifugeExtractor::class.java, "CentrifugeExtractor")
     }
 
     fun initializeBlocks() {
@@ -531,6 +542,8 @@ object IndustryBlocks {
         advancedMachineMacerator
         advancedMachineCompressor
         advancedMachineCutter
+        advancedMachineExtractor
+        advancedMachineFurnace
 
         hardenedCoal
         rubberLeaves

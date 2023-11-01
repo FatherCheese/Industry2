@@ -99,10 +99,7 @@ class TileEntityCompressor : TileEntityEnergyConductorDamageable(), IInventory {
             val resultStack: ItemStack? = RecipesCompressor.getResult(contents[2]!!.item.id)
 
             if (contents[3] == null || contents[3]!!.item == resultStack!!.item &&
-                (contents[3]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= contents[3]!!.maxStackSize ||
-                        contents[3]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
-            )
+                contents[3]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
                 return true
         }
         return false

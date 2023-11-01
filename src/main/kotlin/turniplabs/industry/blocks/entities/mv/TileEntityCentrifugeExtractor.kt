@@ -1,4 +1,4 @@
-package turniplabs.industry.blocks.entities.lv
+package turniplabs.industry.blocks.entities.mv
 
 import com.mojang.nbt.CompoundTag
 import com.mojang.nbt.ListTag
@@ -11,21 +11,25 @@ import sunsetsatellite.sunsetutils.util.Direction
 import turniplabs.industry.IndustryConfig
 import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.TileEntityEnergyConductorDamageable
-import turniplabs.industry.blocks.machines.lv.BlockMacerator
-import turniplabs.industry.recipes.RecipesMacerator
+import turniplabs.industry.blocks.machines.mv.BlockExtractorCentrifuge
+import turniplabs.industry.recipes.RecipesExtractor
+import turniplabs.industry.recipes.fuels.AdvancedRedstoneFuel
 
-class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
-    var active = false
+class TileEntityCentrifugeExtractor : TileEntityEnergyConductorDamageable(), IInventory {
     private var contents: Array<ItemStack?>
+    var active = false
+    var redstone = 0
     var currentMachineTime = 0
     val maxMachineTime = 160
+    val maxRedstone = 8192
+
 
     init {
-        contents = arrayOfNulls(4)
+        contents = arrayOfNulls(7)
 
-        setCapacity(1024)
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"))
-        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"))
+        setCapacity(4096)
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"))
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"))
 
         for (dir in Direction.values())
             setConnection(dir, Connection.INPUT)
@@ -69,7 +73,7 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     override fun getInvName(): String {
-        return "Macerator"
+        return "CentrifugeExtractor"
     }
 
     override fun getInventoryStackLimit(): Int {
@@ -88,37 +92,68 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
     }
 
     private fun isProducible(itemStack: ItemStack?): Boolean {
-        return RecipesMacerator.getRecipeList().containsKey(itemStack!!.item.id)
+        return RecipesExtractor.getRecipeList().containsKey(itemStack!!.item.id)
     }
 
-    private fun canProduce(): Boolean {
+    private fun canProduceFirst(): Boolean {
         if (contents[2] == null || contents[2]!!.item == null)
             return false
 
         if (isProducible(contents[2])) {
-            val resultStack: ItemStack? = RecipesMacerator.getResult(contents[2]!!.item.id)
+            val resultStack: ItemStack? = RecipesExtractor.getResult(contents[2]!!.item.id)
 
-            if (contents[3] == null || contents[3]!!.item == resultStack!!.item &&
-                contents[3]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
+            if (contents[4] == null || contents[4]!!.item == resultStack!!.item &&
+                contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
                 return true
         }
         return false
     }
 
-    private fun produceItem() {
-        if (canProduce()) {
-            val itemStack: ItemStack = RecipesMacerator.getResult(contents[2]!!.item.id) ?: return
+    private fun canProduceSecond(): Boolean {
+        if (contents[3] == null || contents[3]!!.item == null)
+            return false
 
-            if (contents[3] == null)
-                contents[3] = itemStack.copy()
+        if (isProducible(contents[3])) {
+            val resultStack: ItemStack? = RecipesExtractor.getResult(contents[3]!!.item.id)
+
+            if (contents[5] == null || contents[5]!!.item == resultStack!!.item &&
+                contents[5]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
+                return true
+        }
+        return false
+    }
+
+    private fun produceFirstItem() {
+        if (canProduceFirst()) {
+            val itemStack: ItemStack = RecipesExtractor.getResult(contents[2]!!.item.id) ?: return
+
+            if (contents[4] == null)
+                contents[4] = itemStack.copy()
             else
-                if (contents[3]!!.itemID == itemStack.itemID)
-                    contents[3]!!.stackSize += itemStack.stackSize
+                if (contents[4]!!.itemID == itemStack.itemID)
+                    contents[4]!!.stackSize += itemStack.stackSize
 
             --contents[2]!!.stackSize
 
             if (contents[2]!!.stackSize <= 0)
                 contents[2] = null
+        }
+    }
+
+    private fun produceSecondItem() {
+        if (canProduceSecond()) {
+            val itemStack: ItemStack = RecipesExtractor.getResult(contents[3]!!.item.id) ?: return
+
+            if (contents[5] == null)
+                contents[5] = itemStack.copy()
+            else
+                if (contents[5]!!.itemID == itemStack.itemID)
+                    contents[5]!!.stackSize += itemStack.stackSize
+
+            --contents[3]!!.stackSize
+
+            if (contents[3]!!.stackSize <= 0)
+                contents[3] = null
         }
     }
 
@@ -134,31 +169,60 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
 
         if (getStackInSlot(1) != null && getStackInSlot(1)?.item is ItemEnergyContainer) {
             val stack: ItemStack? = getStackInSlot(1)
-
             receive(stack, maxReceive, false)
             onInventoryChanged()
         }
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineMacerator.id &&
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) != IndustryBlocks.advancedMachineExtractor.id &&
                 currentMachineTime == 0 &&
-                contents[2] == null
-            ) {
-                BlockMacerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
+                (contents[2] == null || contents[3] == null)) {
+                BlockExtractorCentrifuge.updateBlockState(true, worldObj, xCoord, yCoord, zCoord)
                 machineUpdated = true
             }
         }
 
-        if (hasEnergy && canProduce()) {
+        if (contents[6] != null && AdvancedRedstoneFuel.getRedstoneFuelList().containsKey(contents[6]!!.item.id)) {
+            val newRedstoneLevel = AdvancedRedstoneFuel.getYield(contents[6]!!.item.id)
+
+            if (AdvancedRedstoneFuel.getRedstoneFuel(contents[6]!!.item.id) != null && redstone + newRedstoneLevel!! <= maxRedstone) {
+                redstone += newRedstoneLevel
+                --contents[6]!!.stackSize
+
+                if (contents[6]!!.stackSize <= 0)
+                    contents[6] = null
+            }
+        }
+
+        if (hasEnergy && (canProduceFirst() || canProduceSecond())) {
             ++currentMachineTime
-            --energy
+            energy -= 2
             active = true
 
-            if (currentMachineTime == maxMachineTime) {
+            if (redstone > 0) {
+                currentMachineTime *= (redstone / 2048)
+
+                if (canProduceFirst()) {
+                    redstone -= 16
+                    energy -= 4
+                }
+
+                if (canProduceSecond()) {
+                    redstone -= 16
+                    energy -= 4
+                }
+            }
+
+            if (currentMachineTime >= maxMachineTime) {
                 currentMachineTime = 0
-                produceItem()
                 active = false
                 machineUpdated = true
+
+                if (contents[2] != null)
+                    produceFirstItem()
+
+                if (contents[3] != null)
+                    produceSecondItem()
             }
         } else {
             currentMachineTime = 0
@@ -185,14 +249,16 @@ class TileEntityMacerator: TileEntityEnergyConductorDamageable(), IInventory {
                 contents[byte] = ItemStack.readItemStackFromNbt(compoundTag2)
         }
 
-        currentMachineTime = compoundTag.getShort("CookTime").toInt()
+        currentMachineTime = compoundTag.getShort("MachineTime").toInt()
         energy = compoundTag.getShort("Energy").toInt()
+        redstone = compoundTag.getShort("Redstone").toInt()
     }
 
     override fun writeToNBT(compoundTag: CompoundTag?) {
         super.writeToNBT(compoundTag)
-        compoundTag?.putShort("CookTime", currentMachineTime.toShort())
+        compoundTag?.putShort("MachineTime", currentMachineTime.toShort())
         compoundTag?.putShort("Energy", energy.toShort())
+        compoundTag?.putShort("Redstone", redstone.toShort())
 
         val listTag = ListTag()
         for (i in contents.indices) {

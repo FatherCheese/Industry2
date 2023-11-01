@@ -123,7 +123,8 @@ object IndustryItems {
     val cellEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, ItemCell(itemID("cellEmpty")), "cell.empty", "cell_empty.png")
     val cellWater: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellWater")), "cell.water", "cell_water.png")
     val cellLava: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellLava")), "cell.lava", "cell_lava.png")
-    val cellUranium: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellUranium")), "cell.uranium", "cell_uranium.png")
+    val cellUranium: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellUranium")), "cell.uranium", "cell_uranium.png").setMaxStackSize(1)
+    val cellCoolant: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("cellCoolant")), "cell.coolant", "cell_coolant.png").setMaxStackSize(1)
 
     val canEmpty: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("canEmpty")), "can.empty", "can.png")
     val canFull: Item = ItemHelper.createItem(Industry2.MOD_ID,
@@ -138,8 +139,7 @@ object IndustryItems {
     val circuitAdvanced: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("circuitAdvanced")), "ingredient.advancedcircuit", "circuit_advanced.png")
 
     // Miscellaneous
-    val scrap: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("scrap")), "scrap", "scrap.png")
-        .withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
+    val scrap: Item = ItemHelper.createItem(Industry2.MOD_ID, Item(itemID("scrap")), "scrap", "scrap.png").withTags(IndustryTags.PREVENT_ITEM_RECYCLING)
 
     fun initializeItems() {
         rawCopperOre
@@ -185,6 +185,7 @@ object IndustryItems {
         cellWater
         cellLava
         cellUranium
+        cellCoolant
 
         resin
         rubber

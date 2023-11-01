@@ -4,6 +4,8 @@ import net.minecraft.core.block.BlockTileEntityRotatable
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.block.material.Material
 import net.minecraft.core.entity.player.EntityPlayer
+import net.minecraft.core.enums.EnumDropCause
+import net.minecraft.core.item.ItemStack
 import net.minecraft.core.util.helper.Side
 import net.minecraft.core.util.helper.Sides
 import net.minecraft.core.world.World
@@ -11,6 +13,7 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.lv.TileEntityElectricFurnace
 
 class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
@@ -62,6 +65,21 @@ class BlockElectricFurnace(key: String?, id: Int, material: Material?) : BlockTi
             else texCoordToIndex(machineTexture[0][0], machineTexture[0][1]).also { atlasIndices[index] = it }
 
         return atlasIndices[index]
+    }
+
+    override fun getBreakResult(
+        world: World?,
+        dropCause: EnumDropCause?,
+        x: Int,
+        y: Int,
+        z: Int,
+        meta: Int,
+        tileEntity: TileEntity?
+    ): Array<ItemStack> {
+        return when (dropCause) {
+            EnumDropCause.SILK_TOUCH, EnumDropCause.PICK_BLOCK, EnumDropCause.PROPER_TOOL -> arrayOf(ItemStack(this))
+            else ->  arrayOf(ItemStack(IndustryBlocks.machineCasing))
+        }
     }
 
     companion object {

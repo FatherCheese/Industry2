@@ -13,6 +13,7 @@ import net.minecraft.core.world.WorldSource
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer
 import turniplabs.halplibe.helper.TextureHelper
 import turniplabs.industry.Industry2
+import turniplabs.industry.blocks.IndustryBlocks
 import turniplabs.industry.blocks.entities.lv.TileEntityCompressor
 
 class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEntityRotatable(key, id, material) {
@@ -75,7 +76,10 @@ class BlockCompressor(key: String?, id: Int, material: Material?) : BlockTileEnt
         meta: Int,
         tileEntity: TileEntity?
     ): Array<ItemStack> {
-        return super.getBreakResult(world, dropCause, x, y, z, meta, tileEntity)
+        return when (dropCause) {
+            EnumDropCause.SILK_TOUCH, EnumDropCause.PICK_BLOCK, EnumDropCause.PROPER_TOOL -> arrayOf(ItemStack(this))
+            else ->  arrayOf(ItemStack(IndustryBlocks.machineCasing))
+        }
     }
 
     companion object {

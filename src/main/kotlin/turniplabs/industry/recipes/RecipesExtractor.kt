@@ -13,6 +13,8 @@ object RecipesExtractor {
         addRecipe(IndustryBlocks.rubberLog, 1)
         addRecipe(IndustryBlocks.rubberSapling, 1)
         addRecipe(IndustryItems.resin, 3)
+
+        addSpecialRecipe(IndustryItems.cellWater, IndustryItems.cellCoolant, 1)
     }
 
     fun addRecipe(itemInput: Item, outputCount: Int) {
@@ -21,6 +23,10 @@ object RecipesExtractor {
 
     fun addRecipe(blockInput: Block, outputCount: Int) {
         recipeList[blockInput.id] = ItemStack(IndustryItems.rubber, outputCount)
+    }
+
+    fun addSpecialRecipe(itemInput: Item, outputItem: Item, outputCount: Int) {
+        recipeList[itemInput.id] = ItemStack(outputItem, outputCount)
     }
 
     fun getResult(i: Int): ItemStack? {

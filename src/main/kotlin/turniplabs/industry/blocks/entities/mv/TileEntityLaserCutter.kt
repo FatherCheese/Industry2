@@ -102,10 +102,7 @@ class TileEntityLaserCutter : TileEntityEnergyConductorDamageable(), IInventory 
             val resultStack: ItemStack? = RecipesCutter.getResult(contents[2]!!.item.id)
 
             if (contents[4] == null || contents[4]!!.item == resultStack!!.item &&
-                (contents[4]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[4]!!.stackSize + resultStack.stackSize <= contents[4]!!.maxStackSize ||
-                        contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
-            )
+                contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
                 return true
         }
         return false
@@ -119,10 +116,7 @@ class TileEntityLaserCutter : TileEntityEnergyConductorDamageable(), IInventory 
             val resultStack: ItemStack? = RecipesCutter.getResult(contents[3]!!.item.id)
 
             if (contents[5] == null || contents[5]!!.item == resultStack!!.item &&
-                (contents[5]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[5]!!.stackSize + resultStack.stackSize <= contents[5]!!.maxStackSize ||
-                        contents[5]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
-            )
+                contents[5]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
                 return true
         }
         return false
@@ -202,17 +196,21 @@ class TileEntityLaserCutter : TileEntityEnergyConductorDamageable(), IInventory 
 
         if (hasEnergy && (canProduceFirst() || canProduceSecond())) {
             ++currentMachineTime
-            --energy
+            energy -= 2
             active = true
 
             if (redstone > 0) {
                 currentMachineTime *= (redstone / 2048)
 
-                if (canProduceFirst())
+                if (canProduceFirst()) {
                     redstone -= 16
+                    energy -= 4
+                }
 
-                if (canProduceSecond())
+                if (canProduceSecond()) {
                     redstone -= 16
+                    energy -= 4
+                }
             }
 
             if (currentMachineTime >= maxMachineTime) {

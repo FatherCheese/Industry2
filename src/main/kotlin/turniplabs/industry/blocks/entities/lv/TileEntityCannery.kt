@@ -103,9 +103,7 @@ class TileEntityCannery : TileEntityEnergyConductorDamageable(), IInventory {
                 return false
 
             if (contents[4] == null || contents[4]!!.item == resultStack!!.item &&
-                (contents[4]!!.stackSize + resultStack.stackSize <= inventoryStackLimit ||
-                        contents[4]!!.stackSize + resultStack.stackSize <= contents[4]!!.maxStackSize ||
-                        contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize))
+                contents[4]!!.stackSize + resultStack.stackSize <= resultStack.maxStackSize)
                 return true
         }
         return false

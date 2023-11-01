@@ -220,6 +220,13 @@ object IndustryRecipes {
             '2', Block.dirt,
             '3', IndustryBlocks.machineCasing
         ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineExtractor), arrayOf(
+            "#1#", "232", "#4#",
+            '1', IndustryBlocks.machineCasingAdvanced,
+            '2', Item.nethercoal,
+            '2', IndustryBlocks.machineElectricFurnace,
+            '4', IndustryItems.circuitAdvanced
+        ))
         Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineMacerator), arrayOf(
             "#1#", "232", "#4#",
             '1', IndustryBlocks.machineCasingAdvanced,
@@ -238,6 +245,13 @@ object IndustryRecipes {
             "#1#", "232", "#4#",
             '1', IndustryBlocks.machineCasingAdvanced,
             '2', Item.quartz,
+            '2', IndustryBlocks.machineCutter,
+            '4', IndustryItems.circuitAdvanced
+        ))
+        Crafting.createRecipe(ItemStack(IndustryBlocks.advancedMachineExtractor), arrayOf(
+            "#1#", "232", "#4#",
+            '1', IndustryBlocks.machineCasingAdvanced,
+            '2', IndustryItems.cellCoolant,
             '2', IndustryBlocks.machineCutter,
             '4', IndustryItems.circuitAdvanced
         ))

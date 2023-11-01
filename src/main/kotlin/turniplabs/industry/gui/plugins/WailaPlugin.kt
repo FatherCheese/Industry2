@@ -25,8 +25,10 @@ class WailaPlugin : BTWailaCustomTootltipPlugin {
         ExtractorTooltip.addTooltip()
         RecyclerTooltip.addTooltip()
         CanneryTooltip.addTooltip()
+        InductionFurnaceTooltip.addTooltip()
         MaceratorRotaryTooltip.addTooltip()
         CompressorSingularityTooltip.addTooltip()
         LaserCutterTooltip.addTooltip()
+        CentrifugeExtractorTooltip.addTooltip()
     }
 }
