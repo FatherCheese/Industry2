@@ -4,15 +4,17 @@
   "version": "${version}",
 
   "name": "Industry2",
-  "description": "This mod adds industrial machines to automate your Minecraft world!",
+  "description": "This mod aims to help new BTA modders.",
   "authors": [
     "Cookie Cakes"
   ],
   "contributors": [
-    "AzureLMAO",
-    "The MidFord",
-    "Useless",
-    "Lyzantra"
+    "AzureLMAO (original helper)",
+    "Apollo (coding help)",
+    "The MidFord (textures)",
+    "Useless (coding help)",
+    "Lyzantra (coding help)",
+    "Nuke (coding help)"
   ],
   "contact": {
     "homepage": "",
@@ -20,21 +22,14 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/industry/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      {
-        "adapter": "kotlin",
-        "value": "turniplabs.industry.Industry2"
-      }
+      "baboon.industry.Industry2"
     ],
     "btwaila": [
-      {
-        "adapter": "kotlin",
-        "value": "turniplabs.industry.gui.plugins.WailaPlugin"
-      }
+      "baboon.industry.gui.plugins.WailaPlugin"
     ]
   },
   "mixins": [
@@ -42,8 +37,7 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.7",
-    "fabric-language-kotlin": "*",
+    "fabricloader": ">=0.13.3",
     "halplibe": ">=2.5.0",
     "energyapi": ">=1.1.9",
     "terrain-api": ">=1.2.0"
