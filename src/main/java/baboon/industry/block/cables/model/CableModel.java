@@ -1,10 +1,7 @@
-package baboon.industry.block.model;
+package baboon.industry.block.cables.model;
 
 import baboon.industry.block.cables.BlockCable;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderBlocks;
-import net.minecraft.core.util.phys.AABB;
-import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.energyapi.api.IEnergy;
 

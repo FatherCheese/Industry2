@@ -22,10 +22,12 @@ public class IndustryConfig {
         ConfigUpdater updater = ConfigUpdater.fromProperties();
 
         properties.addCategory("Energy Values")
+                .addEntry("extraLowVoltage", 2)
                 .addEntry("lowVoltage", 16)
                 .addEntry("mediumVoltage", 32)
                 .addEntry("highVoltage", 256)
                 .addEntry("extraHighVoltage", 512)
+                .addEntry("elvStorage", 128)
                 .addEntry("lvStorage", 1024)
                 .addEntry("mvStorage", 4096)
                 .addEntry("hvStorage", 16384)

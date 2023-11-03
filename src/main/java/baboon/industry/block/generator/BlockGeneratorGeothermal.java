@@ -1,7 +1,7 @@
 package baboon.industry.block.generator;
 
 import baboon.industry.Industry2;
-import baboon.industry.block.generator.entity.TileEntityGenerator;
+import baboon.industry.block.generator.entity.TileEntityGeneratorGeothermal;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -13,34 +13,34 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 import turniplabs.halplibe.helper.TextureHelper;
 
-public class BlockGenerator extends BlockTileEntityRotatable {
+public class BlockGeneratorGeothermal extends BlockTileEntityRotatable {
     private boolean keepInventory = false;
     private final String MOD_ID = Industry2.MOD_ID;
     private final int[][] machineTexture = new int[][]{
-            TextureHelper.getOrCreateBlockTexture(MOD_ID, "generator.png"),
+            TextureHelper.getOrCreateBlockTexture(MOD_ID, "generator_geothermal.png"),
             TextureHelper.getOrCreateBlockTexture(MOD_ID, "machine_casing_basic.png")
     };
 
-    public BlockGenerator(String key, int id, Material material) {
+    public BlockGeneratorGeothermal(String key, int id, Material material) {
         super(key, id, material);
         setupInstance(this);
     }
 
     @Override
-    protected TileEntity getNewBlockEntity() {
-        return new TileEntityGenerator();
-    }
-
-    @Override
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         if (!world.isClientSide) {
-            TileEntityGenerator tileEntity = (TileEntityGenerator) world.getBlockTileEntity(x, y, z);
+            TileEntityGeneratorGeothermal tileEntity = (TileEntityGeneratorGeothermal) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity == null)
                 return false;
             ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntity);
         }
         return true;
+    }
+
+    @Override
+    protected TileEntity getNewBlockEntity() {
+        return new TileEntityGeneratorGeothermal();
     }
 
     @Override
@@ -60,22 +60,21 @@ public class BlockGenerator extends BlockTileEntityRotatable {
             atlasIndices[index] = texCoordToIndex(machineTexture[1][0], machineTexture[1][1]);
 
         if (index == 2)
-                atlasIndices[index] = texCoordToIndex(machineTexture[0][0], machineTexture[0][1]);
+            atlasIndices[index] = texCoordToIndex(machineTexture[0][0], machineTexture[0][1]);
 
         return atlasIndices[index];
     }
 
-    // Static Methods
+    // Static methods
+    private static BlockGeneratorGeothermal instance = null;
 
-    private static BlockGenerator instance = null;
-
-    private static void setupInstance(BlockGenerator machine) {
+    private static void setupInstance(BlockGeneratorGeothermal machine) {
         instance = machine;
     }
 
-    private static BlockGenerator getInstance() {
+    private static BlockGeneratorGeothermal getInstance() {
         if (instance == null)
-            throw new NullPointerException("Instance of BlockGenerator hasn't been setup!");
+            throw new NullPointerException("Instance of BlockGeneratorGeothermal hasn't been setup!");
         return instance;
     }
 

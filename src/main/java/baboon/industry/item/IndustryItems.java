@@ -242,19 +242,19 @@ public class IndustryItems {
 
         batteryRedstone = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryRedstone(itemID("batteryRedstone")),
-                "battery.redstone").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.redstone").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryAdvanced = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryAdvanced(itemID("batteryAdvanced")),
-                "battery.advanced").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.advanced").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryCrystal = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryCrystal(itemID("batteryCrystal")),
-                "battery.crystal").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.crystal").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryLapis = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryLapis(itemID("batteryLapis")),
-                "battery.lapis").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.lapis").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         cellEmpty = ItemHelper.createItem(MOD_ID,
                 new ItemCell(itemID("cellEmpty")),
@@ -289,7 +289,7 @@ public class IndustryItems {
         canFood = ItemHelper.createItem(MOD_ID,
                 new ItemFoodStackable("can.food", itemID("canFood"), 2, false, 20),
                 "can.food",
-                "can_food.png");
+                "can_food.png").setMaxStackSize(10);
 
         resin = ItemHelper.createItem(MOD_ID,
                 new Item(itemID("resin")),

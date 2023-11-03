@@ -1,7 +1,7 @@
 package baboon.industry.mixin;
 
 import baboon.industry.block.cables.BlockCable;
-import baboon.industry.block.model.CableModel;
+import baboon.industry.block.cables.model.CableModel;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.WorldSource;

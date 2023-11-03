@@ -3,10 +3,9 @@ package baboon.industry.block;
 import baboon.industry.Industry2;
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.cables.*;
-import baboon.industry.block.generator.BlockGenerator;
-import baboon.industry.block.generator.entity.TileEntityGenerator;
-import baboon.industry.gui.generator.ContainerGenerator;
-import baboon.industry.gui.generator.GuiGenerator;
+import baboon.industry.block.generator.*;
+import baboon.industry.block.generator.entity.*;
+import baboon.industry.gui.generator.*;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.Block;
@@ -128,10 +127,18 @@ public class IndustryBlocks {
 
     private void addToGuiMap() {
         EnergyAPI.addToNameGuiMap("IndustryGenerator", GuiGenerator.class, TileEntityGenerator.class, ContainerGenerator.class);
+        EnergyAPI.addToNameGuiMap("IndustryWatermill", GuiGeneratorWatermill.class, TileEntityGeneratorWatermill.class, ContainerGeneratorWatermill.class);
+        EnergyAPI.addToNameGuiMap("IndustryWindmill", GuiGeneratorWindmill.class, TileEntityGeneratorWindmill.class, ContainerGeneratorWindmill.class);
+        EnergyAPI.addToNameGuiMap("IndustryGeothermal", GuiGeneratorGeothermal.class, TileEntityGeneratorGeothermal.class, ContainerGeneratorGeothermal.class);
+        EnergyAPI.addToNameGuiMap("IndustrySolar", GuiGeneratorSolar.class, TileEntityGeneratorSolar.class, ContainerSolarBase.class);
     }
 
     private void initializeTiles() {
         EntityHelper.createTileEntity(TileEntityGenerator.class, "IndustryGenerator");
+        EntityHelper.createTileEntity(TileEntityGeneratorWatermill.class, "IndustryWatermill");
+        EntityHelper.createTileEntity(TileEntityGeneratorWindmill.class, "IndustryWindmill");
+        EntityHelper.createTileEntity(TileEntityGeneratorGeothermal.class, "IndustryGeothermal");
+        EntityHelper.createTileEntity(TileEntityGeneratorSolar.class, "IndustrySolar");
     }
 
     public void initializeBlocks() {
@@ -293,6 +300,25 @@ public class IndustryBlocks {
         generator = machineBuilder
                 .setNorthTexture("generator.png")
                 .build(new BlockGenerator("generator", blockID("generator"), Material.metal));
+
+        generatorWatermill = machineBuilderBlank
+                .setTopBottomTexture("machine_casing_basic.png")
+                .setSideTextures("generator_watermill.png")
+                .build(new BlockGeneratorWatermill("generator.watermill", blockID("generatorWatermill"), Material.metal));
+
+        generatorWindmill = machineBuilder
+                .setNorthTexture("generator_windmill.png")
+                .build(new BlockGeneratorWindmill("generator.windmill", blockID("generatorWindmill"), Material.metal));
+
+        generatorGeothermal = machineBuilder
+                .setNorthTexture("generator_geothermal.png")
+                .build(new BlockGeneratorGeothermal("generator.geothermal", blockID("generatorGeothermal"), Material.metal));
+
+        generatorSolar = machineBuilderBlank
+                .setTopTexture("generator_solar.png")
+                .setSideTextures("machine_casing_basic.png")
+                .setBottomTexture("machine_casing_basic.png")
+                .build(new BlockGeneratorSolar("generator.solar", blockID("generatorSolar"), Material.metal));
 
         addToGuiMap();
         initializeTiles();

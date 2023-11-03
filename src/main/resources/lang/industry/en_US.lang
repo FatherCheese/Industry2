@@ -47,16 +47,17 @@ tile.industry.machine.casing.name=Machine Casing
 tile.industry.machine.casing.desc=
 tile.industry.machine.casing.advanced.name=Advanced Machine Casing
 tile.industry.machine.casing.advanced.desc=
+
 tile.industry.generator.name=Generator
 tile.industry.generator.desc=
-tile.industry.machine.generator.geothermal.name=Geothermal Generator
-tile.industry.machine.generator.geothermal.desc=
-tile.industry.machine.generator.watermill.name=Watermill
-tile.industry.machine.generator.watermill.desc=
-tile.industry.machine.generator.windmill.name=Windmill
-tile.industry.machine.generator.windmill.desc=
-tile.industry.machine.generator.solar.name=Solar Generator
-tile.industry.machine.generator.solar.desc=
+tile.industry.generator.watermill.name=Watermill
+tile.industry.generator.watermill.desc=
+tile.industry.generator.windmill.name=Windmill
+tile.industry.generator.windmill.desc=
+tile.industry.generator.geothermal.name=Geothermal Generator
+tile.industry.generator.geothermal.desc=
+tile.industry.generator.solar.name=Solar Generator
+tile.industry.generator.solar.desc=
 
 tile.industry.machine.array.lv.name=LV Solar Array
 tile.industry.machine.array.lv.desc=

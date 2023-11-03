@@ -3,7 +3,9 @@ package baboon.industry;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
 import baboon.industry.recipe.IndustryRecipes;
+import baboon.industry.recipe.fuel.GeneratorGeothermalFuel;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.block.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.SoundHelper;
@@ -34,6 +36,8 @@ public class Industry2 implements ModInitializer {
         new IndustryBlocks().initializeBlocks();
         new IndustryItems().initializeItems();
         new IndustryRecipes().initializeRecipes();
+
+        GeneratorGeothermalFuel.addFuel(Block.cactus.id, 2000);
 
         logger.info("Industry2 has been initialized. Have fun automating!");
     }

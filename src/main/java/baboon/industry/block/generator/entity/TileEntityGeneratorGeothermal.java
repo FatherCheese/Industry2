@@ -2,27 +2,27 @@ package baboon.industry.block.generator.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
-import baboon.industry.block.generator.BlockGenerator;
+import baboon.industry.block.generator.BlockGeneratorGeothermal;
+import baboon.industry.recipe.fuel.GeneratorGeothermalFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.energyapi.api.LookupFuelEnergy;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 
-public class TileEntityGenerator extends TileEntityEnergyConductor implements IInventory {
+public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
-    public boolean active = false;
-    public int currentBurnTime = 0;
-    public int maxBurnTime = 0;
-    public ItemStack currentFuel = null;
+    private final GeneratorGeothermalFuel fuel = new GeneratorGeothermalFuel();
+    private boolean active = false;
+    public int currentFuelTime = 0;
+    public final int maxFuelTime = 8000;
 
-    public TileEntityGenerator() {
+    public TileEntityGeneratorGeothermal() {
         contents = new ItemStack[3];
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
@@ -30,7 +30,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
         setMaxReceive(0);
 
         for (Direction dir : Direction.values())
-            setConnection(dir, Connection.INPUT);
+            setConnection(dir, Connection.OUTPUT);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
 
     @Override
     public String getInvName() {
-        return "IndustryGenerator";
+        return "IndustryGeothermal";
     }
 
     @Override
@@ -88,64 +88,52 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
         return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
     }
 
-    private int energyYieldForItem(ItemStack itemStack) {
-        return itemStack == null ? 0 : LookupFuelEnergy.fuelEnergy().getEnergyYield(itemStack.getItem().id);
-    }
-
-    private int burnTimeForItem(ItemStack itemStack) {
-        return itemStack == null ? 0 : LookupFuelFurnace.instance.getFuelYield(itemStack.getItem().id);
+    private int getFuelFromItem(ItemStack itemStack) {
+        return (itemStack == null) ? 0 : fuel.getYield(itemStack.getItem().id);
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
-        boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
-                provide(getStackInSlot(0), getMaxProvide(), false);
+                provide(getStackInSlot(0), maxProvide, false);
                 onInventoryChanged();
             }
 
-            if (currentBurnTime > 0) {
-                --currentBurnTime;
-                modifyEnergy(energyYieldForItem(currentFuel));
+            if (currentFuelTime > 0 && energy != capacity) {
+                --currentFuelTime;
+                ++energy;
             }
 
-            if (currentBurnTime == 0 && energy != capacity) {
-                currentBurnTime = burnTimeForItem(contents[2]) / 5;
-                maxBurnTime = currentBurnTime;
-
-                if (currentBurnTime > 0) {
+            if ((currentFuelTime == 0 || currentFuelTime > 0 && currentFuelTime < 7000) && contents[2] != null) {
+                if (fuel.getFuelList().containsKey(contents[2].getItem().id)) {
                     active = true;
-                    BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
-
-                    currentFuel = contents[2];
                     onInventoryChanged();
-                    machineUpdated = true;
+                    BlockGeneratorGeothermal.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
 
-                    if (contents[2] != null) {
-                        --contents[2].stackSize;
-                        if (contents[2].stackSize <= 0)
-                            contents[2] = null;
-                    }
-                } else {
+                    currentFuelTime += getFuelFromItem(contents[2]);
+                    --contents[2].stackSize;
+
+                    if (contents[2].getItem() == Item.bucketLava)
+                        contents[2] = new ItemStack(Item.bucket);
+
+                    if (contents[2].stackSize <= 0)
+                        contents[2] = null;
+                } else
                     active = false;
-                    currentFuel = null;
-                }
             }
-            if (machineUpdated)
-                onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.generator.id);
+                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.generatorGeothermal.id);
         }
     }
 
     @Override
     public void writeToNBT(CompoundTag CompoundTag) {
         super.writeToNBT(CompoundTag);
-        CompoundTag.putInt("BurnTime", currentBurnTime);
+        CompoundTag.putInt("FuelTime", currentFuelTime);
         CompoundTag.putInt("Energy", energy);
 
         ListTag listTag = new ListTag();
@@ -164,7 +152,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
     @Override
     public void readFromNBT(CompoundTag CompoundTag) {
         super.readFromNBT(CompoundTag);
-        currentBurnTime = CompoundTag.getInteger("BurnTime");
+        currentFuelTime = CompoundTag.getInteger("FuelTime");
         energy = CompoundTag.getInteger("Energy");
 
         ListTag listTag = CompoundTag.getList("Items");
