@@ -59,29 +59,29 @@ tile.industry.generator.geothermal.desc=
 tile.industry.generator.solar.name=Solar Generator
 tile.industry.generator.solar.desc=
 
-tile.industry.machine.array.lv.name=LV Solar Array
-tile.industry.machine.array.lv.desc=
-tile.industry.machine.array.mv.name=MV Solar Array
-tile.industry.machine.array.mv.desc=
-tile.industry.machine.array.hv.name=HV Solar Array
-tile.industry.machine.array.hv.desc=
-tile.industry.machine.array.shv.name=SHV Solar Array
-tile.industry.machine.array.shv.desc=
+tile.industry.array.lv.name=LV Solar Array
+tile.industry.array.lv.desc=
+tile.industry.array.mv.name=MV Solar Array
+tile.industry.array.mv.desc=
+tile.industry.array.hv.name=HV Solar Array
+tile.industry.array.hv.desc=
+tile.industry.array.ehv.name=EHV Solar Array
+tile.industry.array.ehv.desc=
 
-tile.industry.machine.batbox.lv.name=LV Batbox
-tile.industry.machine.batbox.lv.desc=
-tile.industry.machine.batbox.mv.name=MV Batbox
-tile.industry.machine.batbox.mv.desc=
-tile.industry.machine.batbox.hv.name=HV Batbox
-tile.industry.machine.batbox.hv.desc=
-tile.industry.machine.batbox.shv.name=SHV Batbox
-tile.industry.machine.batbox.shv.desc=
+tile.industry.batbox.lv.name=LV Batbox
+tile.industry.batbox.lv.desc=
+tile.industry.batbox.mv.name=MV Batbox
+tile.industry.batbox.mv.desc=
+tile.industry.batbox.hv.name=HV Batbox
+tile.industry.batbox.hv.desc=
+tile.industry.batbox.ehv.name=EHV Batbox
+tile.industry.batbox.ehv.desc=
 
 tile.industry.machine.transformer.mvtolv.name=MV to LV Transformer
 tile.industry.machine.transformer.mvtolv.desc=
 tile.industry.machine.transformer.hvtomv.name=HV to MV Transformer
 tile.industry.machine.transformer.hvtomv.desc=
-tile.industry.machine.transformer.shvtohv.name=SHV to HV Transformer
+tile.industry.machine.transformer.shvtohv.name=EHV to HV Transformer
 tile.industry.machine.transformer.shvtohv.desc=
 
 tile.industry.machine.furnace.name=Electric Furnace

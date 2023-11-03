@@ -34,8 +34,8 @@ public class GuiGeneratorWindmill extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer() {
-        int scrnX = (width - xSize) / 2 - (88 + 8);
-        fontRenderer.drawString("Windmill", scrnX, 6, 4210752);
+        int scrnX = xSize / 2;
+        drawStringCenteredNoShadow(fontRenderer, "Windmill", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }
 

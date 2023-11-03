@@ -1,31 +1,26 @@
-package baboon.industry.block.generator.entity;
+package baboon.industry.block.storage.entity;
 
+import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 
-public class TileEntitySolarBase extends TileEntityEnergyConductor implements IInventory {
-    protected ItemStack[] contents;
-    public int generatedEnergy = 0;
-    private final int solarVoltage;
+public class TileEntityBatboxBase extends TileEntityEnergyConductorDamageable implements IInventory {
+    private ItemStack[] contents;
 
-    public TileEntitySolarBase(int solarVoltage) {
+    public TileEntityBatboxBase() {
         contents = new ItemStack[2];
-        this.solarVoltage = solarVoltage;
-
-        setMaxReceive(0);
 
         for (Direction dir : Direction.values())
             this.setConnection(dir, Connection.OUTPUT);
-    }
 
+        this.setConnection(Direction.Y_POS, Connection.INPUT);
+    }
 
     @Override
     public int getSizeInventory() {
@@ -82,15 +77,6 @@ public class TileEntitySolarBase extends TileEntityEnergyConductor implements II
         return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
     }
 
-    private boolean isFacingSky() {
-        for (int heightCoords = yCoord + 1; heightCoords < 255; heightCoords++) {
-            Block block = Block.getBlock(worldObj.getBlockId(xCoord, heightCoords, zCoord));
-            if (block != null && block.isOpaqueCube())
-                return false;
-        }
-        return true;
-    }
-
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -100,17 +86,10 @@ public class TileEntitySolarBase extends TileEntityEnergyConductor implements II
                 provide(getStackInSlot(0), maxProvide, false);
                 onInventoryChanged();
             }
-
-            if (!isFacingSky())
-                generatedEnergy = 0;
-
-            if (energy < capacity && isFacingSky()) {
-                generatedEnergy = 2 * solarVoltage;
-
-                generatedEnergy -= worldObj.skyDarken * solarVoltage;
-
-                if (generatedEnergy > 0)
-                    energy = Math.min(energy + generatedEnergy, capacity);
+            
+            if (getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof ItemEnergyContainer) {
+                receive(getStackInSlot(1), maxReceive, false);
+                onInventoryChanged();
             }
         }
     }

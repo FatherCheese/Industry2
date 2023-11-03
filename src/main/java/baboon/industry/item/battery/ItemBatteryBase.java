@@ -15,13 +15,17 @@ public class ItemBatteryBase extends ItemBattery implements ICustomDescription {
         super(i);
         setMaxStackSize(1);
 
+        baseCapacity = capacity;
+        baseProvide = provide;
+        baseReceive = receive;
+
         String MOD_ID = Industry2.MOD_ID;
         textureCoords = new int[][]{
-                TextureHelper.getOrCreateItemTexture(MOD_ID, fullTexture),
-                TextureHelper.getOrCreateItemTexture(MOD_ID, midFullTexture),
-                TextureHelper.getOrCreateItemTexture(MOD_ID, midTexture),
+                TextureHelper.getOrCreateItemTexture(MOD_ID, emptyTexture),
                 TextureHelper.getOrCreateItemTexture(MOD_ID, midEmptyTexture),
-                TextureHelper.getOrCreateItemTexture(MOD_ID, emptyTexture)
+                TextureHelper.getOrCreateItemTexture(MOD_ID, midTexture),
+                TextureHelper.getOrCreateItemTexture(MOD_ID, midFullTexture),
+                TextureHelper.getOrCreateItemTexture(MOD_ID, fullTexture)
         };
     }
 

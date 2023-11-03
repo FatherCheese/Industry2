@@ -1,7 +1,7 @@
-package baboon.industry.block.generator;
+package baboon.industry.block.storage;
 
-import baboon.industry.block.generator.entity.TileEntityGeneratorSolar;
-import baboon.industry.block.generator.entity.TileEntitySolarBase;
+import baboon.industry.block.storage.entity.TileEntityBatboxBase;
+import baboon.industry.block.storage.entity.TileEntityBatboxEHV;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -9,21 +9,21 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 
-public class BlockGeneratorSolar extends BlockTileEntity {
+public class BlockBatboxEHV extends BlockTileEntity {
 
-    public BlockGeneratorSolar(String key, int id, Material material) {
+    public BlockBatboxEHV(String key, int id, Material material) {
         super(key, id, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityGeneratorSolar();
+        return new TileEntityBatboxEHV();
     }
 
     @Override
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         if (!world.isClientSide) {
-            TileEntitySolarBase tileEntity = (TileEntitySolarBase) world.getBlockTileEntity(x, y, z);
+            TileEntityBatboxBase tileEntity = (TileEntityBatboxBase) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity == null)
                 return false;

@@ -1,6 +1,6 @@
 package baboon.industry.block.generator;
 
-import baboon.industry.block.generator.entity.TileEntityGeneratorSolar;
+import baboon.industry.block.generator.entity.TileEntityArrayLV;
 import baboon.industry.block.generator.entity.TileEntitySolarBase;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
@@ -9,15 +9,15 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 
-public class BlockGeneratorSolar extends BlockTileEntity {
+public class BlockArrayLV extends BlockTileEntity {
 
-    public BlockGeneratorSolar(String key, int id, Material material) {
+    public BlockArrayLV(String key, int id, Material material) {
         super(key, id, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityGeneratorSolar();
+        return new TileEntityArrayLV();
     }
 
     @Override

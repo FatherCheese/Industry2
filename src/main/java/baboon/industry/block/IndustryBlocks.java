@@ -3,9 +3,19 @@ package baboon.industry.block;
 import baboon.industry.Industry2;
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.cables.*;
+import baboon.industry.block.cables.entity.TileEntityCable;
 import baboon.industry.block.generator.*;
 import baboon.industry.block.generator.entity.*;
+import baboon.industry.block.storage.BlockBatboxEHV;
+import baboon.industry.block.storage.BlockBatboxHV;
+import baboon.industry.block.storage.BlockBatboxLV;
+import baboon.industry.block.storage.BlockBatboxMV;
+import baboon.industry.block.storage.entity.TileEntityBatboxEHV;
+import baboon.industry.block.storage.entity.TileEntityBatboxHV;
+import baboon.industry.block.storage.entity.TileEntityBatboxLV;
+import baboon.industry.block.storage.entity.TileEntityBatboxMV;
 import baboon.industry.gui.generator.*;
+import baboon.industry.gui.storage.*;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.Block;
@@ -131,14 +141,31 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryWindmill", GuiGeneratorWindmill.class, TileEntityGeneratorWindmill.class, ContainerGeneratorWindmill.class);
         EnergyAPI.addToNameGuiMap("IndustryGeothermal", GuiGeneratorGeothermal.class, TileEntityGeneratorGeothermal.class, ContainerGeneratorGeothermal.class);
         EnergyAPI.addToNameGuiMap("IndustrySolar", GuiGeneratorSolar.class, TileEntityGeneratorSolar.class, ContainerSolarBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryArrayLV", GuiArrayLV.class, TileEntityArrayLV.class, ContainerSolarBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryArrayMV", GuiArrayMV.class, TileEntityArrayMV.class, ContainerSolarBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryArrayHV", GuiArrayHV.class, TileEntityArrayHV.class, ContainerSolarBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryArrayEHV", GuiArrayEHV.class, TileEntityArrayEHV.class, ContainerSolarBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryBatboxLV", GuiBatboxLV.class, TileEntityBatboxLV.class, ContainerBatboxBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryBatboxMV", GuiBatboxMV.class, TileEntityBatboxMV.class, ContainerBatboxBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryBatboxHV", GuiBatboxHV.class, TileEntityBatboxHV.class, ContainerBatboxBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryBatboxEHV", GuiBatboxEHV.class, TileEntityBatboxEHV.class, ContainerBatboxBase.class);
     }
 
     private void initializeTiles() {
+        EntityHelper.createTileEntity(TileEntityCable.class, "Cable");
         EntityHelper.createTileEntity(TileEntityGenerator.class, "IndustryGenerator");
         EntityHelper.createTileEntity(TileEntityGeneratorWatermill.class, "IndustryWatermill");
         EntityHelper.createTileEntity(TileEntityGeneratorWindmill.class, "IndustryWindmill");
         EntityHelper.createTileEntity(TileEntityGeneratorGeothermal.class, "IndustryGeothermal");
         EntityHelper.createTileEntity(TileEntityGeneratorSolar.class, "IndustrySolar");
+        EntityHelper.createTileEntity(TileEntityArrayLV.class, "IndustryArrayLV");
+        EntityHelper.createTileEntity(TileEntityArrayMV.class, "IndustryArrayMV");
+        EntityHelper.createTileEntity(TileEntityArrayHV.class, "IndustryArrayHV");
+        EntityHelper.createTileEntity(TileEntityArrayEHV.class, "IndustryArrayEHV");
+        EntityHelper.createTileEntity(TileEntityBatboxLV.class, "IndustryBatboxLV");
+        EntityHelper.createTileEntity(TileEntityBatboxMV.class, "IndustryBatboxMV");
+        EntityHelper.createTileEntity(TileEntityBatboxHV.class, "IndustryBatboxHV");
+        EntityHelper.createTileEntity(TileEntityBatboxEHV.class, "IndustryBatboxEHV");
     }
 
     public void initializeBlocks() {
@@ -299,26 +326,93 @@ public class IndustryBlocks {
 
         generator = machineBuilder
                 .setNorthTexture("generator.png")
-                .build(new BlockGenerator("generator", blockID("generator"), Material.metal));
+                .build(new BlockGenerator("generator", blockID("generator"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         generatorWatermill = machineBuilderBlank
                 .setTopBottomTexture("machine_casing_basic.png")
                 .setSideTextures("generator_watermill.png")
-                .build(new BlockGeneratorWatermill("generator.watermill", blockID("generatorWatermill"), Material.metal));
+                .build(new BlockGeneratorWatermill("generator.watermill", blockID("generatorWatermill"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         generatorWindmill = machineBuilder
                 .setNorthTexture("generator_windmill.png")
-                .build(new BlockGeneratorWindmill("generator.windmill", blockID("generatorWindmill"), Material.metal));
+                .build(new BlockGeneratorWindmill("generator.windmill", blockID("generatorWindmill"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         generatorGeothermal = machineBuilder
                 .setNorthTexture("generator_geothermal.png")
-                .build(new BlockGeneratorGeothermal("generator.geothermal", blockID("generatorGeothermal"), Material.metal));
+                .build(new BlockGeneratorGeothermal("generator.geothermal", blockID("generatorGeothermal"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         generatorSolar = machineBuilderBlank
                 .setTopTexture("generator_solar.png")
                 .setSideTextures("machine_casing_basic.png")
                 .setBottomTexture("machine_casing_basic.png")
-                .build(new BlockGeneratorSolar("generator.solar", blockID("generatorSolar"), Material.metal));
+                .build(new BlockGeneratorSolar("generator.solar", blockID("generatorSolar"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        solarArrayLV = new BlockBuilder(MOD_ID)
+                .setBlockSound(BlockSounds.WOOD)
+                .setHardness(5.0f)
+                .setResistance(0.0f)
+                .setTopTexture("arrayLV.png")
+                .setSideTextures("batboxLV.png")
+                .setBottomTexture("batboxLV.png")
+                .build(new BlockArrayLV("array.lv", blockID("arrayLV"), Material.wood))
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
+
+        solarArrayMV = machineBuilderBlank
+                .setTopTexture("arrayMV.png")
+                .setSideTextures("batboxMV.png")
+                .setBottomTexture("batboxMV.png")
+                .build(new BlockArrayMV("array.mv", blockID("arrayMV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        solarArrayHV = machineBuilderBlank
+                .setTopTexture("generator_solar.png")
+                .setSideTextures("batboxHV.png")
+                .setBottomTexture("batboxHV.png")
+                .build(new BlockArrayHV("array.hv", blockID("arrayHV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        solarArrayEHV = machineBuilderBlank
+                .setTopTexture("arrayEHV.png")
+                .setSideTextures("batboxEHV.png")
+                .setBottomTexture("batboxEHV.png")
+                .build(new BlockArrayEHV("array.ehv", blockID("arrayEHV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        batboxLV = new BlockBuilder(MOD_ID)
+                .setBlockSound(BlockSounds.WOOD)
+                .setHardness(5.0f)
+                .setResistance(0.0f)
+                .setTopTexture("batboxLV_input.png")
+                .setSideTextures("batboxLV.png")
+                .setBottomTexture("batboxLV.png")
+                .build(new BlockBatboxLV("batbox.lv", blockID("batboxLV"), Material.wood))
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
+
+        batboxMV = machineBuilderBlank
+                .setTopTexture("batboxMV_input.png")
+                .setSideTextures("batboxMV.png")
+                .setBottomTexture("batboxMV.png")
+                .build(new BlockBatboxMV("batbox.mv", blockID("batboxMV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        batboxHV = machineBuilderBlank
+                .setTopTexture("batboxHV_input.png")
+                .setSideTextures("batboxHV.png")
+                .setBottomTexture("batboxHV.png")
+                .build(new BlockBatboxHV("batbox.hv", blockID("batboxHV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        batboxEHV = machineBuilderBlank
+                .setTopTexture("batboxEHV_input.png")
+                .setSideTextures("batboxEHV.png")
+                .setBottomTexture("batboxEHV.png")
+                .build(new BlockBatboxEHV("batbox.ehv", blockID("batboxEHV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         addToGuiMap();
         initializeTiles();

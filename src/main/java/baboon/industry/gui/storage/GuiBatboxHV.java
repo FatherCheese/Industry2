@@ -1,11 +1,11 @@
-package baboon.industry.gui.generator;
+package baboon.industry.gui.storage;
 
-import baboon.industry.block.generator.entity.TileEntitySolarBase;
+import baboon.industry.block.storage.entity.TileEntityBatboxBase;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 
-public class GuiGeneratorSolar extends GuiSolarBase {
+public class GuiBatboxHV extends GuiBatboxBase {
 
-    public GuiGeneratorSolar(InventoryPlayer inventory, TileEntitySolarBase tileEntity) {
+    public GuiBatboxHV(InventoryPlayer inventory, TileEntityBatboxBase tileEntity) {
         super(inventory, tileEntity);
     }
 
@@ -13,7 +13,7 @@ public class GuiGeneratorSolar extends GuiSolarBase {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2;
-        drawStringCenteredNoShadow(fontRenderer, "Solar Generator", scrnX, 6, 4210752);
+        drawStringCenteredNoShadow(fontRenderer, "HV Batbox", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }
 }

@@ -34,8 +34,8 @@ public class GuiGeneratorWatermill extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer() {
-        int scrnX = (width - xSize) / 2 - (88 + 9);
-        fontRenderer.drawString("Watermill", scrnX, 6, 4210752);
+        int scrnX = xSize / 2;
+        drawStringCenteredNoShadow(fontRenderer, "Watermill", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }
 

@@ -22,10 +22,6 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     private int machineHealth = maxMachineHealth;
     private Boolean lastTickDamage = false;
 
-    public void setMachineHealth(int newHealth) {
-        machineHealth = newHealth;
-    }
-
     @Override
     public int receive(Direction dir, int amount, boolean test) {
         if (canConnect(dir, Connection.INPUT)) {
@@ -37,7 +33,10 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
             int received = Math.min(capacity - energy, Math.min(maxReceive, amount));
             if (!test)
                 energy += received;
+
+            return received;
         }
+
         return 0;
     }
 
@@ -45,22 +44,24 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     public void updateEntity() {
         super.updateEntity();
 
-        if (machineHealth < 0)
-            worldObj.createExplosion(null, xCoord, yCoord, zCoord, 1.0f);
+        if (!worldObj.isClientSide) {
+            if (machineHealth < 0)
+                worldObj.createExplosion(null, xCoord, yCoord, zCoord, 1.0f);
 
-        if (machineHealth < maxMachineHealth) {
-            double x = xCoord + random.nextDouble();
-            double y = yCoord + random.nextDouble();
-            double z = zCoord + random.nextDouble();
+            if (machineHealth < maxMachineHealth) {
+                double x = xCoord + random.nextDouble();
+                double y = yCoord + random.nextDouble();
+                double z = zCoord + random.nextDouble();
 
-            worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
-            worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
+                worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
+                worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
+            }
+
+            if (!lastTickDamage && random.nextInt(4) == 0 && machineHealth + healAmount <= maxMachineHealth)
+                machineHealth += healAmount;
+
+            lastTickDamage = false;
         }
-
-        if (!lastTickDamage && random.nextInt(4) == 0  && machineHealth + healAmount <= maxMachineHealth)
-            machineHealth += healAmount;
-
-        lastTickDamage = false;
     }
 
     @Override
