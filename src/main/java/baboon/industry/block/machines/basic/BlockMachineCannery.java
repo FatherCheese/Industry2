@@ -1,6 +1,5 @@
 package baboon.industry.block.machines.basic;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
@@ -10,7 +9,6 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 
 public class BlockMachineCannery extends BlockTileEntityRotatable {
-    private final String MOD_ID = Industry2.MOD_ID;
 
     public BlockMachineCannery(String key, int id, Material material) {
         super(key, id, material);

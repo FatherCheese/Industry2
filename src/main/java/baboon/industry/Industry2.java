@@ -13,8 +13,12 @@ import turniplabs.halplibe.helper.SoundHelper;
 public class Industry2 implements ModInitializer {
 
     // TODO LIST
-    // Look into custom damage types
+    // Machine shift+clicking
+    // Machine drops
     // Fix inconsistencies
+    // Log Resin
+    // BTWaila support
+    // Look into custom damage types
     // Look into damageable crafting
 
     public static String MOD_ID = "industry";

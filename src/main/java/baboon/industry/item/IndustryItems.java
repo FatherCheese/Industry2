@@ -15,8 +15,9 @@ import turniplabs.halplibe.helper.ItemHelper;
 public class IndustryItems {
     private final String MOD_ID = Industry2.MOD_ID;
 
-    private static int itemID(String configName) {
-        return IndustryConfig.cfg.getInt("Item IDs." + configName);
+    private int itemID = 17000;
+    private int nextItemID() {
+        return itemID++;
     }
 
     // Raw Ore
@@ -86,233 +87,233 @@ public class IndustryItems {
 
     public void initializeItems() {
         oreRawTin = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("rawTin")),
+                new Item(nextItemID()),
                 "ore.raw.tin",
                 "raw_tin.png");
 
         oreRawCopper= ItemHelper.createItem(MOD_ID,
-                new Item(itemID("rawCopper")),
+                new Item(nextItemID()),
                 "ore.raw.copper",
                 "raw_copper.png");
 
         oreRawUranium = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("rawUranium")),
+                new Item(nextItemID()),
                 "ore.raw.uranium",
                 "raw_uranium.png");
 
         dustTin = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustTin")),
+                new Item(nextItemID()),
                 "dust.tin",
                 "dust_tin.png");
 
         dustCopper = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustCopper")),
+                new Item(nextItemID()),
                 "dust.copper",
                 "dust_copper.png");
 
         dustBronze = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustBronze")),
+                new Item(nextItemID()),
                 "dust.bronze",
                 "dust_bronze.png");
 
         dustIron = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustIron")),
+                new Item(nextItemID()),
                 "dust.iron",
                 "dust_iron.png");
 
         dustGold = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustGold")),
+                new Item(nextItemID()),
                 "dust.gold",
                 "dust_gold.png");
 
         dustCoal = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("dustCoal")),
+                new Item(nextItemID()),
                 "dust.coal",
                 "dust_coal.png");
 
         ingotTin = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("ingotTin")),
+                new Item(nextItemID()),
                 "ingot.tin",
                 "ingot_tin.png");
 
         ingotCopper = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("ingotCopper")),
+                new Item(nextItemID()),
                 "ingot.copper",
                 "ingot_copper.png");
 
         ingotBronze = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("ingotBronze")),
+                new Item(nextItemID()),
                 "ingot.bronze",
                 "ingot_bronze.png");
 
         ingotUranium = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("ingotUranium")),
+                new Item(nextItemID()),
                 "ingot.uranium",
                 "ingot_uranium.png");
 
         plateTin = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateTin")),
+                new Item(nextItemID()),
                 "plate.tin",
                 "plate_tin.png");
 
         plateCopper = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateCopper")),
+                new Item(nextItemID()),
                 "plate.copper",
                 "plate_copper.png");
 
         plateBronze = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateBronze")),
+                new Item(nextItemID()),
                 "plate.bronze",
                 "plate_bronze.png");
 
         plateIron = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateIron")),
+                new Item(nextItemID()),
                 "plate.iron",
                 "plate_iron.png");
 
         plateGold = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateGold")),
+                new Item(nextItemID()),
                 "plate.gold",
                 "plate_gold.png");
 
         plateSteel = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("plateSteel")),
+                new Item(nextItemID()),
                 "plate.steel",
                 "plate_steel.png");
 
         itemCableTin = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.tin", itemID("itemTinCable"), IndustryBlocks.blockCableTin),
+                new ItemCable("cable.tin", nextItemID(), IndustryBlocks.blockCableTin),
                 "cable.tin",
                 "cable_tin.png");
 
         itemCableCopper = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.copper", itemID("itemCopperCable"), IndustryBlocks.blockCableCopper),
+                new ItemCable("cable.copper", nextItemID(), IndustryBlocks.blockCableCopper),
                 "cable.copper",
                 "cable_copper.png");
 
         itemCableGold = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.gold", itemID("itemGoldCable"), IndustryBlocks.blockCableGold),
+                new ItemCable("cable.gold", nextItemID(), IndustryBlocks.blockCableGold),
                 "cable.gold",
                 "cable_gold.png");
 
         itemCableSteel = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.steel", itemID("itemSteelCable"), IndustryBlocks.blockCableSteel),
+                new ItemCable("cable.steel", nextItemID(), IndustryBlocks.blockCableSteel),
                 "cable.steel",
                 "cable_steel.png");
 
         itemInsulatedCableTin = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.tin", itemID("itemInsulatedTinCable"), IndustryBlocks.blockInsulatedCableTin),
+                new ItemCable("insulated.cable.tin", nextItemID(), IndustryBlocks.blockInsulatedCableTin),
                 "insulated.cable.tin",
                 "cable_insulated_tin.png");
 
         itemInsulatedCableCopper = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.copper", itemID("itemInsulatedCopperCable"), IndustryBlocks.blockInsulatedCableCopper),
+                new ItemCable("insulated.cable.copper", nextItemID(), IndustryBlocks.blockInsulatedCableCopper),
                 "insulated.cable.copper",
                 "cable_insulated_copper.png");
 
         itemInsulatedCableGold = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.gold", itemID("itemInsulatedGoldCable"), IndustryBlocks.blockInsulatedCableGold),
+                new ItemCable("insulated.cable.gold", nextItemID(), IndustryBlocks.blockInsulatedCableGold),
                 "insulated.cable.gold",
                 "cable_insulated_gold.png");
 
         itemInsulatedCableSteel = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.steel", itemID("itemInsulatedSteelCable"), IndustryBlocks.blockInsulatedCableSteel),
+                new ItemCable("insulated.cable.steel", nextItemID(), IndustryBlocks.blockInsulatedCableSteel),
                 "insulated.cable.steel",
                 "cable_insulated_steel.png");
 
         toolTreetap = ItemHelper.createItem(MOD_ID,
-                new ItemTreetap(itemID("toolTreetap")),
+                new ItemTreetap(nextItemID()),
                 "tool.treetap",
                 "tool_treetap.png");
 
         toolHammer = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("toolHammer")),
+                new Item(nextItemID()),
                 "tool.hammer",
                 "tool_hammer.png");
 
         toolCutters = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("toolCutters")),
+                new Item(nextItemID()),
                 "tool.cutters",
                 "tool_cutters.png");
 
         toolWrench = ItemHelper.createItem(MOD_ID,
-                new ItemWrench(itemID("toolWrench")),
+                new ItemWrench(nextItemID()),
                 "tool.wrench",
                 "tool_wrench.png");
 
         batteryRedstone = ItemHelper.createItem(MOD_ID,
-                new ItemBatteryRedstone(itemID("batteryRedstone")),
+                new ItemBatteryRedstone(nextItemID()),
                 "battery.redstone").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryAdvanced = ItemHelper.createItem(MOD_ID,
-                new ItemBatteryAdvanced(itemID("batteryAdvanced")),
+                new ItemBatteryAdvanced(nextItemID()),
                 "battery.advanced").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryCrystal = ItemHelper.createItem(MOD_ID,
-                new ItemBatteryCrystal(itemID("batteryCrystal")),
+                new ItemBatteryCrystal(nextItemID()),
                 "battery.crystal").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         batteryLapis = ItemHelper.createItem(MOD_ID,
-                new ItemBatteryLapis(itemID("batteryLapis")),
+                new ItemBatteryLapis(nextItemID()),
                 "battery.lapis").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
 
         cellEmpty = ItemHelper.createItem(MOD_ID,
-                new ItemCell(itemID("cellEmpty")),
+                new ItemCell(nextItemID()),
                 "cell.empty",
                 "cell_empty.png");
 
         cellWater = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("cellWater")),
+                new Item(nextItemID()),
                 "cell.water",
                 "cell_water.png");
 
         cellLava = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("cellLava")),
+                new Item(nextItemID()),
                 "cell.lava",
                 "cell_lava.png");
 
         cellUranium = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("cellUranium")),
+                new Item(nextItemID()),
                 "cell.uranium",
                 "cell_uranium.png").setMaxStackSize(1);
 
         cellCoolant = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("cellCoolant")),
+                new Item(nextItemID()),
                 "cell.coolant",
                 "cell_coolant.png").setMaxStackSize(1);
 
         canEmpty = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("canEmpty")),
+                new Item(nextItemID()),
                 "can.empty",
                 "can_empty.png");
 
         canFood = ItemHelper.createItem(MOD_ID,
-                new ItemFoodStackable("can.food", itemID("canFood"), 2, false, 20),
+                new ItemFoodStackable("can.food", nextItemID(), 2, false, 20),
                 "can.food",
                 "can_food.png").setMaxStackSize(10);
 
         resin = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("resin")),
+                new Item(nextItemID()),
                 "resin",
                 "resin.png");
 
         rubber = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("rubber")),
+                new Item(nextItemID()),
                 "rubber",
                 "rubber.png");
 
         circuitBasic = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("circuitBasic")),
+                new Item(nextItemID()),
                 "circuit",
                 "circuit.png");
 
         circuitAdvanced = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("circuitAdvanced")),
+                new Item(nextItemID()),
                 "circuitadvanced",
                 "circuit_advanced.png");
 
         scrap = ItemHelper.createItem(MOD_ID,
-                new Item(itemID("scrap")),
+                new Item(nextItemID()),
                 "scrap",
                 "scrap.png").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
     }
