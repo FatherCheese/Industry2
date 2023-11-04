@@ -1,7 +1,6 @@
 package baboon.industry.item;
 
 import baboon.industry.Industry2;
-import baboon.industry.IndustryConfig;
 import baboon.industry.IndustryTags;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.battery.ItemBatteryAdvanced;
@@ -84,6 +83,19 @@ public class IndustryItems {
     public static Item circuitBasic;
     public static Item circuitAdvanced;
     public static Item scrap;
+
+    private void taggedItems() {
+        batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        batteryAdvanced.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        batteryCrystal.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        batteryLapis.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        scrap.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+
+        Item.flint.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        Item.seedsWheat.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        Item.stick.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        Item.string.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+    }
 
     public void initializeItems() {
         oreRawTin = ItemHelper.createItem(MOD_ID,
@@ -243,19 +255,19 @@ public class IndustryItems {
 
         batteryRedstone = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryRedstone(nextItemID()),
-                "battery.redstone").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.redstone").setMaxStackSize(1);
 
         batteryAdvanced = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryAdvanced(nextItemID()),
-                "battery.advanced").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.advanced").setMaxStackSize(1);
 
         batteryCrystal = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryCrystal(nextItemID()),
-                "battery.crystal").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.crystal").setMaxStackSize(1);
 
         batteryLapis = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryLapis(nextItemID()),
-                "battery.lapis").setMaxStackSize(1).withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "battery.lapis").setMaxStackSize(1);
 
         cellEmpty = ItemHelper.createItem(MOD_ID,
                 new ItemCell(nextItemID()),
@@ -315,6 +327,8 @@ public class IndustryItems {
         scrap = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID()),
                 "scrap",
-                "scrap.png").withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+                "scrap.png");
+
+        taggedItems();
     }
 }

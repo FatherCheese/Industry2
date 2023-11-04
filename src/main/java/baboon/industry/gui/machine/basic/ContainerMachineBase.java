@@ -1,11 +1,14 @@
 package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
+import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotFurnace;
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
+
+import java.util.List;
 
 public class ContainerMachineBase extends ContainerEnergy {
 
@@ -27,5 +30,26 @@ public class ContainerMachineBase extends ContainerEnergy {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
         return ((TileEntityMachineBase) tile).canInteractWith(entityPlayer);
+    }
+
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction action, Slot slot, int target, EntityPlayer player) {
+        if (slot.id >= 4 && slot.id <= 40) { // Entire inventory
+            if (target == 1)    // Batteries
+                return getSlots(0, 1, true);
+
+            if (target == 2)    // Ingredients
+                return getSlots(2, 1, false);
+
+            if (slot.id < 32)   // Inventory > Hotbar
+                return getSlots(32, 9, false);
+
+            // Hotbar > Inventory
+            return getSlots(4, 27, false);
+        }
+        if (slot.id < 0)
+            return null;
+
+        return getSlots(4, 36, false);
     }
 }

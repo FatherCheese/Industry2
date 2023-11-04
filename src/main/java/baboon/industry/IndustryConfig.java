@@ -23,6 +23,12 @@ public class IndustryConfig {
                 .addEntry("hvStorage", 16384)
                 .addEntry("ehvStorage", 65536);
 
+        properties.addCategory("World Gen")
+                .addEntry("copperOre", true)
+                .addEntry("tinOre", true)
+                .addEntry("uraniumOre", true)
+                .addEntry("treeRubberwood", true);
+
         cfg = new TomlConfigHandler(updater, Industry2.MOD_ID, properties);
     }
 }

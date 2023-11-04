@@ -561,5 +561,6 @@ public class IndustryBlocks {
 
         addToGuiMap();
         initializeTiles();
+        pickaxeLevels();
     }
 }
