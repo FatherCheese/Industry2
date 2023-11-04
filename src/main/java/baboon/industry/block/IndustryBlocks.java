@@ -2,23 +2,23 @@ package baboon.industry.block;
 
 import baboon.industry.Industry2;
 import baboon.industry.IndustryConfig;
+import baboon.industry.IndustryTags;
 import baboon.industry.block.cables.*;
 import baboon.industry.block.cables.entity.TileEntityCable;
 import baboon.industry.block.generator.*;
 import baboon.industry.block.generator.entity.*;
-import baboon.industry.block.storage.BlockBatboxEHV;
-import baboon.industry.block.storage.BlockBatboxHV;
-import baboon.industry.block.storage.BlockBatboxLV;
-import baboon.industry.block.storage.BlockBatboxMV;
-import baboon.industry.block.storage.entity.TileEntityBatboxEHV;
-import baboon.industry.block.storage.entity.TileEntityBatboxHV;
-import baboon.industry.block.storage.entity.TileEntityBatboxLV;
-import baboon.industry.block.storage.entity.TileEntityBatboxMV;
+import baboon.industry.block.machines.basic.*;
+import baboon.industry.block.machines.basic.entity.*;
+import baboon.industry.block.storage.*;
+import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
+import baboon.industry.gui.machine.basic.*;
 import baboon.industry.gui.storage.*;
+import net.minecraft.client.render.block.color.BlockColorLeaves;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
@@ -85,7 +85,7 @@ public class IndustryBlocks {
     public static Block machineFurnace;
     public static Block machineMacerator;
     public static Block machineCompressor;
-    public static Block machineCutter;
+    public static Block machineWiremill;
     public static Block machineExtractor;
     public static Block machineRecycler;
     public static Block machineCannery;
@@ -149,6 +149,13 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryBatboxMV", GuiBatboxMV.class, TileEntityBatboxMV.class, ContainerBatboxBase.class);
         EnergyAPI.addToNameGuiMap("IndustryBatboxHV", GuiBatboxHV.class, TileEntityBatboxHV.class, ContainerBatboxBase.class);
         EnergyAPI.addToNameGuiMap("IndustryBatboxEHV", GuiBatboxEHV.class, TileEntityBatboxEHV.class, ContainerBatboxBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineFurnace", GuiMachineFurnace.class, TileEntityMachineFurnace.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineMacerator", GuiMachineMacerator.class, TileEntityMachineMacerator.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineCompressor", GuiMachineCompressor.class, TileEntityMachineCompressor.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineWiremill", GuiMachineWiremill.class, TileEntityMachineWiremill.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineExtractor", GuiMachineExtractor.class, TileEntityMachineExtractor.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineRecycler", GuiMachineRecycler.class, TileEntityMachineRecycler.class, ContainerMachineBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineCannery", GuiMachineCannery.class, TileEntityMachineCannery.class, ContainerMachineCannery.class);
     }
 
     private void initializeTiles() {
@@ -166,6 +173,16 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityBatboxMV.class, "IndustryBatboxMV");
         EntityHelper.createTileEntity(TileEntityBatboxHV.class, "IndustryBatboxHV");
         EntityHelper.createTileEntity(TileEntityBatboxEHV.class, "IndustryBatboxEHV");
+        EntityHelper.createTileEntity(TileEntityTransformerMVtoLV.class, "IndustryTransformerMVtoLV");
+        EntityHelper.createTileEntity(TileEntityTransformerHVtoMV.class, "IndustryTransformerHVtoMV");
+        EntityHelper.createTileEntity(TileEntityTransformerEHVtoHV.class, "IndustryTransformerEHVtoHV");
+        EntityHelper.createTileEntity(TileEntityMachineFurnace.class, "IndustryMachineFurnace");
+        EntityHelper.createTileEntity(TileEntityMachineMacerator.class, "IndustryMachineMacerator");
+        EntityHelper.createTileEntity(TileEntityMachineCompressor.class, "IndustryMachineCompressor");
+        EntityHelper.createTileEntity(TileEntityMachineWiremill.class, "IndustryMachineWiremill");
+        EntityHelper.createTileEntity(TileEntityMachineExtractor.class, "IndustryMachineExtractor");
+        EntityHelper.createTileEntity(TileEntityMachineRecycler.class, "IndustryMachineRecycler");
+        EntityHelper.createTileEntity(TileEntityMachineCannery.class, "IndustryMachineCannery");
     }
 
     public void initializeBlocks() {
@@ -413,6 +430,96 @@ public class IndustryBlocks {
                 .setBottomTexture("batboxEHV.png")
                 .build(new BlockBatboxEHV("batbox.ehv", blockID("batboxEHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        transformerMVtoLV = machineBuilderBlank
+                .setTopTexture("batboxMV_input.png")
+                .setSideTextures("transformerMV_LV.png")
+                .setBottomTexture("batboxLV_input.png")
+                .build(new BlockTransformerMVtoLV("transformer.mvtolv", blockID("transformerMVtoLV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        transformerHVtoMV = machineBuilderBlank
+                .setTopTexture("batboxHV_input.png")
+                .setSideTextures("transformerHV_MV.png")
+                .setBottomTexture("batboxMV_input.png")
+                .build(new BlockTransformerHVtoMV("transformer.hvtomv", blockID("transformerHVtoMV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        transformerEHVtoHV = machineBuilderBlank
+                .setTopTexture("batboxEHV_input.png")
+                .setSideTextures("transformerEHV_HV.png")
+                .setBottomTexture("batboxHV_input.png")
+                .build(new BlockTransformerEHVtoHV("transformer.ehvtohv", blockID("transformerEHVtoHV"), Material.metal))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        machineFurnace = machineBuilder
+                .setNorthTexture("machine_furnace.png")
+                .build(new BlockMachineFurnace("machine.furnace", blockID("machineFurnace"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineMacerator = machineBuilder
+                .setNorthTexture("machine_macerator.png")
+                .build(new BlockMachineMacerator("machine.macerator", blockID("machineMacerator"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineCompressor = machineBuilder
+                .setNorthTexture("machine_compressor.png")
+                .build(new BlockMachineCompressor("machine.compressor", blockID("machineCompressor"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineWiremill = machineBuilder
+                .setNorthTexture("machine_wiremill.png")
+                .build(new BlockMachineWiremill("machine.wiremill", blockID("machineWiremill"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineExtractor = machineBuilder
+                .setNorthTexture("machine_extractor.png")
+                .build(new BlockMachineExtractor("machine.extractor", blockID("machineExtractor"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineRecycler = machineBuilder
+                .setNorthTexture("machine_recycler.png")
+                .build(new BlockMachineRecycler("machine.recycler", blockID("machineRecycler"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineCannery = machineBuilder
+                .setNorthTexture("machine_cannery.png")
+                .build(new BlockMachineCannery("machine.cannery", blockID("machineCannery"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        hardenedCoal = new BlockBuilder(MOD_ID)
+                .setTextures("hardened_coal.png")
+                .setBlockSound(BlockSounds.STONE)
+                .setHardness(10.0f)
+                .setResistance(2000.0f)
+                .build(new Block("block.coal.hardened", blockID("hardenedCoal"), Material.stone))
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        leavesRubberWood = new BlockBuilder(MOD_ID)
+                .setTextures(2, 20)
+                .setBlockSound(BlockSounds.GRASS)
+                .setBlockColor(new BlockColorLeaves("pine"))
+                .setHardness(0.2f)
+                .setLightOpacity(1)
+                .build(new BlockLeavesRubberwood("leaves.rubber", blockID("rubberLeaves"), Material.leaves, false))
+                .withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
+                .withDisabledNeighborNotifyOnMetadataChange()
+                .withDisabledStats();
+
+        logRubberWood = new BlockBuilder(MOD_ID)
+                .setTopBottomTexture("log_rubber_top.png")
+                .setSideTextures("log_rubber.png")
+                .setHardness(2.0f)
+                .build(new BlockLog("log.rubber", blockID("rubberLog")))
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+
+        saplingRubberWood = new BlockBuilder(MOD_ID)
+                .setTextures("sapling_rubber.png")
+                .setBlockSound(BlockSounds.GRASS)
+                .setBlockModel(new BlockModelRenderBlocks(1))
+                .build(new BlockSaplingRubberwood("sapling.rubber", blockID("rubberSapling")))
+                .withTags(BlockTags.BROKEN_BY_FLUIDS)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         addToGuiMap();
         initializeTiles();

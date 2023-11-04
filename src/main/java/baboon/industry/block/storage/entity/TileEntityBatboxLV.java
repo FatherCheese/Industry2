@@ -5,7 +5,7 @@ import baboon.industry.IndustryConfig;
 public class TileEntityBatboxLV extends TileEntityBatboxBase {
 
     public TileEntityBatboxLV() {
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage") * 3);
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
         setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
     }
