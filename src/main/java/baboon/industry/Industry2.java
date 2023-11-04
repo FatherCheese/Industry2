@@ -11,8 +11,6 @@ import turniplabs.halplibe.helper.SoundHelper;
 public class Industry2 implements ModInitializer {
 
     // TODO LIST
-    // Recipes
-    // Machine drops
     // BTWaila support
     // Log Resin
     // Nuclear Reactor stuff

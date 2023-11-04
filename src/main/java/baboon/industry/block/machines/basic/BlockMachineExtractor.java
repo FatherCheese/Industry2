@@ -1,11 +1,14 @@
 package baboon.industry.block.machines.basic;
 
 import baboon.industry.Industry2;
+import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineExtractor;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
@@ -44,20 +47,6 @@ public class BlockMachineExtractor extends BlockTileEntityRotatable {
         return true;
     }
 
-    // Static Methods
-
-    private static BlockMachineExtractor instance = null;
-
-    private static void setupInstance(BlockMachineExtractor machine) {
-        instance = machine;
-    }
-
-    private static BlockMachineExtractor getInstance() {
-        if (instance == null)
-            throw new NullPointerException("Instance of BlockMachineExtractor hasn't been setup!");
-        return instance;
-    }
-
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         /*
@@ -84,6 +73,46 @@ public class BlockMachineExtractor extends BlockTileEntityRotatable {
 
         return atlasIndices[index];
     }
+
+    private void dropContents(World world, int x, int y, int z) {
+        TileEntityMachineBase tileEntity = (TileEntityMachineBase) world.getBlockTileEntity(x, y, z);
+        if (tileEntity == null)
+            System.out.println("Can't drop inventory at X: " + x + " Y: " + y + " Z: " + z + " because TileEntity is null");
+        else {
+            for (int i = 0; i < tileEntity.getSizeInventory(); ++i) {
+                ItemStack itemStack = tileEntity.getStackInSlot(i);
+                if (itemStack != null) {
+                    EntityItem item = world.dropItem(x, y, z, itemStack);
+                    item.xd *= 0.5;
+                    item.yd *= 0.5;
+                    item.zd *= 0.5;
+                    item.delayBeforeCanPickup = 0;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onBlockRemoval(World world, int x, int y, int z) {
+        dropContents(world, x, y, z);
+        super.onBlockRemoval(world, x, y, z);
+    }
+
+
+    // Static Methods
+
+    private static BlockMachineExtractor instance = null;
+
+    private static void setupInstance(BlockMachineExtractor machine) {
+        instance = machine;
+    }
+
+    private static BlockMachineExtractor getInstance() {
+        if (instance == null)
+            throw new NullPointerException("Instance of BlockMachineExtractor hasn't been setup!");
+        return instance;
+    }
+
 
     public static void updateBlockState(boolean active, World world, int x, int y, int z) {
         int metadata = world.getBlockMetadata(x, y, z);

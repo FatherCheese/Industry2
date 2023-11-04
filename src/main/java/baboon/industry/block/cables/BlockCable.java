@@ -19,7 +19,6 @@ public class BlockCable extends BlockTileEntity {
     public int transfer;
     private final int dangerLevel;
 
-
     public BlockCable(String key, int id, Material material, int capacity, int transfer, int dangerLevel) {
         super(key, id, material);
 

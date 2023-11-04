@@ -520,7 +520,7 @@ public class IndustryBlocks {
                 .build(new BlockAdvancedWiremill("advanced.wiremill", nextBlockID(), Material.metal))
                 .withTags(IndustryTags.REQUIRES_WRENCH);
 
-        advancedMachineWiremill = advancedMachineBuilder
+        advancedMachineExtractor = advancedMachineBuilder
                 .setNorthTexture("advanced_extractor.png")
                 .build(new BlockAdvancedExtractor("advanced.extractor", nextBlockID(), Material.metal))
                 .withTags(IndustryTags.REQUIRES_WRENCH);
