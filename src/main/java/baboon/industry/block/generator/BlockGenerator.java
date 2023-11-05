@@ -47,7 +47,7 @@ public class BlockGenerator extends BlockTileEntityRotatable {
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-                /*
+        /*
         0 = bottom
         1 = top
         2 = north

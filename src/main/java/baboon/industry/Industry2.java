@@ -11,13 +11,12 @@ import turniplabs.halplibe.helper.SoundHelper;
 public class Industry2 implements ModInitializer {
 
     // TODO LIST
-    // BTWaila support
-    // Log Resin
-    // Nuclear Reactor stuff
     // Fix inconsistencies
+    // Nuclear Reactor stuff
     // Look into upgrades
     // Look into custom damage types
     // Look into damageable crafting
+    // Replace BlockLogResin with an actual log block
 
     public static String MOD_ID = "industry";
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);

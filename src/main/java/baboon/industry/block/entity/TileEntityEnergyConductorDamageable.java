@@ -19,7 +19,7 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     private final Random random = new Random();
     private final int maxMachineHealth = 100;
     private final int healAmount = 1;
-    private int machineHealth = maxMachineHealth;
+    public int machineHealth = maxMachineHealth;
     private Boolean lastTickDamage = false;
 
     @Override

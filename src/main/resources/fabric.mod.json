@@ -29,7 +29,7 @@
       "baboon.industry.Industry2"
     ],
     "btwaila": [
-      "baboon.industry.gui.plugins.WailaPlugin"
+      "baboon.industry.gui.plugins.btwaila.WailaPlugin"
     ]
   },
   "mixins": [

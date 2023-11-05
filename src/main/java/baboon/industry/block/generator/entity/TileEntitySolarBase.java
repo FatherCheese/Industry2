@@ -149,4 +149,8 @@ public class TileEntitySolarBase extends TileEntityEnergyConductor implements II
                 contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
         }
     }
+
+    public boolean getIsSkyVisible() {
+        return isFacingSky();
+    }
 }

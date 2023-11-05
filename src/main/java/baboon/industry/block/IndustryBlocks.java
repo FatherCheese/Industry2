@@ -102,6 +102,7 @@ public class IndustryBlocks {
     public static Block hardenedCoal;
     public static Block leavesRubberWood;
     public static Block logRubberWood;
+    public static Block logRubberWoodResin;
     public static Block saplingRubberWood;
 
     private void pickaxeLevels() {
@@ -547,8 +548,17 @@ public class IndustryBlocks {
         logRubberWood = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("log_rubber_top.png")
                 .setSideTextures("log_rubber.png")
+                .setBlockSound(BlockSounds.WOOD)
                 .setHardness(2.0f)
                 .build(new BlockLog("log.rubber", nextBlockID()))
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+
+        logRubberWoodResin = new BlockBuilder(MOD_ID)
+                .setTopBottomTexture("log_rubber_top.png")
+                .setSideTextures("log_rubber.png")
+                .setBlockSound(BlockSounds.WOOD)
+                .setHardness(2.0f)
+                .build(new BlockLogResin("log.rubber.resin", nextBlockID()))
                 .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
 
         saplingRubberWood = new BlockBuilder(MOD_ID)
