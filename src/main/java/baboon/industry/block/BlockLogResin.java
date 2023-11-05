@@ -4,14 +4,11 @@ import baboon.industry.item.IndustryItems;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class BlockLogResin extends Block {
@@ -24,10 +21,9 @@ public class BlockLogResin extends Block {
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
         super.updateTick(world, x, y, z, rand);
-        int metadata = world.getBlockMetadata(x, y, z);
 
-        if (rand.nextInt(300) == 0 && metadata == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, 1);
+        if (rand.nextInt(300) == 0 && world.getBlockMetadata(x, y, z) == 1) {
+            world.setBlockMetadataWithNotify(x, y, z, 0);
             world.scheduleBlockUpdate(x, y, z, IndustryBlocks.logRubberWoodResin.id, tickRate());
         } else
             world.scheduleBlockUpdate(x, y, z, IndustryBlocks.logRubberWoodResin.id, tickRate());
@@ -35,7 +31,7 @@ public class BlockLogResin extends Block {
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-        if (world.getBlockMetadata(x, y, z) == 1) {
+        if (world.getBlockMetadata(x, y, z) == 0) {
             double slimeX = x + rand.nextDouble();
             double slimeY = y + rand.nextDouble();
             double slimeZ = z + rand.nextDouble();
@@ -45,21 +41,23 @@ public class BlockLogResin extends Block {
 
     @Override
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
-        int metadata = world.getBlockMetadata(x, y, z);
+        ItemStack itemStack = player.getHeldItem();
 
-        if (metadata > 0) {
-            world.playSoundAtEntity(player, "mob.slime", 1.0f, 1.0f);
-            world.setBlockMetadataWithNotify(x, y, z, 0);
-            world.scheduleBlockUpdate(x, y, z, IndustryBlocks.logRubberWoodResin.id, tickRate());
-            return true;
+        if (!world.isClientSide) {
+            if (world.getBlockMetadata(x, y, z) == 0 && itemStack != null && itemStack.getItem() == IndustryItems.toolTreetap) {
+                world.playSoundAtEntity(player, "random.wood click", 0.4f, 1.0f);
+                world.playSoundAtEntity(player, "mob.slime", 1.0f, 1.0f);
+                world.setBlockMetadataWithNotify(x, y, z, 1);
+                world.scheduleBlockUpdate(x, y, z, IndustryBlocks.logRubberWoodResin.id, tickRate());
+
+                int randAmount = new Random().nextInt(4 - 1) + 1;
+                player.inventory.insertItem(new ItemStack(IndustryItems.resin, randAmount), false);
+                itemStack.damageItem(1, player);
+
+                return true;
+            }
         }
-
         return super.blockActivated(world, x, y, z, player);
-    }
-
-    @Override
-    public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
-        world.setBlockMetadata(x, y, z, 1);
     }
 
     @Override

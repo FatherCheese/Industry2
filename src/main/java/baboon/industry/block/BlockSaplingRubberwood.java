@@ -1,8 +1,9 @@
 package baboon.industry.block;
 
+import baboon.industry.world.WorldFeatureRubberTree;
 import net.minecraft.core.block.BlockSaplingBase;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.generate.feature.tree.WorldFeatureTree;
+import net.minecraft.core.world.generate.feature.WorldFeature;
 
 import java.util.Random;
 
@@ -12,8 +13,12 @@ public class BlockSaplingRubberwood extends BlockSaplingBase {
         super(key, id);
     }
 
-    @Override
-    public void growTree(World world, int x, int y, int z, Random random) {
-        new WorldFeatureTree(IndustryBlocks.leavesRubberWood.id, IndustryBlocks.leavesRubberWood.id, 7).generate(world, random, x, y, z);
+    public void growTree(World world, int i, int j, int k, Random random) {
+        world.setBlock(i, j, k, 0);
+
+        WorldFeature tree = new WorldFeatureRubberTree(IndustryBlocks.leavesRubberWood.id,4 + random.nextInt(3 - 1) + 1);
+        if (!tree.generate(world, random, i, j, k)) {
+            world.setBlock(i, j, k, this.id);
+        }
     }
 }

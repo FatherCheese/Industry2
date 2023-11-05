@@ -1,14 +1,13 @@
-package baboon.industry;
+package baboon.industry.world;
 
+import baboon.industry.Industry2;
+import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
-import net.minecraft.core.world.generate.feature.WorldFeatureOre;
-import net.minecraft.core.world.generate.feature.tree.WorldFeatureTree;
 import useless.terrainapi.generation.overworld.ChunkDecoratorOverworldAPI;
 
-import java.util.HashMap;
+import java.util.Random;
 
 public class IndustryWorldGen {
 
@@ -20,7 +19,8 @@ public class IndustryWorldGen {
         ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreUraniumStone, 8, 20, 1/4f);
     }
 
-    protected void initializeWorldGen() {
+    public void initializeWorldGen() {
+        Random random = new Random();
         initializeWorldGenValues();
 
         if (IndustryConfig.cfg.getBoolean("World Gen.copperOre"))
@@ -34,7 +34,7 @@ public class IndustryWorldGen {
 
         if (IndustryConfig.cfg.getBoolean("World Gen.treeRubberwood"))
             ChunkDecoratorOverworldAPI.biomeFeatures.addFeatureSurface(
-                    new WorldFeatureTree(IndustryBlocks.leavesRubberWood.id, IndustryBlocks.logRubberWood.id, 7),
+                    new WorldFeatureRubberTree(IndustryBlocks.leavesRubberWood.id,4 + random.nextInt(3 - 1) + 1),
                     3,
                     new Biome[]{Biomes.OVERWORLD_FOREST}
             );
