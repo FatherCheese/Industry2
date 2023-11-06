@@ -19,7 +19,6 @@ public class GuiReactor extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         int reactorRows = tile.getSizeInventory()/9;
-        reactorRows = 6; // Done for debugging purposes
         ySize = 97 + 17 + 18 * reactorRows;
 
         int texture = mc.renderEngine.getTexture("/assets/industry/gui/reactor.png");
