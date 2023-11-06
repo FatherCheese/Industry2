@@ -3,6 +3,7 @@ package baboon.industry.block.reactor.entity;
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
+import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -101,13 +102,50 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                 chamberCount += 1;
         }
     }
+    private void handleInventoryChange(){
+        ItemStack[] newContents = new ItemStack[chamberCount * 9];
+        if (newContents.length >= contents.length){
+            for (int i = 0; i < contents.length; i++) {
+                newContents[i] = contents[i];
+            }
+        } else {
+            for (int i = 0; i < newContents.length; i++) {
+                newContents[i] = contents[i];
+            }
+            for (int i = newContents.length; i < contents.length; i++) {
+                Random random = new Random();
+                ItemStack itemstack = contents[i];
+                if (itemstack == null) continue;
+                float f = random.nextFloat() * 0.8f + 0.1f;
+                float f1 = random.nextFloat() * 0.8f + 0.1f;
+                float f2 = random.nextFloat() * 0.8f + 0.1f;
+                while (itemstack.stackSize > 0) {
+                    int i1 = random.nextInt(21) + 10;
+                    if (i1 > itemstack.stackSize) {
+                        i1 = itemstack.stackSize;
+                    }
+                    itemstack.stackSize -= i1;
+                    EntityItem entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                    float f3 = 0.05f;
+                    entityitem.xd = (float)random.nextGaussian() * f3;
+                    entityitem.yd = (float)random.nextGaussian() * f3 + 0.2f;
+                    entityitem.zd = (float)random.nextGaussian() * f3;
+                    worldObj.entityJoinedWorld(entityitem);
+                }
+            }
+        }
+        contents = newContents;
+    }
 
     @Override
     public void updateEntity() {
         if (!worldObj.isClientSide) {
 
             checkSides();
-            contents = new ItemStack[chamberCount * 9];
+            if (contents.length != chamberCount * 9){
+                handleInventoryChange();
+            }
+
 
             for (ItemStack content : contents) {
                 if (content != null) {
