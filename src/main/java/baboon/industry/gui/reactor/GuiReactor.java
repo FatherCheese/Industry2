@@ -13,31 +13,26 @@ public class GuiReactor extends GuiContainer {
         super(new ContainerReactor(inventory, tileEntity));
         this.tile = tileEntity;
         this.inventory = inventory;
-        ySize =  inventory.getSizeInventory() + tile.getSizeInventory() * 9;
+        ySize = 97 + 17 + 18 * (tileEntity.getSizeInventory()/9);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
+        int reactorRows = tile.getSizeInventory()/9;
+        reactorRows = 6; // Done for debugging purposes
+        ySize = 97 + 17 + 18 * reactorRows;
+
         int texture = mc.renderEngine.getTexture("/assets/industry/gui/reactor.png");
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         mc.renderEngine.bindTexture(texture);
 
         int scrnX = (width - xSize) / 2;
         int scrnY = (height - ySize) / 2;
-        drawTexturedModalRect(scrnX, scrnY, 0, 0, xSize, ySize);
+        drawTexturedModalRect(scrnX, scrnY, 0, 0, xSize, 17);
 
-        int reactorRows = tile.getSizeInventory() / 9;
-        int reactorMin1 = Math.min(reactorRows, 6) * 9;
-        this.drawTexturedModalRect(scrnX, scrnY, 0, 0, this.xSize, reactorMin1);
+        drawTexturedModalRect(scrnX, scrnY + 17, 0, 17, xSize, 18 * reactorRows);
+        drawTexturedModalRect(scrnX, scrnY + 17 + 18 * reactorRows, 0, 126, xSize, 97);
 
-        int reactorMin2 = 6 * 9;
-        for(int rows = reactorRows; rows > 6; reactorMin1 += reactorMin2) {
-            this.drawTexturedModalRect(scrnX, scrnY + reactorMin1, 0, reactorRows, xSize, reactorMin2);
-            rows -= 6;
-        }
-
-        int inventoryRows = inventory.getSizeInventory() / 9;
-        drawTexturedModalRect(scrnX, scrnY + inventoryRows * 9 + reactorRows - 2, 0, 126, xSize, 96);
     }
 
     @Override
