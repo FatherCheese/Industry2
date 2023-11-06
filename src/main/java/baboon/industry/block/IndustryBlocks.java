@@ -10,11 +10,15 @@ import baboon.industry.block.machines.advanced.*;
 import baboon.industry.block.machines.advanced.entity.*;
 import baboon.industry.block.machines.basic.*;
 import baboon.industry.block.machines.basic.entity.*;
+import baboon.industry.block.reactor.BlockReactorChamber;
+import baboon.industry.block.reactor.entity.TileEntityReactorChamber;
 import baboon.industry.block.storage.*;
 import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
 import baboon.industry.gui.machine.advanced.*;
 import baboon.industry.gui.machine.basic.*;
+import baboon.industry.gui.reactor.ContainerReactor;
+import baboon.industry.gui.reactor.GuiReactor;
 import baboon.industry.gui.storage.*;
 import net.minecraft.client.render.block.color.BlockColorLeaves;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
@@ -105,6 +109,10 @@ public class IndustryBlocks {
     public static Block logRubberWoodResin;
     public static Block saplingRubberWood;
 
+    // Nuclear
+    public static Block nuclearReactor;
+    public static Block nuclearChamber;
+
     private void pickaxeLevels() {
         ItemToolPickaxe.miningLevels.put(oreTinStone, 1);
         ItemToolPickaxe.miningLevels.put(oreTinBasalt, 1);
@@ -165,6 +173,7 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryAdvancedCompressor", GuiAdvancedCompressor.class, TileEntityAdvancedCompressor.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedWiremill", GuiAdvancedWiremill.class, TileEntityAdvancedWiremill.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedExtractor", GuiAdvancedExtractor.class, TIleEntityAdvancedExtractor.class, ContainerAdvancedBase.class);
+        EnergyAPI.addToNameGuiMap("IndustryReactorChamber", GuiReactor.class, TileEntityReactorChamber.class, ContainerReactor.class);
     }
 
     private void initializeTiles() {
@@ -197,6 +206,7 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
         EntityHelper.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
         EntityHelper.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
+        EntityHelper.createTileEntity(TileEntityReactorChamber.class, "IndustryNuclearReactorChamber");
     }
 
     public void initializeBlocks() {
@@ -568,6 +578,20 @@ public class IndustryBlocks {
                 .build(new BlockSaplingRubberwood("sapling.rubber", nextBlockID()))
                 .withTags(BlockTags.BROKEN_BY_FLUIDS)
                 .withDisabledNeighborNotifyOnMetadataChange();
+
+        nuclearReactor = new BlockBuilder(MOD_ID)
+                .setTextures("reactor.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10.0f)
+                .setResistance(0.0f)
+                .build(new Block("reactor", nextBlockID(), Material.metal));
+
+        nuclearChamber = new BlockBuilder(MOD_ID)
+                .setTextures("reactor.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10.0f)
+                .setResistance(0.0f)
+                .build(new BlockReactorChamber("reactor.chamber", nextBlockID(), Material.metal));
 
         addToGuiMap();
         initializeTiles();

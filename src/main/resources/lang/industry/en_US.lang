@@ -190,6 +190,25 @@ item.industry.tool.cutters.name=Wire Cutters
 item.industry.tool.cutters.desc=A pair of thinly made cutters used to cut ingots into cable.
 item.industry.tool.wrench.name=Wrench
 item.industry.tool.wrench.desc=A trusty wrench used to pick up machines.
+item.industry.tool.chainsaw.name=Chainsaw
+item.industry.tool.chainsaw.desc=Chop some trees with this rechargeable tool.
+item.industry.tool.drill.name=Drill
+item.industry.tool.drill.desc=Mine some stone with this rechargeable tool.
+item.industry.tool.drill.gold.name=Golden Drill
+item.industry.tool.drill.gold.desc=Mine some stone with this rechargeable gold-tipped tool.
+item.industry.tool.drill.diamond.name=Diamond Drill
+item.industry.tool.drill.diamond.desc=Mine some stone with this rechargeable diamond-tipped tool.
+item.industry.tool.nanosword.name=NanoSword
+item.industry.tool.nanosword.desc=Slay pesky monsters with this rechargeable sword.
+
+item.industry.armor.helmet.hazmat.name=Hazmat Helmet
+item.industry.armor.helmet.hazmat.desc=Protect yourself from radiation with this yellow helmet.
+item.industry.armor.chestplate.hazmat.name=Hazmat Chestplate
+item.industry.armor.chestplate.hazmat.desc=Protect yourself from radiation with this yellow chestplate.
+item.industry.armor.leggings.hazmat.name=Hazmat Leggings
+item.industry.armor.leggings.hazmat.desc=Protect yourself from radiation with these yellow leggings.
+item.industry.armor.boots.hazmat.name=Hazmat Boots
+item.industry.armor.boots.hazmat.desc=Protect yourself from radiation with these black boots.
 
 item.industry.battery.redstone.name=Redstone Battery
 item.industry.battery.redstone.desc=A redstone battery, with a tin casing.

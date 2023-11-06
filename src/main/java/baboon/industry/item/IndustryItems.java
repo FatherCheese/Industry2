@@ -7,8 +7,15 @@ import baboon.industry.item.battery.ItemBatteryAdvanced;
 import baboon.industry.item.battery.ItemBatteryCrystal;
 import baboon.industry.item.battery.ItemBatteryLapis;
 import baboon.industry.item.battery.ItemBatteryRedstone;
+import baboon.industry.item.toolelectric.ItemToolChainsaw;
+import baboon.industry.item.toolelectric.ItemToolDrill;
+import baboon.industry.item.toolelectric.ItemToolNanoSword;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemFoodStackable;
+import net.minecraft.core.item.material.ArmorMaterial;
+import net.minecraft.core.item.material.ToolMaterial;
+import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 
 public class IndustryItems {
@@ -18,6 +25,8 @@ public class IndustryItems {
     private int nextItemID() {
         return itemID++;
     }
+
+    private static ArmorMaterial armorMaterialHazmat;
 
     // Raw Ore
     public static Item oreRawTin;
@@ -61,6 +70,17 @@ public class IndustryItems {
     public static Item toolHammer;
     public static Item toolCutters;
     public static Item toolWrench;
+    public static Item toolChainsaw;
+    public static Item toolDrill;
+    public static Item toolDrillGold;
+    public static Item toolDrillDiamond;
+    public static Item toolNanoSword;
+
+    // Armor
+    public static Item armorHelmetHazmat;
+    public static Item armorChestplateHazmat;
+    public static Item armorLeggingsHazmat;
+    public static Item armorBootsHazmat;
 
     // Batteries
     public static Item batteryRedstone;
@@ -97,7 +117,13 @@ public class IndustryItems {
         Item.string.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
     }
 
+    private void armorMaterials() {
+        armorMaterialHazmat = ArmorHelper.createArmorMaterial("hazmat", 500, 0.0f, 0.0f, 150.0f, 0.0f);
+    }
+
     public void initializeItems() {
+        armorMaterials();
+
         oreRawTin = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID()),
                 "ore.raw.tin",
@@ -159,7 +185,7 @@ public class IndustryItems {
                 "ingot_bronze.png");
 
         ingotUranium = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID()),
+                new ItemRadioactive(nextItemID()),
                 "ingot.uranium",
                 "ingot_uranium.png");
 
@@ -253,6 +279,51 @@ public class IndustryItems {
                 "tool.wrench",
                 "tool_wrench.png");
 
+        toolChainsaw = ItemHelper.createItem(MOD_ID,
+                new ItemToolChainsaw(nextItemID()),
+                "tool.chainsaw",
+                "tool_chainsaw.png");
+
+        toolDrill = ItemHelper.createItem(MOD_ID,
+                new ItemToolDrill(nextItemID(), ToolMaterial.iron),
+                "tool.drill",
+                "tool_drill.png");
+
+        toolDrillGold = ItemHelper.createItem(MOD_ID,
+                new ItemToolDrill(nextItemID(), ToolMaterial.gold),
+                "tool.drill.gold",
+                "tool_drill_gold.png");
+
+        toolDrillDiamond = ItemHelper.createItem(MOD_ID,
+                new ItemToolDrill(nextItemID(), ToolMaterial.diamond),
+                "tool.drill.diamond",
+                "tool_drill_diamond.png");
+
+        toolNanoSword = ItemHelper.createItem(MOD_ID,
+                new ItemToolNanoSword(nextItemID()),
+                "tool.nanosword",
+                "tool_nanosword.png");
+
+        armorHelmetHazmat = ItemHelper.createItem(MOD_ID,
+                new ItemArmor("armor.helmet.hazmat", nextItemID(), armorMaterialHazmat, 0),
+                "armor.helmet.hazmat",
+                "armor_hazmat_helmet.png");
+
+        armorChestplateHazmat = ItemHelper.createItem(MOD_ID,
+                new ItemArmor("armor.chestplate.hazmat", nextItemID(), armorMaterialHazmat, 1),
+                "armor.chestplate.hazmat",
+                "armor_hazmat_chestplate.png");
+
+        armorLeggingsHazmat = ItemHelper.createItem(MOD_ID,
+                new ItemArmor("armor.leggings.hazmat", nextItemID(), armorMaterialHazmat, 2),
+                "armor.leggings.hazmat",
+                "armor_hazmat_leggings.png");
+
+        armorBootsHazmat = ItemHelper.createItem(MOD_ID,
+                new ItemArmor("armor.boots.hazmat", nextItemID(), armorMaterialHazmat, 3),
+                "armor.boots.hazmat",
+                "armor_hazmat_boots.png");
+
         batteryRedstone = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryRedstone(nextItemID()),
                 "battery.redstone").setMaxStackSize(1);
@@ -285,7 +356,7 @@ public class IndustryItems {
                 "cell_lava.png");
 
         cellUranium = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID()),
+                new ItemRadioactive(nextItemID()),
                 "cell.uranium",
                 "cell_uranium.png").setMaxStackSize(1);
 
