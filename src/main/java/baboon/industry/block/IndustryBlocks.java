@@ -10,8 +10,9 @@ import baboon.industry.block.machines.advanced.*;
 import baboon.industry.block.machines.advanced.entity.*;
 import baboon.industry.block.machines.basic.*;
 import baboon.industry.block.machines.basic.entity.*;
+import baboon.industry.block.reactor.BlockReactor;
 import baboon.industry.block.reactor.BlockReactorChamber;
-import baboon.industry.block.reactor.entity.TileEntityReactorChamber;
+import baboon.industry.block.reactor.entity.TileEntityReactor;
 import baboon.industry.block.storage.*;
 import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
@@ -173,7 +174,7 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryAdvancedCompressor", GuiAdvancedCompressor.class, TileEntityAdvancedCompressor.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedWiremill", GuiAdvancedWiremill.class, TileEntityAdvancedWiremill.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedExtractor", GuiAdvancedExtractor.class, TIleEntityAdvancedExtractor.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryReactorChamber", GuiReactor.class, TileEntityReactorChamber.class, ContainerReactor.class);
+        EnergyAPI.addToNameGuiMap("IndustryReactor", GuiReactor.class, TileEntityReactor.class, ContainerReactor.class);
     }
 
     private void initializeTiles() {
@@ -206,7 +207,7 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
         EntityHelper.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
         EntityHelper.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
-        EntityHelper.createTileEntity(TileEntityReactorChamber.class, "IndustryNuclearReactorChamber");
+        EntityHelper.createTileEntity(TileEntityReactor.class, "IndustryReactor");
     }
 
     public void initializeBlocks() {
@@ -584,7 +585,7 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10.0f)
                 .setResistance(0.0f)
-                .build(new Block("reactor", nextBlockID(), Material.metal));
+                .build(new BlockReactor("reactor", nextBlockID(), Material.metal));
 
         nuclearChamber = new BlockBuilder(MOD_ID)
                 .setTextures("reactor.png")

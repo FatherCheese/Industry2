@@ -1,15 +1,15 @@
 package baboon.industry.gui.reactor;
 
-import baboon.industry.block.reactor.entity.TileEntityReactorChamber;
+import baboon.industry.block.reactor.entity.TileEntityReactor;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class GuiReactor extends GuiContainer {
-    private final TileEntityReactorChamber tile;
+    private final TileEntityReactor tile;
     private final InventoryPlayer inventory;
 
-    public GuiReactor(InventoryPlayer inventory, TileEntityReactorChamber tileEntity) {
+    public GuiReactor(InventoryPlayer inventory, TileEntityReactor tileEntity) {
         super(new ContainerReactor(inventory, tileEntity));
         this.tile = tileEntity;
         this.inventory = inventory;
@@ -27,18 +27,17 @@ public class GuiReactor extends GuiContainer {
         drawTexturedModalRect(scrnX, scrnY, 0, 0, xSize, ySize);
 
         int reactorRows = tile.getSizeInventory() / 9;
-        int reactorMin1 = Math.min(reactorRows, 6) * 9 + 17;
+        int reactorMin1 = Math.min(reactorRows, 6) * 9;
         this.drawTexturedModalRect(scrnX, scrnY, 0, 0, this.xSize, reactorMin1);
 
-        int reactorMin2;
+        int reactorMin2 = 6 * 9;
         for(int rows = reactorRows; rows > 6; reactorMin1 += reactorMin2) {
-            reactorMin2 = 6 * 18;
-            this.drawTexturedModalRect(scrnX, scrnY + reactorMin1, 0, 17, xSize, reactorMin2);
+            this.drawTexturedModalRect(scrnX, scrnY + reactorMin1, 0, reactorRows, xSize, reactorMin2);
             rows -= 6;
         }
 
         int inventoryRows = inventory.getSizeInventory() / 9;
-        drawTexturedModalRect(scrnX, scrnY + inventoryRows * 9 - 1, 0, 126, xSize, 96);
+        drawTexturedModalRect(scrnX, scrnY + inventoryRows * 9 + reactorRows - 2, 0, 126, xSize, 96);
     }
 
     @Override

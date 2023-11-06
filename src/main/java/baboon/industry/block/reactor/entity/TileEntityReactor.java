@@ -6,18 +6,20 @@ import baboon.industry.item.IndustryItems;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
 
 import java.util.Random;
 
-public class TileEntityReactorChamber extends TileEntityEnergyConductor implements IInventory {
+public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
+    private int chamberCount;
     private int uraniumRods = 0;
     public int heat = 0;
     public int maxHeat = 1000;
 
-    public TileEntityReactorChamber() {
-        contents = new ItemStack[9];
+    public TileEntityReactor() {
+        contents = new ItemStack[0];
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
         setMaxReceive(0);
@@ -62,7 +64,7 @@ public class TileEntityReactorChamber extends TileEntityEnergyConductor implemen
 
     @Override
     public String getInvName() {
-        return "IndustryReactorChamber";
+        return "IndustryReactor";
     }
 
     @Override
@@ -72,10 +74,7 @@ public class TileEntityReactorChamber extends TileEntityEnergyConductor implemen
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
-            return false;
-
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return false;
     }
 
     private void overheat() {
@@ -91,24 +90,24 @@ public class TileEntityReactorChamber extends TileEntityEnergyConductor implemen
                 worldObj.createExplosion(null, x, y, z, 3.0f);
     }
 
+    private void checkSides() {
+        chamberCount = 0;
+        Side[] sides = new Side[]{Side.NORTH, Side.SOUTH, Side.EAST, Side.WEST, Side.BOTTOM, Side.TOP};
+        for (Side side: sides) {
+            int x = xCoord + side.getOffsetX();
+            int y = yCoord + side.getOffsetY();
+            int z = zCoord + side.getOffsetZ();
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.nuclearChamber.id)
+                chamberCount += 1;
+        }
+    }
+
     @Override
     public void updateEntity() {
         if (!worldObj.isClientSide) {
 
-            for (int i : new int[]{xCoord - 1, xCoord + 1}) {
-                if (worldObj.getBlockId(i, yCoord, zCoord) == IndustryBlocks.nuclearChamber.id)
-                    contents = new ItemStack[contents.length + 9];
-            }
-
-            for (int i : new int[]{yCoord - 1, yCoord + 1}) {
-                if (worldObj.getBlockId(xCoord, i, zCoord) == IndustryBlocks.nuclearChamber.id)
-                    contents = new ItemStack[contents.length + 9];
-            }
-
-            for (int i : new int[]{zCoord - 1, zCoord + 1}) {
-                if (worldObj.getBlockId(xCoord, yCoord, i) == IndustryBlocks.nuclearChamber.id)
-                    contents = new ItemStack[contents.length + 9];
-            }
+            checkSides();
+            contents = new ItemStack[chamberCount * 9];
 
             for (ItemStack content : contents) {
                 if (content != null) {
