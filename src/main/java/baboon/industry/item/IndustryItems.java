@@ -356,12 +356,12 @@ public class IndustryItems {
                 "cell_lava.png");
 
         cellUranium = ItemHelper.createItem(MOD_ID,
-                new ItemRadioactive(nextItemID()),
+                new ItemCellUranium(nextItemID()),
                 "cell.uranium",
                 "cell_uranium.png").setMaxStackSize(1);
 
         cellCoolant = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID()),
+                new ItemCellCoolant(nextItemID()),
                 "cell.coolant",
                 "cell_coolant.png").setMaxStackSize(1);
 

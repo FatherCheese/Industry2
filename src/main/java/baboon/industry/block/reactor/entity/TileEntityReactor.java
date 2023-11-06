@@ -3,6 +3,7 @@ package baboon.industry.block.reactor.entity;
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
+import baboon.industry.item.ItemCellUranium;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -87,8 +88,12 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
 
         if (heat >= maxHeat)
-            for (int explosionSize = 0; explosionSize < uraniumRods; explosionSize++)
-                worldObj.createExplosion(null, x, y, z, 3.0f);
+            for (int exploX = (int) (x - 1); exploX < x + 1; exploX++)
+                for (int exploY = (int) (y - 1); exploY < y + 1; exploY++)
+                    for (int exploZ = (int) (z - 1); exploZ < z + 1; exploZ++) {
+                        worldObj.createExplosion(null, x, y, z, 3.0f);
+                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+            }
     }
 
     private void checkSides() {
@@ -104,28 +109,25 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     }
     private void handleInventoryChange(){
         ItemStack[] newContents = new ItemStack[chamberCount * 9];
-        if (newContents.length >= contents.length){
-            for (int i = 0; i < contents.length; i++) {
-                newContents[i] = contents[i];
-            }
-        } else {
-            for (int i = 0; i < newContents.length; i++) {
-                newContents[i] = contents[i];
-            }
+        if (newContents.length >= contents.length)
+            System.arraycopy(contents, 0, newContents, 0, contents.length);
+        else {
+            System.arraycopy(contents, 0, newContents, 0, newContents.length);
+
             for (int i = newContents.length; i < contents.length; i++) {
                 Random random = new Random();
                 ItemStack itemstack = contents[i];
                 if (itemstack == null) continue;
-                float f = random.nextFloat() * 0.8f + 0.1f;
-                float f1 = random.nextFloat() * 0.8f + 0.1f;
-                float f2 = random.nextFloat() * 0.8f + 0.1f;
+                float randX = random.nextFloat() * 0.8f + 0.1f;
+                float randY = random.nextFloat() * 0.8f + 0.1f;
+                float randZ = random.nextFloat() * 0.8f + 0.1f;
                 while (itemstack.stackSize > 0) {
                     int i1 = random.nextInt(21) + 10;
-                    if (i1 > itemstack.stackSize) {
+                    if (i1 > itemstack.stackSize)
                         i1 = itemstack.stackSize;
-                    }
+
                     itemstack.stackSize -= i1;
-                    EntityItem entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                    EntityItem entityitem = new EntityItem(worldObj, (float)xCoord + randX, (float)yCoord + randY, (float)zCoord + randZ, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                     float f3 = 0.05f;
                     entityitem.xd = (float)random.nextGaussian() * f3;
                     entityitem.yd = (float)random.nextGaussian() * f3 + 0.2f;
@@ -138,25 +140,55 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     }
 
     @Override
+    public void onInventoryChanged() {
+        super.onInventoryChanged();
+        uraniumRods = 0;
+        for (int cells = 0; cells < contents.length; cells++) {
+            if (contents[cells] != null) {
+                if (contents[cells].getItem() instanceof ItemCellUranium)
+                    uraniumRods += cells
+
+                System.out.println(uraniumRods);
+
+                if (contents[cells].itemID == IndustryItems.cellCoolant.id) {
+                    heat -= 1;
+                    if (heat > 0)
+                        contents[cells].damageItem(1, null);
+                }
+
+                if (contents[cells].stackSize <= 0)
+                    contents[cells] = null;
+            }
+        }
+    }
+
+    @Override
     public void updateEntity() {
         if (!worldObj.isClientSide) {
 
             checkSides();
-            if (contents.length != chamberCount * 9){
+            if (contents.length != chamberCount * 9)
                 handleInventoryChange();
-            }
 
-
-            for (ItemStack content : contents) {
-                if (content != null) {
-                    if (content.itemID == IndustryItems.cellUranium.id) {
-                        heat += 4;
-                        ++energy;
-                        uraniumRods += 1;
+            uraniumRods = 0;
+            for (int cells = 0; cells < contents.length; cells++) {
+                if (contents[cells] != null) {
+                    if (contents[cells].getItem() instanceof ItemCellUranium) {
+                        heat += 3;
+                        uraniumRods += cells;
+                        contents[cells].damageItem(1, null);
                     }
 
-                    if (content.itemID == IndustryItems.cellCoolant.id)
-                        --heat;
+                    System.out.println(uraniumRods);
+
+                    if (contents[cells].itemID == IndustryItems.cellCoolant.id) {
+                        heat -= 1;
+                        if (heat > 0)
+                            contents[cells].damageItem(1, null);
+                    }
+
+                    if (contents[cells].stackSize <= 0)
+                        contents[cells] = null;
                 }
             }
 

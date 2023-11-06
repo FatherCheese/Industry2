@@ -112,7 +112,7 @@ dependencies {
 	modImplementation "TerrainAPI:terrainapi-beta:${project.terrain_api_version}"
 
 	// BTWaila
-	modImplementation "btwaila:btwaila:0.3.0"
+	modImplementation "btwaila:btwaila:0.3.1"
 
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
