@@ -189,7 +189,8 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
             coolantTimer = 0;
         }
 
-        for (ItemStack stack : contents) {
+        for (int i = 0; i < contents.length; i++) {
+            ItemStack stack = contents[i];
             if (stack == null)
                 continue;
 
@@ -199,6 +200,9 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
             if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
                 stack.damageItem(1, null);
+            }
+            if (stack.stackSize <= 0){
+                contents[i] = null;
             }
         }
 
