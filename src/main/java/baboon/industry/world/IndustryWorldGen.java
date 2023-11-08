@@ -16,7 +16,7 @@ public class IndustryWorldGen {
     private void initializeWorldGenValues() {
         ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreCopperStone, 8, 20, 1/2f);
         ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreTinStone, 8, 20, 1/2f);
-        ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreUraniumStone, 8, 20, 1/4f);
+        ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreUraniumStone, 2, 10, 1/4f);
     }
 
     public void initializeWorldGen() {
@@ -35,7 +35,7 @@ public class IndustryWorldGen {
         if (IndustryConfig.cfg.getBoolean("World Gen.treeRubberwood"))
             ChunkDecoratorOverworldAPI.biomeFeatures.addFeatureSurface(
                     new WorldFeatureRubberTree(IndustryBlocks.leavesRubberWood.id,4 + random.nextInt(3 - 1) + 1),
-                    3,
+                    1,
                     new Biome[]{Biomes.OVERWORLD_FOREST}
             );
     }

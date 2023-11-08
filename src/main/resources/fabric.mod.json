@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Industry2",
-  "description": "This mod aims to help new BTA modders.",
+  "description": "This mod adds industrial machines to your BTA world.",
   "authors": [
     "Cookie Cakes"
   ],

@@ -6,8 +6,8 @@ import net.minecraft.core.block.material.Material;
 
 public class BlockLeavesRubberwood extends BlockLeavesBase {
 
-    public BlockLeavesRubberwood(String key, int id, Material material, boolean flag) {
-        super(key, id, material, flag);
+    public BlockLeavesRubberwood(String key, int id, Material material) {
+        super(key, id, material, false);
     }
 
     @Override

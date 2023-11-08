@@ -30,19 +30,20 @@ public class BlockReactor extends BlockTileEntity {
     public void onBlockRemoval(World world, int x, int y, int z) {
         if (world.getBlockTileEntity(x, y, z) != null) {
             TileEntityReactor tileEntityReactor = (TileEntityReactor)world.getBlockTileEntity(x, y, z);
-            for (int l = 0; l < tileEntityReactor.getSizeInventory(); ++l) {
-                ItemStack itemstack = tileEntityReactor.getStackInSlot(l);
+            for (int inventory = 0; inventory < tileEntityReactor.getSizeInventory(); ++inventory) {
+                ItemStack itemstack = tileEntityReactor.getStackInSlot(inventory);
+
                 if (itemstack == null) continue;
-                float f = this.random.nextFloat() * 0.8f + 0.1f;
-                float f1 = this.random.nextFloat() * 0.8f + 0.1f;
-                float f2 = this.random.nextFloat() * 0.8f + 0.1f;
+                float randX = this.random.nextFloat() * 0.8f + 0.1f;
+                float randY = this.random.nextFloat() * 0.8f + 0.1f;
+                float randZ = this.random.nextFloat() * 0.8f + 0.1f;
                 while (itemstack.stackSize > 0) {
                     int i1 = this.random.nextInt(21) + 10;
-                    if (i1 > itemstack.stackSize) {
+                    if (i1 > itemstack.stackSize)
                         i1 = itemstack.stackSize;
-                    }
+
                     itemstack.stackSize -= i1;
-                    EntityItem entityitem = new EntityItem(world, (float)x + f, (float)y + f1, (float)z + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                    EntityItem entityitem = new EntityItem(world, (float)x + randX, (float)y + randY, (float)z + randZ, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                     float f3 = 0.05f;
                     entityitem.xd = (float)this.random.nextGaussian() * f3;
                     entityitem.yd = (float)this.random.nextGaussian() * f3 + 0.2f;

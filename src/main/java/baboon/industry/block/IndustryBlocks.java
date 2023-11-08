@@ -551,7 +551,7 @@ public class IndustryBlocks {
                 .setBlockColor(new BlockColorLeaves("pine"))
                 .setHardness(0.2f)
                 .setLightOpacity(1)
-                .build(new BlockLeavesRubberwood("leaves.rubber", nextBlockID(), Material.leaves, false))
+                .build(new BlockLeavesRubberwood("leaves.rubber", nextBlockID(), Material.leaves))
                 .withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
                 .withDisabledNeighborNotifyOnMetadataChange()
                 .withDisabledStats();

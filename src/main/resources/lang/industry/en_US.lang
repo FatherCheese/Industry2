@@ -123,9 +123,9 @@ tile.industry.sapling.rubber.name=RubberWood Sapling
 tile.industry.sapling.rubber.desc=Plant to grow a rubberwood tree.
 
 tile.industry.reactor.name=Nuclear Reactor
-tile.industry.reactor.desc=
+tile.industry.reactor.desc=An extra-high voltage generator that heats up glowing rocks, in exchange for energy.
 tile.industry.reactor.chamber.name=Reactor Chamber
-tile.industry.reactor.chamber.desc=
+tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
 
 item.industry.ore.raw.tin.name=Raw Tin Ore
 item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
@@ -250,3 +250,6 @@ item.industry.circuitadvanced.name=Advanced Circuit
 item.industry.circuitadvanced.desc=A piece of metal with advanced beeps and boops on it.
 item.industry.scrap.name=Scrap
 item.industry.scrap.desc=A useless ball of recycled material.
+
+item.industry.reactorplate.name=Reactor Plating
+item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.

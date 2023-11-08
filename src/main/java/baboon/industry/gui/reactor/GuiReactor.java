@@ -110,7 +110,7 @@ public class GuiReactor extends GuiContainer {
             action = InventoryAction.MOVE_SINGLE_ITEM;
         }
         if (this.inventorySlots instanceof ContainerReactor) { // This is the only section that actually really matters
-            if (clickedItemId == IndustryItems.cellUranium.id || clickedItemId == IndustryItems.cellCoolant.id){
+            if (clickedItemId == IndustryItems.cellUranium.id || clickedItemId == IndustryItems.cellCoolant.id || clickedItemId == IndustryItems.reactorPlate.id){
                 target = 1;
             }
         }

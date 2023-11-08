@@ -6,6 +6,6 @@ public class ItemTreetap extends Item {
 
     public ItemTreetap(int id) {
         super(id);
-        setMaxDamage(64);
+        setMaxDamage(31);
     }
 }

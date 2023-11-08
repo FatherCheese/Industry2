@@ -104,6 +104,8 @@ public class IndustryItems {
     public static Item circuitAdvanced;
     public static Item scrap;
 
+    public static Item reactorPlate;
+
     private void taggedItems() {
         batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
         batteryAdvanced.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
@@ -262,22 +264,22 @@ public class IndustryItems {
         toolTreetap = ItemHelper.createItem(MOD_ID,
                 new ItemTreetap(nextItemID()),
                 "tool.treetap",
-                "tool_treetap.png");
+                "tool_treetap.png").setMaxStackSize(1);
 
         toolHammer = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID()),
+                new ItemTools(nextItemID()),
                 "tool.hammer",
                 "tool_hammer.png");
 
         toolCutters = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID()),
+                new ItemTools(nextItemID()),
                 "tool.cutters",
                 "tool_cutters.png");
 
         toolWrench = ItemHelper.createItem(MOD_ID,
                 new ItemWrench(nextItemID()),
                 "tool.wrench",
-                "tool_wrench.png");
+                "tool_wrench.png").setMaxStackSize(1);
 
         toolChainsaw = ItemHelper.createItem(MOD_ID,
                 new ItemToolChainsaw(nextItemID()),
@@ -399,6 +401,11 @@ public class IndustryItems {
                 new Item(nextItemID()),
                 "scrap",
                 "scrap.png");
+
+        reactorPlate = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID()),
+                "reactorplate",
+                "plate_reactor.png");
 
         taggedItems();
     }
