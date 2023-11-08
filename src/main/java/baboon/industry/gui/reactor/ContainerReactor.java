@@ -82,5 +82,7 @@ public class ContainerReactor extends ContainerEnergy {
         }
         return returnSlots;
     }
-
+    public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
+        return ((TileEntityReactor)tile).canInteractWith(entityPlayer);
+    }
 }
