@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
-    private int chamberCount;
+    public int chamberCount;
     private int uraniumCell = 0;
     private int coolantCell = 0;
     private int uraniumTimer = 0;
