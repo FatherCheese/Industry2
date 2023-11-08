@@ -79,7 +79,10 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        return false;
+        if (this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this) {
+            return false;
+        }
+        return entityPlayer.distanceToSqr((double)this.xCoord + 0.5, (double)this.yCoord + 0.5, (double)this.zCoord + 0.5) <= 64.0;
     }
 
     private void overheat() {
@@ -196,21 +199,19 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
             if (damageUranium && stack.getItem() == IndustryItems.cellUranium) {
                 stack.damageItem(1, null);
+                heat += 3 * uraniumCell;
             }
 
             if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
-                stack.damageItem(1, null);
+                int adjUranium = adjacentUranium(i);
+                stack.damageItem(adjUranium, null);
+                heat -= adjUranium;
+                heat = Math.max(heat, 0);
             }
             if (stack.stackSize <= 0){
                 contents[i] = null;
             }
         }
-
-        if (uraniumCell > 0)
-            heat += 3 * uraniumCell;
-
-        if (coolantCell > 0 && heat - coolantCell >= 0)
-            heat -= coolantCell;
 
         if (uraniumCell <= 0 && heat - 1 >= 0)
             --heat;
@@ -219,6 +220,20 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
             overheat();
 
         super.updateEntity();
+    }
+    private int adjacentUranium(int id){
+        int num = 0;
+        int[] offsets = new int[]{-1, 1, 9, -9};
+        for (int i: offsets) {
+            if (isUranium(id + i)) num++;
+        }
+        return num;
+    }
+    private boolean isUranium(int id){
+        if (id < 0) return false;
+        if (id >= contents.length) return false;
+        if (contents[id] == null) return false;
+        return contents[id].getItem() == IndustryItems.cellUranium;
     }
 
     @Override
