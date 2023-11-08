@@ -28,6 +28,7 @@ public class BlockReactor extends BlockTileEntity {
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         if (!world.isClientSide) {
             TileEntityReactor tileEntityReactor = (TileEntityReactor)world.getBlockTileEntity(x, y, z);
+            if (tileEntityReactor.chamberCount <= 0) return false;
             ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntityReactor);
         }
         return true;
