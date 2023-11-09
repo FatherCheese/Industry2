@@ -17,8 +17,8 @@ import sunsetsatellite.sunsetutils.util.Direction;
 import java.util.Random;
 
 public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
-    private ItemStack[] contents;
-    public int chamberCount;
+    private ItemStack[] contents = new ItemStack[0];
+    public int chamberCount = 0;
     private int uraniumCell = 0;
     private int coolantCell = 0;
     private int uraniumTimer = 0;
@@ -27,7 +27,6 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     public int maxHeat = 1000;
 
     public TileEntityReactor() {
-        contents = new ItemStack[0];
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
         setMaxReceive(0);
@@ -247,41 +246,38 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     }
 
     @Override
-    public void writeToNBT(CompoundTag CompoundTag) {
-        super.writeToNBT(CompoundTag);
-        CompoundTag.putInt("Heat", heat);
-        CompoundTag.putInt("Energy", energy);
-        CompoundTag.putInt("Chambers", chamberCount);
+    public void writeToNBT(CompoundTag compoundTag) {
+        super.writeToNBT(compoundTag);
+        compoundTag.putInt("Heat", heat);
+        compoundTag.putInt("Energy", energy);
+        compoundTag.putInt("Chambers", chamberCount);
 
-        ListTag listTag = new ListTag();
-        for (int i = 0; i < contents.length; i++) {
-            if (contents[i] != null) {
-                CompoundTag compoundTag2 = new CompoundTag();
-
-                compoundTag2.putInt("Slot", i);
-                contents[i].writeToNBT(compoundTag2);
-                listTag.addTag(compoundTag2);
-            }
+        ListTag nbttaglist = new ListTag();
+        for (int i = 0; i < this.contents.length; ++i) {
+            if (this.contents[i] == null) continue;
+            CompoundTag nbttagcompound1 = new CompoundTag();
+            nbttagcompound1.putByte("Slot", (byte)i);
+            this.contents[i].writeToNBT(nbttagcompound1);
+            nbttaglist.addTag(nbttagcompound1);
         }
-        CompoundTag.put("Items", listTag);
+        compoundTag.put("Items", nbttaglist);
     }
 
     @Override
-    public void readFromNBT(CompoundTag CompoundTag) {
-        super.readFromNBT(CompoundTag);
-        heat = CompoundTag.getInteger("Heat");
-        energy = CompoundTag.getInteger("Energy");
-        chamberCount = CompoundTag.getInteger("Chambers");
-
-        ListTag listTag = CompoundTag.getList("Items");
-
-        contents = new ItemStack[getSizeInventory()];
-        for (int i = 0; i < listTag.tagCount(); i++) {
-            CompoundTag compoundTag2 = (com.mojang.nbt.CompoundTag) listTag.tagAt(i);
-            int slot = compoundTag2.getInteger("Slot");
-
-            if (slot >= 0 && slot < contents.length)
-                contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
+    public void readFromNBT(CompoundTag compoundTag) {
+        super.readFromNBT(compoundTag);
+        heat = compoundTag.getInteger("Heat");
+        energy = compoundTag.getInteger("Energy");
+        chamberCount = compoundTag.getInteger("Chambers");
+        handleInventoryChange();
+        
+        ListTag nbttaglist = compoundTag.getList("Items");
+        this.contents = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+            CompoundTag nbttagcompound1 = (CompoundTag) nbttaglist.tagAt(i);
+            int j = nbttagcompound1.getByte("Slot") & 0xFF;
+            if (j >= contents.length) continue;
+            this.contents[j] = ItemStack.readItemStackFromNbt(nbttagcompound1);
         }
     }
 }
