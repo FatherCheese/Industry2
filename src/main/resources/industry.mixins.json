@@ -5,7 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "RenderBlocksMixin",
-    "WorldFeatureDungeonMixin"
+    "WorldFeatureDungeonMixin",
+    "gui.EntityPlayerMixin",
+    "gui.EntityPlayerMPMixin",
+    "gui.EntityPlayerSPMixin",
+    "gui.NetClientHandlerMixin",
+    "gui.NetHandlerMixin"
   ],
   "client": [
   ],
