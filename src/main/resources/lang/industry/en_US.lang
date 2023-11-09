@@ -127,12 +127,17 @@ tile.industry.reactor.desc=An extra-high voltage generator that heats up glowing
 tile.industry.reactor.chamber.name=Reactor Chamber
 tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
 
+tile.industry.fabricator.name=Energy Fabricator
+tile.industry.fabricator.desc=TUrns raw energy into any block or item.
+
 item.industry.ore.raw.tin.name=Raw Tin Ore
 item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=A chunk of unprocessed copper. Can be smelted into a copper ingot.
 item.industry.ore.raw.uranium.name=Raw Uranium
 item.industry.ore.raw.uranium.desc=A chunk of unprocessed uranium. Can be compressed into a uranium ingot.
+item.industry.ore.raw.iridium.name=Raw Iridium
+item.industry.ore.raw.uranium.desc=A chunk of unprocessed iridium. Can be compressed into an iridium plate.
 
 item.industry.dust.tin.name=Tin Dust
 item.industry.dust.tin.desc=A pile of unprocessed tin. Can be smelted into a tin ingot.
@@ -168,6 +173,8 @@ item.industry.plate.gold.name=Gold Plate
 item.industry.plate.gold.desc=A plate of gold.
 item.industry.plate.steel.name=Steel Plate
 item.industry.plate.steel.desc=A plate of steel.
+item.industry.plate.iridium.name=Iridium Plate
+item.industry.plate.iridium.desc=A plate of iridium.
 
 item.industry.cable.tin.name=Tin Cable
 item.industry.cable.tin.desc=A bundle of tin cable.
@@ -243,7 +250,7 @@ item.industry.can.food.desc=Holds mystery food. Yummy!
 item.industry.resin.name=Resin
 item.industry.resin.desc=Rubberwood blood.
 item.industry.rubber.name=Rubber
-item.industry.rubber.desc=A bar of black rubber. Boing!
+item.industry.rubber.desc=A ball of black rubber. Boing!
 item.industry.circuit.name=Circuit
 item.industry.circuit.desc=A piece of metal with various beeps and boops on it.
 item.industry.circuitadvanced.name=Advanced Circuit

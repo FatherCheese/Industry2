@@ -10,6 +10,8 @@ import baboon.industry.block.machines.advanced.*;
 import baboon.industry.block.machines.advanced.entity.*;
 import baboon.industry.block.machines.basic.*;
 import baboon.industry.block.machines.basic.entity.*;
+import baboon.industry.block.machines.endgame.BlockEnergyFabricator;
+import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
 import baboon.industry.block.reactor.BlockReactor;
 import baboon.industry.block.reactor.BlockReactorChamber;
 import baboon.industry.block.reactor.entity.TileEntityReactor;
@@ -18,6 +20,8 @@ import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
 import baboon.industry.gui.machine.advanced.*;
 import baboon.industry.gui.machine.basic.*;
+import baboon.industry.gui.machine.endgame.ContainerFabricator;
+import baboon.industry.gui.machine.endgame.GuiFabricator;
 import baboon.industry.gui.reactor.ContainerReactor;
 import baboon.industry.gui.reactor.GuiReactor;
 import baboon.industry.gui.storage.*;
@@ -114,6 +118,9 @@ public class IndustryBlocks {
     public static Block nuclearReactor;
     public static Block nuclearChamber;
 
+    // End Game
+    public static Block energyFabricator;
+
     private void pickaxeLevels() {
         ItemToolPickaxe.miningLevels.put(oreTinStone, 1);
         ItemToolPickaxe.miningLevels.put(oreTinBasalt, 1);
@@ -175,6 +182,7 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryAdvancedWiremill", GuiAdvancedWiremill.class, TileEntityAdvancedWiremill.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedExtractor", GuiAdvancedExtractor.class, TIleEntityAdvancedExtractor.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryReactor", GuiReactor.class, TileEntityReactor.class, ContainerReactor.class);
+        EnergyAPI.addToNameGuiMap("IndustryFabricator", GuiFabricator.class, TileEntityEnergyFabricator.class, ContainerFabricator.class);
     }
 
     private void initializeTiles() {
@@ -208,6 +216,7 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
         EntityHelper.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
         EntityHelper.createTileEntity(TileEntityReactor.class, "IndustryReactor");
+        EntityHelper.createTileEntity(TileEntityEnergyFabricator.class, "IndustryFabricator");
     }
 
     public void initializeBlocks() {
@@ -593,6 +602,14 @@ public class IndustryBlocks {
                 .setHardness(10.0f)
                 .setResistance(0.0f)
                 .build(new BlockReactorChamber("reactor.chamber", nextBlockID(), Material.metal));
+
+        energyFabricator = new BlockBuilder(MOD_ID)
+                .setTextures("machine_casing_advanced.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10.0f)
+                .setResistance(0.0f)
+                .build(new BlockEnergyFabricator("fabricator", nextBlockID(), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
 
         addToGuiMap();
         initializeTiles();

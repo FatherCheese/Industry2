@@ -4,12 +4,15 @@ import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
+import sunsetsatellite.sunsetutils.util.Connection;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.Random;
 
@@ -28,6 +31,9 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
         setMaxReceive(0);
+
+        for (sunsetsatellite.sunsetutils.util.Direction dir : Direction.values())
+            setConnection(dir, Connection.OUTPUT);
     }
 
     @Override
@@ -167,6 +173,22 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         super.onInventoryChanged();
     }
 
+    private int adjacentUranium(int id){
+        int num = 0;
+        int[] offsets = new int[]{-1, 1, 9, -9};
+        for (int i: offsets) {
+            if (isUranium(id + i)) num++;
+        }
+        return num;
+    }
+
+    private boolean isUranium(int id){
+        if (id < 0) return false;
+        if (id >= contents.length) return false;
+        if (contents[id] == null) return false;
+        return contents[id].getItem() == IndustryItems.cellUranium;
+    }
+
     @Override
     public void updateEntity() {
         if (worldObj.isClientSide) {
@@ -199,7 +221,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
             if (damageUranium && stack.getItem() == IndustryItems.cellUranium) {
                 stack.damageItem(1, null);
-                heat += 3 * uraniumCell;
+                heat += 4;
             }
 
             if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
@@ -216,33 +238,50 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         if (uraniumCell <= 0 && heat - 1 >= 0)
             --heat;
 
+        energy += uraniumCell;
+
         if (heat >= maxHeat / 2)
             overheat();
 
         super.updateEntity();
     }
-    private int adjacentUranium(int id){
-        int num = 0;
-        int[] offsets = new int[]{-1, 1, 9, -9};
-        for (int i: offsets) {
-            if (isUranium(id + i)) num++;
-        }
-        return num;
-    }
-    private boolean isUranium(int id){
-        if (id < 0) return false;
-        if (id >= contents.length) return false;
-        if (contents[id] == null) return false;
-        return contents[id].getItem() == IndustryItems.cellUranium;
-    }
 
     @Override
     public void writeToNBT(CompoundTag CompoundTag) {
         super.writeToNBT(CompoundTag);
+        CompoundTag.putInt("Heat", heat);
+        CompoundTag.putInt("Energy", energy);
+        CompoundTag.putInt("Chambers", chamberCount);
+
+        ListTag listTag = new ListTag();
+        for (int i = 0; i < contents.length; i++) {
+            if (contents[i] != null) {
+                CompoundTag compoundTag2 = new CompoundTag();
+
+                compoundTag2.putInt("Slot", i);
+                contents[i].writeToNBT(compoundTag2);
+                listTag.addTag(compoundTag2);
+            }
+        }
+        CompoundTag.put("Items", listTag);
     }
 
     @Override
     public void readFromNBT(CompoundTag CompoundTag) {
         super.readFromNBT(CompoundTag);
+        heat = CompoundTag.getInteger("Heat");
+        energy = CompoundTag.getInteger("Energy");
+        chamberCount = CompoundTag.getInteger("Chambers");
+
+        ListTag listTag = CompoundTag.getList("Items");
+
+        contents = new ItemStack[getSizeInventory()];
+        for (int i = 0; i < listTag.tagCount(); i++) {
+            CompoundTag compoundTag2 = (com.mojang.nbt.CompoundTag) listTag.tagAt(i);
+            int slot = compoundTag2.getInteger("Slot");
+
+            if (slot >= 0 && slot < contents.length)
+                contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
+        }
     }
 }

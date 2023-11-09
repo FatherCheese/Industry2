@@ -17,7 +17,7 @@ public class RenderBlocksMixin {
     @Shadow private WorldSource blockAccess;
 
     @Inject(method = "renderBlockByRenderType", at = @At("HEAD"), cancellable = true)
-    void industry_renderCable(Block block, int renderType, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
+    private void industry_renderCable(Block block, int renderType, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
         if (renderType == 32)
             cir.setReturnValue(CableModel.renderCable((RenderBlocks) (Object) this, blockAccess, (BlockCable) block, x, y, z));
     }

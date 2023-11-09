@@ -20,6 +20,9 @@ public class WailaPlugin implements BTWailaCustomTootltipPlugin {
         new TooltipMachineCannery().addTooltip();
         new TooltipMachineAdvanced().addTooltip();
 
+        new TooltipReactor().addTooltip();
+        new TooltipFabricator().addTooltip();
+
         BTWaila.LOGGER.info("Adding tooltips for: Industry2");
     }
 }

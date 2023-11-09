@@ -32,6 +32,7 @@ public class IndustryItems {
     public static Item oreRawTin;
     public static Item oreRawCopper;
     public static Item oreRawUranium;
+    public static Item oreRawIridium;
 
     // Dust
     public static Item dustTin;
@@ -54,6 +55,7 @@ public class IndustryItems {
     public static Item plateIron;
     public static Item plateGold;
     public static Item plateSteel;
+    public static Item plateIridium;
 
     // Cables
     public static Item itemCableTin;
@@ -141,6 +143,11 @@ public class IndustryItems {
                 "ore.raw.uranium",
                 "raw_uranium.png");
 
+        oreRawIridium = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID()),
+                "ore.raw.iridium",
+                "raw_iridium.png");
+
         dustTin = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID()),
                 "dust.tin",
@@ -220,6 +227,11 @@ public class IndustryItems {
                 new Item(nextItemID()),
                 "plate.steel",
                 "plate_steel.png");
+
+        plateIridium = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID()),
+                "plate.iridium",
+                "plate_iridium.png");
 
         itemCableTin = ItemHelper.createItem(MOD_ID,
                 new ItemCable("cable.tin", nextItemID(), IndustryBlocks.blockCableTin),

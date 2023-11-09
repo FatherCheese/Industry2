@@ -4,7 +4,8 @@
   "package": "baboon.industry.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "RenderBlocksMixin"
+    "RenderBlocksMixin",
+    "WorldFeatureDungeonMixin"
   ],
   "client": [
   ],

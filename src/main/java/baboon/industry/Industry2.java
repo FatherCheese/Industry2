@@ -12,8 +12,7 @@ import turniplabs.halplibe.helper.SoundHelper;
 public class Industry2 implements ModInitializer {
 
     // TODO LIST
-    // Nuclear Reactor stuff
-    // End game machines
+    // End game stuff
     // Achievements
     // Look into upgrades
     // Look into custom damage types

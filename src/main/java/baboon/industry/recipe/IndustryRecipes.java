@@ -198,6 +198,15 @@ public class IndustryRecipes {
                 "1#1", "1#1",
                 '1', IndustryItems.rubber
         });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.reactorPlate), new Object[]{
+                IndustryItems.plateSteel,
+                IndustryItems.plateSteel
+        });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.reactorPlate), new Object[]{
+                Item.ingotSteel,
+                Item.ingotSteel,
+                IndustryItems.toolHammer
+        });
     }
 
     private void craftingRecipesBlocks() {
@@ -409,6 +418,19 @@ public class IndustryRecipes {
                 '2', Block.blockCoal,
                 '3', Block.obsidian
         });
+
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearReactor), new Object[]{
+                "1", "2", "3",
+                '1', IndustryItems.circuitAdvanced,
+                '2', IndustryBlocks.nuclearChamber,
+                '3', IndustryBlocks.generator
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearChamber), new Object[]{
+                "111", "121", "111",
+                '1', IndustryBlocks.nuclearReactor,
+                '2', IndustryItems.batteryLapis
+        });
+
         RecipeHelper.Crafting.createShapelessRecipe(Block.planksOakPainted, 4, new Object[]{IndustryBlocks.logRubberWood});
 
         RecipeHelper.Crafting.createShapelessRecipe(Block.obsidian, 1, new Object[]{IndustryItems.cellWater, IndustryItems.cellLava});
