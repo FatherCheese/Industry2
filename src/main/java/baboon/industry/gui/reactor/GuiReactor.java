@@ -4,7 +4,6 @@ import baboon.industry.block.reactor.entity.TileEntityReactor;
 import baboon.industry.item.IndustryItems;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.InventoryAction;
-import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
@@ -22,12 +21,12 @@ public class GuiReactor extends GuiContainer {
         super(new ContainerReactor(inventory, tileEntity));
         this.tile = tileEntity;
         this.inventory = inventory;
-        ySize = 97 + 17 + 18 * (tileEntity.getSizeInventory()/9);
+        ySize = 97 + 17 + 18 * (tileEntity.chamberCount);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
-        int reactorRows = tile.getSizeInventory()/9;
+        int reactorRows = tile.chamberCount;
         ySize = 97 + 17 + 18 * reactorRows;
 
         int texture = mc.renderEngine.getTexture("/assets/industry/gui/reactor.png");

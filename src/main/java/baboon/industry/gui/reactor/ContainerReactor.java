@@ -1,8 +1,6 @@
 package baboon.industry.gui.reactor;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.reactor.entity.TileEntityReactor;
-import baboon.industry.item.IndustryItems;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -14,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContainerReactor extends ContainerEnergy {
-    private int inventoryStart = 0;
-    private int hotbarStart = 0;
+    private final int inventoryStart;
+    private final int hotbarStart;
 
     public ContainerReactor(InventoryPlayer inventory, TileEntityReactor tileEntity) {
         tile = tileEntity;
-        int numberOfRows = tileEntity.getSizeInventory() / 9;
+        int numberOfRows = tileEntity.chamberCount;
         int rowInt = numberOfRows * 18;
 
         for(int reactorRowsY = 0; reactorRowsY < numberOfRows; ++reactorRowsY)

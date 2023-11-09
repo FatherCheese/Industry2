@@ -1,12 +1,14 @@
 package baboon.industry;
 
 import baboon.industry.block.IndustryBlocks;
+import baboon.industry.gui.network.PacketOpenReactor;
 import baboon.industry.item.IndustryItems;
 import baboon.industry.recipe.IndustryRecipes;
 import baboon.industry.world.IndustryWorldGen;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import turniplabs.halplibe.helper.NetworkHelper;
 import turniplabs.halplibe.helper.SoundHelper;
 
 public class Industry2 implements ModInitializer {
@@ -41,6 +43,7 @@ public class Industry2 implements ModInitializer {
         new IndustryRecipes().initializeRecipes();
 
         new IndustryWorldGen().initializeWorldGen();
+        NetworkHelper.register(PacketOpenReactor.class, false, true);
 
         logger.info("Industry2 has been initialized. Have fun automating!");
     }

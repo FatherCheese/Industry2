@@ -1,15 +1,14 @@
 package baboon.industry.block.reactor;
 
 import baboon.industry.block.reactor.entity.TileEntityReactor;
+import baboon.industry.gui.IPlayerDisplay;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.block.entity.TileEntityDispenser;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 
 import java.util.Random;
 
@@ -29,7 +28,7 @@ public class BlockReactor extends BlockTileEntity {
         if (!world.isClientSide) {
             TileEntityReactor tileEntityReactor = (TileEntityReactor)world.getBlockTileEntity(x, y, z);
             if (tileEntityReactor.chamberCount <= 0) return false;
-            ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntityReactor);
+            ((IPlayerDisplay) player).displayGuiReactor(player.inventory, tileEntityReactor, tileEntityReactor.chamberCount);
         }
         return true;
     }

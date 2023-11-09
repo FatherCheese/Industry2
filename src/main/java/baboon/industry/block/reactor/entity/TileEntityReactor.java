@@ -17,7 +17,7 @@ import sunsetsatellite.sunsetutils.util.Direction;
 import java.util.Random;
 
 public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
-    private ItemStack[] contents = new ItemStack[0];
+    private ItemStack[] contents = new ItemStack[6 * 9];
     public int chamberCount = 0;
     private int uraniumCell = 0;
     private int coolantCell = 0;
