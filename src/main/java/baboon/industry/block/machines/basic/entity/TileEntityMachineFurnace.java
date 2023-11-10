@@ -4,6 +4,10 @@ import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
 import net.minecraft.core.crafting.recipe.RecipesFurnace;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
+import sunsetsatellite.sunsetutils.util.Connection;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.IItemIO;
 
 public class TileEntityMachineFurnace extends TileEntityMachineBase {
 

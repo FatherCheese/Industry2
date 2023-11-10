@@ -1,4 +1,4 @@
-package baboon.industry.gui.plugins.btwaila;
+package baboon.industry.compat.btwaila;
 
 import org.slf4j.Logger;
 import toufoumaster.btwaila.BTWaila;

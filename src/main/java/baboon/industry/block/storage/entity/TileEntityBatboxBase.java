@@ -20,6 +20,7 @@ public class TileEntityBatboxBase extends TileEntityEnergyConductorDamageable im
             this.setConnection(dir, Connection.OUTPUT);
 
         this.setConnection(Direction.Y_POS, Connection.INPUT);
+        this.setConnection(Direction.Y_NEG, Connection.INPUT);
     }
 
     @Override

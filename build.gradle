@@ -88,6 +88,14 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	ivy {
+		url = "https://github.com/SamuelDeboni"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 dependencies {
@@ -100,10 +108,6 @@ dependencies {
 	// Helper library
 	modImplementation "com.github.Turnip-Labs:bta-halplibe:${project.halplibe_version}"
 
-	modImplementation "ModMenu:ModMenu:2.0.2"
-	modImplementation "nocrashes:nocrashes:1.0.4"
-	modImplementation "guidebookpp:guidebookpp:1.5.7"
-
 	// Energy API
 	modImplementation "sunsetutils:sunsetutils:1.9.0"
 	modImplementation "energyapi:energyapi:${project.energyapi_version}"
@@ -111,8 +115,13 @@ dependencies {
 	// Terrain API
 	modImplementation "TerrainAPI:terrainapi-beta:${project.terrain_api_version}"
 
-	// BTWaila
-	modImplementation "btwaila:btwaila:0.3.2"
+	modImplementation "ModMenu:ModMenu:2.0.2"
+	modImplementation "nocrashes:nocrashes:1.0.4"
+	modImplementation "guidebookpp:guidebookpp:1.5.7"
+
+	// Mod Compatability
+	modImplementation "btwaila:btwaila:0.3.3"
+	modImplementation "potato-logistics:PotatoLogistics:0.2.1"
 
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

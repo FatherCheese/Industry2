@@ -13,6 +13,8 @@ public class RecipesExtractor {
 
     public RecipesExtractor() {
         addRecipe(IndustryBlocks.logRubberWood.id, new ItemStack(IndustryItems.rubber, 1));
+        addRecipe(IndustryBlocks.logRubberWoodResin.id, new ItemStack(IndustryItems.rubber, 1));
+        addRecipe(IndustryBlocks.logRubberWoodResinFull.id, new ItemStack(IndustryItems.rubber, 1));
         addRecipe(IndustryBlocks.saplingRubberWood.id, new ItemStack(IndustryItems.rubber, 1));
         addRecipe(IndustryItems.resin.id, new ItemStack(IndustryItems.rubber, 3));
 

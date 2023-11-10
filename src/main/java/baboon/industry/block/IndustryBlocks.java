@@ -409,15 +409,21 @@ public class IndustryBlocks {
                 .setHardness(5.0f)
                 .setResistance(0.0f)
                 .setTopTexture("arrayLV.png")
-                .setSideTextures("batboxLV.png")
-                .setBottomTexture("batboxLV.png")
+                .setBottomTexture("batboxLV_bottom.png")
+                .setNorthTexture("batboxLV_front.png")
+                .setSouthTexture("batboxLV_front.png")
+                .setEastTexture("batboxLV_sides.png")
+                .setWestTexture("batboxLV_sides.png")
                 .build(new BlockArrayLV("array.lv", nextBlockID(), Material.wood))
                 .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
 
         solarArrayMV = machineBuilderBlank
                 .setTopTexture("arrayMV.png")
-                .setSideTextures("batboxMV.png")
-                .setBottomTexture("batboxMV.png")
+                .setBottomTexture("batboxMV_bottom.png")
+                .setNorthTexture("batboxMV_front.png")
+                .setSouthTexture("batboxMV_front.png")
+                .setEastTexture("batboxMV_sides.png")
+                .setWestTexture("batboxMV_sides.png")
                 .build(new BlockArrayMV("array.mv", nextBlockID(), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
@@ -439,16 +445,22 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.WOOD)
                 .setHardness(5.0f)
                 .setResistance(0.0f)
-                .setTopTexture("batboxLV_input.png")
-                .setSideTextures("batboxLV.png")
-                .setBottomTexture("batboxLV.png")
+                .setTopTexture("batboxLV_top.png")
+                .setBottomTexture("batboxLV_bottom.png")
+                .setNorthTexture("batboxLV_front.png")
+                .setSouthTexture("batboxLV_front.png")
+                .setEastTexture("batboxLV_sides.png")
+                .setWestTexture("batboxLV_sides.png")
                 .build(new BlockBatboxLV("batbox.lv", nextBlockID(), Material.wood))
                 .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
 
         batboxMV = machineBuilderBlank
-                .setTopTexture("batboxMV_input.png")
-                .setSideTextures("batboxMV.png")
-                .setBottomTexture("batboxMV.png")
+                .setTopTexture("batboxMV_top.png")
+                .setBottomTexture("batboxMV_bottom.png")
+                .setNorthTexture("batboxMV_front.png")
+                .setSouthTexture("batboxMV_front.png")
+                .setEastTexture("batboxMV_sides.png")
+                .setWestTexture("batboxMV_sides.png")
                 .build(new BlockBatboxMV("batbox.mv", nextBlockID(), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
@@ -467,16 +479,16 @@ public class IndustryBlocks {
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         transformerMVtoLV = machineBuilderBlank
-                .setTopTexture("batboxMV_input.png")
+                .setTopTexture("batboxMV_top.png")
                 .setSideTextures("transformerMV_LV.png")
-                .setBottomTexture("batboxLV_input.png")
+                .setBottomTexture("batboxLV_bottom.png")
                 .build(new BlockTransformerMVtoLV("transformer.mvtolv", nextBlockID(), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         transformerHVtoMV = machineBuilderBlank
                 .setTopTexture("batboxHV_input.png")
                 .setSideTextures("transformerHV_MV.png")
-                .setBottomTexture("batboxMV_input.png")
+                .setBottomTexture("batboxMV_bottom.png")
                 .build(new BlockTransformerHVtoMV("transformer.hvtomv", nextBlockID(), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 

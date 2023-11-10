@@ -9,11 +9,13 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.helper.Sides;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.IItemIO;
 
-public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageable implements IInventory {
+public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     private ItemStack[] contents;
     private final RecipesCannery recipes = new RecipesCannery();
     public boolean active = false;
@@ -202,5 +204,31 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
             if (slot >= 0 && slot < contents.length)
                 contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
         }
+    }
+
+    @Override
+    public int getActiveItemSlotForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.X_NEG)
+            return 2;
+        if (direction == Direction.X_POS)
+            return 3;
+        return -1;
+    }
+
+    @Override
+    public Connection getItemIOForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.X_NEG)
+            return Connection.INPUT;
+        if (direction == Direction.X_POS)
+            return Connection.OUTPUT;
+        return Connection.NONE;
     }
 }

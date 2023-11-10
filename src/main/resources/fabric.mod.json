@@ -12,6 +12,7 @@
     "AzureLMAO (original helper)",
     "Apollo (coding help)",
     "The MidFord (textures)",
+    "Mzov (textures)",
     "Useless (coding help)",
     "Lyzantra (coding help)",
     "Nuke (coding help)",
@@ -30,7 +31,7 @@
       "baboon.industry.Industry2"
     ],
     "btwaila": [
-      "baboon.industry.gui.plugins.btwaila.WailaPlugin"
+      "baboon.industry.compat.btwaila.WailaPlugin"
     ]
   },
   "mixins": [

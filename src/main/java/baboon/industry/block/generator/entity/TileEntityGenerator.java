@@ -134,6 +134,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                     currentFuel = null;
                 }
             }
+
             if (machineUpdated)
                 onInventoryChanged();
 

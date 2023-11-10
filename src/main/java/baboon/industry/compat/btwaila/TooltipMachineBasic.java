@@ -1,4 +1,4 @@
-package baboon.industry.gui.plugins.btwaila;
+package baboon.industry.compat.btwaila;
 
 import baboon.industry.Industry2;
 import baboon.industry.block.machines.basic.entity.*;
@@ -8,18 +8,23 @@ import toufoumaster.btwaila.TooltipGroup;
 import toufoumaster.btwaila.TooltipRegistry;
 import toufoumaster.btwaila.gui.GuiBlockOverlay;
 
-public class TooltipMachineCannery implements IBTWailaCustomBlockTooltip {
+public class TooltipMachineBasic implements IBTWailaCustomBlockTooltip {
 
     @Override
     public void addTooltip() {
-        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntityMachineCannery.class, this);
-        tooltipGroup.addTooltip(TileEntityMachineCannery.class);
+        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntityMachineBase.class, this);
+        tooltipGroup.addTooltip(TileEntityMachineFurnace.class);
+        tooltipGroup.addTooltip(TileEntityMachineMacerator.class);
+        tooltipGroup.addTooltip(TileEntityMachineCompressor.class);
+        tooltipGroup.addTooltip(TileEntityMachineWiremill.class);
+        tooltipGroup.addTooltip(TileEntityMachineRecycler.class);
+        tooltipGroup.addTooltip(TileEntityMachineExtractor.class);
         TooltipRegistry.tooltipMap.add(tooltipGroup);
     }
 
     @Override
     public void drawAdvancedTooltip(TileEntity tileEntity, GuiBlockOverlay guiBlockOverlay) {
-        TileEntityMachineCannery tile = (TileEntityMachineCannery) tileEntity;
+        TileEntityMachineBase tile = (TileEntityMachineBase) tileEntity;
         guiBlockOverlay.drawStringWithShadow("Current Health: " + tile.machineHealth, 0);
         guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
 

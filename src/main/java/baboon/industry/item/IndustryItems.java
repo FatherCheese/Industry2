@@ -27,6 +27,7 @@ public class IndustryItems {
     }
 
     private static ArmorMaterial armorMaterialHazmat;
+    private static ArmorMaterial armorMaterialIridium;
 
     // Raw Ore
     public static Item oreRawTin;
@@ -83,6 +84,10 @@ public class IndustryItems {
     public static Item armorChestplateHazmat;
     public static Item armorLeggingsHazmat;
     public static Item armorBootsHazmat;
+    public static Item armorHelmetIridium;
+    public static Item armorChestplateIridium;
+    public static Item armorLeggingsIridium;
+    public static Item armorBootsIridium;
 
     // Batteries
     public static Item batteryRedstone;
@@ -123,6 +128,7 @@ public class IndustryItems {
 
     private void armorMaterials() {
         armorMaterialHazmat = ArmorHelper.createArmorMaterial("hazmat", 500, 0.0f, 0.0f, 150.0f, 0.0f);
+        armorMaterialIridium = ArmorHelper.createArmorMaterial("iridium", -1, 100.0f, 100.0f, 100.0f, 100.0f);
     }
 
     public void initializeItems() {
@@ -338,21 +344,41 @@ public class IndustryItems {
                 "armor.boots.hazmat",
                 "armor_hazmat_boots.png");
 
+        armorHelmetIridium = ItemHelper.createItem(MOD_ID,
+                new ItemArmorIridium("armor.helmet.iridium", nextItemID(), armorMaterialIridium, 0),
+                "armor.helmet.iridium",
+                "armor_iridium_helmet.png");
+
+        armorChestplateIridium = ItemHelper.createItem(MOD_ID,
+                new ItemArmorIridium("armor.chestplate.iridium", nextItemID(), armorMaterialIridium, 1),
+                "armor.chestplate.iridium",
+                "armor_iridium_chestplate.png");
+
+        armorLeggingsIridium = ItemHelper.createItem(MOD_ID,
+                new ItemArmorIridium("armor.leggings.iridium", nextItemID(), armorMaterialIridium, 2),
+                "armor.leggings.iridium",
+                "armor_iridium_leggings.png");
+
+        armorBootsIridium = ItemHelper.createItem(MOD_ID,
+                new ItemArmorIridium("armor.boots.iridium", nextItemID(), armorMaterialIridium, 3),
+                "armor.boots.iridium",
+                "armor_iridium_boots.png");
+
         batteryRedstone = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryRedstone(nextItemID()),
-                "battery.redstone").setMaxStackSize(1);
+                "battery.redstone");
 
         batteryAdvanced = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryAdvanced(nextItemID()),
-                "battery.advanced").setMaxStackSize(1);
+                "battery.advanced");
 
         batteryCrystal = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryCrystal(nextItemID()),
-                "battery.crystal").setMaxStackSize(1);
+                "battery.crystal");
 
         batteryLapis = ItemHelper.createItem(MOD_ID,
                 new ItemBatteryLapis(nextItemID()),
-                "battery.lapis").setMaxStackSize(1);
+                "battery.lapis");
 
         cellEmpty = ItemHelper.createItem(MOD_ID,
                 new ItemCell(nextItemID()),

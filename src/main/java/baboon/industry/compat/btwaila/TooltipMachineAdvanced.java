@@ -1,4 +1,4 @@
-package baboon.industry.gui.plugins.btwaila;
+package baboon.industry.compat.btwaila;
 
 import baboon.industry.Industry2;
 import baboon.industry.block.machines.advanced.entity.*;

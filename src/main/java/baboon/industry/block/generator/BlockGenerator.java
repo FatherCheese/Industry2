@@ -2,6 +2,7 @@ package baboon.industry.block.generator;
 
 import baboon.industry.Industry2;
 import baboon.industry.block.generator.entity.TileEntityGenerator;
+import baboon.industry.block.machines.basic.entity.TileEntityMachineCompressor;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -20,6 +21,7 @@ public class BlockGenerator extends BlockTileEntityRotatable {
     private final String MOD_ID = Industry2.MOD_ID;
     private final int[][] machineTexture = new int[][]{
             TextureHelper.getOrCreateBlockTexture(MOD_ID, "generator.png"),
+            TextureHelper.getOrCreateBlockTexture(MOD_ID, "generator_on.png"),
             TextureHelper.getOrCreateBlockTexture(MOD_ID, "machine_casing_basic.png")
     };
 
@@ -56,13 +58,17 @@ public class BlockGenerator extends BlockTileEntityRotatable {
         5 = east
         */
 
+        TileEntityGenerator tileEntity = ((TileEntityGenerator) blockAccess.getBlockTileEntity(x, y, z));
         int metadata = blockAccess.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * metadata + side.getId()];
         if (index != 2)
-            atlasIndices[index] = texCoordToIndex(machineTexture[1][0], machineTexture[1][1]);
+            atlasIndices[index] = texCoordToIndex(machineTexture[2][0], machineTexture[2][1]);
 
-        if (index == 2)
-                atlasIndices[index] = texCoordToIndex(machineTexture[0][0], machineTexture[0][1]);
+        if (index == 2) {
+            atlasIndices[index] = texCoordToIndex(machineTexture[0][0], machineTexture[0][1]);
+            if (tileEntity.active)
+                atlasIndices[index] = texCoordToIndex(machineTexture[1][0], machineTexture[1][1]);
+        }
 
         return atlasIndices[index];
     }
