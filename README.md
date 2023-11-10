@@ -1,32 +1,23 @@
-# Minimal Mod
+# Industry2
 
-Quilt example mod, without the examples feat. Kotlin.
+Ever dreamt of having industrial machines in your Better Than Adventure world? Having new ores to mine, and having the ability to automate the smelting of said new ores? Well that's where Industry2 comes in!
 
 ## Prerequisites
 - JDK for Java 17 ([Eclipse Temurin](https://adoptium.net/temurin/releases/) recommended)
-- IntelliJ IDEA
-- Minecraft Development plugin (Optional, but highly recommended)
+- Halplibe 2.7.0 or later
+- EnergyAPI 1.1.9 or later.
+- TerrainAPI 1.3.0 or later
 
 ## Setup instructions
 
-- Download or clone this repository and put it somewhere.
-```
-git clone https://github.com/MartinSVK12/bta-example-mod.git
-```
+1. Download the BTA Babric Instance from the Turnip Labs GitHub. (https://github.com/Turnip-Labs/babric-instance-repo)
 
-- Import the project in IntelliJ IDEA, close it and open it again.
+2. Update HalpLibe to 2.7.0 or above in the Babric instance.
 
-- Add `-Dloader.development=true` and change `-Dfabric.dli.main=` to `org.quiltmc.loader.impl.launch.knot.KnotClient` or `=org.quiltmc.loader.impl.launch.knot.KnotServer` in your run configurations.
+3. Download TerrainAPI from here. (https://github.com/UselessBullets/TerrainAPI) or here (https://bta-modding.nouma-vallee.fr/Useless/terrainapi/)
 
-- Create a new run configuration by going in `Run > Edit Configurations`  
-   Then click on the plus icon and select Gradle. In the `Tasks and Arguments` field enter `build`  
-   Running it will build your finished jar files and put them in `build/libs/`
+4. Download EnergyAPI from here. (https://github.com/MartinSVK12/energyapi)
 
-- Open `File > Settings` and head to `Build, Execution, Development > Build Tools > Gradle`  
-   Change `Build and run using` and `Run tests using` to `IntelliJ IDEA`
+5. Download this mod from the BTA modding site from the releases tab.
 
-
-- Open `File > Project Structure`, select `Project` and set `Compiler output` to your project's path/out.
-
-
-- Done! Now all that's left is to change every mention of `examplemod` to your own mod id. Happy modding!
+6. Plug the jar file into you and your server's Mods folder, and Have fun!
