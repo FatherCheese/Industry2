@@ -113,13 +113,13 @@ tile.industry.advanced.extractor.desc=For extracting blocks and items from other
 tile.industry.block.coal.hardened.name=Hardened Carbon
 tile.industry.block.coal.hardened.desc=With a little more compression, can turn into a fine gem.
 
-tile.industry.leaves.rubber.name=RubberWood Leaves
+tile.industry.leaves.rubber.name=Rubberwood Leaves
 tile.industry.leaves.rubber.desc=Leaves from a rubberwood tree.
-tile.industry.log.rubber.name=RubberWood Log
+tile.industry.log.rubber.name=Rubberwood Log
 tile.industry.log.rubber.desc=A log from a rubberwood tree.
-tile.industry.log.rubber.resin.name=RubberWood Resin Log
+tile.industry.log.rubber.resin.name=Rubberwood Resin Log
 tile.industry.log.rubber.resin.desc=A log full of resin from a rubberwood tree.
-tile.industry.sapling.rubber.name=RubberWood Sapling
+tile.industry.sapling.rubber.name=Rubberwood Sapling
 tile.industry.sapling.rubber.desc=Plant to grow a rubberwood tree.
 
 tile.industry.reactor.name=Nuclear Reactor
@@ -128,7 +128,7 @@ tile.industry.reactor.chamber.name=Reactor Chamber
 tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
 
 tile.industry.fabricator.name=Energy Fabricator
-tile.industry.fabricator.desc=TUrns raw energy into any block or item.
+tile.industry.fabricator.desc=Turns raw energy into any block or item.
 
 item.industry.ore.raw.tin.name=Raw Tin Ore
 item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.

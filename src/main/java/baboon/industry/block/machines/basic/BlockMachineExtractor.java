@@ -1,6 +1,7 @@
 package baboon.industry.block.machines.basic;
 
 import baboon.industry.Industry2;
+import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineExtractor;
 import net.minecraft.core.block.BlockTileEntityRotatable;
@@ -8,6 +9,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
@@ -98,6 +100,13 @@ public class BlockMachineExtractor extends BlockTileEntityRotatable {
         super.onBlockRemoval(world, x, y, z);
     }
 
+    @Override
+    public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
+        if (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.PROPER_TOOL)
+            return new ItemStack[]{new ItemStack(this)};
+        else
+            return new ItemStack[]{new ItemStack(IndustryBlocks.machineCasingBasic)};
+    }
 
     // Static Methods
 

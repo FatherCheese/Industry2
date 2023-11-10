@@ -427,8 +427,15 @@ public class IndustryRecipes {
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearChamber), new Object[]{
                 "111", "121", "111",
-                '1', IndustryBlocks.nuclearReactor,
+                '1', IndustryItems.reactorPlate,
                 '2', IndustryItems.batteryLapis
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.energyFabricator), true, new Object[]{
+                "#1#", "232", "#4#",
+                '1', Block.netherrack,
+                '2', IndustryItems.circuitAdvanced,
+                '3', IndustryBlocks.nuclearChamber,
+                '4', Block.stone
         });
 
         RecipeHelper.Crafting.createShapelessRecipe(Block.planksOakPainted, 4, new Object[]{IndustryBlocks.logRubberWood});

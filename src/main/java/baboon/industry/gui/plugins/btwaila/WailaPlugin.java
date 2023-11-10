@@ -8,6 +8,7 @@ public class WailaPlugin implements BTWailaCustomTootltipPlugin {
 
     @Override
     public void initializePlugin(Logger logger) {
+        new TooltipCable().addTooltip();
         new TooltipGenerator().addTooltip();
         new TooltipGeneratorWatermill().addTooltip();
         new TooltipGeneratorWindmill().addTooltip();

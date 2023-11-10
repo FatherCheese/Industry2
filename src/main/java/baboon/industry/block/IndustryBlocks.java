@@ -112,6 +112,7 @@ public class IndustryBlocks {
     public static Block leavesRubberWood;
     public static Block logRubberWood;
     public static Block logRubberWoodResin;
+    public static Block logRubberWoodResinFull;
     public static Block saplingRubberWood;
 
     // Nuclear
@@ -560,8 +561,9 @@ public class IndustryBlocks {
                 .setBlockColor(new BlockColorLeaves("pine"))
                 .setHardness(0.2f)
                 .setLightOpacity(1)
-                .build(new BlockLeavesRubberwood("leaves.rubber", nextBlockID(), Material.leaves))
+                .build(new BlockLeavesRubberwood("leaves.rubber", nextBlockID()))
                 .withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
+                .setTickOnLoad(true)
                 .withDisabledNeighborNotifyOnMetadataChange()
                 .withDisabledStats();
 
@@ -578,7 +580,17 @@ public class IndustryBlocks {
                 .setSideTextures("log_rubber.png")
                 .setBlockSound(BlockSounds.WOOD)
                 .setHardness(2.0f)
+                .setBlockModel(new BlockModelRenderBlocks(27))
                 .build(new BlockLogResin("log.rubber.resin", nextBlockID()))
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT, BlockTags.NOT_IN_CREATIVE_MENU);
+
+        logRubberWoodResinFull = new BlockBuilder(MOD_ID)
+                .setTopBottomTexture("log_rubber_top.png")
+                .setSideTextures("log_rubber.png")
+                .setBlockSound(BlockSounds.WOOD)
+                .setHardness(2.0f)
+                .setBlockModel(new BlockModelRenderBlocks(27))
+                .build(new BlockLogResinFull("log.rubber.resin", nextBlockID()))
                 .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
 
         saplingRubberWood = new BlockBuilder(MOD_ID)
@@ -587,6 +599,7 @@ public class IndustryBlocks {
                 .setBlockModel(new BlockModelRenderBlocks(1))
                 .build(new BlockSaplingRubberwood("sapling.rubber", nextBlockID()))
                 .withTags(BlockTags.BROKEN_BY_FLUIDS)
+                .setTickOnLoad(true)
                 .withDisabledNeighborNotifyOnMetadataChange();
 
         nuclearReactor = new BlockBuilder(MOD_ID)
