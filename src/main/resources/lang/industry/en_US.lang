@@ -221,6 +221,14 @@ item.industry.armor.leggings.hazmat.name=Hazmat Leggings
 item.industry.armor.leggings.hazmat.desc=Protect yourself from radiation with these yellow leggings.
 item.industry.armor.boots.hazmat.name=Hazmat Boots
 item.industry.armor.boots.hazmat.desc=Protect yourself from radiation with these black boots.
+item.industry.armor.helmet.iridium.name=Iridium Plate Helmet
+item.industry.armor.helmet.iridium.desc=Protect yourself from everything with this indestructible helmet.
+item.industry.armor.chestplate.iridium.name=Iridium Plate Chestplate
+item.industry.armor.chestplate.iridium.desc=Protect yourself from everything with this indestructible chestplate.
+item.industry.armor.leggings.iridium.name=Iridium Plate Leggings
+item.industry.armor.leggings.iridium.desc=Protect yourself from everything with this pair of indestructible leggings.
+item.industry.armor.boots.iridium.name=Iridium Plate Boots
+item.industry.armor.boots.iridium.desc=Protect yourself from everything with this pair of indestructible boots.
 
 item.industry.battery.redstone.name=Redstone Battery
 item.industry.battery.redstone.desc=A redstone battery, with a tin casing.

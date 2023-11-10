@@ -78,7 +78,7 @@ public class TIleEntityAdvancedExtractor extends TileEntityAdvancedBase {
                 BlockAdvancedExtractor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 onInventoryChanged();
 
-                if (hasEnergy && canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5])) {
+                if (hasEnergy && (canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5]))) {
                     ++currentMachineTime;
                     energy -= 8;
                     active = true;

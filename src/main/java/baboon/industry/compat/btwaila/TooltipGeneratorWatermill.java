@@ -1,7 +1,6 @@
 package baboon.industry.compat.btwaila;
 
 import baboon.industry.Industry2;
-import baboon.industry.block.generator.entity.TileEntityGenerator;
 import baboon.industry.block.generator.entity.TileEntityGeneratorWatermill;
 import net.minecraft.core.block.entity.TileEntity;
 import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;

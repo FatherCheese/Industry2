@@ -13,13 +13,11 @@ import turniplabs.halplibe.helper.SoundHelper;
 
 public class Industry2 implements ModInitializer {
 
-    // TODO LIST
-    // End game stuff
-    // Achievements
+    // "TODO" LIST
     // Look into upgrades
     // Look into custom damage types
     // Look into damageable crafting
-    // Replace BlockLogResin with an actual log block
+    // Achievements
 
     public static String MOD_ID = "industry";
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);

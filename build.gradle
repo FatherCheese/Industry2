@@ -83,7 +83,7 @@ repositories {
 	ivy {
 		url = "https://github.com/UselessBullets"
 		patternLayout {
-			artifact "[organisation]/releases/download/b[revision]/[module]-[revision].jar"
+			artifact "[organisation]/releases/download/r[revision]/[module]-[revision].jar"
 			m2compatible = true
 		}
 		metadataSources { artifact() }
@@ -113,7 +113,7 @@ dependencies {
 	modImplementation "energyapi:energyapi:${project.energyapi_version}"
 
 	// Terrain API
-	modImplementation "TerrainAPI:terrainapi-beta:${project.terrain_api_version}"
+	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	modImplementation "ModMenu:ModMenu:2.0.2"
 	modImplementation "nocrashes:nocrashes:1.0.4"

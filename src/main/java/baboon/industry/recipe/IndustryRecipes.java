@@ -178,6 +178,13 @@ public class IndustryRecipes {
                 '1', Item.diamond,
                 '2', IndustryItems.toolDrill
         });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolNanoSword), new Object[]{
+                "#1#", "#2#", "343",
+                '1', Item.quartz,
+                '2', Item.dustGlowstone,
+                '3', IndustryItems.plateSteel,
+                '4', IndustryItems.batteryAdvanced
+        });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorHelmetHazmat), new Object[]{
                 "111", "121", "#3#",
                 '1', IndustryItems.rubber,
@@ -198,6 +205,28 @@ public class IndustryRecipes {
                 "1#1", "1#1",
                 '1', IndustryItems.rubber
         });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorHelmetIridium), new Object[]{
+                "121", "131",
+                '1', IndustryItems.plateIridium,
+                '2', IndustryItems.batteryLapis,
+                '3', Block.glassTinted
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorChestplateIridium), new Object[]{
+                "1#1", "121", "111",
+                '1', IndustryItems.plateIridium,
+                '2', IndustryItems.batteryLapis
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorLeggingsIridium), new Object[]{
+                "111", "2#2", "1#1",
+                '1', IndustryItems.plateIridium,
+                '2', IndustryItems.batteryLapis
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorBootsIridium), new Object[]{
+                "1#1", "2#2",
+                '1', IndustryItems.batteryLapis,
+                '2', IndustryItems.plateIridium
+        });
+
         RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.reactorPlate), new Object[]{
                 IndustryItems.plateSteel,
                 IndustryItems.plateSteel

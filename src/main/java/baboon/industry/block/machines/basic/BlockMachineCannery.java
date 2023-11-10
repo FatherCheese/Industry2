@@ -1,9 +1,7 @@
 package baboon.industry.block.machines.basic;
 
 import baboon.industry.block.IndustryBlocks;
-import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;

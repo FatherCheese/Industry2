@@ -8,11 +8,15 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.helper.Sides;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.IItemIO;
 
-public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable implements IInventory {
+import java.util.Random;
+
+public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     protected ItemStack[] contents;
     protected AdvancedRedstoneFuel redstoneFuel = new AdvancedRedstoneFuel();
     public boolean active = false;
@@ -153,5 +157,46 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
             if (slot >= 0 && slot < contents.length)
                 contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
         }
+    }
+
+    @Override
+    public int getActiveItemSlotForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        Random random = new Random();
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.Z_POS)
+            return 2;
+        if (direction == Direction.X_NEG)
+            return 3;
+        if (direction == Direction.Z_NEG)
+            return 4;
+        if (direction == Direction.X_POS)
+            return 5;
+        if (direction == Direction.Y_NEG)
+            return 6;
+
+        return -1;
+    }
+
+    @Override
+    public Connection getItemIOForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.Z_POS)
+            return Connection.INPUT;
+        if (direction == Direction.X_NEG)
+            return Connection.INPUT;
+        if (direction == Direction.Z_NEG)
+            return Connection.OUTPUT;
+        if (direction == Direction.X_POS)
+            return Connection.OUTPUT;
+        if (direction == Direction.Y_NEG)
+            return Connection.INPUT;
+
+        return Connection.NONE;
     }
 }

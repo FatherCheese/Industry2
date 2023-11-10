@@ -1,7 +1,6 @@
 package baboon.industry.block.generator.entity;
 
 import baboon.industry.IndustryConfig;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 
 public class TileEntityGeneratorSolar extends TileEntitySolarBase {
     public TileEntityGeneratorSolar() {

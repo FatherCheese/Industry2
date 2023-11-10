@@ -10,7 +10,6 @@
     "gui.EntityPlayerMixin",
     "gui.EntityPlayerMPMixin",
     "gui.EntityPlayerSPMixin",
-    "gui.InventoryPlayerMixin",
     "gui.NetClientHandlerMixin",
     "gui.NetHandlerMixin"
   ],

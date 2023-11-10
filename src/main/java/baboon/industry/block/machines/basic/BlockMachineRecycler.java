@@ -3,7 +3,6 @@ package baboon.industry.block.machines.basic;
 import baboon.industry.Industry2;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
-import baboon.industry.block.machines.basic.entity.TileEntityMachineMacerator;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineRecycler;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;

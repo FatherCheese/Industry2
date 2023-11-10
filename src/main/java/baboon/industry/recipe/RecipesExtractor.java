@@ -2,8 +2,6 @@ package baboon.industry.recipe;
 
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 
 import java.util.HashMap;

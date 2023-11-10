@@ -2,7 +2,6 @@ package baboon.industry.compat.btwaila;
 
 import baboon.industry.Industry2;
 import baboon.industry.block.cables.entity.TileEntityCable;
-import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
 import net.minecraft.core.block.entity.TileEntity;
 import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
 import toufoumaster.btwaila.TooltipGroup;

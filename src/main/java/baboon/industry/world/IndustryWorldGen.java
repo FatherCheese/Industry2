@@ -5,7 +5,7 @@ import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
-import useless.terrainapi.generation.overworld.ChunkDecoratorOverworldAPI;
+import useless.terrainapi.generation.overworld.api.ChunkDecoratorOverworldAPI;
 
 import java.util.Random;
 
@@ -14,9 +14,9 @@ public class IndustryWorldGen {
     private final String MOD_ID = Industry2.MOD_ID;
 
     private void initializeWorldGenValues() {
-        ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreCopperStone, 8, 20, 1/2f);
-        ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreTinStone, 8, 20, 1/2f);
-        ChunkDecoratorOverworldAPI.oreFeatures.setOreValues(MOD_ID, IndustryBlocks.oreUraniumStone, 2, 10, 1/4f);
+        ChunkDecoratorOverworldAPI.oreFeatures.config.setOreValues(MOD_ID, IndustryBlocks.oreCopperStone, 8, 20, 1/2f);
+        ChunkDecoratorOverworldAPI.oreFeatures.config.setOreValues(MOD_ID, IndustryBlocks.oreTinStone, 8, 20, 1/2f);
+        ChunkDecoratorOverworldAPI.oreFeatures.config.setOreValues(MOD_ID, IndustryBlocks.oreUraniumStone, 2, 10, 1/4f);
     }
 
     public void initializeWorldGen() {

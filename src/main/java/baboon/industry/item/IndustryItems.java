@@ -321,8 +321,7 @@ public class IndustryItems {
 
         toolNanoSword = ItemHelper.createItem(MOD_ID,
                 new ItemToolNanoSword(nextItemID()),
-                "tool.nanosword",
-                "tool_nanosword.png");
+                "tool.nanosword");
 
         armorHelmetHazmat = ItemHelper.createItem(MOD_ID,
                 new ItemArmor("armor.helmet.hazmat", nextItemID(), armorMaterialHazmat, 0),

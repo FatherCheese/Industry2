@@ -1,6 +1,5 @@
 package baboon.industry.world;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.IndustryBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
@@ -64,8 +63,12 @@ public class WorldFeatureRubberTree extends WorldFeatureTree {
                     for(int l1 = 0; l1 < randHeight; ++l1) {
                         int id = world.getBlockId(x, y + l1, z);
                         if (id == 0 || this.isLeaf(id)) {
-                            if (random.nextInt(6) == 0)
-                                world.setBlockWithNotify(x, y + l1, z, IndustryBlocks.logRubberWoodResin.id);
+                            if (random.nextInt(6) == 0) {
+                                if (random.nextInt(2) == 0)
+                                    world.setBlockWithNotify(x, y + l1, z, IndustryBlocks.logRubberWoodResin.id);
+                                else
+                                    world.setBlockWithNotify(x, y + l1, z, IndustryBlocks.logRubberWoodResinFull.id);
+                            }
                             else
                                 world.setBlockWithNotify(x, y + l1, z, this.logID);
                         }

@@ -2,7 +2,6 @@ package baboon.industry.block.generator;
 
 import baboon.industry.Industry2;
 import baboon.industry.block.generator.entity.TileEntityGenerator;
-import baboon.industry.block.machines.basic.entity.TileEntityMachineCompressor;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;

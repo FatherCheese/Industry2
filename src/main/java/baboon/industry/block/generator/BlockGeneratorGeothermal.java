@@ -1,7 +1,6 @@
 package baboon.industry.block.generator;
 
 import baboon.industry.Industry2;
-import baboon.industry.block.generator.entity.TileEntityGenerator;
 import baboon.industry.block.generator.entity.TileEntityGeneratorGeothermal;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;

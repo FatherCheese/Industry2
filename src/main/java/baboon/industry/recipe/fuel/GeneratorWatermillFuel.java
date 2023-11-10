@@ -1,9 +1,6 @@
 package baboon.industry.recipe.fuel;
 
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.entity.TileEntityFurnace;
-import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.Item;
 
 import java.util.HashMap;

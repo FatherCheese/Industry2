@@ -1,8 +1,6 @@
 package baboon.industry.gui.machine.advanced;
 
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedBase;
-import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
-import baboon.industry.gui.machine.basic.ContainerMachineBase;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.net.command.TextFormatting;
