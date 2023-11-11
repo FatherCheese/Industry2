@@ -32,6 +32,9 @@
     ],
     "btwaila": [
       "baboon.industry.compat.btwaila.WailaPlugin"
+    ],
+    "terrain-api": [
+      "baboon.industry.compat.terrainapi.TerrainAPIPlugin"
     ]
   },
   "mixins": [
