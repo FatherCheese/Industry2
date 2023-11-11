@@ -31,7 +31,7 @@ public class BlockCable extends BlockTileEntity {
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityCable();
+        return new TileEntityCable(capacity, 0, transfer, dangerLevel);
     }
 
     @Override
