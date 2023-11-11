@@ -429,15 +429,21 @@ public class IndustryBlocks {
 
         solarArrayHV = machineBuilderBlank
                 .setTopTexture("generator_solar.png")
-                .setSideTextures("batboxHV.png")
-                .setBottomTexture("batboxHV.png")
+                .setBottomTexture("batboxHV_bottom.png")
+                .setNorthTexture("batboxHV_front.png")
+                .setSouthTexture("batboxHV_front.png")
+                .setEastTexture("batboxHV_sides.png")
+                .setWestTexture("batboxHV_sides.png")
                 .build(new BlockArrayHV("array.hv", blockID("solarArrayHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         solarArrayEHV = machineBuilderBlank
                 .setTopTexture("arrayEHV.png")
-                .setSideTextures("batboxEHV.png")
-                .setBottomTexture("batboxEHV.png")
+                .setBottomTexture("batboxEHV_bottom.png")
+                .setNorthTexture("batboxEHV_front.png")
+                .setSouthTexture("batboxEHV_front.png")
+                .setEastTexture("batboxEHV_sides.png")
+                .setWestTexture("batboxEHV_sides.png")
                 .build(new BlockArrayEHV("array.ehv", blockID("solarArrayEHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
@@ -465,37 +471,52 @@ public class IndustryBlocks {
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         batboxHV = machineBuilderBlank
-                .setTopTexture("batboxHV_input.png")
-                .setSideTextures("batboxHV.png")
-                .setBottomTexture("batboxHV.png")
+                .setTopTexture("batboxHV_top.png")
+                .setBottomTexture("batboxHV_bottom.png")
+                .setNorthTexture("batboxHV_front.png")
+                .setSouthTexture("batboxHV_front.png")
+                .setEastTexture("batboxHV_sides.png")
+                .setWestTexture("batboxHV_sides.png")
                 .build(new BlockBatboxHV("batbox.hv", blockID("batboxHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         batboxEHV = machineBuilderBlank
-                .setTopTexture("batboxEHV_input.png")
-                .setSideTextures("batboxEHV.png")
-                .setBottomTexture("batboxEHV.png")
+                .setTopTexture("batboxEHV_top.png")
+                .setBottomTexture("batboxEHV_bottom.png")
+                .setNorthTexture("batboxEHV_front.png")
+                .setSouthTexture("batboxEHV_front.png")
+                .setEastTexture("batboxEHV_sides.png")
+                .setWestTexture("batboxEHV_sides.png")
                 .build(new BlockBatboxEHV("batbox.ehv", blockID("batboxEHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         transformerMVtoLV = machineBuilderBlank
                 .setTopTexture("batboxMV_top.png")
-                .setSideTextures("transformerMV_LV.png")
                 .setBottomTexture("batboxLV_bottom.png")
+                .setNorthTexture("transformerMV_LV_front.png")
+                .setSouthTexture("transformerMV_LV_front.png")
+                .setEastTexture("transformerMV_LV_sides.png")
+                .setWestTexture("transformerMV_LV_sides.png")
                 .build(new BlockTransformerMVtoLV("transformer.mvtolv", blockID("transformerMVtoLV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         transformerHVtoMV = machineBuilderBlank
-                .setTopTexture("batboxHV_input.png")
-                .setSideTextures("transformerHV_MV.png")
+                .setTopTexture("batboxHV_top.png")
                 .setBottomTexture("batboxMV_bottom.png")
+                .setNorthTexture("transformerHV_MV_front.png")
+                .setSouthTexture("transformerHV_MV_front.png")
+                .setEastTexture("transformerHV_MV_sides.png")
+                .setWestTexture("transformerHV_MV_sides.png")
                 .build(new BlockTransformerHVtoMV("transformer.hvtomv", blockID("transformerHVtoMV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         transformerEHVtoHV = machineBuilderBlank
-                .setTopTexture("batboxEHV_input.png")
-                .setSideTextures("transformerEHV_HV.png")
-                .setBottomTexture("batboxHV_input.png")
+                .setTopTexture("batboxEHV_top.png")
+                .setBottomTexture("batboxHV_bottom.png")
+                .setNorthTexture("transformerEHV_HV_front.png")
+                .setSouthTexture("transformerEHV_HV_front.png")
+                .setEastTexture("transformerEHV_HV_sides.png")
+                .setWestTexture("transformerEHV_HV_sides.png")
                 .build(new BlockTransformerEHVtoHV("transformer.ehvtohv", blockID("transformerEHVtoHV"), Material.metal))
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 

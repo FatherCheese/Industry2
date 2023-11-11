@@ -29,7 +29,7 @@ public class GuiGeneratorGeothermal extends GuiContainer {
         drawTexturedModalRect(scrnX + 8, scrnY + 39, 176, 0, (int) (power * 16), 8);
 
         int fuelTime = tileEntity.currentFuelTime * 16 / tileEntity.maxFuelTime;
-        drawTexturedModalRect(scrnX + 80, (scrnY + 17) + (16 - fuelTime), 192, 23 - fuelTime, 16, fuelTime);
+        drawTexturedModalRect(scrnX + 80, (scrnY + 17) + (16 - fuelTime), 192, 24 - fuelTime, 16, fuelTime);
     }
 
     @Override

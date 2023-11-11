@@ -33,7 +33,7 @@ public class IndustryItems {
     public static Item oreRawTin;
     public static Item oreRawCopper;
     public static Item oreRawUranium;
-    public static Item oreRawIridium;
+    public static Item ingotIridium;
 
     // Dust
     public static Item dustTin;
@@ -149,11 +149,6 @@ public class IndustryItems {
                 "ore.raw.uranium",
                 "raw_uranium.png");
 
-        oreRawIridium = ItemHelper.createItem(MOD_ID,
-                new Item(nextItemID("oreRawIridium")),
-                "ore.raw.iridium",
-                "raw_iridium.png");
-
         dustTin = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID("dustTin")),
                 "dust.tin",
@@ -203,6 +198,11 @@ public class IndustryItems {
                 new ItemRadioactive(nextItemID("ingotUranium")),
                 "ingot.uranium",
                 "ingot_uranium.png");
+
+        ingotIridium = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("ingotIridium")),
+                "ingot.iridium",
+                "ingot_iridium.png");
 
         plateTin = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID("plateTin")),

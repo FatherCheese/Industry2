@@ -136,8 +136,6 @@ item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=A chunk of unprocessed copper. Can be smelted into a copper ingot.
 item.industry.ore.raw.uranium.name=Raw Uranium
 item.industry.ore.raw.uranium.desc=A chunk of unprocessed uranium. Can be compressed into a uranium ingot.
-item.industry.ore.raw.iridium.name=Raw Iridium
-item.industry.ore.raw.uranium.desc=A chunk of unprocessed iridium. Can be compressed into an iridium plate.
 
 item.industry.dust.tin.name=Tin Dust
 item.industry.dust.tin.desc=A pile of unprocessed tin. Can be smelted into a tin ingot.
@@ -160,6 +158,8 @@ item.industry.ingot.bronze.name=Bronze Ingot
 item.industry.ingot.bronze.desc=Tin and copper fused into an iron-like alloy.
 item.industry.ingot.uranium.name=Uranium Ingot
 item.industry.ingot.uranium.desc=A metal bar of uranium used for nuclear science.
+item.industry.ingot.iridium.name=Iridium Ingot
+item.industry.ingot.iridium.desc=A metal bar of iridium, lucky you! Can be compressed into a plate.
 
 item.industry.plate.tin.name=Tin Plate
 item.industry.plate.tin.desc=A plate of tin.

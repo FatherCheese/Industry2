@@ -139,7 +139,7 @@ public class IndustryRecipes {
                 "#1#", "1#1", "#1#",
                 '1', IndustryItems.ingotTin
         });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.batteryLapis, 3), new Object[]{
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.canEmpty, 3), new Object[]{
                 "1#1", "#1#",
                 '1', IndustryItems.plateTin
         });
