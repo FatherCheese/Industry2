@@ -30,7 +30,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
         setMaxReceive(0);
 
         for (Direction dir : Direction.values())
-            setConnection(dir, Connection.INPUT);
+            setConnection(dir, Connection.OUTPUT);
     }
 
     @Override
