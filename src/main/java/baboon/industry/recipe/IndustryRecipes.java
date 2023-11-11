@@ -147,7 +147,7 @@ public class IndustryRecipes {
                 "111", "232", "111",
                 '1', IndustryItems.itemInsulatedCableCopper,
                 '2', Item.dustRedstone,
-                '3', IndustryItems.plateSteel
+                '3', IndustryItems.plateIron
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.circuitAdvanced), new Object[]{
                 "111", "234", "111",
