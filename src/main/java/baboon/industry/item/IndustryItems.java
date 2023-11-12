@@ -113,12 +113,20 @@ public class IndustryItems {
 
     public static Item reactorPlate;
 
+    public static Item ingotIridiumScrap;
+
     private void taggedItems() {
-        batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
-        batteryAdvanced.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
-        batteryCrystal.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
-        batteryLapis.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
-        scrap.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
+        batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        batteryAdvanced.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        batteryCrystal.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        batteryLapis.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        scrap.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        ingotIridium.withTags(IndustryTags.PREVENT_FABRICATING);
+        plateIridium.withTags(IndustryTags.PREVENT_FABRICATING);
+        armorHelmetIridium.withTags(IndustryTags.PREVENT_FABRICATING);
+        armorChestplateIridium.withTags(IndustryTags.PREVENT_FABRICATING);
+        armorLeggingsIridium.withTags(IndustryTags.PREVENT_FABRICATING);
+        armorBootsIridium.withTags(IndustryTags.PREVENT_FABRICATING);
 
         Item.flint.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
         Item.seedsWheat.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
@@ -443,6 +451,11 @@ public class IndustryItems {
                 new Item(nextItemID("reactorPlate")),
                 "reactorplate",
                 "plate_reactor.png");
+
+        ingotIridiumScrap = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("ingotIridiumScrap")),
+                "ingot.iridium.scrap",
+                "ingot_iridium_scrap.png");
 
         taggedItems();
     }

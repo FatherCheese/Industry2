@@ -1,18 +1,23 @@
 package baboon.industry.block.machines.endgame.entity;
 
 import baboon.industry.IndustryConfig;
+import baboon.industry.IndustryTags;
 import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.helper.Sides;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.IItemIO;
 
-public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implements IInventory {
+import java.util.Random;
+
+public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implements IInventory, IItemIO {
     private ItemStack[] contents;
     public int scrap = 0;
     public int currentMachineTime = 0;
@@ -105,26 +110,27 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
                     contents[4] = null;
             }
 
-            if (contents[2] != null && energy >= 0) {
-                ++currentMachineTime;
-                if (energy - 64 >= 0)
-                    energy -= 64;
+            if (contents[2] != null)
+                if (!contents[2].getItem().hasTag(IndustryTags.PREVENT_FABRICATING) && energy >= 0) {
+                    ++currentMachineTime;
+                    if (energy - 64 >= 0)
+                        energy -= 64;
 
-                if (currentMachineTime >= maxMachineTime) {
+                    if (currentMachineTime >= maxMachineTime) {
+                        currentMachineTime = 0;
+
+                        if (contents[3] == null)
+                            contents[3] = new ItemStack(contents[2].getItem(), 1);
+                        else if (contents[3].itemID == contents[2].itemID && contents[3].stackSize + 1 <= contents[3].getMaxStackSize())
+                            ++contents[3].stackSize;
+                    }
+
+                    if (scrap >= 0 && scrap - 10 >= 0 && currentMachineTime + 1 <= maxMachineTime) {
+                        currentMachineTime += (int) ((double) scrap / 5);
+                        scrap -= 10;
+                    }
+                } else
                     currentMachineTime = 0;
-
-                    if (contents[3] == null)
-                        contents[3] = new ItemStack(contents[2].getItem(), 1);
-                    else if (contents[3].itemID == contents[2].itemID && contents[3].stackSize + 1 <= contents[3].getMaxStackSize())
-                        ++contents[3].stackSize;
-                }
-
-                if (scrap >= 0 && scrap - 10 >= 0 && currentMachineTime + 1 <= maxMachineTime) {
-                    currentMachineTime += (int) ((double) scrap / 5);
-                    scrap -= 10;
-                }
-            } else
-                currentMachineTime = 0;
         }
     }
 
@@ -165,5 +171,37 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
             if (slot >= 0 && slot < contents.length)
                 contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
         }
+    }
+
+    @Override
+    public int getActiveItemSlotForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.X_NEG)
+            return 2;
+        if (direction == Direction.X_POS)
+            return 3;
+        if (direction == Direction.Y_NEG)
+            return 4;
+
+        return -1;
+    }
+
+    @Override
+    public Connection getItemIOForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
+
+        if (direction == Direction.X_NEG)
+            return Connection.INPUT;
+        if (direction == Direction.X_POS)
+            return Connection.OUTPUT;
+        if (direction == Direction.Y_NEG)
+            return Connection.INPUT;
+
+        return Connection.NONE;
     }
 }

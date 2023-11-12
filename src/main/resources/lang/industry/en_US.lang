@@ -159,7 +159,7 @@ item.industry.ingot.bronze.desc=Tin and copper fused into an iron-like alloy.
 item.industry.ingot.uranium.name=Uranium Ingot
 item.industry.ingot.uranium.desc=A metal bar of uranium used for nuclear science.
 item.industry.ingot.iridium.name=Iridium Ingot
-item.industry.ingot.iridium.desc=A metal bar of iridium, lucky you! Can be compressed into a plate.
+item.industry.ingot.iridium.desc=A metal bar of iridium. Can be compressed into a plate.
 
 item.industry.plate.tin.name=Tin Plate
 item.industry.plate.tin.desc=A plate of tin.
@@ -268,3 +268,6 @@ item.industry.scrap.desc=A useless ball of recycled material.
 
 item.industry.reactorplate.name=Reactor Plating
 item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.
+
+item.industry.ingot.iridium.scrap.name=Iridium Scrap
+item.industry.ingot.iridium.scrap.desc=A scrap of rare iridium. Lucky you.

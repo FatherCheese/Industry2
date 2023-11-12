@@ -4,6 +4,7 @@
   "package": "baboon.industry.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "EntityMixin",
     "RenderBlocksMixin",
     "TileEntityTrommelMixin",
     "WorldFeatureDungeonMixin",

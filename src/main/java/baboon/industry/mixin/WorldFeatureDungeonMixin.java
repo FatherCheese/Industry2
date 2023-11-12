@@ -17,6 +17,6 @@ public class WorldFeatureDungeonMixin {
     private void industry_iridiumLoot(Random random, CallbackInfoReturnable<ItemStack> cir) {
         int indI = random.nextInt(15);
         if (indI == 0)
-            cir.setReturnValue(new ItemStack(IndustryItems.ingotIridium));
+            cir.setReturnValue(new ItemStack(IndustryItems.ingotIridiumScrap));
     }
 }
