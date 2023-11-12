@@ -236,6 +236,12 @@ public class IndustryRecipes {
                 Item.ingotSteel,
                 IndustryItems.toolHammer
         });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.dustBronze, 4), new Object[]{
+                IndustryItems.dustCopper,
+                IndustryItems.dustCopper,
+                IndustryItems.dustCopper,
+                IndustryItems.dustTin
+        });
     }
 
     private void craftingRecipesBlocks() {
