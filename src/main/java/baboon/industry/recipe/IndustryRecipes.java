@@ -242,7 +242,7 @@ public class IndustryRecipes {
                 IndustryItems.dustCopper,
                 IndustryItems.dustTin
         });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotIridiumScrap), new Object[]{
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotIridium), new Object[]{
                 IndustryItems.ingotIridiumScrap,
                 IndustryItems.ingotIridiumScrap,
                 IndustryItems.ingotIridiumScrap
