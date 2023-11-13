@@ -18,6 +18,9 @@ public class IndustryRecipes {
         RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotCopper, 9), new Object[]{
                 IndustryBlocks.blockCopper
         });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotBronze, 9), new Object[]{
+                IndustryBlocks.blockBronze
+        });
         RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotUranium, 9), new Object[]{
                 IndustryBlocks.blockUranium
         });
