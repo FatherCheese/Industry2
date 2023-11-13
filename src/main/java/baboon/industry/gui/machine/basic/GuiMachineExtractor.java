@@ -41,7 +41,7 @@ public class GuiMachineExtractor extends GuiMachineBase {
         return slotID;
     }
 
-    // This is copied from "Better Than Better Than Adventure", so shout out to them for figuring this out.
+    // This is copied from "Better than Better Than Adventure", so shout out to them for figuring this out.
     @Override
     public void clickInventory(int x, int y, int mouseButton) {
         int slotId = this.getSlotID(x, y);

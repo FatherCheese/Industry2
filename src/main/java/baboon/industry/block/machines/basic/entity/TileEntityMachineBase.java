@@ -42,20 +42,22 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
 
     @Override
     public ItemStack decrStackSize(int i, int j) {
-        if (contents[i] == null && contents[i].stackSize <= j) {
-            ItemStack itemStack = contents[i];
+        if (contents[i] != null) {
+            if (contents[i].stackSize <= j) {
+                ItemStack itemstack = contents[i];
+                contents[i] = null;
+                return itemstack;
+            } else {
+                ItemStack splitStack = contents[i].splitStack(j);
+                if (contents[i].stackSize <= 0) {
+                    contents[i] = null;
+                }
 
-            contents[i] = null;
-            onInventoryChanged();
-            return itemStack;
+                return splitStack;
+            }
+        } else {
+            return null;
         }
-        ItemStack splitStack = contents[i].splitStack(j);
-        if (contents[i].stackSize == 0) {
-            contents[i] = null;
-
-            onInventoryChanged();
-            return splitStack;
-        } else return null;
     }
 
     @Override
