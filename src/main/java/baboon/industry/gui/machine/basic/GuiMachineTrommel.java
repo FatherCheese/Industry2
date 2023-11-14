@@ -28,7 +28,7 @@ public class GuiMachineTrommel extends GuiContainer {
         float power = (float) tileEntity.energy / tileEntity.capacity;
         drawTexturedModalRect(scrnX + 8, scrnY + 39, 176, 0, (int) (power * 16), 8);
 
-        int progress = ((tileEntity.currentMachineTime * 8) / tileEntity.maxMachineTime) % 4;
+        int progress = (int) ((tileEntity.getTrommelProgressPercent(1) * 8) % 4);
         GL11.glPushMatrix();
         GL11.glTranslatef((float)(scrnX + 80), (float)(scrnY + 35), 0.0F);
         this.drawTexturedModalRect(0, 0, 176 + progress * 16, 16, 16, 16);

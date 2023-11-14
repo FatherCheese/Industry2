@@ -34,7 +34,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     private int nextToSieve = 2;
     public boolean active = false;
     public int currentMachineTime = 0;
-    public final int maxMachineTime = 200;
+    public final int maxMachineTime = 20;
 
     public TileEntityMachineTrommel() {
         contents = new ItemStack[14];
@@ -330,15 +330,13 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 onInventoryChanged();
             }
 
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineTrommel.id &&
-            currentMachineTime == 0 &&
-            contents[nextToSieve] == null) {
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineTrommel.id && currentMachineTime == 0 && contents[nextToSieve] == null) {
                 BlockMachineTrommel.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 onInventoryChanged();
             }
 
             if (!this.canProduce(nextToSieve))
-                nextToSieve = (nextToSieve + 1) % 4;
+                nextSieveId();
 
             if (nextToSieve > 5)
                 nextToSieve = 2;
@@ -347,9 +345,8 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 ++currentMachineTime;
                 energy -= 3;
                 active = true;
-                ++nextToSieve;
 
-                if (currentMachineTime == maxMachineTime) {
+                if (currentMachineTime >= maxMachineTime) {
                     currentMachineTime = 0;
                     sieveItem(nextToSieve);
                     active = false;
@@ -363,6 +360,18 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
             if (active)
                 worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.machineTrommel.id);
         }
+    }
+    private void nextSieveId(){
+        nextToSieve++;
+        if (nextToSieve > 5){
+            nextToSieve = 2;
+        }
+        if (nextToSieve < 2){
+            nextToSieve = 2;
+        }
+    }
+    public float getTrommelProgressPercent(int i) {
+        return (float)this.currentMachineTime / (float)this.maxMachineTime * (float)i;
     }
 
     @Override
