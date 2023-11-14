@@ -15,8 +15,6 @@ import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.IItemIO;
 
-import java.util.Random;
-
 public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implements IInventory, IItemIO {
     private ItemStack[] contents;
     public int scrap = 0;

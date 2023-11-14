@@ -111,16 +111,18 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                 energy += 10;
             }
 
-            if ((currentBurnTime == 0 || currentBurnTime > 0 && currentBurnTime < maxBurnTime) && contents[2] == null) {
+            if ((currentBurnTime == 0 || currentBurnTime > 0 && currentBurnTime < maxBurnTime) && contents[2] != null) {
                 if (fuel.getFuelList().containsKey(contents[2].getItem().id)) {
+                    --contents[2].stackSize;
                     active = true;
                     onInventoryChanged();
                     BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
 
                     currentBurnTime = burnTimeForItem(contents[2]);
+                    maxBurnTime = currentBurnTime;
 
                     if (currentBurnTime <= 0)
-                        --contents[2].stackSize;
+                        active = false;
 
                     if (contents[2].stackSize <= 0)
                         contents[2] = null;

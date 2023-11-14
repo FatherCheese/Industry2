@@ -484,7 +484,9 @@ public class IndustryRecipes {
                 '5', Block.stone
         });
 
-        RecipeHelper.Crafting.createShapelessRecipe(Block.planksOakPainted, 4, new Object[]{IndustryBlocks.logRubberWood});
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted.id, 4, 15), new Object[]{IndustryBlocks.logRubberWood.id});
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted.id, 4, 15), new Object[]{IndustryBlocks.logRubberWoodResin.id});
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted.id, 4, 15), new Object[]{IndustryBlocks.logRubberWoodResinFull.id});
 
         RecipeHelper.Crafting.createShapelessRecipe(Block.obsidian, 1, new Object[]{IndustryItems.cellWater, IndustryItems.cellLava});
     }

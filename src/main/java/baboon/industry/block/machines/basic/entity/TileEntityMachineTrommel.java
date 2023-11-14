@@ -15,6 +15,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -108,14 +109,20 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
     @Override
     public int getActiveItemSlotForSide(Direction direction) {
-        for (int inputSlots = 2; inputSlots < 5; inputSlots++) {
-            if (direction == Direction.X_NEG)
-                return inputSlots;
+        if (direction == Direction.X_NEG) {
+            for (int inputSlots = 2; inputSlots < 6; inputSlots++) {
+                if (contents[inputSlots] == null || contents[inputSlots].stackSize < 64)
+                    return inputSlots;
+            }
+            return 2;
         }
 
-        for (int outputSlots = 6; outputSlots < 13; outputSlots++) {
-            if (direction == Direction.X_POS)
-                return outputSlots;
+        if (direction == Direction.X_POS) {
+            for (int outputSlots = 6; outputSlots < 14; outputSlots++) {
+                if (contents[outputSlots] != null)
+                    return outputSlots;
+            }
+            return 6;
         }
 
         return -1;
@@ -290,10 +297,13 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                     }
                 }
 
-                int randOutput = rand.nextInt(14 - 7) + 7;
+                int randOutput = rand.nextInt(14 - 6) + 6;
                 if (itemResult.stackSize > 0) {
                     if (contents[randOutput] == null)
                         contents[randOutput] = new ItemStack(itemResult);
+                    else
+                        if (contents[randOutput].getItem() == itemResult.getItem())
+                            ++contents[randOutput].stackSize;
                 }
             }
 
@@ -330,7 +340,9 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 onInventoryChanged();
             }
 
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineTrommel.id && currentMachineTime == 0 && contents[nextToSieve] == null) {
+            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineTrommel.id &&
+                    currentMachineTime == 0 &&
+                    contents[nextToSieve] == null) {
                 BlockMachineTrommel.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 onInventoryChanged();
             }

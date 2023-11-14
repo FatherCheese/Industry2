@@ -165,13 +165,21 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        for (int inputSlots = 2; inputSlots < 3; inputSlots++)
-            if (direction == Direction.X_NEG)
-                return inputSlots;
+        if (direction == Direction.X_NEG) {
+            for (int inputSlots = 2; inputSlots < 4; inputSlots++) {
+                if (contents[inputSlots] == null || contents[inputSlots].stackSize < 64)
+                    return inputSlots;
+            }
+            return 2;
+        }
 
-        for (int outputSlots = 4; outputSlots < 5; outputSlots++)
-            if (direction == Direction.X_POS)
-                return outputSlots;
+        if (direction == Direction.X_POS) {
+            for (int outputSlots = 4; outputSlots < 6; outputSlots++) {
+                if (contents[outputSlots] != null)
+                    return outputSlots;
+            }
+            return 4;
+        }
 
         if (direction == Direction.Y_NEG)
             return 6;
@@ -185,12 +193,14 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
+        if (direction == Direction.Z_POS)
+            return Connection.INPUT;
         if (direction == Direction.X_NEG)
             return Connection.INPUT;
-
+        if (direction == Direction.Z_NEG)
+            return Connection.OUTPUT;
         if (direction == Direction.X_POS)
             return Connection.OUTPUT;
-
         if (direction == Direction.Y_NEG)
             return Connection.INPUT;
 

@@ -104,7 +104,7 @@ tile.industry.machine.trommel.desc=Now you can separate dirt and useful items wi
 tile.industry.advanced.furnace.name=Advanced Electric Furnace
 tile.industry.advanced.furnace.desc=For melting, heating, and cooking blocks and items with EVEN MORE POWER!!!
 tile.industry.advanced.macerator.name=Advanced Macerator
-tile.industry.advanced.macerator.desc==For crushing blocks and items into even finer things.
+tile.industry.advanced.macerator.desc=For crushing blocks and items into even finer things.
 tile.industry.advanced.compressor.name=Advanced Compressor
 tile.industry.advanced.compressor.desc=For compressing blocks and items even more.
 tile.industry.advanced.wiremill.name=Advanced Wiremill

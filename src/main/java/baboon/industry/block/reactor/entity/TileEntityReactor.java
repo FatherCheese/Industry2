@@ -27,8 +27,8 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     public int maxHeat = 1000;
 
     public TileEntityReactor() {
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
-        setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+        setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
 
         for (sunsetsatellite.sunsetutils.util.Direction dir : Direction.values())
             setConnection(dir, Connection.OUTPUT);
@@ -169,7 +169,6 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                     maxHeat += 250;
             }
         }
-        System.out.println(maxHeat);
         super.onInventoryChanged();
     }
 
@@ -219,7 +218,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
             if (stack == null)
                 continue;
 
-            if (damageUranium && stack.getItem() == IndustryItems.cellUranium) {
+            if (damageUranium && stack.getItem() == IndustryItems.cellUranium && energy < capacity - 5) {
                 stack.damageItem(1, null);
                 heat += 4;
             }
@@ -238,7 +237,8 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         if (uraniumCell <= 0 && heat - 1 >= 0)
             --heat;
 
-        energy += 5 * uraniumCell;
+        if (energy + 5 < capacity)
+            energy += 5 * uraniumCell;
 
         if (heat >= maxHeat / 2)
             overheat();
