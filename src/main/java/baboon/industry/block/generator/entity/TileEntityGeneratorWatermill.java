@@ -105,7 +105,7 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
             if (worldObj.dimension == Dimension.nether)
                 currentFuelTime = 0;
 
-            if (currentFuelTime > 0 && energy != capacity) {
+            if (currentFuelTime > 0 && (energy != capacity || energy + 2 < capacity)) {
                 --currentFuelTime;
                 energy += 2;
             }

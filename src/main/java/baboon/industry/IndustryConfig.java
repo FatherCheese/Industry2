@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IndustryConfig {
+    public static ConfigUpdater updater = ConfigUpdater.fromProperties();
+    private static final Toml properties = new Toml("Industry2's TOML Config");
     public static TomlConfigHandler cfg;
 
     public IndustryConfig() {
-        Toml properties = new Toml("Industry2's TOML Config");
-        ConfigUpdater updater = ConfigUpdater.fromProperties();
+        properties.addCategory("Industry2")
+                .addEntry("cfgVersion", 5);
 
         properties.addCategory("Energy Values")
                 .addEntry("elvIO", 5)

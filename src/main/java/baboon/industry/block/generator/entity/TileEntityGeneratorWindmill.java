@@ -21,8 +21,8 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
     public TileEntityGeneratorWindmill() {
         contents = new ItemStack[2];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.elvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
         setMaxReceive(0);
 
         setConnection(Direction.X_POS, Connection.OUTPUT);

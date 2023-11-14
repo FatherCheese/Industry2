@@ -106,7 +106,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                 onInventoryChanged();
             }
 
-            if (currentBurnTime > 0 && energy != capacity) {
+            if (currentBurnTime > 0 && (energy != capacity || energy + 10 < capacity)) {
                 --currentBurnTime;
                 energy += 10;
             }
