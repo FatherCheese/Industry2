@@ -7,8 +7,8 @@ public class TileEntityArrayLV extends TileEntitySolarBase {
     public TileEntityArrayLV() {
         super(4);
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
     }
 
     @Override

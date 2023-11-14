@@ -6,8 +6,8 @@ public class TileEntityGeneratorSolar extends TileEntitySolarBase {
     public TileEntityGeneratorSolar() {
         super(1);
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.elvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.extraLowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.elvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.elvIO"));
     }
 
     @Override

@@ -106,7 +106,7 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
 
             if (currentFuelTime > 0 && energy != capacity) {
                 --currentFuelTime;
-                ++energy;
+                energy += 20;
             }
 
             if ((currentFuelTime == 0 || currentFuelTime > 0 && currentFuelTime < 7000) && contents[2] != null) {

@@ -29,7 +29,7 @@ public class ItemToolElectric extends ItemEnergyContainer implements ICustomDesc
     public boolean onBlockDestroyed(ItemStack itemstack, int id, int x, int y, int z, EntityLiving entityliving) {
         Block block = Block.blocksList[id];
         if (block != null && block.getHardness() > 0.0f) {
-            modifyEnergy(itemstack, -8);
+            modifyEnergy(itemstack, -50);
         }
 
         return true;

@@ -107,7 +107,7 @@ public class TileEntitySolarBase extends TileEntityEnergyConductor implements II
                 generatedEnergy = 0;
 
             if (energy < capacity && isFacingSky()) {
-                generatedEnergy = 2 * solarVoltage;
+                generatedEnergy = solarVoltage;
 
                 generatedEnergy -= worldObj.skyDarken * solarVoltage;
 

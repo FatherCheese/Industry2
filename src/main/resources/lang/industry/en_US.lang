@@ -98,6 +98,8 @@ tile.industry.machine.recycler.name=Recycler
 tile.industry.machine.recycler.desc=For recycling your garbage.
 tile.industry.machine.cannery.name=Canning Machine
 tile.industry.machine.cannery.desc=For canning your food into shelf-stable food.
+tile.industry.machine.trommel.name=Electric Trommel
+tile.industry.machine.trommel.desc=Now you can separate dirt and useful items with electricity.
 
 tile.industry.advanced.furnace.name=Advanced Electric Furnace
 tile.industry.advanced.furnace.desc=For melting, heating, and cooking blocks and items with EVEN MORE POWER!!!

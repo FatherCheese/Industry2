@@ -22,9 +22,8 @@ public class ItemToolNanoSword extends ItemToolElectric {
 
     public ItemToolNanoSword(int id) {
         super(id, BlockTags.MINEABLE_BY_SWORD, ToolMaterial.steel);
-        this.baseCapacity = IndustryConfig.cfg.getInt("Energy Values.mvStorage");
-        this.baseReceive = IndustryConfig.cfg.getInt("Energy Values.mediumVoltage");
-        this.baseProvide = IndustryConfig.cfg.getInt("Energy Values.mediumVoltage");
+        this.baseCapacity = IndustryConfig.cfg.getInt("Energy Values.hvBatteryStorage");
+        this.baseReceive = IndustryConfig.cfg.getInt("Energy Values.hvIO");
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
     }

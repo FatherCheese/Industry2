@@ -26,9 +26,9 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
 
     public TileEntityEnergyFabricator() {
         contents = new ItemStack[5];
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
-        setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
-        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvMachineStorage"));
+        setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
 
         for (Direction dir : Direction.values())
             setConnection(dir, Connection.INPUT);

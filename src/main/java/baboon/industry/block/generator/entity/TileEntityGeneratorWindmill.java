@@ -97,12 +97,12 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
             }
 
             if (energy < capacity) {
-
                 if (worldObj.getWorldType() != WorldTypes.OVERWORLD_EXTENDED || worldObj.getWorldType() != WorldTypes.OVERWORLD_AMPLIFIED) {
                     if (yCoord > 48)
-                        generatedEnergy = (yCoord / 32);
-                } else if (yCoord > 96)
-                    generatedEnergy = (yCoord / 64);
+                        generatedEnergy += 5 * (yCoord / 24);
+                } else
+                    if (yCoord > 96)
+                        generatedEnergy += 5 * (yCoord / 48);
 
                 if (worldObj.getCurrentWeather() == Weather.overworldRain ||
                         worldObj.getCurrentWeather() == Weather.overworldRainBlood ||

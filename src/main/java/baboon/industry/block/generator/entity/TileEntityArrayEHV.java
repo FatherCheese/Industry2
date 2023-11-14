@@ -7,8 +7,8 @@ public class TileEntityArrayEHV extends TileEntitySolarBase {
     public TileEntityArrayEHV() {
         super(16);
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
     }
 
     @Override

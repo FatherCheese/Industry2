@@ -160,16 +160,18 @@ public class IndustryRecipes {
                 '4', Item.dustRedstone
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolChainsaw), new Object[]{
-                "#11", "121", "31#",
+                "#11", "231", "42#",
                 '1', IndustryItems.plateSteel,
                 '2', IndustryItems.circuitBasic,
-                '3', IndustryItems.batteryAdvanced
+                '3', IndustryItems.ingotBronze,
+                '4', IndustryItems.batteryRedstone
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrill), new Object[]{
-                "#1#", "121", "131",
+                "#1#", "121", "343",
                 '1', IndustryItems.plateSteel,
                 '2', IndustryItems.circuitBasic,
-                '3', IndustryItems.batteryAdvanced
+                '3', IndustryItems.ingotBronze,
+                '4', IndustryItems.batteryRedstone
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrillGold), new Object[]{
                 "#1#", "121",
@@ -185,8 +187,8 @@ public class IndustryRecipes {
                 "#1#", "#2#", "343",
                 '1', Item.quartz,
                 '2', Item.dustGlowstone,
-                '3', IndustryItems.plateSteel,
-                '4', IndustryItems.batteryAdvanced
+                '3', IndustryItems.reactorPlate,
+                '4', IndustryItems.batteryCrystal
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorHelmetHazmat), new Object[]{
                 "111", "121", "#3#",

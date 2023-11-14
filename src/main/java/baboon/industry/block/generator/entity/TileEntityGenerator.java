@@ -3,6 +3,7 @@ package baboon.industry.block.generator.entity;
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.generator.BlockGenerator;
+import baboon.industry.recipe.fuel.GeneratorFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.crafting.LookupFuelFurnace;
@@ -17,6 +18,7 @@ import sunsetsatellite.sunsetutils.util.Direction;
 
 public class TileEntityGenerator extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
+    private final GeneratorFuel fuel = new GeneratorFuel();
     public boolean active = false;
     public int currentBurnTime = 0;
     public int maxBurnTime = 0;
@@ -25,8 +27,8 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
     public TileEntityGenerator() {
         contents = new ItemStack[3];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage") * 4);
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
         setMaxReceive(0);
 
         for (Direction dir : Direction.values())
@@ -90,18 +92,13 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
         return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
     }
 
-    private int energyYieldForItem(ItemStack itemStack) {
-        return itemStack == null ? 0 : LookupFuelEnergy.fuelEnergy().getEnergyYield(itemStack.getItem().id);
-    }
-
     private int burnTimeForItem(ItemStack itemStack) {
-        return itemStack == null ? 0 : LookupFuelFurnace.instance.getFuelYield(itemStack.getItem().id);
+        return itemStack == null ? 0 : fuel.getYield(itemStack.getItem().id);
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
-        boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
@@ -109,36 +106,27 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                 onInventoryChanged();
             }
 
-            if (currentBurnTime > 0) {
+            if (currentBurnTime > 0 && energy != capacity) {
                 --currentBurnTime;
-                modifyEnergy(energyYieldForItem(currentFuel));
+                energy += 10;
             }
 
-            if (currentBurnTime == 0 && energy != capacity) {
-                currentBurnTime = burnTimeForItem(contents[2]) / 5;
-                maxBurnTime = currentBurnTime;
-
-                if (currentBurnTime > 0) {
+            if ((currentBurnTime == 0 || currentBurnTime > 0 && currentBurnTime < maxBurnTime) && contents[2] == null) {
+                if (fuel.getFuelList().containsKey(contents[2].getItem().id)) {
                     active = true;
+                    onInventoryChanged();
                     BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
 
-                    currentFuel = contents[2];
-                    onInventoryChanged();
-                    machineUpdated = true;
+                    currentBurnTime = burnTimeForItem(contents[2]);
 
-                    if (contents[2] != null) {
+                    if (currentBurnTime <= 0)
                         --contents[2].stackSize;
-                        if (contents[2].stackSize <= 0)
-                            contents[2] = null;
-                    }
-                } else {
-                    active = false;
-                    currentFuel = null;
-                }
-            }
 
-            if (machineUpdated)
-                onInventoryChanged();
+                    if (contents[2].stackSize <= 0)
+                        contents[2] = null;
+                } else
+                    active = false;
+            }
 
             if (active)
                 worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.generator.id);

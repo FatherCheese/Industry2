@@ -10,7 +10,12 @@ import net.minecraft.core.world.World;
 
 public class BlockCableTin extends BlockCable {
     public BlockCableTin(String key, int id, Material material) {
-        super(key, id, material, IndustryConfig.cfg.getInt("Energy Values.lowVoltage"), IndustryConfig.cfg.getInt("Energy Values.lowVoltage"), 1);
+        super(key,
+                id,
+                material,
+                IndustryConfig.cfg.getInt("Energy Values.lvIO"),
+                IndustryConfig.cfg.getInt("Energy Values.lvIO"),
+                1);
     }
 
     @Override

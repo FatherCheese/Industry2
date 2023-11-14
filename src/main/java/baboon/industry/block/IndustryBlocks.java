@@ -101,6 +101,7 @@ public class IndustryBlocks {
     public static Block machineExtractor;
     public static Block machineRecycler;
     public static Block machineCannery;
+    public static Block machineTrommel;
     public static Block advancedMachineFurnace;
     public static Block advancedMachineMacerator;
     public static Block advancedMachineCompressor;
@@ -177,6 +178,7 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryMachineExtractor", GuiMachineExtractor.class, TileEntityMachineExtractor.class, ContainerMachineBase.class);
         EnergyAPI.addToNameGuiMap("IndustryMachineRecycler", GuiMachineRecycler.class, TileEntityMachineRecycler.class, ContainerMachineBase.class);
         EnergyAPI.addToNameGuiMap("IndustryMachineCannery", GuiMachineCannery.class, TileEntityMachineCannery.class, ContainerMachineCannery.class);
+        EnergyAPI.addToNameGuiMap("IndustryMachineTrommel", GuiMachineTrommel.class, TileEntityMachineTrommel.class, ContainerMachineTrommel.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedFurnace", GuiAdvancedFurnace.class, TileEntityAdvancedFurnace.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedMacerator", GuiAdvancedMacerator.class, TileEntityAdvancedMacerator.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedCompressor", GuiAdvancedCompressor.class, TileEntityAdvancedCompressor.class, ContainerAdvancedBase.class);
@@ -211,6 +213,7 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityMachineExtractor.class, "IndustryMachineExtractor");
         EntityHelper.createTileEntity(TileEntityMachineRecycler.class, "IndustryMachineRecycler");
         EntityHelper.createTileEntity(TileEntityMachineCannery.class, "IndustryMachineCannery");
+        EntityHelper.createTileEntity(TileEntityMachineTrommel.class, "IndustryMachineTrommel");
         EntityHelper.createTileEntity(TileEntityAdvancedFurnace.class, "IndustryAdvancedFurnace");
         EntityHelper.createTileEntity(TileEntityAdvancedMacerator.class, "IndustryAdvancedMacerator");
         EntityHelper.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
@@ -553,6 +556,11 @@ public class IndustryBlocks {
         machineCannery = machineBuilder
                 .setNorthTexture("machine_cannery.png")
                 .build(new BlockMachineCannery("machine.cannery", blockID("machineCannery"), Material.metal))
+                .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        machineTrommel = machineBuilder
+                .setNorthTexture("machine_trommel.png")
+                .build(new BlockMachineTrommel("machine.trommel", blockID("machineTrommel"), Material.metal))
                 .withTags(IndustryTags.REQUIRES_WRENCH);
 
         advancedMachineFurnace = advancedMachineBuilder

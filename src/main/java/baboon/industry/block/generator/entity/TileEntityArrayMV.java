@@ -7,8 +7,8 @@ public class TileEntityArrayMV extends TileEntitySolarBase {
     public TileEntityArrayMV() {
         super(8);
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.mvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
     }
 
     @Override

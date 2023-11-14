@@ -24,9 +24,8 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
     public TileEntityGeneratorWatermill() {
         contents = new ItemStack[3];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
-        setMaxReceive(0);
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.elvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.elvIO"));
 
         setConnection(Direction.X_POS, Connection.OUTPUT);
         setConnection(Direction.Y_NEG, Connection.OUTPUT);
@@ -108,7 +107,7 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
 
             if (currentFuelTime > 0 && energy != capacity) {
                 --currentFuelTime;
-                ++energy;
+                energy += 2;
             }
 
             if ((currentFuelTime == 0 || currentFuelTime > 0 && currentFuelTime < 7000) && contents[2] != null) {

@@ -22,9 +22,9 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
     public TileEntityMachineBase() {
         contents = new ItemStack[4];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
-        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
 
         for (Direction dir : Direction.values())
             setConnection(dir, Connection.INPUT);

@@ -10,7 +10,12 @@ import net.minecraft.core.world.World;
 
 public class BlockCableGold extends BlockCable {
     public BlockCableGold(String key, int id, Material material) {
-        super(key, id, material, IndustryConfig.cfg.getInt("Energy Values.highVoltage"), IndustryConfig.cfg.getInt("Energy Values.highVoltage"), 6);
+        super(key,
+                id,
+                material,
+                IndustryConfig.cfg.getInt("Energy Values.hvIO"),
+                IndustryConfig.cfg.getInt("Energy Values.hvIO"),
+                6);
     }
 
     @Override

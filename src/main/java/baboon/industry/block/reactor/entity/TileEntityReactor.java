@@ -29,7 +29,6 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     public TileEntityReactor() {
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvStorage"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.extraHighVoltage"));
-        setMaxReceive(0);
 
         for (sunsetsatellite.sunsetutils.util.Direction dir : Direction.values())
             setConnection(dir, Connection.OUTPUT);
@@ -239,7 +238,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         if (uraniumCell <= 0 && heat - 1 >= 0)
             --heat;
 
-        energy += uraniumCell;
+        energy += 5 * uraniumCell;
 
         if (heat >= maxHeat / 2)
             overheat();

@@ -21,16 +21,19 @@ public class IndustryConfig {
         ConfigUpdater updater = ConfigUpdater.fromProperties();
 
         properties.addCategory("Energy Values")
-                .addEntry("extraLowVoltage", 2)
-                .addEntry("lowVoltage", 16)
-                .addEntry("mediumVoltage", 32)
-                .addEntry("highVoltage", 256)
-                .addEntry("extraHighVoltage", 512)
-                .addEntry("elvStorage", 128)
-                .addEntry("lvStorage", 1024)
-                .addEntry("mvStorage", 4096)
-                .addEntry("hvStorage", 16384)
-                .addEntry("ehvStorage", 65536);
+                .addEntry("elvIO", 5)
+                .addEntry("lvIO", 32)
+                .addEntry("mvIO", 128)
+                .addEntry("hvIO", 512)
+                .addEntry("ehvIO", 2048)
+                .addEntry("lvBatteryStorage", 10000)
+                .addEntry("mvBatteryStorage", 100000)
+                .addEntry("hvBatteryStorage", 1000000)
+                .addEntry("ehvBatteryStorage", 10000000)
+                .addEntry("elvMachineStorage", 100)
+                .addEntry("lvMachineStorage", 1000)
+                .addEntry("mvMachineStorage", 10000)
+                .addEntry("ehvMachineStorage", 100000);
 
         properties.addCategory("World Gen")
                 .addEntry("copperOre", true)

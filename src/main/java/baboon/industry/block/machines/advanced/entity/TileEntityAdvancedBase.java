@@ -14,8 +14,6 @@ import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.IItemIO;
 
-import java.util.Random;
-
 public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     protected ItemStack[] contents;
     protected AdvancedRedstoneFuel redstoneFuel = new AdvancedRedstoneFuel();
@@ -28,9 +26,9 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     public TileEntityAdvancedBase() {
         contents = new ItemStack[7];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.mvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"));
-        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mediumVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.mvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
 
         for (Direction dir : Direction.values())
             setConnection(dir, Connection.INPUT);
@@ -165,17 +163,16 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     public int getActiveItemSlotForSide(Direction direction) {
         int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
-        Random random = new Random();
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.Z_POS)
-            return 2;
-        if (direction == Direction.X_NEG)
-            return 3;
-        if (direction == Direction.Z_NEG)
-            return 4;
-        if (direction == Direction.X_POS)
-            return 5;
+        for (int inputSlots = 2; inputSlots < 3; inputSlots++)
+            if (direction == Direction.X_NEG)
+                return inputSlots;
+
+        for (int outputSlots = 4; outputSlots < 5; outputSlots++)
+            if (direction == Direction.X_POS)
+                return outputSlots;
+
         if (direction == Direction.Y_NEG)
             return 6;
 
@@ -188,14 +185,12 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.Z_POS)
-            return Connection.INPUT;
         if (direction == Direction.X_NEG)
             return Connection.INPUT;
-        if (direction == Direction.Z_NEG)
-            return Connection.OUTPUT;
+
         if (direction == Direction.X_POS)
             return Connection.OUTPUT;
+
         if (direction == Direction.Y_NEG)
             return Connection.INPUT;
 
