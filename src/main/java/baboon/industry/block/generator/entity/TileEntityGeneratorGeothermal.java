@@ -25,8 +25,8 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
     public TileEntityGeneratorGeothermal() {
         contents = new ItemStack[3];
 
-        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvStorage"));
-        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lowVoltage"));
+        setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage"));
+        setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
         setMaxReceive(0);
 
         for (Direction dir : Direction.values())
