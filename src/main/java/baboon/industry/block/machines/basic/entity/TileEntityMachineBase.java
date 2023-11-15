@@ -147,7 +147,7 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.X_NEG)
+        if (direction == Direction.Y_POS)
             return 2;
         if (direction == Direction.X_POS)
             return 3;
@@ -160,7 +160,7 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.X_NEG)
+        if (direction == Direction.Y_POS)
             return Connection.INPUT;
         if (direction == Direction.X_POS)
             return Connection.OUTPUT;

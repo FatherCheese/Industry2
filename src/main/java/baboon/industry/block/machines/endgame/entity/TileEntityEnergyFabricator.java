@@ -179,12 +179,14 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.X_NEG)
-            return 2;
-        if (direction == Direction.X_POS)
-            return 3;
-        if (direction == Direction.Y_NEG)
-            return 4;
+        switch (direction) {
+            case Y_POS:
+                return 2;
+            case X_POS:
+                return 3;
+            case Y_NEG:
+                return 4;
+        }
 
         return -1;
     }
@@ -195,12 +197,13 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
-        if (direction == Direction.X_NEG)
-            return Connection.INPUT;
-        if (direction == Direction.X_POS)
-            return Connection.OUTPUT;
-        if (direction == Direction.Y_NEG)
-            return Connection.INPUT;
+        switch (direction) {
+            case Y_POS:
+            case Y_NEG:
+                return Connection.INPUT;
+            case X_POS:
+                return Connection.OUTPUT;
+        }
 
         return Connection.NONE;
     }

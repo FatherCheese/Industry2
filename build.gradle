@@ -115,13 +115,13 @@ dependencies {
 	// Terrain API
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
+	// Mod Compatability
+	modImplementation "btwaila:btwaila:0.3.3"
+	modImplementation "potato-logistics:PotatoLogistics:0.2.2_1"
+
 	modImplementation "ModMenu:ModMenu:2.0.2"
 	modImplementation "nocrashes:nocrashes:1.0.4"
 	modImplementation "guidebookpp:guidebookpp:1.5.7"
-
-	// Mod Compatability
-	modImplementation "btwaila:btwaila:0.3.3"
-	modImplementation "potato-logistics:PotatoLogistics:0.2.1"
 
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

@@ -5,7 +5,7 @@ import baboon.industry.IndustryConfig;
 public class TileEntityArrayLV extends TileEntitySolarBase {
 
     public TileEntityArrayLV() {
-        super(4);
+        super(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));

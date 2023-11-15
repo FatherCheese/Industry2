@@ -658,7 +658,11 @@ public class IndustryBlocks {
                 .build(new BlockReactorChamber("reactor.chamber", blockID("nuclearChamber"), Material.metal));
 
         energyFabricator = new BlockBuilder(MOD_ID)
-                .setTextures("machine_casing_advanced.png")
+                .setTopBottomTexture("machine_casing_advanced.png")
+                .setNorthTexture("endgame_fabricator.png")
+                .setEastTexture("machine_casing_advanced.png")
+                .setSouthTexture("machine_casing_advanced.png")
+                .setWestTexture("machine_casing_advanced.png")
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10.0f)
                 .setResistance(0.0f)

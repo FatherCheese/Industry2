@@ -23,7 +23,7 @@ public class IndustryConfig {
                 .addEntry("cfgVersion", 5);
 
         properties.addCategory("Energy Values")
-                .addEntry("elvIO", 5)
+                .addEntry("elvIO", 4)
                 .addEntry("lvIO", 32)
                 .addEntry("mvIO", 128)
                 .addEntry("hvIO", 512)

@@ -5,7 +5,7 @@ import baboon.industry.IndustryConfig;
 public class TileEntityArrayHV extends TileEntitySolarBase {
 
     public TileEntityArrayHV() {
-        super(12);
+        super(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
