@@ -106,12 +106,12 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                 onInventoryChanged();
             }
 
-            if (currentBurnTime > 0 && (energy != capacity || energy + 10 < capacity)) {
+            if (currentBurnTime > 0 && energy + 10 <= capacity) {
                 --currentBurnTime;
                 energy += 10;
             }
 
-            if ((currentBurnTime == 0 || currentBurnTime > 0 && currentBurnTime < maxBurnTime) && contents[2] != null) {
+            if ((currentBurnTime <= 0) && contents[2] != null) {
                 if (fuel.getFuelList().containsKey(contents[2].getItem().id)) {
                     --contents[2].stackSize;
                     active = true;
@@ -126,8 +126,9 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
 
                     if (contents[2].stackSize <= 0)
                         contents[2] = null;
-                } else
+                } else {
                     active = false;
+                }
             }
 
             if (active)
