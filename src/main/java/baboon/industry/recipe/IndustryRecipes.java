@@ -425,6 +425,12 @@ public class IndustryRecipes {
                 '2', Block.dirt,
                 '3', IndustryBlocks.machineCasingBasic
         });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineTrommel), new Object[]{
+                "1", "2", "3",
+                '1', IndustryBlocks.machineCasingBasic,
+                '2', Block.trommelIdle,
+                '3', IndustryItems.circuitBasic
+        });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineFurnace), new Object[]{
                 "#1#", "232", "#4#",
                 '1', IndustryItems.circuitAdvanced,
