@@ -32,7 +32,7 @@ public class BlockLogResin extends BlockLog {
         ItemStack itemStack = player.getHeldItem();
 
         if (itemStack != null && itemStack.getItem() == IndustryItems.toolTreetap)
-            world.playSoundAtEntity(player, "random.wood click", 0.4f, 1.0f);
+            world.playSoundAtEntity(player, "industry.tap", 0.4f, 1.0f);
 
         return super.blockActivated(world, x, y, z, player);
     }

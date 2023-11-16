@@ -30,6 +30,7 @@ public class Industry2 implements ModInitializer {
 
         SoundHelper.addSound(MOD_ID, "zap.wav");
         SoundHelper.addSound(MOD_ID, "laser.wav");
+        SoundHelper.addSound(MOD_ID, "tap.wav");
 
         new IndustryConfig();
 
