@@ -19,6 +19,10 @@ public class ContainerMachineCannery extends ContainerEnergy {
         addSlot(new Slot(tileEntity, 2, 56, 17));
         addSlot(new Slot(tileEntity, 3, 56, 53));
         addSlot(new SlotFurnace(inventory.player, tileEntity, 4, 116, 35));
+        addSlot(new Slot(tileEntity, 5, 184, 8));
+        addSlot(new Slot(tileEntity, 6, 184, 26));
+        addSlot(new Slot(tileEntity, 7, 184, 44));
+        addSlot(new Slot(tileEntity, 8, 184, 62));
 
         for(int xSlot = 0; xSlot < 3; ++xSlot)
             for (int ySlot = 0; ySlot < 9; ++ySlot)

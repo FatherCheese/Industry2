@@ -2,6 +2,7 @@ package baboon.industry.block.machines.basic.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -15,12 +16,15 @@ import sunsetsatellite.sunsetutils.util.IItemIO;
 
 public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     protected ItemStack[] contents;
+    protected int currentSpeed = 0;
+    protected int currentEnergy = 0;
+    protected int currentTransformers = 0;
     public boolean active = false;
     public int currentMachineTime = 0;
-    public final int maxMachineTime = 200;
+    public int maxMachineTime = 200;
 
     public TileEntityMachineBase() {
-        contents = new ItemStack[4];
+        contents = new ItemStack[8];
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
@@ -88,6 +92,33 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
     }
 
     @Override
+    public void onInventoryChanged() {
+        currentSpeed = 0;
+        currentEnergy = 0;
+        currentTransformers = 0;
+        maxMachineTime = 200;
+        capacity = IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage");
+
+        for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeSpeed) {
+                    currentSpeed += 1;
+                    maxMachineTime *= 1 - 0.3;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeEnergy) {
+                    currentEnergy += 1;
+                    capacity += 10000;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
+                    currentTransformers += 1;
+            }
+        }
+        super.onInventoryChanged();
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
 
@@ -100,6 +131,22 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
             if (getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof ItemEnergyContainer) {
                 receive(getStackInSlot(1), getMaxReceive(), false);
                 onInventoryChanged();
+            }
+
+            if (energy > capacity)
+                energy = 0;
+
+            switch (currentTransformers) {
+                case 1:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
+                    break;
+                case 2:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
+                    break;
+                case 3:
+                case 4:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+                    break;
             }
         }
     }

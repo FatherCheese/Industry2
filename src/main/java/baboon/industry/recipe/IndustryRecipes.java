@@ -252,6 +252,36 @@ public class IndustryRecipes {
                 IndustryItems.ingotIridiumScrap,
                 IndustryItems.ingotIridiumScrap
         });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.upgradePlate), new Object[]{
+                IndustryItems.plateIron,
+                IndustryItems.plateIron
+        });
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.upgradePlate), new Object[]{
+                Item.ingotIron,
+                Item.ingotIron,
+                IndustryItems.toolHammer
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeSpeed), new Object[]{
+                "#1#", "121", "#3#",
+                '1', IndustryItems.cellCoolant,
+                '2', IndustryItems.upgradePlate,
+                '3', IndustryItems.circuitBasic
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeTransformer), new Object[]{
+                "1#2", "#3#", "456",
+                '1', IndustryItems.itemInsulatedCableCopper,
+                '2', IndustryItems.itemInsulatedCableGold,
+                '3', IndustryItems.upgradePlate,
+                '4', IndustryItems.itemInsulatedCableSteel,
+                '5', IndustryItems.circuitBasic,
+                '6', IndustryItems.itemInsulatedCableTin
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeEnergy), new Object[]{
+                "1", "2", "3",
+                '1', IndustryItems.batteryRedstone,
+                '2', IndustryItems.upgradePlate,
+                '3', IndustryItems.circuitBasic
+        });
     }
 
     private void craftingRecipesBlocks() {

@@ -1,10 +1,13 @@
 package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
+import net.minecraft.client.gui.GuiInventoryCreative;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMachineBase extends GuiContainer {
@@ -13,6 +16,7 @@ public class GuiMachineBase extends GuiContainer {
     public GuiMachineBase(InventoryPlayer inventory, TileEntityMachineBase tileEntity) {
         super(new ContainerMachineBase(inventory, tileEntity));
         this.tileEntity = tileEntity;
+        this.xSize = 208;
     }
 
     @Override
@@ -30,6 +34,9 @@ public class GuiMachineBase extends GuiContainer {
 
         int machineTime = tileEntity.currentMachineTime * 23 / tileEntity.maxMachineTime;
         drawTexturedModalRect(scrnX + 79, scrnY + 35, 176, 8, machineTime + 1, 23);
+
+        // Upgrades slots
+        drawTexturedModalRect(scrnX + 176, scrnY, 0, 166, 32, 86);
     }
 
     @Override

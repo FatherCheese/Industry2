@@ -28,6 +28,12 @@ public class ContainerMachineTrommel extends ContainerEnergy {
             for ( int outYSlot = 0; outYSlot < 4; ++outYSlot)
                 addSlot(new SlotFurnace(inventory.player, tileEntity, outYSlot + outXSlot * 4 + 6, 134 + outXSlot * 18, 8 + outYSlot * 18));
 
+        // Upgrade Slots
+        addSlot(new Slot(tileEntity, 14, 184, 8));
+        addSlot(new Slot(tileEntity, 15, 184, 26));
+        addSlot(new Slot(tileEntity, 16, 184, 44));
+        addSlot(new Slot(tileEntity, 17, 184, 62));
+
         // Inventory
         for(int xSlot = 0; xSlot < 3; ++xSlot)
             for (int ySlot = 0; ySlot < 9; ++ySlot)

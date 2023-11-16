@@ -114,6 +114,13 @@ public class IndustryItems {
     public static Item reactorPlate;
 
     public static Item ingotIridiumScrap;
+    public static Item upgradePlate;
+    public static Item upgradeSpeed;
+    public static Item upgradeTransformer;
+    public static Item upgradeEnergy;
+    public static Item upgradePusher;
+    public static Item upgradePuller;
+
 
     private void taggedItems() {
         batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
@@ -456,6 +463,33 @@ public class IndustryItems {
                 new Item(nextItemID("ingotIridiumScrap")),
                 "ingot.iridium.scrap",
                 "ingot_iridium_scrap.png");
+
+        upgradePlate = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradePlate")),
+                "upgrade.plate",
+                "plate_upgrade.png");
+        upgradeSpeed = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradeSpeed")).setMaxStackSize(4),
+                "upgrade.speed",
+                "upgrade_speed.png");
+        upgradeTransformer = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradeTransformer")).setMaxStackSize(4),
+                "upgrade.transformer",
+                "upgrade_transformer.png");
+        upgradeEnergy = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradeEnergy")).setMaxStackSize(4),
+                "upgrade.energy",
+                "upgrade_energy.png");
+
+        // Currently unused as I can't figure out the code at the moment
+        upgradePusher = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradePusher")).setMaxStackSize(4),
+                "upgrade.pusher",
+                "upgrade_pusher.png");
+        upgradePuller = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradePuller")).setMaxStackSize(4),
+                "upgrade.puller",
+                "upgrade_puller.png");
 
         taggedItems();
     }

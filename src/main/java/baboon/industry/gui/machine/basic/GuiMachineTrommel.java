@@ -13,6 +13,7 @@ public class GuiMachineTrommel extends GuiContainer {
     public GuiMachineTrommel(InventoryPlayer inventory, TileEntityMachineTrommel tileEntity) {
         super(new ContainerMachineTrommel(inventory, tileEntity));
         this.tileEntity = tileEntity;
+        this.xSize = 208;
     }
 
     @Override
@@ -33,12 +34,15 @@ public class GuiMachineTrommel extends GuiContainer {
         GL11.glTranslatef((float)(scrnX + 80), (float)(scrnY + 35), 0.0F);
         this.drawTexturedModalRect(0, 0, 176 + progress * 16, 16, 16, 16);
         GL11.glPopMatrix();
+
+        // Upgrades slots
+        drawTexturedModalRect(scrnX + 176, scrnY, 0, 166, 32, 86);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        int scrnX = xSize / 2;
+        int scrnX = xSize / 2 - 16;
         drawStringCenteredNoShadow(fontRenderer, "Electric Trommel", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }

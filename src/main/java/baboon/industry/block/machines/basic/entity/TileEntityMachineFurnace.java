@@ -61,8 +61,11 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
 
             if (hasEnergy && canProduce()) {
                 ++currentMachineTime;
-                --energy;
+                energy -= 3;
                 active = true;
+
+                if (currentSpeed > 0 && energy - 18 * currentSpeed >= 0)
+                    energy -= 18 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;

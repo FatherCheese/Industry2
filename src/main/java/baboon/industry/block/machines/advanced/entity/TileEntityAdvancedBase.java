@@ -2,6 +2,7 @@ package baboon.industry.block.machines.advanced.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.item.IndustryItems;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
@@ -17,14 +18,17 @@ import sunsetsatellite.sunsetutils.util.IItemIO;
 public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     protected ItemStack[] contents;
     protected AdvancedRedstoneFuel redstoneFuel = new AdvancedRedstoneFuel();
+    protected int currentSpeed = 0;
+    protected int currentEnergy = 0;
+    protected int currentTransformers = 0;
     public boolean active = false;
     public int redstone = 0;
     public int currentMachineTime = 0;
     public final int maxRedstone = 8000;
-    public final int maxMachineTime = 200;
+    public int maxMachineTime = 200;
 
     public TileEntityAdvancedBase() {
-        contents = new ItemStack[7];
+        contents = new ItemStack[11];
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.mvMachineStorage"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
@@ -92,6 +96,33 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     }
 
     @Override
+    public void onInventoryChanged() {
+        super.onInventoryChanged();
+        for (int upgradesSize = 7; upgradesSize < 10; upgradesSize++) {
+            currentSpeed = 0;
+            currentEnergy = 0;
+            currentTransformers = 0;
+            maxMachineTime = 200;
+            capacity = IndustryConfig.cfg.getInt("Energy Values.mvMachineStorage");
+
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeSpeed) {
+                    currentSpeed += 1;
+                    maxMachineTime *= 1 - 0.3;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeEnergy) {
+                    currentEnergy += 1;
+                    capacity += 10000;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
+                    currentTransformers += 1;
+            }
+        }
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
 
@@ -105,6 +136,11 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
                 receive(getStackInSlot(1), getMaxReceive(), false);
                 onInventoryChanged();
             }
+
+            if (currentTransformers == 1)
+                setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
+            else if (currentTransformers == 2)
+                setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
 
             if (contents[6] != null && redstoneFuel.getRedstoneList().containsKey(contents[6].getItem().id)) {
                 int newRedstoneLevel = redstoneFuel.getYield(contents[6].getItem().id);

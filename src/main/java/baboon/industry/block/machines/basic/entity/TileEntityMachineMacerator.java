@@ -62,8 +62,11 @@ public class TileEntityMachineMacerator extends TileEntityMachineBase {
 
             if (hasEnergy && canProduce()) {
                 ++currentMachineTime;
-                --energy;
+                energy -= 2;
                 active = true;
+
+                if (currentSpeed > 0 && energy - 12 * currentSpeed >= 0)
+                    energy -= 12 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;

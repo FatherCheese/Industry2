@@ -53,6 +53,7 @@ public class TileEntityMachineCompressor extends TileEntityMachineBase {
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
+
             if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCompressor.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
@@ -62,8 +63,11 @@ public class TileEntityMachineCompressor extends TileEntityMachineBase {
 
             if (hasEnergy && canProduce()) {
                 ++currentMachineTime;
-                --energy;
+                energy -= 2;
                 active = true;
+
+                if (currentSpeed > 0&& energy - 12 * currentSpeed >= 0)
+                    energy -= 12 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;

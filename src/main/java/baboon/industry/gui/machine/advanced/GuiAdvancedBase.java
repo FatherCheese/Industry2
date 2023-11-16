@@ -13,6 +13,7 @@ public class GuiAdvancedBase extends GuiContainer {
     public GuiAdvancedBase(InventoryPlayer inventory, TileEntityAdvancedBase tileEntity) {
         super(new ContainerAdvancedBase(inventory, tileEntity));
         this.tileEntity = tileEntity;
+        this.xSize = 208;
     }
 
     @Override
@@ -33,6 +34,9 @@ public class GuiAdvancedBase extends GuiContainer {
 
         int redstone = tileEntity.redstone / 333;
         drawTexturedModalRect(scrnX + 157, (scrnY + 23) + (24 - redstone), 176, 55 - redstone, 4, redstone);
+
+        // Upgrades slots
+        drawTexturedModalRect(scrnX + 176, scrnY, 0, 166, 32, 86);
     }
 
     @Override

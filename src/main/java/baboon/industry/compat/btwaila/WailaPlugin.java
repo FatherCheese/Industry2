@@ -19,6 +19,7 @@ public class WailaPlugin implements BTWailaCustomTootltipPlugin {
 
         new TooltipMachineBasic().addTooltip();
         new TooltipMachineCannery().addTooltip();
+        new TooltipMachineTrommel().addTooltip();
         new TooltipMachineAdvanced().addTooltip();
 
         new TooltipReactor().addTooltip();

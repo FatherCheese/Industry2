@@ -22,6 +22,7 @@ public class GuiMachineCannery extends GuiContainer {
     public GuiMachineCannery(InventoryPlayer inventory, TileEntityMachineCannery tileEntity) {
         super(new ContainerMachineCannery(inventory, tileEntity));
         this.tileEntity = tileEntity;
+        this.xSize = 208;
     }
 
     @Override
@@ -39,12 +40,15 @@ public class GuiMachineCannery extends GuiContainer {
 
         int machineTime = tileEntity.currentMachineTime * 23 / tileEntity.maxMachineTime;
         drawTexturedModalRect(scrnX + 79, scrnY + 35, 176, 8, machineTime + 1, 23);
+
+        // Upgrades slots
+        drawTexturedModalRect(scrnX + 176, scrnY, 0, 166, 32, 86);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        int scrnX = xSize / 2;
+        int scrnX = xSize / 2 - 16;
         drawStringCenteredNoShadow(fontRenderer, "Canning Machine", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }

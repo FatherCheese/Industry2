@@ -102,7 +102,7 @@ tile.industry.machine.trommel.name=Electric Trommel
 tile.industry.machine.trommel.desc=Now you can separate dirt and useful items with electricity.
 
 tile.industry.advanced.furnace.name=Advanced Electric Furnace
-tile.industry.advanced.furnace.desc=For melting, heating, and cooking blocks and items with EVEN MORE POWER!!!
+tile.industry.advanced.furnace.desc=For melting, heating, and cooking blocks and items with EVEN MORE POWER!
 tile.industry.advanced.macerator.name=Advanced Macerator
 tile.industry.advanced.macerator.desc=For crushing blocks and items into even finer things.
 tile.industry.advanced.compressor.name=Advanced Compressor
@@ -272,4 +272,17 @@ item.industry.reactorplate.name=Reactor Plating
 item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.
 
 item.industry.ingot.iridium.scrap.name=Iridium Scrap
-item.industry.ingot.iridium.scrap.desc=A scrap of rare iridium. Lucky you.
+item.industry.ingot.iridium.scrap.desc=A scrap of rare iridium, lucky you!
+
+item.industry.upgrade.plate.name=Upgrade Plate
+item.industry.upgrade.plate.desc=Add onto this base plate to make upgrades for your machines.
+item.industry.upgrade.speed.name=Speed Upgrade
+item.industry.upgrade.speed.desc=Makes your machines 30% faster in exchange for more power.
+item.industry.upgrade.transformer.name=Transformer Upgrade
+item.industry.upgrade.transformer.desc=Makes your machines handle a higher voltage.
+item.industry.upgrade.energy.name=Energy Upgrade
+item.industry.upgrade.energy.desc=Makes your machines store 10,000 more energy.
+item.industry.upgrade.pusher.name=Pusher Upgrade
+item.industry.upgrade.pusher.desc=Makes your machines automatically push items to the right.
+item.industry.upgrade.puller.name=Puller Upgrade
+item.industry.upgrade.puller.desc=Makes your machines automatically pull items from the top.

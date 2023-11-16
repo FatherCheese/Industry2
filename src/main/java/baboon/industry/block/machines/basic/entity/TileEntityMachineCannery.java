@@ -18,12 +18,15 @@ import sunsetsatellite.sunsetutils.util.IItemIO;
 public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     private ItemStack[] contents;
     private final RecipesCannery recipes = new RecipesCannery();
+    private int currentSpeed = 0;
+    private int currentEnergy = 0;
+    private int currentTransformers = 0;
     public boolean active = false;
     public int currentMachineTime = 0;
-    public final int maxMachineTime = 200;
+    public int maxMachineTime = 200;
 
     public TileEntityMachineCannery() {
-        contents = new ItemStack[5];
+        contents = new ItemStack[9];
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
@@ -138,6 +141,33 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
     }
 
     @Override
+    public void onInventoryChanged() {
+        currentSpeed = 0;
+        currentEnergy = 0;
+        currentTransformers = 0;
+        maxMachineTime = 200;
+        capacity = IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage");
+
+        for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeSpeed) {
+                    currentSpeed += 1;
+                    maxMachineTime *= 1 - 0.3;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeEnergy) {
+                    currentEnergy += 1;
+                    capacity += 10000;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
+                    currentTransformers += 1;
+            }
+        }
+        super.onInventoryChanged();
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         boolean hasEnergy = energy > 0;
@@ -153,12 +183,31 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
                 onInventoryChanged();
             }
 
+            if (energy > capacity)
+                energy = 0;
+
+            switch (currentTransformers) {
+                case 1:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
+                    break;
+                case 2:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
+                    break;
+                case 3:
+                case 4:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+                    break;
+            }
+
             if (currentMachineTime == 0 || currentMachineTime > 0 && contents[4] == null) {
                 onInventoryChanged();
 
                 if (hasEnergy && canProduce()) {
                     ++currentMachineTime;
-                    energy -= 4;
+                    --energy;
+
+                    if (currentSpeed > 0 && energy - 6 * currentSpeed >= 0)
+                        energy -= 6 * currentSpeed;
 
                     if (currentMachineTime == maxMachineTime) {
                         currentMachineTime = 0;

@@ -21,6 +21,10 @@ public class ContainerAdvancedBase extends ContainerEnergy {
         addSlot(new SlotFurnace(inventory.player, tileEntity, 4, 116, 25));
         addSlot(new SlotFurnace(inventory.player, tileEntity, 5, 116, 43));
         addSlot(new Slot(tileEntity, 6, 151, 53));
+        addSlot(new Slot(tileEntity, 7, 184, 8));
+        addSlot(new Slot(tileEntity, 8, 184, 26));
+        addSlot(new Slot(tileEntity, 9, 184, 44));
+        addSlot(new Slot(tileEntity, 10, 184, 62));
 
         for(int xSlot = 0; xSlot < 3; ++xSlot)
             for (int ySlot = 0; ySlot < 9; ++ySlot)
@@ -37,7 +41,7 @@ public class ContainerAdvancedBase extends ContainerEnergy {
 
     @Override
     public List<Integer> getTargetSlots(InventoryAction action, Slot slot, int target, EntityPlayer player) {
-        if (slot.id >= 7 && slot.id <= 43) { // Entire inventory
+        if (slot.id >= 11 && slot.id <= 47) { // Entire inventory
             if (target == 1)    // Batteries
                 return getSlots(0, 1, true);
 
@@ -47,15 +51,15 @@ public class ContainerAdvancedBase extends ContainerEnergy {
             if (target == 3)    // Redstone
                 return getSlots(6, 1, false);
 
-            if (slot.id < 34)   // Inventory > Hotbar
-                return getSlots(34, 9, false);
+            if (slot.id < 38)   // Inventory > Hotbar
+                return getSlots(38, 9, false);
 
             // Hotbar > Inventory
-            return getSlots(7, 27, false);
+            return getSlots(11, 27, false);
         }
         if (slot.id < 0)
             return null;
 
-        return getSlots(7, 36, false);
+        return getSlots(11, 36, false);
     }
 }

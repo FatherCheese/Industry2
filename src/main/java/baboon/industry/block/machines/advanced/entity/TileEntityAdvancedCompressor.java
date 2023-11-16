@@ -80,20 +80,23 @@ public class TileEntityAdvancedCompressor extends TileEntityAdvancedBase {
 
                 if (hasEnergy && (canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5]))) {
                     ++currentMachineTime;
-                    energy -= 8;
+                    energy -= 6;
                     active = true;
+
+                    if (currentSpeed > 0 && energy - 36 * currentSpeed >= 0)
+                        energy -= 36 * currentSpeed;
 
                     if (redstone > 0) {
                         currentMachineTime *= (int) ((double) redstone / 2000);
 
                         if (canProduce(contents[2], contents[4])) {
-                            redstone -= 10;
-                            energy -= 4;
+                            redstone -= 9;
+                            energy -= 6;
                         }
 
                         if (canProduce(contents[3], contents[5])) {
-                            redstone -= 10;
-                            energy -= 4;
+                            redstone -= 9;
+                            energy -= 6;
                         }
                     }
 

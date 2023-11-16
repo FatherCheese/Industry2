@@ -20,7 +20,7 @@ public class GuiMachineWiremill extends GuiMachineBase {
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        int scrnX = xSize / 2;
+        int scrnX = xSize / 2 - 16;
         drawStringCenteredNoShadow(fontRenderer, "Wiremill", scrnX, 6, 4210752);
         fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
     }

@@ -4,6 +4,7 @@ import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
 import baboon.industry.block.machines.basic.BlockMachineTrommel;
+import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.WeightedRandomBag;
@@ -15,7 +16,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import net.minecraft.core.util.collection.Pair;
+import net.minecraft.core.util.helper.Sides;
 import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -33,12 +34,16 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsSoulSand = new WeightedRandomBag<>();
     private final Random rand = new Random();
     private int nextToSieve = 2;
+    private boolean hasEnergyUpgrade;
+    private int currentSpeed = 0;
+    private int currentEnergy = 0;
+    private int currentTransformers = 0;
     public boolean active = false;
     public int currentMachineTime = 0;
-    public final int maxMachineTime = 20;
+    public int maxMachineTime = 40;
 
     public TileEntityMachineTrommel() {
-        contents = new ItemStack[14];
+        contents = new ItemStack[18];
 
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage"));
         setTransfer(IndustryConfig.cfg.getInt("Energy Values.lvIO"));
@@ -109,6 +114,9 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
     @Override
     public int getActiveItemSlotForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
         if (direction == Direction.X_NEG) {
             for (int inputSlots = 2; inputSlots < 6; inputSlots++) {
                 if (contents[inputSlots] == null || contents[inputSlots].stackSize < 64)
@@ -130,6 +138,9 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
     @Override
     public Connection getItemIOForSide(Direction direction) {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
+        direction = Direction.getDirectionFromSide(index);
         if (direction == Direction.X_NEG)
             return Connection.INPUT;
 
@@ -325,6 +336,33 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     @Override
+    public void onInventoryChanged() {
+        currentSpeed = 0;
+        currentEnergy = 0;
+        currentTransformers = 0;
+        maxMachineTime = 40;
+        capacity = IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage");
+
+        for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeSpeed) {
+                    currentSpeed += 1;
+                    maxMachineTime *= 1 - 0.3;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeEnergy) {
+                    currentEnergy += 1;
+                    capacity += 10000;
+                }
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
+                    currentTransformers += 1;
+            }
+        }
+        super.onInventoryChanged();
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         boolean hasEnergy = energy > 0;
@@ -353,10 +391,29 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
             if (nextToSieve > 5)
                 nextToSieve = 2;
 
+            if (energy > capacity)
+                energy = 0;
+
+            switch (currentTransformers) {
+                case 1:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mvIO"));
+                    break;
+                case 2:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
+                    break;
+                case 3:
+                case 4:
+                    setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+                    break;
+            }
+
             if (hasEnergy && canProduce(nextToSieve)) {
                 ++currentMachineTime;
                 energy -= 3;
                 active = true;
+
+                if (currentSpeed > 0 && energy - 18 * currentSpeed >= 0)
+                    energy -= 18 * currentSpeed;
 
                 if (currentMachineTime >= maxMachineTime) {
                     currentMachineTime = 0;
