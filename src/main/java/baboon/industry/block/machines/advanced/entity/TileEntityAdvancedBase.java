@@ -6,6 +6,7 @@ import baboon.industry.item.IndustryItems;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -21,6 +22,8 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     protected int currentSpeed = 0;
     protected int currentEnergy = 0;
     protected int currentTransformers = 0;
+    private int currentPuller = 0;
+    private int currentPusher = 0;
     public boolean active = false;
     public int redstone = 0;
     public int currentMachineTime = 0;
@@ -98,7 +101,7 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     @Override
     public void onInventoryChanged() {
         super.onInventoryChanged();
-        for (int upgradesSize = 7; upgradesSize < 10; upgradesSize++) {
+        for (int upgradesSize = 7; upgradesSize < 11; upgradesSize++) {
             currentSpeed = 0;
             currentEnergy = 0;
             currentTransformers = 0;
@@ -118,6 +121,107 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
 
                 if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
                     currentTransformers += 1;
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradePuller)
+                    currentPuller = 1;
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradePusher)
+                    currentPusher = 1;
+            }
+        }
+    }
+
+    private void pullFromTop() {
+        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        if (tile instanceof IInventory) {
+            for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
+                ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
+
+                if (tileStack != null) {
+                    if (tileStack.stackSize - 2 > 0) {
+
+                        for (int inputSlots = 2; inputSlots < 4; inputSlots++) {
+                            if (contents[inputSlots] == null) {
+                                contents[inputSlots] = new ItemStack(tileStack.getItem().id, 1, tileStack.getMetadata());
+                                --tileStack.stackSize;
+                            }
+                            if (contents[inputSlots] != null && contents[inputSlots].stackSize + 2 <= contents[inputSlots].getMaxStackSize())
+                                if (contents[inputSlots] != null && contents[inputSlots].itemID == tileStack.itemID && contents[inputSlots].getMetadata() == tileStack.getMetadata()) {
+                                    ++contents[inputSlots].stackSize;
+                                    --tileStack.stackSize;
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void pushToSide() {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        TileEntity tile;
+
+        switch (meta) {
+            default:
+            case 2:
+                tile = worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
+                break;
+            case 3:
+                tile = worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
+                break;
+            case 4:
+                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
+                break;
+            case 5:
+                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
+                break;
+        }
+
+        if (tile instanceof IInventory) {
+            for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
+                ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
+
+                for (int outputSlots = 4; outputSlots < 6; outputSlots++) {
+                    if (contents[outputSlots] != null) {
+                        if (tileStack == null) {
+                            ((IInventory) tile).setInventorySlotContents(tileInv, new ItemStack(contents[outputSlots].getItem(), 1, contents[outputSlots].getMetadata()));
+                            --contents[outputSlots].stackSize;
+                        }
+
+                        if (tileStack != null && tileStack.stackSize + 1 <= tileStack.getMaxStackSize())
+                            if (tileStack.itemID == contents[outputSlots].itemID && tileStack.getMetadata() == contents[outputSlots].getMetadata()) {
+                                ++tileStack.stackSize;
+                                --contents[outputSlots].stackSize;
+                            }
+
+                        if (contents[outputSlots].stackSize <= 0)
+                            contents[outputSlots] = null;
+                    }
+                }
+            }
+        }
+    }
+
+    private void pullFromBottom() {
+        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
+        if (tile instanceof IInventory) {
+            for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
+                ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
+
+                if (tileStack != null) {
+                    if (tileStack.stackSize - 1 > 0) {
+
+                        if (contents[6] == null) {
+                            contents[6] = new ItemStack(tileStack.getItem().id, 1, tileStack.getMetadata());
+                            --tileStack.stackSize;
+                        }
+                        if (contents[6] != null && contents[6].stackSize + 2 < contents[6].getMaxStackSize())
+                            if (contents[6] != null && contents[6].itemID == tileStack.itemID && contents[6].getMetadata() == tileStack.getMetadata()) {
+                                ++contents[6].stackSize;
+                                --tileStack.stackSize;
+                            }
+                    }
+                }
             }
         }
     }
@@ -139,8 +243,16 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
 
             if (currentTransformers == 1)
                 setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.hvIO"));
-            else if (currentTransformers == 2)
+            else if (currentTransformers >= 2)
                 setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+
+            if (currentPuller > 0) {
+                pullFromTop();
+                pullFromBottom();
+            }
+
+            if (currentPusher > 0)
+                pushToSide();
 
             if (contents[6] != null && redstoneFuel.getRedstoneList().containsKey(contents[6].getItem().id)) {
                 int newRedstoneLevel = redstoneFuel.getYield(contents[6].getItem().id);

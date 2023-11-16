@@ -13,8 +13,6 @@ import turniplabs.halplibe.helper.SoundHelper;
 public class Industry2 implements ModInitializer {
 
     // "TODO" LIST
-    // Look into upgrades
-    // Look into custom damage types
     // Look into damageable crafting
     // Achievements
 

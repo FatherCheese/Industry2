@@ -282,6 +282,18 @@ public class IndustryRecipes {
                 '2', IndustryItems.upgradePlate,
                 '3', IndustryItems.circuitBasic
         });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePuller), new Object[]{
+                "1", "2", "3",
+                '1', Block.pistonBaseSticky,
+                '2', IndustryItems.upgradePlate,
+                '3', IndustryItems.circuitBasic
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePusher), new Object[]{
+                "1", "2", "3",
+                '1', Block.pistonBase,
+                '2', IndustryItems.upgradePlate,
+                '3', IndustryItems.circuitBasic
+        });
     }
 
     private void craftingRecipesBlocks() {

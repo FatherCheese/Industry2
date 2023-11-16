@@ -262,11 +262,11 @@ item.industry.resin.desc=Rubberwood blood.
 item.industry.rubber.name=Rubber
 item.industry.rubber.desc=A ball of black rubber. Boing!
 item.industry.circuit.name=Circuit
-item.industry.circuit.desc=A piece of metal with various beeps and boops on it.
+item.industry.circuit.desc=Beeps and bloops on a piece of flat iron.
 item.industry.circuitadvanced.name=Advanced Circuit
-item.industry.circuitadvanced.desc=A piece of metal with advanced beeps and boops on it.
+item.industry.circuitadvanced.desc=Advanced beeps and bloops on a piece of flat steel.
 item.industry.scrap.name=Scrap
-item.industry.scrap.desc=A useless ball of recycled material.
+item.industry.scrap.desc=A ball of recycled material.
 
 item.industry.reactorplate.name=Reactor Plating
 item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.

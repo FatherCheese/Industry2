@@ -11,6 +11,7 @@ import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockChest;
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.monster.EntitySlime;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -38,6 +39,8 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     private int currentSpeed = 0;
     private int currentEnergy = 0;
     private int currentTransformers = 0;
+    private int currentPuller = 0;
+    private int currentPusher = 0;
     public boolean active = false;
     public int currentMachineTime = 0;
     public int maxMachineTime = 40;
@@ -341,6 +344,8 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         currentEnergy = 0;
         currentTransformers = 0;
         maxMachineTime = 40;
+        currentPuller = 0;
+        currentPusher = 0;
         capacity = IndustryConfig.cfg.getInt("Energy Values.lvMachineStorage");
 
         for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
@@ -357,9 +362,86 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
                 if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
                     currentTransformers += 1;
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradePuller)
+                    currentPuller = 1;
+
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradePusher)
+                    currentPusher = 1;
             }
         }
         super.onInventoryChanged();
+    }
+
+    private void pullFromTop() {
+        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        if (tile instanceof IInventory) {
+            for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
+                ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
+
+                if (tileStack != null) {
+                    if (tileStack.stackSize - 4 > 0) {
+
+                        for (int inputSlots = 2; inputSlots < 6; inputSlots++) {
+                            if (contents[inputSlots] == null) {
+                                contents[inputSlots] = new ItemStack(tileStack.getItem().id, 1, tileStack.getMetadata());
+                                --tileStack.stackSize;
+                            }
+                            if (contents[inputSlots] != null && contents[inputSlots].stackSize + 2 <= contents[inputSlots].getMaxStackSize())
+                                if (contents[inputSlots] != null && contents[inputSlots].itemID == tileStack.itemID && contents[inputSlots].getMetadata() == tileStack.getMetadata()) {
+                                    ++contents[inputSlots].stackSize;
+                                    --tileStack.stackSize;
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void pushToSide() {
+        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        TileEntity tile;
+
+        switch (meta) {
+            default:
+            case 2:
+                tile = worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
+                break;
+            case 3:
+                tile = worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
+                break;
+            case 4:
+                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
+                break;
+            case 5:
+                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
+                break;
+        }
+
+        if (tile instanceof IInventory) {
+            for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
+                ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
+
+                for (int outputSlots = 6; outputSlots < 14; outputSlots++) {
+                    if (contents[outputSlots] != null) {
+                        if (tileStack == null) {
+                            ((IInventory) tile).setInventorySlotContents(tileInv, new ItemStack(contents[outputSlots].getItem(), 1, contents[outputSlots].getMetadata()));
+                            --contents[outputSlots].stackSize;
+                        }
+
+                        if (tileStack != null && tileStack.stackSize + 1 <= tileStack.getMaxStackSize())
+                            if (tileStack.itemID == contents[outputSlots].itemID && tileStack.getMetadata() == contents[outputSlots].getMetadata()) {
+                                ++tileStack.stackSize;
+                                --contents[outputSlots].stackSize;
+                            }
+
+                        if (contents[outputSlots].stackSize <= 0)
+                            contents[outputSlots] = null;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -406,6 +488,12 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                     setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
                     break;
             }
+
+            if (currentPuller > 0)
+                pullFromTop();
+
+            if (currentPusher > 0)
+                pushToSide();
 
             if (hasEnergy && canProduce(nextToSieve)) {
                 ++currentMachineTime;

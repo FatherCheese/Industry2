@@ -1,7 +1,6 @@
 package baboon.industry.mixin;
 
 import baboon.industry.item.IndustryItems;
-import baboon.industry.item.ItemArmorIridium;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;

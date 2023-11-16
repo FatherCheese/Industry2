@@ -1,7 +1,7 @@
 package baboon.industry.compat.btwaila;
 
 import baboon.industry.Industry2;
-import baboon.industry.block.machines.basic.entity.*;
+import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
 import net.minecraft.core.block.entity.TileEntity;
 import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
 import toufoumaster.btwaila.TooltipGroup;

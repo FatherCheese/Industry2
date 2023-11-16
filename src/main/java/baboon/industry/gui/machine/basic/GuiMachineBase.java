@@ -1,13 +1,10 @@
 package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
-import net.minecraft.client.gui.GuiInventoryCreative;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMachineBase extends GuiContainer {

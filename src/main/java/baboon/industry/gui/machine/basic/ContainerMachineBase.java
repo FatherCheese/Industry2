@@ -3,11 +3,9 @@ package baboon.industry.gui.machine.basic;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.player.inventory.ContainerGuidebook;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotFurnace;
-import org.lwjgl.Sys;
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
 
 import java.util.List;
