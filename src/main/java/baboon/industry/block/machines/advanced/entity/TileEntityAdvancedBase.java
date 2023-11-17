@@ -27,7 +27,7 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
     public boolean active = false;
     public int redstone = 0;
     public int currentMachineTime = 0;
-    public final int maxRedstone = 8000;
+    public int maxRedstone = 8000;
     public int maxMachineTime = 200;
 
     public TileEntityAdvancedBase() {
@@ -253,6 +253,9 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
 
             if (currentPusher > 0)
                 pushToSide();
+
+            if (currentMachineTime > maxMachineTime)
+                currentMachineTime = 0;
 
             if (contents[6] != null && redstoneFuel.getRedstoneList().containsKey(contents[6].getItem().id)) {
                 int newRedstoneLevel = redstoneFuel.getYield(contents[6].getItem().id);

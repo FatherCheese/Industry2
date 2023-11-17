@@ -2,10 +2,15 @@ package baboon.industry.block.machines.advanced.entity;
 
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.advanced.BlockAdvancedFurnace;
+import baboon.industry.item.IndustryItems;
+import net.minecraft.core.crafting.recipe.RecipesBlastFurnace;
 import net.minecraft.core.crafting.recipe.RecipesFurnace;
 import net.minecraft.core.item.ItemStack;
 
 public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
+    private final RecipesFurnace recipesFurnace = RecipesFurnace.smelting();
+    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.smelting();
+    private boolean blasting = false;
 
     @Override
     public String getInvName() {
@@ -13,7 +18,9 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
     }
 
     private boolean isProducible(ItemStack itemStack) {
-        return RecipesFurnace.smelting().getSmeltingList().containsKey(itemStack.getItem().id);
+        if (blasting)
+            return recipesBlastFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
+        return recipesFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
     }
 
     private boolean canProduce(ItemStack input, ItemStack output) {
@@ -21,7 +28,12 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
             return false;
 
         if (isProducible(input)) {
-            ItemStack resultStack = RecipesFurnace.smelting().getSmeltingResult(input.getItem().id);
+            ItemStack resultStack;
+
+            if (blasting)
+                resultStack = recipesBlastFurnace.getSmeltingResult(input.getItem().id);
+            else
+                resultStack = recipesFurnace.getSmeltingResult(input.getItem().id);
 
             return output == null || output.getItem() == resultStack.getItem() &&
                     output.stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
@@ -31,7 +43,13 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
 
     private void produceFirstItem() {
         if (canProduce(contents[2], contents[4])) {
-            ItemStack itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[2].getItem().id);
+            ItemStack itemStack;
+
+            if (blasting)
+                itemStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
+            else
+                itemStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
+
             if (itemStack == null)
                 return;
 
@@ -50,7 +68,13 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
 
     private void produceSecondItem() {
         if (canProduce(contents[3], contents[5])) {
-            ItemStack itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[3].getItem().id);
+            ItemStack itemStack;
+
+            if (blasting)
+                itemStack = recipesBlastFurnace.getSmeltingResult(contents[3].getItem().id);
+            else
+                itemStack = recipesFurnace.getSmeltingResult(contents[3].getItem().id);
+
             if (itemStack == null)
                 return;
 
@@ -68,6 +92,18 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
     }
 
     @Override
+    public void onInventoryChanged() {
+        blasting = false;
+        for (int upgradesSize = 7; upgradesSize < 11; upgradesSize++) {
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeBlasting)
+                    blasting = true;
+            }
+        }
+        super.onInventoryChanged();
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         boolean hasEnergy = energy > 0;
@@ -82,8 +118,8 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
                     energy -= 6;
                     active = true;
 
-                    if (currentSpeed > 0 && energy - 36 * currentSpeed >= 0)
-                        energy -= 36 * currentSpeed;
+                    if (currentSpeed > 0)
+                        energy -= 40 * currentSpeed;
 
                     if (redstone > 0) {
                         currentMachineTime *= (int) ((double) redstone / 2000);

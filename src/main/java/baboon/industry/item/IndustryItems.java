@@ -120,7 +120,9 @@ public class IndustryItems {
     public static Item upgradeEnergy;
     public static Item upgradePusher;
     public static Item upgradePuller;
+    public static Item upgradeBlasting;
 
+    public static Item foodJoffos;
 
     private void taggedItems() {
         batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
@@ -480,8 +482,6 @@ public class IndustryItems {
                 new Item(nextItemID("upgradeEnergy")).setMaxStackSize(4),
                 "upgrade.energy",
                 "upgrade_energy.png");
-
-        // Currently unused as I can't figure out the code at the moment
         upgradePusher = ItemHelper.createItem(MOD_ID,
                 new Item(nextItemID("upgradePusher")).setMaxStackSize(4),
                 "upgrade.pusher",
@@ -490,6 +490,15 @@ public class IndustryItems {
                 new Item(nextItemID("upgradePuller")).setMaxStackSize(4),
                 "upgrade.puller",
                 "upgrade_puller.png");
+        upgradeBlasting = ItemHelper.createItem(MOD_ID,
+                new Item(nextItemID("upgradeBlasting")).setMaxStackSize(4),
+                "upgrade.blasting",
+                "upgrade_blasting.png");
+
+        foodJoffos = ItemHelper.createItem(MOD_ID,
+                new ItemFoodStackable("food.joffos", nextItemID("foodJoffos"), 1, false, 10),
+                "food.joffos",
+                "food_joffos.png");
 
         taggedItems();
     }

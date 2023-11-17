@@ -162,8 +162,8 @@ public class IndustryRecipes {
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolChainsaw), new Object[]{
                 "#11", "231", "42#",
                 '1', IndustryItems.plateSteel,
-                '2', IndustryItems.circuitBasic,
-                '3', IndustryItems.ingotBronze,
+                '2', IndustryItems.ingotBronze,
+                '3', IndustryItems.circuitBasic,
                 '4', IndustryItems.batteryRedstone
         });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrill), new Object[]{
@@ -293,6 +293,18 @@ public class IndustryRecipes {
                 '1', Block.pistonBase,
                 '2', IndustryItems.upgradePlate,
                 '3', IndustryItems.circuitBasic
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeBlasting), new Object[]{
+                "#1#", "121", "#3#",
+                '1', Item.nethercoal,
+                '2', IndustryItems.upgradePlate,
+                '3', IndustryItems.circuitBasic
+        });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.foodJoffos), new Object[]{
+                "1", "2", "3",
+                '1', new ItemStack(Item.dye, 1, 3),
+                '2', Block.pumpkin,
+                '3', Item.wheat
         });
     }
 
@@ -577,6 +589,8 @@ public class IndustryRecipes {
         RecipeHelper.blastingManager.addSmelting(IndustryItems.dustBronze.id, new ItemStack(IndustryItems.ingotBronze));
         RecipeHelper.blastingManager.addSmelting(IndustryItems.dustIron.id, new ItemStack(Item.ingotIron));
         RecipeHelper.blastingManager.addSmelting(IndustryItems.dustGold.id, new ItemStack(Item.ingotGold));
+
+        RecipeHelper.blastingManager.addSmelting(Block.blockIron.id, new ItemStack(Item.ingotSteelCrude, 9));
     }
 
     public void initializeRecipes() {

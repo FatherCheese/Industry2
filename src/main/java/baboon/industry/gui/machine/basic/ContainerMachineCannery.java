@@ -60,4 +60,11 @@ public class ContainerMachineCannery extends ContainerEnergy {
 
         return getSlots(5, 36, false);
     }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        TileEntityMachineCannery tileEntity = (TileEntityMachineCannery) tile;
+        if (id == 0)
+            tileEntity.currentMachineTime = value;
+    }
 }

@@ -306,6 +306,9 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
             if (currentPusher > 0)
                 pushToSide();
 
+            if (currentMachineTime > maxMachineTime)
+                currentMachineTime = 0;
+
             if (currentMachineTime == 0 || currentMachineTime > 0 && contents[4] == null) {
                 onInventoryChanged();
 
@@ -313,8 +316,8 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
                     ++currentMachineTime;
                     --energy;
 
-                    if (currentSpeed > 0 && energy - 6 * currentSpeed >= 0)
-                        energy -= 6 * currentSpeed;
+                    if (currentSpeed > 0)
+                        energy -= 20 * currentSpeed;
 
                     if (currentMachineTime == maxMachineTime) {
                         currentMachineTime = 0;

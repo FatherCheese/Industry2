@@ -17,7 +17,7 @@ public class ItemToolDrill extends ItemToolElectric {
 
     @Override
     public boolean canHarvestBlock(Block block) {
-        return block.hasTag(BlockTags.MINEABLE_BY_PICKAXE);
+        return block.hasTag(BlockTags.MINEABLE_BY_PICKAXE) || block.hasTag(BlockTags.MINEABLE_BY_SHOVEL);
     }
 
     @Override

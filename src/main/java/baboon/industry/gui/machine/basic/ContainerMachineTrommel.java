@@ -68,4 +68,11 @@ public class ContainerMachineTrommel extends ContainerEnergy {
 
         return getSlots(6, 36, false);
     }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        TileEntityMachineTrommel tileEntity = (TileEntityMachineTrommel) tile;
+        if (id == 0)
+            tileEntity.currentMachineTime = value;
+    }
 }

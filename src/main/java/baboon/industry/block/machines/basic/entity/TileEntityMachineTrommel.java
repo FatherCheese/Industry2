@@ -495,13 +495,16 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
             if (currentPusher > 0)
                 pushToSide();
 
+            if (currentMachineTime > maxMachineTime)
+                currentMachineTime = 0;
+
             if (hasEnergy && canProduce(nextToSieve)) {
                 ++currentMachineTime;
                 energy -= 3;
                 active = true;
 
-                if (currentSpeed > 0 && energy - 18 * currentSpeed >= 0)
-                    energy -= 18 * currentSpeed;
+                if (currentSpeed > 0)
+                    energy -= 20 * currentSpeed;
 
                 if (currentMachineTime >= maxMachineTime) {
                     currentMachineTime = 0;

@@ -60,4 +60,11 @@ public class ContainerMachineBase extends ContainerEnergy {
 
         return getSlots(8, 36, false);
     }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        tileEntity = (TileEntityMachineBase) tile;
+        if (id == 0)
+            tileEntity.currentMachineTime = value;
+    }
 }

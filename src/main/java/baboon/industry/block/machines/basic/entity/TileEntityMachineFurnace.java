@@ -2,24 +2,35 @@ package baboon.industry.block.machines.basic.entity;
 
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
+import baboon.industry.item.IndustryItems;
+import net.minecraft.core.crafting.recipe.RecipesBlastFurnace;
 import net.minecraft.core.crafting.recipe.RecipesFurnace;
 import net.minecraft.core.item.ItemStack;
 
 public class TileEntityMachineFurnace extends TileEntityMachineBase {
-
+    private final RecipesFurnace recipesFurnace = RecipesFurnace.smelting();
+    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.smelting();
+    private boolean blasting = false;
     @Override
     public String getInvName() {
         return "IndustryMachineFurnace";
     }
 
     private boolean isProducible(ItemStack itemStack) {
-        return RecipesFurnace.smelting().getSmeltingList().containsKey(itemStack.getItem().id);
+        if (blasting)
+            return recipesBlastFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
+        return recipesFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
     }
 
     private boolean canProduce() {
         if (contents[2] != null && contents[2].getItem() != null) {
             if (isProducible(contents[2])) {
-                ItemStack resultStack = RecipesFurnace.smelting().getSmeltingResult(contents[2].getItem().id);
+                ItemStack resultStack;
+
+                if (blasting)
+                    resultStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
+                else
+                    resultStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
 
                 return contents[3] == null || contents[3].getItem() == resultStack.getItem() &&
                         contents[3].stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
@@ -28,9 +39,27 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
         return false;
     }
 
+    @Override
+    public void onInventoryChanged() {
+        blasting = false;
+        for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
+            if (contents[upgradesSize] != null) {
+                if (contents[upgradesSize].getItem() == IndustryItems.upgradeBlasting)
+                    blasting = true;
+            }
+        }
+        super.onInventoryChanged();
+    }
+
     private void produceItem() {
         if (canProduce()) {
-            ItemStack itemStack = RecipesFurnace.smelting().getSmeltingResult(contents[2].getItem().id);
+
+            ItemStack itemStack;
+
+            if (blasting)
+                itemStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
+            else
+                itemStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
 
             if (contents[3] == null)
                 contents[3] = itemStack.copy();
@@ -64,8 +93,8 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
                 energy -= 3;
                 active = true;
 
-                if (currentSpeed > 0 && energy - 18 * currentSpeed >= 0)
-                    energy -= 18 * currentSpeed;
+                if (currentSpeed > 0)
+                    energy -= 20 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;

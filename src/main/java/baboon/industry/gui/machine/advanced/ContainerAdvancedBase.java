@@ -62,4 +62,20 @@ public class ContainerAdvancedBase extends ContainerEnergy {
 
         return getSlots(11, 36, false);
     }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        TileEntityAdvancedBase tileEntity = (TileEntityAdvancedBase) tile;
+        if (id == 0)
+            tileEntity.currentMachineTime = value;
+
+        if (id == 1)
+            tileEntity.maxMachineTime = value;
+
+        if (id == 3)
+            tileEntity.redstone = value;
+
+        if (id == 4)
+            tileEntity.maxRedstone = value;
+    }
 }

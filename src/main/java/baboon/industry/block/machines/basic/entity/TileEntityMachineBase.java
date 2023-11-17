@@ -214,6 +214,9 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
             if (energy > capacity)
                 energy = 0;
 
+            if (currentMachineTime > maxMachineTime)
+                currentMachineTime = 0;
+
             switch (currentTransformers) {
                 case 1:
                     setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.mvIO"));

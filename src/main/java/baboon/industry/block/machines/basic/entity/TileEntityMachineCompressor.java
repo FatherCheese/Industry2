@@ -66,8 +66,8 @@ public class TileEntityMachineCompressor extends TileEntityMachineBase {
                 energy -= 2;
                 active = true;
 
-                if (currentSpeed > 0&& energy - 12 * currentSpeed >= 0)
-                    energy -= 12 * currentSpeed;
+                if (currentSpeed > 0)
+                    energy -= 20 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;

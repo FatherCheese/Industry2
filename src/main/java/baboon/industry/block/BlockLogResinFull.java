@@ -1,5 +1,6 @@
 package baboon.industry.block;
 
+import baboon.industry.IndustryAchievements;
 import baboon.industry.item.IndustryItems;
 import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
@@ -34,6 +35,7 @@ public class BlockLogResinFull extends BlockLog {
 
                 int meta = world.getBlockMetadata(x, y, z);
                 if (!world.isClientSide) {
+                    player.addStat(IndustryAchievements.ROOT1, 1);
                     world.setBlockAndMetadataWithNotify(x, y, z, IndustryBlocks.logRubberWoodResin.id, meta);
                     world.scheduleBlockUpdate(x, y, z, this.id, tickRate());
 
