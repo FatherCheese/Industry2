@@ -26,6 +26,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     public int heat = 0;
     public int maxHeat = 1000;
     public boolean disabled = false;
+    public int tick = 0;
 
     public TileEntityReactor() {
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
@@ -152,7 +153,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         }
         contents = newContents;
     }
-
+    private static boolean sendInventoryPacket = true;
     @Override
     public void onInventoryChanged() {
         uraniumCell = 0;
@@ -170,7 +171,9 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                     maxHeat += 250;
             }
         }
-        super.onInventoryChanged();
+        if (sendInventoryPacket){
+            super.onInventoryChanged();
+        }
     }
 
     private int adjacentUranium(int id){
@@ -191,6 +194,12 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
     @Override
     public void updateEntity() {
+        tick++;
+        if (tick % 10 != 0) {
+            sendInventoryPacket = false;
+        } else {
+            tick = 0;
+        }
         if (worldObj.isClientSide) {
             return;
         }
@@ -247,6 +256,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                 overheat();
 
         super.updateEntity();
+        sendInventoryPacket = true;
     }
 
     @Override
