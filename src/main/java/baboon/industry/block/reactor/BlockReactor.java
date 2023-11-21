@@ -59,4 +59,10 @@ public class BlockReactor extends BlockTileEntity {
         }
         super.onBlockRemoval(world, x, y, z);
     }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
+        TileEntityReactor tile = (TileEntityReactor)world.getBlockTileEntity(x, y, z);
+        tile.disabled = (world.isBlockGettingPowered(x, y, z) || world.isBlockIndirectlyGettingPowered(x, y, z));
+    }
 }

@@ -18,13 +18,14 @@ import java.util.Random;
 
 public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents = new ItemStack[6 * 9];
-    public int chamberCount = 0;
     private int uraniumCell = 0;
     private int coolantCell = 0;
     private int uraniumTimer = 0;
     private int coolantTimer = 0;
+    public int chamberCount = 0;
     public int heat = 0;
     public int maxHeat = 1000;
+    public boolean disabled = false;
 
     public TileEntityReactor() {
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
@@ -194,54 +195,56 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
             return;
         }
 
-        checkSides();
-        if (contents.length != chamberCount * 9)
-            handleInventoryChange();
+        if (!disabled) {
+            checkSides();
+            if (contents.length != chamberCount * 9)
+                handleInventoryChange();
 
-        uraniumTimer++;
-        coolantTimer++;
+            uraniumTimer++;
+            coolantTimer++;
 
-        boolean damageUranium = false;
-        if (uraniumTimer >= 20) {
-            damageUranium = true;
-            uraniumTimer = 0;
-        }
-
-        boolean damageCoolant = false;
-        if (coolantTimer >= 20 && heat > 0) {
-            damageCoolant = true;
-            coolantTimer = 0;
-        }
-
-        for (int i = 0; i < contents.length; i++) {
-            ItemStack stack = contents[i];
-            if (stack == null)
-                continue;
-
-            if (damageUranium && stack.getItem() == IndustryItems.cellUranium && energy < capacity - 5) {
-                stack.damageItem(1, null);
-                heat += 4;
+            boolean damageUranium = false;
+            if (uraniumTimer >= 20) {
+                damageUranium = true;
+                uraniumTimer = 0;
             }
 
-            if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
-                int adjUranium = adjacentUranium(i);
-                stack.damageItem(adjUranium, null);
-                heat -= adjUranium;
-                heat = Math.max(heat, 0);
+            boolean damageCoolant = false;
+            if (coolantTimer >= 20 && heat > 0) {
+                damageCoolant = true;
+                coolantTimer = 0;
             }
-            if (stack.stackSize <= 0){
-                contents[i] = null;
+
+            for (int i = 0; i < contents.length; i++) {
+                ItemStack stack = contents[i];
+                if (stack == null)
+                    continue;
+
+                if (damageUranium && stack.getItem() == IndustryItems.cellUranium && energy < capacity - 5) {
+                    stack.damageItem(1, null);
+                    heat += 4;
+                }
+
+                if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
+                    int adjUranium = adjacentUranium(i);
+                    stack.damageItem(adjUranium, null);
+                    heat -= adjUranium;
+                    heat = Math.max(heat, 0);
+                }
+                if (stack.stackSize <= 0) {
+                    contents[i] = null;
+                }
             }
+
+            if (energy + 5 * uraniumCell < capacity)
+                energy += 5 * uraniumCell;
         }
 
-        if (uraniumCell <= 0 && heat - 1 >= 0)
-            --heat;
+            if ((uraniumCell <= 0  || disabled) && heat - 1 >= 0)
+                --heat;
 
-        if (energy + 5 < capacity)
-            energy += 5 * uraniumCell;
-
-        if (heat >= maxHeat / 2)
-            overheat();
+            if (heat >= maxHeat / 2)
+                overheat();
 
         super.updateEntity();
     }

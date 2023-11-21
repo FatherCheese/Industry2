@@ -59,7 +59,7 @@ public class TileEntityMachineRecycler extends TileEntityMachineBase {
                 ++currentMachineTime;
                 --energy;
 
-                if (currentSpeed > 0)
+                if (currentSpeed > 0 && energy - 20 * currentSpeed >= -20)
                     energy -= 20 * currentSpeed;
 
                 if (currentMachineTime == maxMachineTime) {

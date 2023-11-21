@@ -123,6 +123,8 @@ public class IndustryBlocks {
     // End Game
     public static Block energyFabricator;
 
+    public static Block alarm;
+
     private void pickaxeLevels() {
         ItemToolPickaxe.miningLevels.put(oreTinStone, 1);
         ItemToolPickaxe.miningLevels.put(oreTinBasalt, 1);
@@ -154,6 +156,7 @@ public class IndustryBlocks {
         ItemToolPickaxe.miningLevels.put(transformerMVtoLV, 2);
         ItemToolPickaxe.miningLevels.put(transformerHVtoMV, 2);
         ItemToolPickaxe.miningLevels.put(transformerEHVtoHV, 2);
+        ItemToolPickaxe.miningLevels.put(alarm, 2);
         ItemToolPickaxe.miningLevels.put(hardenedCoal, 3);
     }
 
@@ -668,6 +671,18 @@ public class IndustryBlocks {
                 .setResistance(0.0f)
                 .build(new BlockEnergyFabricator("fabricator", blockID("energyFabricator"), Material.metal))
                 .withTags(IndustryTags.REQUIRES_WRENCH);
+
+        alarm = new BlockBuilder(MOD_ID)
+                .setTopBottomTexture("block_bronze_sides.png")
+                .setNorthTexture("alarm_front.png")
+                .setEastTexture("block_bronze_sides.png")
+                .setSouthTexture("block_bronze_sides.png")
+                .setWestTexture("block_bronze_sides.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(5.0F)
+                .build(new BlockAlarm("alarm", blockID("alarm")))
+                .setTickOnLoad(true)
+                .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         addToGuiMap();
         initializeTiles();

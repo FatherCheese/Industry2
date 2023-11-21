@@ -199,6 +199,9 @@ tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
 tile.industry.fabricator.name=Energy Fabricator
 tile.industry.fabricator.desc=Turns raw energy into any block or item.
 
+tile.industry.alarm.name=Alarm
+tile.industry.alarm.desc=Plays a loud sound when powered by redstone.
+
 item.industry.ore.raw.tin.name=Raw Tin Ore
 item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
 item.industry.ore.raw.copper.name=Raw Copper Ore

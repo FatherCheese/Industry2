@@ -23,6 +23,7 @@ public class TooltipReactor implements IBTWailaCustomBlockTooltip {
 
         guiBlockOverlay.drawStringWithShadow("Current Heat: " + tile.heat + " / " + tile.maxHeat, 0);
         guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
+        guiBlockOverlay.drawStringWithShadow("Disabled: " + tile.disabled, 0);
         guiBlockOverlay.drawInventory(tile, 0);
     }
 }

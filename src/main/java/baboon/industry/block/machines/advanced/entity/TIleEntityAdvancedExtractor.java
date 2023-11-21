@@ -83,7 +83,7 @@ public class TIleEntityAdvancedExtractor extends TileEntityAdvancedBase {
                     energy -= 6;
                     active = true;
 
-                    if (currentSpeed > 0)
+                    if (currentSpeed > 0 && energy - 40 * currentSpeed >= -40)
                         energy -= 40 * currentSpeed;
 
                     if (redstone > 0) {
