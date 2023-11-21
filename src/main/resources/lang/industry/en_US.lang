@@ -195,6 +195,8 @@ tile.industry.reactor.name=Nuclear Reactor
 tile.industry.reactor.desc=An extra-high voltage generator that heats up glowing rocks, in exchange for energy.
 tile.industry.reactor.chamber.name=Reactor Chamber
 tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
+tile.industry.reactor.io.name=Reactor I/O
+tile.industry.reactor.io.desc=The part that exports and imports power from your reactor.
 
 tile.industry.fabricator.name=Energy Fabricator
 tile.industry.fabricator.desc=Turns raw energy into any block or item.

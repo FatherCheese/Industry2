@@ -29,7 +29,7 @@ public class CableModel extends RenderBlocks {
         boolean aNegZ = blockAccess.getBlockId(x, y, z - 1) == blockCable.id ||
                 blockAccess.getBlockTileEntity(x, y, z - 1) instanceof IEnergy;
 
-        blockCable.setBlockBounds(boundMin, boundMin, boundMin, boundMax, boundMax, boundMax);
+        blockCable.setBlockBounds(boundMin - 0.0001f, boundMin - 0.0001f, boundMin - 0.0001f, boundMax + 0.0001f, boundMax + 0.0001f, boundMax + 0.0001f);
 
         renderBlocks.renderStandardBlock(blockCable, x, y, z);
 

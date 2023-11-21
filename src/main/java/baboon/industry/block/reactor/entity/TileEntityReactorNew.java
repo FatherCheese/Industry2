@@ -5,7 +5,6 @@ import baboon.industry.block.IndustryBlocks;
 import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -16,22 +15,22 @@ import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.Random;
 
-public class TileEntityReactor extends TileEntityEnergyConductor implements IInventory {
-    private ItemStack[] contents = new ItemStack[6 * 9];
+public class TileEntityReactorNew extends TileEntityEnergyConductor implements IInventory {
+    private ItemStack[] contents;
     private int uraniumCell = 0;
     private int coolantCell = 0;
     private int uraniumTimer = 0;
     private int coolantTimer = 0;
-    public int chamberCount = 0;
     public int heat = 0;
     public int maxHeat = 1000;
-    public boolean disabled = false;
+    public boolean isDisabled = false;
 
-    public TileEntityReactor() {
+    public TileEntityReactorNew() {
+        contents = new ItemStack[9 * 6];
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
 
-        for (sunsetsatellite.sunsetutils.util.Direction dir : Direction.values())
+        for (Direction dir : Direction.values())
             setConnection(dir, Connection.OUTPUT);
     }
 
@@ -86,71 +85,10 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this) {
+        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
             return false;
-        }
-        return entityPlayer.distanceToSqr((double)this.xCoord + 0.5, (double)this.yCoord + 0.5, (double)this.zCoord + 0.5) <= 64.0;
-    }
 
-    private void overheat() {
-        Random random = new Random();
-        double x = xCoord + random.nextDouble();
-        double y = yCoord + random.nextDouble();
-        double z = zCoord + random.nextDouble();
-        worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
-        worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
-
-        if (heat >= maxHeat)
-            for (int exploX = (int) (x - 1); exploX < x + 1; exploX++)
-                for (int exploY = (int) (y - 1); exploY < y + 1; exploY++)
-                    for (int exploZ = (int) (z - 1); exploZ < z + 1; exploZ++) {
-                        worldObj.createExplosion(null, x, y, z, 3.0f);
-                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-                    }
-    }
-
-    private void checkSides() {
-        chamberCount = 0;
-        Side[] sides = new Side[]{Side.NORTH, Side.SOUTH, Side.EAST, Side.WEST, Side.BOTTOM, Side.TOP};
-        for (Side side : sides) {
-            int x = xCoord + side.getOffsetX();
-            int y = yCoord + side.getOffsetY();
-            int z = zCoord + side.getOffsetZ();
-            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.nuclearChamber.id)
-                chamberCount += 1;
-        }
-    }
-
-    private void handleInventoryChange() {
-        ItemStack[] newContents = new ItemStack[chamberCount * 9];
-        if (newContents.length >= contents.length)
-            System.arraycopy(contents, 0, newContents, 0, contents.length);
-        else {
-            System.arraycopy(contents, 0, newContents, 0, newContents.length);
-
-            for (int i = newContents.length; i < contents.length; i++) {
-                Random random = new Random();
-                ItemStack itemstack = contents[i];
-                if (itemstack == null) continue;
-                float randX = random.nextFloat() * 0.8f + 0.1f;
-                float randY = random.nextFloat() * 0.8f + 0.1f;
-                float randZ = random.nextFloat() * 0.8f + 0.1f;
-                while (itemstack.stackSize > 0) {
-                    int i1 = random.nextInt(21) + 10;
-                    if (i1 > itemstack.stackSize)
-                        i1 = itemstack.stackSize;
-
-                    itemstack.stackSize -= i1;
-                    EntityItem entityitem = new EntityItem(worldObj, (float) xCoord + randX, (float) yCoord + randY, (float) zCoord + randZ, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
-                    float f3 = 0.05f;
-                    entityitem.xd = (float) random.nextGaussian() * f3;
-                    entityitem.yd = (float) random.nextGaussian() * f3 + 0.2f;
-                    entityitem.zd = (float) random.nextGaussian() * f3;
-                    worldObj.entityJoinedWorld(entityitem);
-                }
-            }
-        }
-        contents = newContents;
+        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
     }
 
     @Override
@@ -158,6 +96,7 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         uraniumCell = 0;
         coolantCell = 0;
         maxHeat = 1000;
+
         for (ItemStack content : contents) {
             if (content != null) {
                 if (content.getItem() == IndustryItems.cellUranium)
@@ -173,16 +112,46 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
         super.onInventoryChanged();
     }
 
-    private int adjacentUranium(int id){
+    public boolean isAssembled() {
+        Side[] sides = new Side[]{Side.NORTH, Side.SOUTH, Side.EAST, Side.WEST, Side.BOTTOM, Side.TOP};
+        for (Side side : sides) {
+            int x = xCoord + side.getOffsetX();
+            int y = yCoord + side.getOffsetY();
+            int z = zCoord + side.getOffsetZ();
+            if (worldObj.getBlockId(x, yCoord, z) != IndustryBlocks.nuclearChamber.id &&
+                    worldObj.getBlockId(xCoord, y, zCoord) != IndustryBlocks.nuclearIO.id)
+                return false;
+        }
+        return true;
+    }
+
+    private void overHeat() {
+        Random random = new Random();
+        double x = xCoord + random.nextDouble() * 2;
+        double y = yCoord + random.nextDouble();
+        double z = zCoord + random.nextDouble() * 2;
+        worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
+        worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
+
+        if (heat >= maxHeat)
+            for (int exploX = (int) (x - 1); exploX < x + 1; exploX++)
+                for (int exploY = (int) (y - 1); exploY < y + 1; exploY++)
+                    for (int exploZ = (int) (z - 1); exploZ < z + 1; exploZ++) {
+                        worldObj.createExplosion(null, x, y, z, 6.0f);
+                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                    }
+    }
+
+    private int adjacentUranium(int id) {
         int num = 0;
         int[] offsets = new int[]{-1, 1, 9, -9};
-        for (int i: offsets) {
+        for (int i : offsets) {
             if (isUranium(id + i)) num++;
         }
         return num;
     }
 
-    private boolean isUranium(int id){
+    private boolean isUranium(int id) {
         if (id < 0) return false;
         if (id >= contents.length) return false;
         if (contents[id] == null) return false;
@@ -191,28 +160,21 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
 
     @Override
     public void updateEntity() {
-        if (worldObj.isClientSide) {
-            return;
-        }
-
-        if (!disabled) {
-            checkSides();
-            if (contents.length != chamberCount * 9)
-                handleInventoryChange();
-
-            uraniumTimer++;
-            coolantTimer++;
+        super.updateEntity();
+        if (!worldObj.isClientSide && isAssembled() && !isDisabled) {
+            ++coolantTimer;
+            ++uraniumTimer;
 
             boolean damageUranium = false;
             if (uraniumTimer >= 20) {
-                damageUranium = true;
                 uraniumTimer = 0;
+                damageUranium = true;
             }
 
             boolean damageCoolant = false;
-            if (coolantTimer >= 20 && heat > 0) {
-                damageCoolant = true;
+            if (coolantTimer >= 20) {
                 coolantTimer = 0;
+                damageCoolant = true;
             }
 
             for (int i = 0; i < contents.length; i++) {
@@ -220,9 +182,9 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                 if (stack == null)
                     continue;
 
-                if (damageUranium && stack.getItem() == IndustryItems.cellUranium && energy < capacity - 5) {
-                    stack.damageItem(1, null);
+                if (damageUranium && stack.getItem() == IndustryItems.cellUranium) {
                     heat += 4;
+                    stack.damageItem(1, null);
                 }
 
                 if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
@@ -231,38 +193,40 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
                     heat -= adjUranium;
                     heat = Math.max(heat, 0);
                 }
+
                 if (stack.stackSize <= 0) {
                     contents[i] = null;
                 }
             }
 
-            if (energy + 5 * uraniumCell < capacity)
+            if (energy + 5 * uraniumCell <= capacity)
                 energy += 5 * uraniumCell;
         }
 
-            if ((uraniumCell <= 0  || disabled) && heat - 1 >= 0)
-                --heat;
+        if ((uraniumCell <= 0  || isDisabled) && heat - 1 >= 0)
+            --heat;
 
-            if (heat >= maxHeat / 2)
-                overheat();
-
-        super.updateEntity();
+        if (heat >= maxHeat / 2)
+            overHeat();
     }
 
     @Override
     public void writeToNBT(CompoundTag compoundTag) {
         super.writeToNBT(compoundTag);
         compoundTag.putInt("Heat", heat);
+        compoundTag.putInt("MaxHeat", maxHeat);
         compoundTag.putInt("Energy", energy);
-        compoundTag.putInt("Chambers", chamberCount);
+        compoundTag.putInt("UraniumCells", uraniumCell);
+        compoundTag.putInt("CoolantCells", coolantCell);
+        compoundTag.putBoolean("Disabled", isDisabled);
 
         ListTag nbttaglist = new ListTag();
         for (int i = 0; i < this.contents.length; ++i) {
             if (this.contents[i] == null) continue;
-            CompoundTag nbttagcompound1 = new CompoundTag();
-            nbttagcompound1.putByte("Slot", (byte)i);
-            this.contents[i].writeToNBT(nbttagcompound1);
-            nbttaglist.addTag(nbttagcompound1);
+            CompoundTag nbtTagCompound = new CompoundTag();
+            nbtTagCompound.putByte("Slot", (byte)i);
+            this.contents[i].writeToNBT(nbtTagCompound);
+            nbttaglist.addTag(nbtTagCompound);
         }
         compoundTag.put("Items", nbttaglist);
     }
@@ -271,14 +235,16 @@ public class TileEntityReactor extends TileEntityEnergyConductor implements IInv
     public void readFromNBT(CompoundTag compoundTag) {
         super.readFromNBT(compoundTag);
         heat = compoundTag.getInteger("Heat");
+        maxHeat = compoundTag.getInteger("MaxHeat");
         energy = compoundTag.getInteger("Energy");
-        chamberCount = compoundTag.getInteger("Chambers");
-        handleInventoryChange();
-        
-        ListTag nbttaglist = compoundTag.getList("Items");
+        uraniumCell = compoundTag.getInteger("UraniumCells");
+        coolantCell = compoundTag.getInteger("CoolantCells");
+        isDisabled = compoundTag.getBoolean("Disabled");
+
+        ListTag nbtTagList = compoundTag.getList("Items");
         this.contents = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            CompoundTag nbttagcompound1 = (CompoundTag) nbttaglist.tagAt(i);
+        for (int i = 0; i < nbtTagList.tagCount(); ++i) {
+            CompoundTag nbttagcompound1 = (CompoundTag) nbtTagList.tagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 0xFF;
             if (j >= contents.length) continue;
             this.contents[j] = ItemStack.readItemStackFromNbt(nbttagcompound1);

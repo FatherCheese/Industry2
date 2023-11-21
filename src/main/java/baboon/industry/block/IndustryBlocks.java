@@ -15,7 +15,9 @@ import baboon.industry.block.machines.endgame.BlockEnergyFabricator;
 import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
 import baboon.industry.block.reactor.BlockReactor;
 import baboon.industry.block.reactor.BlockReactorChamber;
-import baboon.industry.block.reactor.entity.TileEntityReactor;
+import baboon.industry.block.reactor.BlockReactorIO;
+import baboon.industry.block.reactor.entity.TileEntityReactorIO;
+import baboon.industry.block.reactor.entity.TileEntityReactorNew;
 import baboon.industry.block.storage.*;
 import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
@@ -119,6 +121,7 @@ public class IndustryBlocks {
     // Nuclear
     public static Block nuclearReactor;
     public static Block nuclearChamber;
+    public static Block nuclearIO;
 
     // End Game
     public static Block energyFabricator;
@@ -187,7 +190,7 @@ public class IndustryBlocks {
         EnergyAPI.addToNameGuiMap("IndustryAdvancedCompressor", GuiAdvancedCompressor.class, TileEntityAdvancedCompressor.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedWiremill", GuiAdvancedWiremill.class, TileEntityAdvancedWiremill.class, ContainerAdvancedBase.class);
         EnergyAPI.addToNameGuiMap("IndustryAdvancedExtractor", GuiAdvancedExtractor.class, TIleEntityAdvancedExtractor.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryReactor", GuiReactor.class, TileEntityReactor.class, ContainerReactor.class);
+        EnergyAPI.addToNameGuiMap("IndustryReactor", GuiReactor.class, TileEntityReactorNew.class, ContainerReactor.class);
         EnergyAPI.addToNameGuiMap("IndustryFabricator", GuiFabricator.class, TileEntityEnergyFabricator.class, ContainerFabricator.class);
     }
 
@@ -222,7 +225,8 @@ public class IndustryBlocks {
         EntityHelper.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
         EntityHelper.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
         EntityHelper.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
-        EntityHelper.createTileEntity(TileEntityReactor.class, "IndustryReactor");
+        EntityHelper.createTileEntity(TileEntityReactorNew.class, "IndustryReactor");
+        EntityHelper.createTileEntity(TileEntityReactorIO.class, "IndustryReactorIO");
         EntityHelper.createTileEntity(TileEntityEnergyFabricator.class, "IndustryFabricator");
     }
 
@@ -647,18 +651,32 @@ public class IndustryBlocks {
                 .withDisabledNeighborNotifyOnMetadataChange();
 
         nuclearReactor = new BlockBuilder(MOD_ID)
-                .setTextures("reactor.png")
+                .setTopBottomTexture("reactorIO_bottom.png")
+                .setSideTextures("reactor.png")
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10.0f)
                 .setResistance(0.0f)
                 .build(new BlockReactor("reactor", blockID("nuclearReactor"), Material.metal));
 
         nuclearChamber = new BlockBuilder(MOD_ID)
-                .setTextures("reactor.png")
+                .setTopBottomTexture("reactor_casing_top.png")
+                .setSideTextures("reactor_casing_sides.png")
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10.0f)
                 .setResistance(0.0f)
                 .build(new BlockReactorChamber("reactor.chamber", blockID("nuclearChamber"), Material.metal));
+
+        nuclearIO = new BlockBuilder(MOD_ID)
+                .setTopTexture("reactorIO_top.png")
+                .setBottomTexture("reactorIO_bottom.png")
+                .setNorthTexture("reactorIO_front.png")
+                .setSouthTexture("reactorIO_front.png")
+                .setEastTexture("reactorIO_sides.png")
+                .setWestTexture("reactorIO_sides.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10.0F)
+                .setResistance(0.0F)
+                .build(new BlockReactorIO("reactor.io", blockID("nuclearIO"), Material.metal));
 
         energyFabricator = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("machine_casing_advanced.png")

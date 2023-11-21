@@ -1,6 +1,6 @@
 package baboon.industry.gui.reactor;
 
-import baboon.industry.block.reactor.entity.TileEntityReactor;
+import baboon.industry.block.reactor.entity.TileEntityReactorNew;
 import baboon.industry.item.IndustryItems;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.InventoryAction;
@@ -14,19 +14,19 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class GuiReactor extends GuiContainer {
-    private final TileEntityReactor tile;
+    private final TileEntityReactorNew tile;
     private final InventoryPlayer inventory;
 
-    public GuiReactor(InventoryPlayer inventory, TileEntityReactor tileEntity) {
+    public GuiReactor(InventoryPlayer inventory, TileEntityReactorNew tileEntity) {
         super(new ContainerReactor(inventory, tileEntity));
         this.tile = tileEntity;
         this.inventory = inventory;
-        ySize = 97 + 17 + 18 * (tileEntity.chamberCount);
+        ySize = 97 + 17 + 18 * 6;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
-        int reactorRows = tile.chamberCount;
+        int reactorRows = 6;
         ySize = 97 + 17 + 18 * reactorRows;
 
         int texture = mc.renderEngine.getTexture("/assets/industry/gui/reactor.png");
@@ -113,7 +113,7 @@ public class GuiReactor extends GuiContainer {
                 target = 1;
             }
         }
-        if (slot != null && itemInSlot != null && itemInSlot instanceof ItemArmor && mouseButton == 1 && shiftPressed) {
+        if (slot != null && itemInSlot instanceof ItemArmor && mouseButton == 1 && shiftPressed) {
             this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.EQUIP_ARMOR, new int[]{slot.id}, this.mc.thePlayer);
             return;
         }

@@ -8,12 +8,7 @@
     "RenderBlocksMixin",
     "TileEntityTrommelMixin",
     "WorldFeatureDungeonMixin",
-    "achievement.SlotCraftingMixin",
-    "gui.EntityPlayerMixin",
-    "gui.EntityPlayerMPMixin",
-    "gui.EntityPlayerSPMixin",
-    "gui.NetClientHandlerMixin",
-    "gui.NetHandlerMixin"
+    "achievement.SlotCraftingMixin"
   ],
   "client": [
   ],

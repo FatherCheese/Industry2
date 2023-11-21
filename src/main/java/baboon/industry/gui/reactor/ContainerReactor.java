@@ -1,6 +1,6 @@
 package baboon.industry.gui.reactor;
 
-import baboon.industry.block.reactor.entity.TileEntityReactor;
+import baboon.industry.block.reactor.entity.TileEntityReactorNew;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -15,18 +15,20 @@ public class ContainerReactor extends ContainerEnergy {
     private final int inventoryStart;
     private final int hotbarStart;
 
-    public ContainerReactor(InventoryPlayer inventory, TileEntityReactor tileEntity) {
+    public ContainerReactor(InventoryPlayer inventory, TileEntityReactorNew tileEntity) {
         tile = tileEntity;
-        int numberOfRows = tileEntity.chamberCount;
+        int numberOfRows = 6;
         int rowInt = numberOfRows * 18;
 
         for(int reactorRowsY = 0; reactorRowsY < numberOfRows; ++reactorRowsY)
             for (int reactorRowsX = 0; reactorRowsX < 9; ++reactorRowsX)
                 addSlot(new Slot(tileEntity, reactorRowsX + reactorRowsY * 9, 8 + reactorRowsX * 18, 18 + reactorRowsY * 18));
+
         inventoryStart = this.inventorySlots.size();
         for(int ySlot = 0; ySlot < 3; ++ySlot)
             for (int xSlot = 0; xSlot < 9; ++xSlot)
                 addSlot(new Slot(inventory, xSlot + ySlot * 9 + 9, 8 + xSlot * 18, 18 + 13 + rowInt + ySlot * 18));
+
         hotbarStart = this.inventorySlots.size();
         for(int hotbar = 0; hotbar < 9; ++hotbar)
             addSlot(new Slot(inventory, hotbar, 8 + hotbar * 18, 18 + 17 + rowInt + 3 * 18));
@@ -80,7 +82,8 @@ public class ContainerReactor extends ContainerEnergy {
         }
         return returnSlots;
     }
+
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
-        return ((TileEntityReactor)tile).canInteractWith(entityPlayer);
+        return ((TileEntityReactorNew)tile).canInteractWith(entityPlayer);
     }
 }
