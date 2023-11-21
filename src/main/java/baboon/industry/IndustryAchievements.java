@@ -42,9 +42,10 @@ public class IndustryAchievements extends AchievementPage {
     public static final Achievement DRILL3 = new Achievement(AchievementList.achievementList.size() + 1, "industry.drill.diamond", 9, -4, IndustryItems.toolDrillDiamond, DRILL2);
     public static final Achievement CHAINSAW = new Achievement(AchievementList.achievementList.size() + 1, "industry.chainsaw", 8, -2, IndustryItems.toolChainsaw, DRILL1);
     public static final Achievement NANOSWORD = new Achievement(AchievementList.achievementList.size() + 1, "industry.nanosword", 10, -2, IndustryItems.toolNanoSword, DRILL1);
-    public static final Achievement FABRICATOR = new Achievement(AchievementList.achievementList.size() + 1, "industry.fabricator", 9, 7, IndustryBlocks.energyFabricator, BATBOX1);
-    public static final Achievement IRIDIUM = new Achievement(AchievementList.achievementList.size() + 1, "industry.iridium", 7, 7, IndustryItems.ingotIridium, FABRICATOR);
-    public static final Achievement IRIDIUMARMOR = new Achievement(AchievementList.achievementList.size() + 1, "industry.iridiumarmor", 6, 7, IndustryItems.armorHelmetIridium, IRIDIUM);
+    public static final Achievement REACTOR = new Achievement(AchievementList.achievementList.size() + 1, "industry.reactor", 9, 7, IndustryBlocks.nuclearReactor, BATBOX1);
+    public static final Achievement FABRICATOR = new Achievement(AchievementList.achievementList.size() + 1, "industry.fabricator", 7, 7, IndustryBlocks.energyFabricator, REACTOR);
+    public static final Achievement IRIDIUM = new Achievement(AchievementList.achievementList.size() + 1, "industry.iridium", 5, 7, IndustryItems.ingotIridium, FABRICATOR);
+    public static final Achievement IRIDIUMARMOR = new Achievement(AchievementList.achievementList.size() + 1, "industry.iridiumarmor", 4, 7, IndustryItems.armorHelmetIridium, IRIDIUM);
 
 
     public IndustryAchievements() {
@@ -77,6 +78,7 @@ public class IndustryAchievements extends AchievementPage {
         achievementList.add(DRILL3);
         achievementList.add(CHAINSAW);
         achievementList.add(NANOSWORD);
+        achievementList.add(REACTOR);
         achievementList.add(FABRICATOR);
         achievementList.add(IRIDIUM);
         achievementList.add(IRIDIUMARMOR);

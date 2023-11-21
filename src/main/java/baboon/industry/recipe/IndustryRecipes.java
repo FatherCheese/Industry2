@@ -535,6 +535,11 @@ public class IndustryRecipes {
                 '1', IndustryItems.reactorPlate,
                 '2', IndustryItems.batteryLapis
         });
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearIO), new Object[]{
+                "1", "2", "1",
+                '1', IndustryItems.itemInsulatedCableSteel,
+                '2', IndustryBlocks.nuclearChamber
+        });
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.energyFabricator), true, new Object[]{
                 "121", "343", "151",
                 '1', IndustryItems.circuitAdvanced,

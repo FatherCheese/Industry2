@@ -105,6 +105,9 @@ public abstract class SlotCraftingMixin {
         if (item.id == IndustryItems.toolNanoSword.id)
             thePlayer.addStat(IndustryAchievements.NANOSWORD, 1);
 
+        if (item.id == IndustryBlocks.nuclearReactor.id)
+            thePlayer.addStat(IndustryAchievements.REACTOR, 1);
+
         if (item.id == IndustryBlocks.energyFabricator.id)
             thePlayer.addStat(IndustryAchievements.FABRICATOR, 1);
 

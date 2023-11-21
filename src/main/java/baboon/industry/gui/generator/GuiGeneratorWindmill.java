@@ -28,7 +28,7 @@ public class GuiGeneratorWindmill extends GuiContainer {
         float power = (float) tileEntity.energy / tileEntity.capacity;
         drawTexturedModalRect(scrnX + 80, scrnY + 39, 176, 0, (int) (power * 16), 8);
 
-        int height = tileEntity.yCoord / 8;
+        int height = tileEntity.currentHeight;
         drawTexturedModalRect(scrnX + 102, (scrnY + 27) + (32 - height), 176, 39 - height, 4, height);
     }
 

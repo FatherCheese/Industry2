@@ -2,6 +2,7 @@ package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
 import net.minecraft.core.InventoryAction;
+import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -11,8 +12,15 @@ import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
 import java.util.List;
 
 public class ContainerMachineCannery extends ContainerEnergy {
+    private int energy = 0;
+    private int currentMachineTime = 0;
+    InventoryPlayer inventory;
+    TileEntityMachineCannery tileEntity;
 
     public ContainerMachineCannery(InventoryPlayer inventory, TileEntityMachineCannery tileEntity) {
+        this.inventory = inventory;
+        this.tileEntity = tileEntity;
+
         tile = tileEntity;
         addSlot(new Slot(tileEntity, 0, 8, 17));
         addSlot(new Slot(tileEntity, 1, 8, 53));
@@ -62,9 +70,25 @@ public class ContainerMachineCannery extends ContainerEnergy {
     }
 
     @Override
+    public void updateInventory() {
+        super.updateInventory();
+
+        for(ICrafting crafter : this.crafters) {
+            if (this.energy != tileEntity.energy)
+                crafter.updateCraftingInventoryInfo(this, 0, tileEntity.energy);
+
+            if (this.currentMachineTime != tileEntity.currentMachineTime)
+                crafter.updateCraftingInventoryInfo(this, 1, tileEntity.currentMachineTime);
+        }
+    }
+
+    @Override
     public void updateClientProgressBar(int id, int value) {
-        TileEntityMachineCannery tileEntity = (TileEntityMachineCannery) tile;
+        tileEntity = (TileEntityMachineCannery) tile;
         if (id == 0)
+            tileEntity.energy = value;
+
+        if (id == 1)
             tileEntity.currentMachineTime = value;
     }
 }

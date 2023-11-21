@@ -220,15 +220,15 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         compoundTag.putInt("CoolantCells", coolantCell);
         compoundTag.putBoolean("Disabled", isDisabled);
 
-        ListTag nbttaglist = new ListTag();
+        ListTag nbtTagList = new ListTag();
         for (int i = 0; i < this.contents.length; ++i) {
             if (this.contents[i] == null) continue;
             CompoundTag nbtTagCompound = new CompoundTag();
             nbtTagCompound.putByte("Slot", (byte)i);
             this.contents[i].writeToNBT(nbtTagCompound);
-            nbttaglist.addTag(nbtTagCompound);
+            nbtTagList.addTag(nbtTagCompound);
         }
-        compoundTag.put("Items", nbttaglist);
+        compoundTag.put("Items", nbtTagList);
     }
 
     @Override
@@ -244,10 +244,10 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         ListTag nbtTagList = compoundTag.getList("Items");
         this.contents = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < nbtTagList.tagCount(); ++i) {
-            CompoundTag nbttagcompound1 = (CompoundTag) nbtTagList.tagAt(i);
-            int j = nbttagcompound1.getByte("Slot") & 0xFF;
+            CompoundTag nbtCompoundTag = (CompoundTag) nbtTagList.tagAt(i);
+            int j = nbtCompoundTag.getByte("Slot") & 0xFF;
             if (j >= contents.length) continue;
-            this.contents[j] = ItemStack.readItemStackFromNbt(nbttagcompound1);
+            this.contents[j] = ItemStack.readItemStackFromNbt(nbtCompoundTag);
         }
     }
 }

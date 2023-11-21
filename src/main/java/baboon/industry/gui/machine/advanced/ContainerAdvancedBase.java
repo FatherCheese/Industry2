@@ -2,6 +2,7 @@ package baboon.industry.gui.machine.advanced;
 
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedBase;
 import net.minecraft.core.InventoryAction;
+import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -11,8 +12,17 @@ import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
 import java.util.List;
 
 public class ContainerAdvancedBase extends ContainerEnergy {
+    private int energy = 0;
+    private int currentMachineTime = 0;
+    private int redstone = 0;
+    InventoryPlayer inventory;
+    TileEntityAdvancedBase tileEntity;
+
 
     public ContainerAdvancedBase(InventoryPlayer inventory, TileEntityAdvancedBase tileEntity) {
+        this.inventory = inventory;
+        this.tileEntity = tileEntity;
+
         tile = tileEntity;
         addSlot(new Slot(tileEntity, 0, 8, 17));
         addSlot(new Slot(tileEntity, 1, 8, 53));
@@ -64,18 +74,31 @@ public class ContainerAdvancedBase extends ContainerEnergy {
     }
 
     @Override
+    public void updateInventory() {
+        super.updateInventory();
+
+        for(ICrafting crafter : this.crafters) {
+            if (this.energy != tileEntity.energy)
+                crafter.updateCraftingInventoryInfo(this, 0, tileEntity.energy);
+
+            if (this.currentMachineTime != tileEntity.currentMachineTime)
+                crafter.updateCraftingInventoryInfo(this, 1, tileEntity.currentMachineTime);
+
+            if (this.redstone != tileEntity.redstone)
+                crafter.updateCraftingInventoryInfo(this, 2, tileEntity.redstone);
+        }
+    }
+
+    @Override
     public void updateClientProgressBar(int id, int value) {
-        TileEntityAdvancedBase tileEntity = (TileEntityAdvancedBase) tile;
+        tileEntity = (TileEntityAdvancedBase) tile;
         if (id == 0)
-            tileEntity.currentMachineTime = value;
+            tileEntity.energy = value;
 
         if (id == 1)
-            tileEntity.maxMachineTime = value;
+            tileEntity.currentMachineTime = value;
 
-        if (id == 3)
+        if (id == 2)
             tileEntity.redstone = value;
-
-        if (id == 4)
-            tileEntity.maxRedstone = value;
     }
 }

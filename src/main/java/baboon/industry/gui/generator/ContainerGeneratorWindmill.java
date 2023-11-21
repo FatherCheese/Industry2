@@ -1,14 +1,22 @@
 package baboon.industry.gui.generator;
 
 import baboon.industry.block.generator.entity.TileEntityGeneratorWindmill;
+import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
 
 public class ContainerGeneratorWindmill extends ContainerEnergy {
+    private int energy = 0;
+    private int currentHeight = 0;
+    InventoryPlayer inventory;
+    TileEntityGeneratorWindmill tileEntity;
 
     public ContainerGeneratorWindmill(InventoryPlayer inventory, TileEntityGeneratorWindmill tileEntity) {
+        this.inventory = inventory;
+        this.tileEntity = tileEntity;
+
         tile = tileEntity;
 
         addSlot(new Slot(tileEntity, 0, 80, 17));
@@ -25,5 +33,28 @@ public class ContainerGeneratorWindmill extends ContainerEnergy {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
         return ((TileEntityGeneratorWindmill) tile).canInteractWith(entityPlayer);
+    }
+
+    @Override
+    public void updateInventory() {
+        super.updateInventory();
+
+        for(ICrafting crafter : this.crafters) {
+            if (this.energy != tileEntity.energy)
+                crafter.updateCraftingInventoryInfo(this, 0, tileEntity.energy);
+
+            if (this.currentHeight != tileEntity.getCurrentHeight())
+                crafter.updateCraftingInventoryInfo(this, 1, tileEntity.currentHeight);
+        }
+    }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        tileEntity = (TileEntityGeneratorWindmill) tile;
+        if (id == 0)
+            tileEntity.energy = value;
+
+        if (id == 1)
+            tileEntity.currentHeight = value;
     }
 }
