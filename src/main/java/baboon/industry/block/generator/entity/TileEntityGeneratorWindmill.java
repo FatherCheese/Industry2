@@ -17,6 +17,7 @@ import sunsetsatellite.sunsetutils.util.Direction;
 public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
     public int generatedEnergy = 0;
+    public int currentHeight = 0;
 
     public TileEntityGeneratorWindmill() {
         contents = new ItemStack[2];
@@ -155,5 +156,10 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
             if (slot >= 0 && slot < contents.length)
                 contents[slot] = ItemStack.readItemStackFromNbt(compoundTag2);
         }
+    }
+
+    public int getCurrentHeight() {
+        currentHeight = this.yCoord / 8;
+        return currentHeight;
     }
 }

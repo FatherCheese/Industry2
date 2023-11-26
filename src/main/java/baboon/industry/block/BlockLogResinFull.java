@@ -33,8 +33,8 @@ public class BlockLogResinFull extends BlockLog {
             if (itemStack != null && itemStack.getItem() == IndustryItems.toolTreetap) {
                 world.playSoundAtEntity(player, "mob.slime", 1.0f, 1.0f);
 
-                int meta = world.getBlockMetadata(x, y, z);
                 if (!world.isClientSide) {
+                    int meta = world.getBlockMetadata(x, y, z);
                     player.addStat(IndustryAchievements.ROOT1, 1);
                     world.setBlockAndMetadataWithNotify(x, y, z, IndustryBlocks.logRubberWoodResin.id, meta);
                     world.scheduleBlockUpdate(x, y, z, this.id, tickRate());

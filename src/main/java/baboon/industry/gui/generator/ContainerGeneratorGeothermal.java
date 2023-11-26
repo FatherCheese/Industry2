@@ -1,14 +1,22 @@
 package baboon.industry.gui.generator;
 
 import baboon.industry.block.generator.entity.TileEntityGeneratorGeothermal;
+import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
 
 public class ContainerGeneratorGeothermal extends ContainerEnergy {
+    private int energy = 0;
+    private int currentFuelTime = 0;
+    InventoryPlayer inventory;
+    TileEntityGeneratorGeothermal tileEntity;
 
     public ContainerGeneratorGeothermal(InventoryPlayer inventory, TileEntityGeneratorGeothermal tileEntity) {
+        this.inventory = inventory;
+        this.tileEntity = tileEntity;
+
         tile = tileEntity;
         addSlot(new Slot(tileEntity, 0, 8, 17));
         addSlot(new Slot(tileEntity, 1, 8, 53));
@@ -25,5 +33,28 @@ public class ContainerGeneratorGeothermal extends ContainerEnergy {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
         return ((TileEntityGeneratorGeothermal) tile).canInteractWith(entityPlayer);
+    }
+
+    @Override
+    public void updateInventory() {
+        super.updateInventory();
+
+        for(ICrafting crafter : this.crafters) {
+            if (this.energy != tileEntity.energy)
+                crafter.updateCraftingInventoryInfo(this, 0, tileEntity.energy);
+
+            if (this.currentFuelTime != tileEntity.currentFuelTime)
+                crafter.updateCraftingInventoryInfo(this, 1, tileEntity.currentFuelTime);
+        }
+    }
+
+    @Override
+    public void updateClientProgressBar(int id, int value) {
+        tileEntity = (TileEntityGeneratorGeothermal) tile;
+        if (id == 0)
+            tileEntity.energy = value;
+
+        if (id == 1)
+            tileEntity.currentFuelTime = value;
     }
 }

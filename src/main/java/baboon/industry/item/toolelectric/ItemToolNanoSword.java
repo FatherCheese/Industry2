@@ -31,16 +31,17 @@ public class ItemToolNanoSword extends ItemToolElectric {
 
     @Override
     public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
-        super.inventoryTick(itemstack, world, entity, i, flag);
-        if (getEnergy(itemstack) <= 0)
-            active = false;
+        if (!world.isClientSide) {
+            if (getEnergy(itemstack) <= 0)
+                active = false;
 
-        if (active)
-            damageTimer++;
+            if (active)
+                damageTimer++;
 
-        if (damageTimer == 20 && getEnergy(itemstack) > 0) {
-            damageTimer = 0;
-            modifyEnergy(itemstack, -10);
+            if (damageTimer == 20 && getEnergy(itemstack) > 0) {
+                damageTimer = 0;
+                modifyEnergy(itemstack, -10);
+            }
         }
     }
 
