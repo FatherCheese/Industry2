@@ -6,8 +6,9 @@ import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.net.command.TextFormatting;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
+import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class ItemToolElectric extends ItemEnergyContainer implements ICustomDescription {
     private final Tag<Block> tagEffectiveAgainst;
@@ -26,7 +27,7 @@ public class ItemToolElectric extends ItemEnergyContainer implements ICustomDesc
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack itemstack, int id, int x, int y, int z, EntityLiving entityliving) {
+    public boolean onBlockDestroyed(World world, ItemStack itemstack, int id, int x, int y, int z, EntityLiving entityliving) {
         Block block = Block.blocksList[id];
         if (block != null && block.getHardness() > 0.0f) {
             modifyEnergy(itemstack, -50);

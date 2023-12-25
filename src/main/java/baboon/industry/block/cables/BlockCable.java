@@ -10,7 +10,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
-import sunsetsatellite.energyapi.api.IEnergy;
+import sunsetsatellite.catalyst.energy.api.IEnergy;
 
 import java.util.Random;
 
@@ -45,7 +45,7 @@ public class BlockCable extends BlockTileEntity {
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 

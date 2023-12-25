@@ -9,10 +9,10 @@ import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.type.WorldTypes;
 import net.minecraft.core.world.weather.Weather;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
@@ -81,15 +81,20 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void sortInventory() {
+
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
 
@@ -99,11 +104,11 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
 
             if (energy < capacity) {
                 if (worldObj.getWorldType() != WorldTypes.OVERWORLD_EXTENDED || worldObj.getWorldType() != WorldTypes.OVERWORLD_AMPLIFIED) {
-                    if (yCoord > 48)
-                        generatedEnergy += 5 * (yCoord / 24);
+                    if (y > 48)
+                        generatedEnergy += 5 * (y / 24);
                 } else
-                    if (yCoord > 96)
-                        generatedEnergy += 5 * (yCoord / 48);
+                    if (y > 96)
+                        generatedEnergy += 5 * (y / 48);
 
                 if (worldObj.getCurrentWeather() == Weather.overworldRain ||
                         worldObj.getCurrentWeather() == Weather.overworldRainBlood ||
@@ -159,7 +164,7 @@ public class TileEntityGeneratorWindmill extends TileEntityEnergyConductor imple
     }
 
     public int getCurrentHeight() {
-        currentHeight = this.yCoord / 8;
+        currentHeight = this.y / 8;
         return currentHeight;
     }
 }

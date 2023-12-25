@@ -9,10 +9,10 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityGenerator extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
@@ -84,10 +84,15 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 
     private int burnTimeForItem(ItemStack itemStack) {
@@ -95,8 +100,8 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
@@ -114,7 +119,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
                     --contents[2].stackSize;
                     active = true;
                     onInventoryChanged();
-                    BlockGenerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                    BlockGenerator.updateBlockState(true, worldObj, x, y, z);
 
                     currentBurnTime = burnTimeForItem(contents[2]);
                     maxBurnTime = currentBurnTime;
@@ -130,7 +135,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.generator.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.generator.id);
         }
     }
 

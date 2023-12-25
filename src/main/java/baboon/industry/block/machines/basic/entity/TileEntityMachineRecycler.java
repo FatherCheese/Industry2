@@ -43,13 +43,13 @@ public class TileEntityMachineRecycler extends TileEntityMachineBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineRecycler.id &&
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineRecycler.id &&
                     currentMachineTime == 0 &&
                     contents[2] == null) {
                 machineUpdated = true;

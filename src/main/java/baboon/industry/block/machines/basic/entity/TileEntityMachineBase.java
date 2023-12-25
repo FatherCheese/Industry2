@@ -10,10 +10,10 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.helper.Sides;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.IItemIO;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IItemIO;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     protected ItemStack[] contents;
@@ -88,10 +88,15 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 
     @Override
@@ -130,7 +135,7 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
     }
 
     private void pullFromTop() {
-        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        TileEntity tile = worldObj.getBlockTileEntity(x, y + 1, z);
         if (tile instanceof IInventory) {
             for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
                 ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
@@ -154,22 +159,22 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
     }
 
     private void pushToSide() {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         TileEntity tile;
 
         switch (meta) {
             default:
             case 2:
-                tile = worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
+                tile = worldObj.getBlockTileEntity(x - 1, y, z);
                 break;
             case 3:
-                tile = worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
+                tile = worldObj.getBlockTileEntity(x + 1, y, z);
                 break;
             case 4:
-                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
+                tile = worldObj.getBlockTileEntity(x, y, z + 1);
                 break;
             case 5:
-                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
+                tile = worldObj.getBlockTileEntity(x, y, z - 1);
                 break;
         }
 
@@ -197,8 +202,8 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
@@ -277,7 +282,7 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
 
     @Override
     public int getActiveItemSlotForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
@@ -290,7 +295,7 @@ public class TileEntityMachineBase extends TileEntityEnergyConductorDamageable i
 
     @Override
     public Connection getItemIOForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 

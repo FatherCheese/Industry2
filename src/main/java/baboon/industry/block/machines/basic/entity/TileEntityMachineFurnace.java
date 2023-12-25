@@ -3,23 +3,13 @@ package baboon.industry.block.machines.basic.entity;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.crafting.recipe.RecipesBlastFurnace;
-import net.minecraft.core.crafting.recipe.RecipesFurnace;
 import net.minecraft.core.item.ItemStack;
 
 public class TileEntityMachineFurnace extends TileEntityMachineBase {
-    private final RecipesFurnace recipesFurnace = RecipesFurnace.smelting();
-    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.smelting();
     private boolean blasting = false;
     @Override
     public String getInvName() {
         return "IndustryMachineFurnace";
-    }
-
-    private boolean isProducible(ItemStack itemStack) {
-        if (blasting)
-            return recipesBlastFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
-        return recipesFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
     }
 
     private boolean canProduce() {
@@ -51,40 +41,17 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
         super.onInventoryChanged();
     }
 
-    private void produceItem() {
-        if (canProduce()) {
-
-            ItemStack itemStack;
-
-            if (blasting)
-                itemStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
-            else
-                itemStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
-
-            if (contents[3] == null)
-                contents[3] = itemStack.copy();
-            else
-                if (contents[3].itemID == itemStack.itemID)
-                    contents[3].stackSize += itemStack.stackSize;
-
-                --contents[2].stackSize;
-
-                if (contents[2].stackSize <= 0)
-                    contents[2] = null;
-        }
-    }
-
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineFurnace.id &&
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineFurnace.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
-                BlockMachineFurnace.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockMachineFurnace.updateBlockState(true, worldObj, x, y, z);
                 machineUpdated = true;
             }
 
@@ -111,7 +78,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.machineFurnace.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineFurnace.id);
         }
     }
 }

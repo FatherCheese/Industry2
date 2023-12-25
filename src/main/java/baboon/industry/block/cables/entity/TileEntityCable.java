@@ -1,8 +1,8 @@
 package baboon.industry.block.cables.entity;
 
 import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
 
 public class TileEntityCable extends TileEntityEnergyConductorDamageable {
 

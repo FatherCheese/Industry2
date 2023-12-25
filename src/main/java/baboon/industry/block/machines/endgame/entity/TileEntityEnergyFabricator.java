@@ -9,11 +9,11 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.helper.Sides;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.IItemIO;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IItemIO;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implements IInventory, IItemIO {
     private ItemStack[] contents;
@@ -83,14 +83,19 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
     }
 
     @Override
-    public void updateEntity() {
+    public void sortInventory() {
+
+    }
+
+    @Override
+    public void tick() {
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
                 provide(getStackInSlot(0), getMaxProvide(), false);
@@ -175,7 +180,7 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
 
     @Override
     public int getActiveItemSlotForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 
@@ -193,7 +198,7 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
 
     @Override
     public Connection getItemIOForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
 

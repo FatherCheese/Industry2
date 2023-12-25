@@ -47,16 +47,16 @@ public class TileEntityMachineMacerator extends TileEntityMachineBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineMacerator.id &&
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineMacerator.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
-                BlockMachineMacerator.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockMachineMacerator.updateBlockState(true, worldObj, x, y, z);
                 machineUpdated = true;
             }
 
@@ -83,7 +83,7 @@ public class TileEntityMachineMacerator extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.machineMacerator.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineMacerator.id);
         }
     }
 }

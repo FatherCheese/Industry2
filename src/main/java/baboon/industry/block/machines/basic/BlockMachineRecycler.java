@@ -1,6 +1,5 @@
 package baboon.industry.block.machines.basic;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineRecycler;
@@ -12,11 +11,10 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
+import sunsetsatellite.catalyst.Catalyst;
 
 public class BlockMachineRecycler extends BlockTileEntityRotatable {
     private boolean keepInventory = false;
-    private final String MOD_ID = Industry2.MOD_ID;
 
     public BlockMachineRecycler(String key, int id, Material material) {
         super(key, id, material);
@@ -34,7 +32,7 @@ public class BlockMachineRecycler extends BlockTileEntityRotatable {
 
             if (tileEntity == null)
                 return false;
-            ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntity);
+            Catalyst.displayGui(player, tileEntity, tileEntity.getInvName());
         }
         return true;
     }
@@ -58,9 +56,9 @@ public class BlockMachineRecycler extends BlockTileEntityRotatable {
     }
 
     @Override
-    public void onBlockRemoval(World world, int x, int y, int z) {
+    public void onBlockRemoved(World world, int x, int y, int z, int meta) {
         dropContents(world, x, y, z);
-        super.onBlockRemoval(world, x, y, z);
+        super.onBlockRemoved(world, x, y, z, meta);
     }
 
     @Override

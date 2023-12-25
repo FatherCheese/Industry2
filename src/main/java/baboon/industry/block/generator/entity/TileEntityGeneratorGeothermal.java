@@ -10,10 +10,10 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
@@ -84,10 +84,15 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 
     private int getFuelFromItem(ItemStack itemStack) {
@@ -95,8 +100,8 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
@@ -113,7 +118,7 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
                 if (fuel.getFuelList().containsKey(contents[2].getItem().id)) {
                     active = true;
                     onInventoryChanged();
-                    BlockGeneratorGeothermal.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                    BlockGeneratorGeothermal.updateBlockState(true, worldObj, x, y, z);
 
                     currentFuelTime += getFuelFromItem(contents[2]);
                     --contents[2].stackSize;
@@ -128,7 +133,7 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.generatorGeothermal.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.generatorGeothermal.id);
         }
     }
 
