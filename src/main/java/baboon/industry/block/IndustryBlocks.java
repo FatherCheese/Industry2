@@ -622,7 +622,8 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.WOOD)
                 .setHardness(2.0f)
                 .build(new BlockLog("log.rubber", blockID("logRubberWood")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         logRubberWoodResin = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("log_rubber_top.png")
@@ -631,7 +632,8 @@ public class IndustryBlocks {
                 .setHardness(2.0f)
                 .setBlockModel(new BlockModelRenderBlocks(27))
                 .build(new BlockLogResin("log.rubber.resin", blockID("logRubberWoodResin")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT, BlockTags.NOT_IN_CREATIVE_MENU);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT, BlockTags.NOT_IN_CREATIVE_MENU)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         logRubberWoodResinFull = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("log_rubber_top.png")
@@ -640,7 +642,8 @@ public class IndustryBlocks {
                 .setHardness(2.0f)
                 .setBlockModel(new BlockModelRenderBlocks(27))
                 .build(new BlockLogResinFull("log.rubber.resin", blockID("logRubberWoodResinFull")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         saplingRubberWood = new BlockBuilder(MOD_ID)
                 .setTextures("sapling_rubber.png")
