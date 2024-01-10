@@ -3,6 +3,9 @@ package baboon.industry.block.machines.basic.entity;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
 import baboon.industry.item.IndustryItems;
+import net.minecraft.core.crafting.legacy.recipe.RecipesBlastFurnace;
+import net.minecraft.core.crafting.legacy.recipe.RecipesFurnace;
+import net.minecraft.core.item.ItemStack;
 
 public class TileEntityMachineFurnace extends TileEntityMachineBase {
     private boolean blasting = false;
@@ -10,21 +13,48 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
     public String getInvName() {
         return "IndustryMachineFurnace";
     }
+    private boolean isProducible(ItemStack itemStack) {
+        if (blasting)
+            return RecipesBlastFurnace.getInstance().getSmeltingList().containsKey(itemStack.getItem().id);
+        return RecipesFurnace.getInstance().getSmeltingList().containsKey(itemStack.getItem().id);
+    }
+    private void produceItem() {
+        if (canProduce()) {
+
+            ItemStack itemStack;
+
+            if (blasting)
+                itemStack = RecipesBlastFurnace.getInstance().getSmeltingResult(contents[2].getItem().id);
+            else
+                itemStack = RecipesFurnace.getInstance().getSmeltingResult(contents[2].getItem().id);
+
+            if (contents[3] == null)
+                contents[3] = itemStack.copy();
+            else
+            if (contents[3].itemID == itemStack.itemID)
+                contents[3].stackSize += itemStack.stackSize;
+
+            --contents[2].stackSize;
+
+            if (contents[2].stackSize <= 0)
+                contents[2] = null;
+        }
+    }
 
     private boolean canProduce() {
-//        if (contents[2] != null && contents[2].getItem() != null) {
-//            if (isProducible(contents[2])) {
-//                ItemStack resultStack;
-//
-//                if (blasting)
-//                    resultStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
-//                else
-//                    resultStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
-//
-//                return contents[3] == null || contents[3].getItem() == resultStack.getItem() &&
-//                        contents[3].stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
-//            }
-//        }
+        if (contents[2] != null && contents[2].getItem() != null) {
+            if (isProducible(contents[2])) {
+                ItemStack resultStack;
+
+                if (blasting)
+                    resultStack = RecipesBlastFurnace.getInstance().getSmeltingResult(contents[2].getItem().id);
+                else
+                    resultStack = RecipesFurnace.getInstance().getSmeltingResult(contents[2].getItem().id);
+
+                return contents[3] == null || contents[3].getItem() == resultStack.getItem() &&
+                        contents[3].stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
+            }
+        }
         return false;
     }
 
@@ -64,7 +94,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;
-//                    produceItem();
+                    produceItem();
                     active = false;
                     machineUpdated = true;
                 }
