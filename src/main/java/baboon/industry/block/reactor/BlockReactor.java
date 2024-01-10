@@ -8,7 +8,7 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
+import sunsetsatellite.catalyst.Catalyst;
 
 public class BlockReactor extends BlockTileEntity {
     public BlockReactor(String key, int id, Material material) {
@@ -26,7 +26,7 @@ public class BlockReactor extends BlockTileEntity {
             TileEntityReactorNew tile = (TileEntityReactorNew) world.getBlockTileEntity(x, y, z);
             if (!tile.isAssembled())
                 return false;
-            ((IEntityPlayer) player).displayGuiScreen_energyapi(tile);
+            Catalyst.displayGui(player, tile, tile.getInvName());
         }
         return true;
     }
@@ -56,8 +56,8 @@ public class BlockReactor extends BlockTileEntity {
     }
 
     @Override
-    public void onBlockRemoval(World world, int x, int y, int z) {
+    public void onBlockRemoved(World world, int x, int y, int z, int data) {
         dropContents(world, x, y, z);
-        super.onBlockRemoval(world, x, y, z);
+        super.onBlockRemoved(world, x, y, z, data);
     }
 }

@@ -3,13 +3,13 @@ package baboon.industry.block.machines.advanced.entity;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.advanced.BlockAdvancedFurnace;
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.crafting.recipe.RecipesBlastFurnace;
-import net.minecraft.core.crafting.recipe.RecipesFurnace;
+import net.minecraft.core.crafting.legacy.recipe.RecipesBlastFurnace;
+import net.minecraft.core.crafting.legacy.recipe.RecipesFurnace;
 import net.minecraft.core.item.ItemStack;
 
 public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
-    private final RecipesFurnace recipesFurnace = RecipesFurnace.smelting();
-    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.smelting();
+    private final RecipesFurnace recipesFurnace = RecipesFurnace.getInstance();
+    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.getInstance();
     private boolean blasting = false;
 
     @Override
@@ -104,13 +104,13 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
 
         if (!worldObj.isClientSide) {
             if (currentMachineTime == 0 || currentMachineTime > 0 && contents[2] != null || contents[3] != null) {
-                BlockAdvancedFurnace.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockAdvancedFurnace.updateBlockState(true, worldObj, x, y, z);
                 onInventoryChanged();
 
                 if (hasEnergy && (canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5]))) {
@@ -153,7 +153,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.advancedMachineFurnace.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.advancedMachineFurnace.id);
         }
     }
 }
