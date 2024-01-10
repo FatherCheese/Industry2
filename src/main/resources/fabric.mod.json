@@ -31,6 +31,9 @@
     "main": [
       "baboon.industry.Industry2"
     ],
+    "recipesReady": [
+      "baboon.industry.recipe.RecipesTrommel"
+    ],
     "btwaila": [
       "baboon.industry.compat.btwaila.WailaPlugin"
     ],
