@@ -8,10 +8,11 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.InventorySorter;
 import net.minecraft.core.util.helper.Side;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 import java.util.Random;
 
@@ -85,11 +86,17 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
     }
+
+    @Override
+    public void sortInventory() {
+        InventorySorter.sortInventory(contents);
+    }
+
     private static boolean sendInventoryPacket = true;
     @Override
     public void onInventoryChanged() {
@@ -117,11 +124,11 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
     public boolean isAssembled() {
         Side[] sides = new Side[]{Side.NORTH, Side.SOUTH, Side.EAST, Side.WEST, Side.BOTTOM, Side.TOP};
         for (Side side : sides) {
-            int x = xCoord + side.getOffsetX();
-            int y = yCoord + side.getOffsetY();
-            int z = zCoord + side.getOffsetZ();
-            if (worldObj.getBlockId(x, yCoord, z) != IndustryBlocks.nuclearChamber.id &&
-                    worldObj.getBlockId(xCoord, y, zCoord) != IndustryBlocks.nuclearIO.id)
+            int _x = x + side.getOffsetX();
+            int _y = y + side.getOffsetY();
+            int _z = z + side.getOffsetZ();
+            if (worldObj.getBlockId(_x, y, _z) != IndustryBlocks.nuclearChamber.id &&
+                    worldObj.getBlockId(x, _y, z) != IndustryBlocks.nuclearIO.id)
                 return false;
         }
         return true;
@@ -129,18 +136,18 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
 
     private void overHeat() {
         Random random = new Random();
-        double x = xCoord + random.nextDouble() * 2;
-        double y = yCoord + random.nextDouble();
-        double z = zCoord + random.nextDouble() * 2;
-        worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
-        worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
+        double _x = x + random.nextDouble() * 2;
+        double _y = y + random.nextDouble();
+        double _z = z + random.nextDouble() * 2;
+        worldObj.spawnParticle("smoke", _x, _y + 0.22, _z, 0.0, 0.0, 0.0);
+        worldObj.spawnParticle("flame", _x, _y + 0.22, _z, 0.0, 0.0, 0.0);
 
         if (heat >= maxHeat)
-            for (int exploX = (int) (x - 1); exploX < x + 1; exploX++)
-                for (int exploY = (int) (y - 1); exploY < y + 1; exploY++)
-                    for (int exploZ = (int) (z - 1); exploZ < z + 1; exploZ++) {
-                        worldObj.createExplosion(null, x, y, z, 6.0f);
-                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+            for (int exploX = (int) (_x - 1); exploX < _x + 1; exploX++)
+                for (int exploY = (int) (_y - 1); exploY < _y + 1; exploY++)
+                    for (int exploZ = (int) (_z - 1); exploZ < _z + 1; exploZ++) {
+                        worldObj.createExplosion(null, _x, _y, _z, 6.0f);
+                        worldObj.setBlock(x, y, z, 0);
                     }
     }
 
@@ -161,8 +168,8 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         if (!worldObj.isClientSide && isAssembled() && !isDisabled) {
             ++coolantTimer;
             ++uraniumTimer;

@@ -4,7 +4,7 @@ import baboon.industry.block.storage.entity.TileEntityBatboxBase;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
+import sunsetsatellite.catalyst.energy.impl.ContainerEnergy;
 
 public class ContainerBatboxBase extends ContainerEnergy {
 

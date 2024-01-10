@@ -1,31 +1,12 @@
 package baboon.industry.compat.btwaila;
 
 import org.slf4j.Logger;
-import toufoumaster.btwaila.BTWaila;
-import toufoumaster.btwaila.BTWailaCustomTootltipPlugin;
+import toufoumaster.btwaila.entryplugins.waila.BTWailaCustomTooltipPlugin;
+import toufoumaster.btwaila.tooltips.TooltipRegistry;
 
-public class WailaPlugin implements BTWailaCustomTootltipPlugin {
-
+public class WailaPlugin implements BTWailaCustomTooltipPlugin {
     @Override
-    public void initializePlugin(Logger logger) {
-        new TooltipCable().addTooltip();
-        new TooltipGenerator().addTooltip();
-        new TooltipGeneratorWatermill().addTooltip();
-        new TooltipGeneratorWindmill().addTooltip();
-        new TooltipGeneratorGeothermal().addTooltip();
-        new TooltipSolar().addTooltip();
-        new TooltipBatbox().addTooltip();
-        new TooltipTransformer().addTooltip();
-
-        new TooltipMachineBasic().addTooltip();
-        new TooltipMachineCannery().addTooltip();
-        new TooltipMachineTrommel().addTooltip();
-        new TooltipMachineAdvanced().addTooltip();
-
-        new TooltipReactor().addTooltip();
-        new TooltipReactorIO().addTooltip();
-        new TooltipFabricator().addTooltip();
-
-        BTWaila.LOGGER.info("Adding tooltips for: Industry2");
+    public void initializePlugin(TooltipRegistry tooltipRegistry, Logger logger) {
+        logger.info("Adding tooltips for: Industry2");
     }
 }

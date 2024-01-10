@@ -1,30 +1,22 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.generator.entity.TileEntityGenerator;
-import net.minecraft.core.block.entity.TileEntity;
-import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
-import toufoumaster.btwaila.TooltipGroup;
-import toufoumaster.btwaila.TooltipRegistry;
-import toufoumaster.btwaila.gui.GuiBlockOverlay;
+import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
+import toufoumaster.btwaila.tooltips.TileTooltip;
 
-public class TooltipGenerator implements IBTWailaCustomBlockTooltip {
-
+public class TooltipGenerator extends TileTooltip<TileEntityGenerator> {
     @Override
-    public void addTooltip() {
-        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntityGenerator.class, this);
-        tooltipGroup.addTooltip(TileEntityGenerator.class);
-        TooltipRegistry.tooltipMap.add(tooltipGroup);
+    public void initTooltip() {
+        addClass(TileEntityGenerator.class);
     }
 
     @Override
-    public void drawAdvancedTooltip(TileEntity tileEntity, GuiBlockOverlay guiBlockOverlay) {
-        TileEntityGenerator tile = (TileEntityGenerator) tileEntity;
-        guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
+    public void drawAdvancedTooltip(TileEntityGenerator generator, AdvancedInfoComponent advancedInfoComponent) {
+        advancedInfoComponent.drawStringWithShadow("Stored Energy: " + generator.energy + " / " + generator.capacity, 0);
 
-        if (tile.active)
-            guiBlockOverlay.drawStringWithShadow("Machine Progress: " + tile.currentBurnTime + " / " + tile.maxBurnTime, 0);
+        if (generator.active)
+            advancedInfoComponent.drawStringWithShadow("Machine Progress: " + generator.currentBurnTime + " / " + generator.maxBurnTime, 0);
 
-        guiBlockOverlay.drawInventory(tile, 0);
+        advancedInfoComponent.drawInventory(generator, 0);
     }
 }

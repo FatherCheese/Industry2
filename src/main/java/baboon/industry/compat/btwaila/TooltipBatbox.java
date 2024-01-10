@@ -1,31 +1,26 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.Industry2;
-import baboon.industry.block.storage.entity.*;
-import net.minecraft.core.block.entity.TileEntity;
-import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
-import toufoumaster.btwaila.TooltipGroup;
-import toufoumaster.btwaila.TooltipRegistry;
-import toufoumaster.btwaila.gui.GuiBlockOverlay;
+import baboon.industry.block.storage.entity.TileEntityBatboxBase;
+import baboon.industry.block.storage.entity.TileEntityBatboxEHV;
+import baboon.industry.block.storage.entity.TileEntityBatboxHV;
+import baboon.industry.block.storage.entity.TileEntityBatboxLV;
+import baboon.industry.block.storage.entity.TileEntityBatboxMV;
+import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
+import toufoumaster.btwaila.tooltips.TileTooltip;
 
-public class TooltipBatbox implements IBTWailaCustomBlockTooltip {
-
+public class TooltipBatbox extends TileTooltip<TileEntityBatboxBase> {
     @Override
-    public void addTooltip() {
-        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntityBatboxBase.class, this);
-        tooltipGroup.addTooltip(TileEntityBatboxLV.class);
-        tooltipGroup.addTooltip(TileEntityBatboxMV.class);
-        tooltipGroup.addTooltip(TileEntityBatboxHV.class);
-        tooltipGroup.addTooltip(TileEntityBatboxEHV.class);
-        TooltipRegistry.tooltipMap.add(tooltipGroup);
+    public void initTooltip() {
+        addClass(TileEntityBatboxLV.class);
+        addClass(TileEntityBatboxMV.class);
+        addClass(TileEntityBatboxHV.class);
+        addClass(TileEntityBatboxEHV.class);
     }
 
     @Override
-    public void drawAdvancedTooltip(TileEntity tileEntity, GuiBlockOverlay guiBlockOverlay) {
-        TileEntityBatboxBase tile = (TileEntityBatboxBase) tileEntity;
-        guiBlockOverlay.drawStringWithShadow("Current Health: " + tile.machineHealth, 0);
-        guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
-
-        guiBlockOverlay.drawInventory(tile, 0);
+    public void drawAdvancedTooltip(TileEntityBatboxBase batBox, AdvancedInfoComponent advancedInfoComponent) {
+        advancedInfoComponent.drawStringWithShadow("Current Health: " + batBox.machineHealth, 0);
+        advancedInfoComponent.drawStringWithShadow("Stored Energy: " + batBox.energy + " / " + batBox.capacity, 0);
+        advancedInfoComponent.drawInventory(batBox, 0);
     }
 }
