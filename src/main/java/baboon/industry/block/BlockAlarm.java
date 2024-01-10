@@ -12,7 +12,7 @@ public class BlockAlarm extends BlockRotatableHorizontal {
 
     public BlockAlarm(String key, int id) {
         super(key, id, Material.metal);
-        setTickOnLoad(true);
+        setTicking(true);
     }
 
     @Override

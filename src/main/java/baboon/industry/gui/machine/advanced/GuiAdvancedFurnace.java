@@ -3,14 +3,14 @@ package baboon.industry.gui.machine.advanced;
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedBase;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import net.minecraft.core.InventoryAction;
-import net.minecraft.core.crafting.recipe.RecipesFurnace;
+import net.minecraft.core.crafting.legacy.recipe.RecipesFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
 import org.lwjgl.input.Keyboard;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class GuiAdvancedFurnace extends GuiAdvancedBase {
 
@@ -55,11 +55,11 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
             if (mouseButton == 1)
                 action = InventoryAction.DROP_HELD_SINGLE;
 
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
             return;
         }
-        if (!this.mc.thePlayer.getGamemode().consumeBlocks && mouseButton == 2) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
+        if (!this.mc.thePlayer.getGamemode().consumeBlocks() && mouseButton == 2) {
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
             return;
         }
 
@@ -105,7 +105,7 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
             action = InventoryAction.MOVE_SINGLE_ITEM;
 
         if (this.inventorySlots instanceof ContainerAdvancedBase) { // This is the only section that actually really matters
-            boolean recipes = RecipesFurnace.smelting().getSmeltingList().containsKey(clickedItemId);
+            boolean recipes = RecipesFurnace.getInstance().getSmeltingList().containsKey(clickedItemId);
             boolean redstone = new AdvancedRedstoneFuel().getRedstoneList().containsKey(clickedItemId);
 
             if (Item.itemsList[clickedItemId] instanceof ItemEnergyContainer)
@@ -117,11 +117,11 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
         }
 
         if (slot != null && stackInSlot != null && slot.allowItemInteraction() && stackInSlot.getItem().hasInventoryInteraction() && mouseButton == 1) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
             return;
         }
 
         int[] args = new int[]{slotId, target};
-        this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
+        this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
     }
 }
