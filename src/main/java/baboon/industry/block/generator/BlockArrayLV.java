@@ -9,7 +9,9 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
+import sunsetsatellite.catalyst.Catalyst;
+
+import javax.xml.crypto.Data;
 
 public class BlockArrayLV extends BlockTileEntity {
 
@@ -29,7 +31,7 @@ public class BlockArrayLV extends BlockTileEntity {
 
             if (tileEntity == null)
                 return false;
-            ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntity);
+            Catalyst.displayGui(player, tileEntity, tileEntity.getInvName());
         }
         return true;
     }
@@ -53,8 +55,8 @@ public class BlockArrayLV extends BlockTileEntity {
     }
 
     @Override
-    public void onBlockRemoval(World world, int x, int y, int z) {
-        dropContents(world, x, y, z);
-        super.onBlockRemoval(world, x, y, z);
+    public void onBlockRemoved(World world, int x, int y, int z, int data) {
+        this.dropContents(world, x, y, z);
+        super.onBlockRemoved(world, x, y, z, data);
     }
 }

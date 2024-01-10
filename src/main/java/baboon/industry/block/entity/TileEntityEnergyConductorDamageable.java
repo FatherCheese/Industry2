@@ -1,9 +1,9 @@
 package baboon.industry.block.entity;
 
 import com.mojang.nbt.CompoundTag;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 import java.util.Random;
 
@@ -22,7 +22,6 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     public int machineHealth = maxMachineHealth;
     private Boolean lastTickDamage = false;
 
-    @Override
     public int receive(Direction dir, int amount, boolean test) {
         if (canConnect(dir, Connection.INPUT)) {
             if (amount > maxReceive && random.nextInt(4) == 0) {
@@ -41,20 +40,20 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (machineHealth < 0)
-                worldObj.createExplosion(null, xCoord, yCoord, zCoord, 1.0f);
+                worldObj.createExplosion(null, x, y, z, 1.0f);
 
             if (machineHealth < maxMachineHealth) {
-                double x = xCoord + random.nextDouble();
-                double y = yCoord + random.nextDouble();
-                double z = zCoord + random.nextDouble();
+                double randX = x + random.nextDouble();
+                double randY = y + random.nextDouble();
+                double randZ = z + random.nextDouble();
 
-                worldObj.spawnParticle("smoke", x, y + 0.22, z, 0.0, 0.0, 0.0);
-                worldObj.spawnParticle("flame", x, y + 0.22, z, 0.0, 0.0, 0.0);
+                worldObj.spawnParticle("smoke", randX, randY + 0.22, randZ, 0.0, 0.0, 0.0);
+                worldObj.spawnParticle("flame", randX, randY + 0.22, randZ, 0.0, 0.0, 0.0);
             }
 
             if (!lastTickDamage && random.nextInt(4) == 0 && machineHealth + healAmount <= maxMachineHealth)

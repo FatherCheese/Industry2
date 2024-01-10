@@ -10,10 +10,10 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.world.Dimension;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
@@ -82,10 +82,15 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 
     private int getFuelFromItem(ItemStack itemStack) {
@@ -93,8 +98,8 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
@@ -124,9 +129,9 @@ public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor impl
                 }
             }
 
-            for (int xWater = xCoord - 1; xWater < xCoord + 1; xWater++)
-                for (int yWater = yCoord - 1; yWater < yCoord + 1; yWater++)
-                    for (int zWater = zCoord - 1; zWater < zCoord + 1; zWater++)
+            for (int xWater = x - 1; xWater < x + 1; xWater++)
+                for (int yWater = y - 1; yWater < y + 1; yWater++)
+                    for (int zWater = z - 1; zWater < z + 1; zWater++)
                         if (worldObj.getBlockId(xWater, yWater, zWater) == Block.fluidWaterStill.id) {
                                 currentFuelTime = maxFuelTime;
                         }

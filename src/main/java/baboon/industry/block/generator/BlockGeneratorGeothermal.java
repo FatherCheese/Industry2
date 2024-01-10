@@ -12,7 +12,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
+import sunsetsatellite.catalyst.Catalyst;
 import turniplabs.halplibe.helper.TextureHelper;
 
 public class BlockGeneratorGeothermal extends BlockTileEntityRotatable {
@@ -37,7 +37,7 @@ public class BlockGeneratorGeothermal extends BlockTileEntityRotatable {
 
             if (tileEntity == null)
                 return false;
-            ((IEntityPlayer) player).displayGuiScreen_energyapi(tileEntity);
+            Catalyst.displayGui(player, tileEntity, tileEntity.getInvName());
         }
         return true;
     }
@@ -93,9 +93,9 @@ public class BlockGeneratorGeothermal extends BlockTileEntityRotatable {
     }
 
     @Override
-    public void onBlockRemoval(World world, int x, int y, int z) {
+    public void onBlockRemoved(World world, int x, int y, int z, int data) {
         dropContents(world, x, y, z);
-        super.onBlockRemoval(world, x, y, z);
+        super.onBlockRemoved(world, x, y, z, data);
     }
 
     // Static methods

@@ -109,15 +109,15 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, z + 0.5f) <= 64;
     }
 
     @Override
     public int getActiveItemSlotForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
         if (direction == Direction.X_NEG) {
@@ -141,7 +141,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
     @Override
     public Connection getItemIOForSide(Direction direction) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
         if (direction == Direction.X_NEG)
@@ -277,7 +277,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
             if (itemResult != null) {
                 int xOffset = 0;
                 int zOffset = 0;
-                int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord) & 7;
+                int meta = this.worldObj.getBlockMetadata(this.x, this.y, this.z) & 7;
                 if (meta == 2) {
                     xOffset = -1;
                 } else if (meta == 5) {
@@ -288,10 +288,10 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                     zOffset = 1;
                 }
 
-                int adjacentId = this.worldObj.getBlockId(this.xCoord + xOffset, this.yCoord, this.zCoord + zOffset);
+                int adjacentId = this.worldObj.getBlockId(this.xCoord + xOffset, this.y, this.z + zOffset);
                 IInventory chest = null;
                 if (Block.blocksList[adjacentId] instanceof BlockChest) {
-                    chest = BlockChest.getInventory(this.worldObj, this.xCoord + xOffset, this.yCoord, this.zCoord + zOffset);
+                    chest = BlockChest.getInventory(this.worldObj, this.xCoord + xOffset, this.y, this.z + zOffset);
                 }
 
                 if (chest != null) {
@@ -339,7 +339,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 EntitySlime entityslime = new EntitySlime(this.worldObj);
                 entityslime.setSlimeSize(1);
                 entityslime.moveTo(
-                        (double)this.xCoord + (double)f, (double)this.yCoord + 1.0, (double)this.zCoord + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F
+                        (double)this.xCoord + (double)f, (double)this.yCoord + 1.0, (double)this.z + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F
                 );
                 float f3 = 0.05F;
                 entityslime.xd = (float)this.rand.nextGaussian() * f3;
@@ -386,7 +386,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     private void pullFromTop() {
-        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        TileEntity tile = worldObj.getBlockTileEntity(x, yCoord + 1, z);
         if (tile instanceof IInventory) {
             for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
                 ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
@@ -412,22 +412,22 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     private void pushToSide() {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+        int meta = worldObj.getBlockMetadata(x, y, z);
         TileEntity tile;
 
         switch (meta) {
             default:
             case 2:
-                tile = worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
+                tile = worldObj.getBlockTileEntity(xCoord - 1, y, z);
                 break;
             case 3:
-                tile = worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
+                tile = worldObj.getBlockTileEntity(xCoord + 1, y, z);
                 break;
             case 4:
-                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
+                tile = worldObj.getBlockTileEntity(x, y, z + 1);
                 break;
             case 5:
-                tile = worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
+                tile = worldObj.getBlockTileEntity(x, y, z - 1);
                 break;
         }
 
@@ -457,8 +457,8 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
 
         if (!worldObj.isClientSide) {
@@ -472,10 +472,10 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 onInventoryChanged();
             }
 
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineTrommel.id &&
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineTrommel.id &&
                     currentMachineTime == 0 &&
                     contents[nextToSieve] == null) {
-                BlockMachineTrommel.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockMachineTrommel.updateBlockState(true, worldObj, x, y, z);
                 onInventoryChanged();
             }
 
@@ -530,7 +530,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.machineTrommel.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineTrommel.id);
         }
     }
     private void nextSieveId(){

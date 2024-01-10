@@ -6,10 +6,10 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntitySolarBase extends TileEntityEnergyConductor implements IInventory {
     protected ItemStack[] contents;
@@ -78,24 +78,29 @@ public class TileEntitySolarBase extends TileEntityEnergyConductor implements II
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 
     private boolean isFacingSky() {
-        for (int heightCoords = yCoord + 1; heightCoords < 255; heightCoords++) {
-            Block block = Block.getBlock(worldObj.getBlockId(xCoord, heightCoords, zCoord));
-            if (block != null && block.isOpaqueCube())
+        for (int heightCoords = y + 1; heightCoords < 255; heightCoords++) {
+            Block block = Block.getBlock(worldObj.getBlockId(x, heightCoords, z));
+            if (block != null && block.isSolidRender())
                 return false;
         }
         return true;
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {

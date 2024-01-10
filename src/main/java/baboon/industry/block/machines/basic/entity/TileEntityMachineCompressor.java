@@ -47,17 +47,17 @@ public class TileEntityMachineCompressor extends TileEntityMachineBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
 
-            if (worldObj.getBlockId(xCoord, yCoord, zCoord) == IndustryBlocks.machineCompressor.id &&
+            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineCompressor.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
-                BlockMachineCompressor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockMachineCompressor.updateBlockState(true, worldObj, x, y, z);
                 machineUpdated = true;
             }
 
@@ -84,7 +84,7 @@ public class TileEntityMachineCompressor extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active) {
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.machineCompressor.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineCompressor.id);
             }
         }
     }

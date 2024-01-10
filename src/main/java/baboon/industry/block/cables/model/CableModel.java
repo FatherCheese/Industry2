@@ -3,7 +3,7 @@ package baboon.industry.block.cables.model;
 import baboon.industry.block.cables.BlockCable;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.energyapi.api.IEnergy;
+import sunsetsatellite.catalyst.energy.api.IEnergy;
 
 public class CableModel extends RenderBlocks {
 

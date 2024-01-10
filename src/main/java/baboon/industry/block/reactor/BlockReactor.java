@@ -10,10 +10,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayer;
 
-import java.util.Random;
-
 public class BlockReactor extends BlockTileEntity {
-    private final Random random = new Random();
     public BlockReactor(String key, int id, Material material) {
         super(key, id, material);
     }
