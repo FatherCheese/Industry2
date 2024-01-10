@@ -3,7 +3,6 @@ package baboon.industry.block.machines.basic.entity;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.item.ItemStack;
 
 public class TileEntityMachineFurnace extends TileEntityMachineBase {
     private boolean blasting = false;
@@ -13,19 +12,19 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
     }
 
     private boolean canProduce() {
-        if (contents[2] != null && contents[2].getItem() != null) {
-            if (isProducible(contents[2])) {
-                ItemStack resultStack;
-
-                if (blasting)
-                    resultStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
-                else
-                    resultStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
-
-                return contents[3] == null || contents[3].getItem() == resultStack.getItem() &&
-                        contents[3].stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
-            }
-        }
+//        if (contents[2] != null && contents[2].getItem() != null) {
+//            if (isProducible(contents[2])) {
+//                ItemStack resultStack;
+//
+//                if (blasting)
+//                    resultStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
+//                else
+//                    resultStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
+//
+//                return contents[3] == null || contents[3].getItem() == resultStack.getItem() &&
+//                        contents[3].stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
+//            }
+//        }
         return false;
     }
 
@@ -65,7 +64,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
 
                 if (currentMachineTime == maxMachineTime) {
                     currentMachineTime = 0;
-                    produceItem();
+//                    produceItem();
                     active = false;
                     machineUpdated = true;
                 }

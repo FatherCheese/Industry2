@@ -53,7 +53,7 @@ public class WorldFeatureRubberTree extends WorldFeatureTree {
                             for(int i4 = z - i3; i4 <= z + i3; ++i4) {
                                 int j4 = i4 - z;
                                 if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0)
-                                        && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)]) {
+                                        && !Block.translucent[world.getBlockId(k3, k1, i4)]) {
                                     this.placeLeaves(world, k3, k1, i4, random);
                                 }
                             }

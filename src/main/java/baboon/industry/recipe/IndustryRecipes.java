@@ -6,7 +6,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.energyapi.api.LookupFuelEnergy;
+import sunsetsatellite.catalyst.energy.api.LookupFuelEnergy;
 import turniplabs.halplibe.helper.RecipeHelper;
 
 public class IndustryRecipes {

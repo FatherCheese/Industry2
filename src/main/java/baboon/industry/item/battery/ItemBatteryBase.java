@@ -3,12 +3,12 @@ package baboon.industry.item.battery;
 import baboon.industry.Industry2;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import sunsetsatellite.energyapi.EnergyAPI;
-import sunsetsatellite.energyapi.template.items.ItemBattery;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
+import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 import turniplabs.halplibe.helper.TextureHelper;
 
-public class ItemBatteryBase extends ItemBattery implements ICustomDescription {
+public class ItemBatteryBase extends ItemEnergyContainer implements ICustomDescription {
     private final int[][] textureCoords;
 
     public ItemBatteryBase(int i, int capacity, int provide, int receive, String emptyTexture, String midEmptyTexture, String midTexture, String midFullTexture, String fullTexture) {
@@ -31,7 +31,7 @@ public class ItemBatteryBase extends ItemBattery implements ICustomDescription {
 
     @Override
     public int getIconIndex(ItemStack itemstack) {
-        int mapped = (int) EnergyAPI.map(
+        int mapped = (int) CatalystEnergy.map(
                 ((double) getEnergy(itemstack) / getCapacity(itemstack)),
                 0.0,
                 1.0,

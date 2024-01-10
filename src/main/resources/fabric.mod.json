@@ -44,8 +44,7 @@
 
   "depends": {
     "fabricloader": ">=0.13.3",
-    "halplibe": ">=2.7.0",
-    "energyapi": ">=1.1.9",
+    "halplibe": ">=3.1.0",
     "terrain-api": ">=1.2.1"
   },
   "suggests": {

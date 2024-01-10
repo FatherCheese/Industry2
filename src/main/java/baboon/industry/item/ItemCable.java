@@ -5,7 +5,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemPlaceable;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
 
 public class ItemCable extends ItemPlaceable implements ICustomDescription {
 
