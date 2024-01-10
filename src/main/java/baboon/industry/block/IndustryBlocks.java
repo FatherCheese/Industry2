@@ -612,7 +612,7 @@ public class IndustryBlocks {
                 .setLightOpacity(1)
                 .build(new BlockLeavesRubberwood("leaves.rubber", blockID("leavesRubberWood")))
                 .withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withDisabledNeighborNotifyOnMetadataChange()
                 .withDisabledStats();
 
@@ -648,7 +648,7 @@ public class IndustryBlocks {
                 .setBlockModel(new BlockModelRenderBlocks(1))
                 .build(new BlockSaplingRubberwood("sapling.rubber", blockID("saplingRubberWood")))
                 .withTags(BlockTags.BROKEN_BY_FLUIDS)
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withDisabledNeighborNotifyOnMetadataChange();
 
         nuclearReactor = new BlockBuilder(MOD_ID)
@@ -700,7 +700,7 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(5.0F)
                 .build(new BlockAlarm("alarm", blockID("alarm")))
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         addToGuiMap();
