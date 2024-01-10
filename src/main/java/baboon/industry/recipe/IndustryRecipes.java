@@ -12,546 +12,203 @@ import turniplabs.halplibe.helper.RecipeHelper;
 public class IndustryRecipes {
 
     private void craftingRecipesItems() {
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotTin, 9), new Object[]{
-                IndustryBlocks.blockTin
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotCopper, 9), new Object[]{
-                IndustryBlocks.blockCopper
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotBronze, 9), new Object[]{
-                IndustryBlocks.blockBronze
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotUranium, 9), new Object[]{
-                IndustryBlocks.blockUranium
-        });
-
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateTin, 1), false, false, false, new Object[]{
-                "12",
-                '1', IndustryItems.ingotTin,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateCopper, 1), false, false, false, new Object[]{
-                "12",
-                '1', IndustryItems.ingotCopper,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateBronze, 1), false, false, false, new Object[]{
-                "12",
-                '1', IndustryItems.ingotBronze,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateIron, 1), false, false, false, new Object[]{
-                "12",
-                '1', Item.ingotIron,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateGold, 1), false, false, false, new Object[]{
-                "12",
-                '1', Item.ingotGold,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.plateSteel, 1), false, false, false, new Object[]{
-                "12",
-                '1', Item.ingotSteel,
-                '2', IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.itemCableTin, 2), false, false, false, new Object[]{
-                "12",
-                '1', IndustryItems.ingotTin,
-                '2', IndustryItems.toolCutters
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.itemCableCopper, 2), false, false, false, new Object[]{
-                "12",
-                '1', IndustryItems.ingotCopper,
-                '2', IndustryItems.toolCutters
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.itemCableGold, 2), false, false, false, new Object[]{
-                "12",
-                '1', Item.ingotGold,
-                '2', IndustryItems.toolCutters
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.itemCableSteel, 2), false, false, false, new Object[]{
-                "12",
-                '1', Item.ingotSteel,
-                '2', IndustryItems.toolCutters
-        });
-
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.itemInsulatedCableTin), new Object[]{
-                IndustryItems.itemCableTin,
-                IndustryItems.rubber
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.itemInsulatedCableCopper), new Object[]{
-                IndustryItems.itemCableCopper,
-                IndustryItems.rubber
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.itemInsulatedCableGold), new Object[]{
-                IndustryItems.itemCableGold,
-                IndustryItems.rubber
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.itemInsulatedCableSteel), new Object[]{
-                IndustryItems.itemCableSteel,
-                IndustryItems.rubber
-        });
-
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolTreetap), true, new Object[]{
-                "#1#", "111", "1##",
-                '1', Block.planksOak
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolHammer), new Object[]{
-                "111", "121", "#2#",
-                '1', Item.ingotIron,
-                '2', Item.stick
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolCutters), new Object[]{
-                "1#1", "#1#", "2#2",
-                '1', IndustryItems.plateIron,
-                '2', Item.ingotIron
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolWrench), new Object[]{
-                "1#1", "111", "#1#",
-                '1', IndustryItems.plateBronze
-        });
-
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.batteryRedstone), new Object[]{
-                "#1#", "232", "232",
-                '1', IndustryItems.itemInsulatedCableTin,
-                '2', IndustryItems.plateTin,
-                '3', Item.dustRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.batteryAdvanced), new Object[]{
-                "#1#", "232", "242",
-                '1', IndustryItems.itemInsulatedCableCopper,
-                '2', IndustryItems.plateBronze,
-                '3', Item.dustRedstone,
-                '4', Item.sulphur
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.batteryCrystal), new Object[]{
-                "121", "232", "121",
-                '1', IndustryItems.itemInsulatedCableGold,
-                '2', Item.dustRedstone,
-                '3', Item.diamond
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.batteryLapis), new Object[]{
-                "121", "343", "121",
-                '1', IndustryItems.itemInsulatedCableSteel,
-                '2', new ItemStack(Item.dye, 1, 4),
-                '3', IndustryItems.circuitAdvanced,
-                '4', Item.diamond
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.cellEmpty, 8), new Object[]{
-                "#1#", "1#1", "#1#",
-                '1', IndustryItems.ingotTin
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.canEmpty, 3), new Object[]{
-                "1#1", "#1#",
-                '1', IndustryItems.plateTin
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.circuitBasic), new Object[]{
-                "111", "232", "111",
-                '1', IndustryItems.itemInsulatedCableCopper,
-                '2', Item.dustRedstone,
-                '3', IndustryItems.plateIron
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.circuitAdvanced), new Object[]{
-                "111", "234", "111",
-                '1', IndustryItems.itemInsulatedCableGold,
-                '2', Item.quartz,
-                '3', IndustryItems.plateSteel,
-                '4', Item.dustRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolChainsaw), new Object[]{
-                "#11", "231", "42#",
-                '1', IndustryItems.plateSteel,
-                '2', IndustryItems.ingotBronze,
-                '3', IndustryItems.circuitBasic,
-                '4', IndustryItems.batteryRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrill), new Object[]{
-                "#1#", "121", "343",
-                '1', IndustryItems.plateSteel,
-                '2', IndustryItems.circuitBasic,
-                '3', IndustryItems.ingotBronze,
-                '4', IndustryItems.batteryRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrillGold), new Object[]{
-                "#1#", "121",
-                '1', Item.ingotGold,
-                '2', IndustryItems.toolDrill
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolDrillDiamond), new Object[]{
-                "#1#", "121",
-                '1', Item.diamond,
-                '2', IndustryItems.toolDrill
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.toolNanoSword), new Object[]{
-                "#1#", "#2#", "343",
-                '1', Item.quartz,
-                '2', Item.dustGlowstone,
-                '3', IndustryItems.reactorPlate,
-                '4', IndustryItems.batteryCrystal
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorHelmetHazmat), new Object[]{
-                "111", "121", "#3#",
-                '1', IndustryItems.rubber,
-                '2', Block.glass,
-                '3', new ItemStack(Item.dye, 1, 11)
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorChestplateHazmat), new Object[]{
-                "121", "111", "111",
-                '1', IndustryItems.rubber,
-                '2', new ItemStack(Item.dye, 1, 11)
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorLeggingsHazmat), new Object[]{
-                "111", "121", "1#1",
-                '1', IndustryItems.rubber,
-                '2', new ItemStack(Item.dye, 1, 11)
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorBootsHazmat), new Object[]{
-                "1#1", "1#1",
-                '1', IndustryItems.rubber
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorHelmetIridium), new Object[]{
-                "121", "131",
-                '1', IndustryItems.plateIridium,
-                '2', IndustryItems.batteryLapis,
-                '3', Block.glassTinted
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorChestplateIridium), new Object[]{
-                "1#1", "121", "111",
-                '1', IndustryItems.plateIridium,
-                '2', IndustryItems.batteryLapis
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorLeggingsIridium), new Object[]{
-                "111", "2#2", "1#1",
-                '1', IndustryItems.plateIridium,
-                '2', IndustryItems.batteryLapis
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.armorBootsIridium), new Object[]{
-                "1#1", "2#2",
-                '1', IndustryItems.batteryLapis,
-                '2', IndustryItems.plateIridium
-        });
-
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.reactorPlate), new Object[]{
-                IndustryItems.plateSteel,
-                IndustryItems.plateSteel
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.reactorPlate), new Object[]{
-                Item.ingotSteel,
-                Item.ingotSteel,
-                IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.dustBronze, 4), new Object[]{
-                IndustryItems.dustCopper,
-                IndustryItems.dustCopper,
-                IndustryItems.dustCopper,
-                IndustryItems.dustTin
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.ingotIridium), new Object[]{
-                IndustryItems.ingotIridiumScrap,
-                IndustryItems.ingotIridiumScrap,
-                IndustryItems.ingotIridiumScrap
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.upgradePlate), new Object[]{
-                IndustryItems.plateIron,
-                IndustryItems.plateIron
-        });
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(IndustryItems.upgradePlate), new Object[]{
-                Item.ingotIron,
-                Item.ingotIron,
-                IndustryItems.toolHammer
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeSpeed), new Object[]{
-                "#1#", "121", "#3#",
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeSpeed), "#1#", "121", "#3#",
                 '1', IndustryItems.cellCoolant,
                 '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeTransformer), new Object[]{
-                "1#2", "#3#", "456",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeTransformer), "1#2", "#3#", "456",
                 '1', IndustryItems.itemInsulatedCableCopper,
                 '2', IndustryItems.itemInsulatedCableGold,
                 '3', IndustryItems.upgradePlate,
                 '4', IndustryItems.itemInsulatedCableSteel,
                 '5', IndustryItems.circuitBasic,
-                '6', IndustryItems.itemInsulatedCableTin
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeEnergy), new Object[]{
-                "1", "2", "3",
+                '6', IndustryItems.itemInsulatedCableTin);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeEnergy), "1", "2", "3",
                 '1', IndustryItems.batteryRedstone,
                 '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePuller), new Object[]{
-                "1", "2", "3",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePuller), "1", "2", "3",
                 '1', Block.pistonBaseSticky,
                 '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePusher), new Object[]{
-                "1", "2", "3",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePusher), "1", "2", "3",
                 '1', Block.pistonBase,
                 '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeBlasting), new Object[]{
-                "#1#", "121", "#3#",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeBlasting), "#1#", "121", "#3#",
                 '1', Item.nethercoal,
                 '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.foodJoffos), new Object[]{
-                "1", "2", "3",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.foodJoffos), "1", "2", "3",
                 '1', new ItemStack(Item.dye, 1, 3),
                 '2', Block.pumpkin,
-                '3', Item.wheat
-        });
+                '3', Item.wheat);
     }
 
     private void craftingRecipesBlocks() {
         // Blocks
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockTin), new Object[]{
-                "111", "111", "111",
-                '1', IndustryItems.ingotTin
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockCopper), new Object[]{
-                "111", "111", "111",
-                '1', IndustryItems.ingotCopper
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockBronze), new Object[]{
-                "111", "111", "111",
-                '1', IndustryItems.ingotBronze
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockUranium), new Object[]{
-                "111", "111", "111",
-                '1', IndustryItems.ingotUranium
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCasingBasic), new Object[]{
-                "111", "121", "111",
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockTin), "111", "111", "111",
+                '1', IndustryItems.ingotTin);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockCopper), "111", "111", "111",
+                '1', IndustryItems.ingotCopper);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockBronze), "111", "111", "111",
+                '1', IndustryItems.ingotBronze);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockUranium), "111", "111", "111",
+                '1', IndustryItems.ingotUranium);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCasingBasic), "111", "121", "111",
                 '1', IndustryItems.plateIron,
-                '2', IndustryItems.batteryRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCasingAdvanced), new Object[]{
-                "111", "121", "111",
+                '2', IndustryItems.batteryRedstone);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCasingAdvanced), "111", "121", "111",
                 '1', IndustryItems.plateSteel,
-                '2', IndustryItems.batteryAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generator), new Object[]{
-                "1", "2",
+                '2', IndustryItems.batteryAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generator), "1", "2",
                 '1', IndustryBlocks.machineCasingBasic,
-                '2', Block.furnaceStoneIdle
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorWatermill), true, new Object[]{
-                "121", "232", "121",
+                '2', Block.furnaceStoneIdle);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorWatermill), true, "121", "232", "121",
                 '1', Item.stick,
                 '2', Block.planksOak,
-                '3', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorWindmill), new Object[]{
-                "#1#", "121", "#1#",
+                '3', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorWindmill), "#1#", "121", "#1#",
                 '1', IndustryBlocks.blockTin,
-                '2', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorGeothermal), new Object[]{
-                "121", "121", "343",
+                '2', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorGeothermal), "121", "121", "343",
                 '1', Block.glass,
                 '2', IndustryItems.cellEmpty,
                 '3', IndustryItems.plateSteel,
-                '4', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorSolar), new Object[]{
-                "121", "212", "343",
+                '4', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorSolar), "121", "212", "343",
                 '1', IndustryItems.dustCoal,
                 '2', Block.glass,
                 '3', IndustryItems.circuitBasic,
-                '4', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorSolar), new Object[]{
-                "121", "212", "343",
+                '4', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.generatorSolar), "121", "212", "343",
                 '1', Block.glass,
                 '2', IndustryItems.dustCoal,
                 '3', IndustryItems.circuitBasic,
-                '4', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayLV), new Object[]{
-                "111", "121", "111",
+                '4', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayLV), "111", "121", "111",
                 '1', IndustryBlocks.generatorSolar,
-                '2', IndustryBlocks.batboxLV
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayMV), new Object[]{
-                "111", "121", "111",
+                '2', IndustryBlocks.batboxLV);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayMV), "111", "121", "111",
                 '1', IndustryBlocks.solarArrayLV,
-                '2', IndustryBlocks.batboxMV
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayHV), new Object[]{
-                "111", "121", "111",
+                '2', IndustryBlocks.batboxMV);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayHV), "111", "121", "111",
                 '1', IndustryBlocks.solarArrayMV,
-                '2', IndustryBlocks.batboxHV
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayEHV), new Object[]{
-                "111", "121", "111",
+                '2', IndustryBlocks.batboxHV);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.solarArrayEHV), "111", "121", "111",
                 '1', IndustryBlocks.solarArrayHV,
-                '2', IndustryBlocks.batboxEHV
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxLV), true, new Object[]{
-                "121", "333", "111",
+                '2', IndustryBlocks.batboxEHV);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxLV), true, "121", "333", "111",
                 '1', Block.planksOak,
                 '2', IndustryItems.itemInsulatedCableTin,
-                '3', IndustryItems.batteryRedstone
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxMV), new Object[]{
-                "121", "333", "111",
+                '3', IndustryItems.batteryRedstone);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxMV), "121", "333", "111",
                 '1', IndustryItems.plateBronze,
                 '2', IndustryItems.itemInsulatedCableCopper,
-                '3', IndustryItems.batteryAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxHV), new Object[]{
-                "121", "333", "111",
+                '3', IndustryItems.batteryAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxHV), "121", "333", "111",
                 '1', IndustryItems.plateIron,
                 '2', IndustryItems.itemInsulatedCableGold,
-                '3', IndustryItems.batteryCrystal
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxEHV), new Object[]{
-                "121", "333", "111",
+                '3', IndustryItems.batteryCrystal);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.batboxEHV), "121", "333", "111",
                 '1', IndustryItems.plateSteel,
                 '2', IndustryItems.itemInsulatedCableSteel,
-                '3', IndustryItems.batteryLapis
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerMVtoLV), true, new Object[]{
-                "121", "134", "454",
+                '3', IndustryItems.batteryLapis);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerMVtoLV), true, "121", "134", "454",
                 '1', IndustryItems.plateBronze,
                 '2', IndustryItems.itemInsulatedCableCopper,
                 '3', IndustryItems.batteryRedstone,
                 '4', Block.planksOak,
-                '5', IndustryItems.itemInsulatedCableTin
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerHVtoMV), new Object[]{
-                "121", "134", "454",
+                '5', IndustryItems.itemInsulatedCableTin);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerHVtoMV), "121", "134", "454",
                 '1', IndustryItems.plateIron,
                 '2', IndustryItems.itemInsulatedCableGold,
                 '3', IndustryItems.batteryAdvanced,
                 '4', IndustryItems.plateBronze,
-                '5', IndustryItems.itemInsulatedCableCopper
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerEHVtoHV), new Object[]{
-                "121", "134", "454",
+                '5', IndustryItems.itemInsulatedCableCopper);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.transformerEHVtoHV), "121", "134", "454",
                 '1', IndustryItems.plateSteel,
                 '2', IndustryItems.itemInsulatedCableSteel,
                 '3', IndustryItems.batteryCrystal,
                 '4', IndustryItems.plateIron,
-                '5', IndustryItems.itemInsulatedCableGold
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineFurnace), new Object[]{
-                "#1#", "232", "#4#",
+                '5', IndustryItems.itemInsulatedCableGold);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineFurnace), "#1#", "232", "#4#",
                 '1', IndustryItems.circuitBasic,
                 '2', Item.dustRedstone,
                 '3', IndustryBlocks.machineCasingBasic,
-                '4', Block.furnaceStoneIdle
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineMacerator), true, new Object[]{
-                "111", "232", "#4#",
+                '4', Block.furnaceStoneIdle);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineMacerator), true, "111", "232", "#4#",
                 '1', Item.flint,
                 '2', Block.cobbleStone,
                 '3', IndustryBlocks.machineCasingBasic,
-                '4', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCompressor), true, new Object[]{
-                "1#1", "121", "131",
+                '4', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineCompressor), true, "1#1", "121", "131",
                 '1', Block.stone,
                 '2', IndustryBlocks.machineCasingBasic,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineWiremill), new Object[]{
-                "1#1", "121", "#3#",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineWiremill), "1#1", "121", "#3#",
                 '1', Item.ingotIron,
                 '2', IndustryBlocks.machineCasingBasic,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineExtractor), new Object[]{
-                "121", "131",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineExtractor), "121", "131",
                 '1', IndustryItems.toolTreetap,
                 '2', IndustryBlocks.machineCasingBasic,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineRecycler), new Object[]{
-                "#1#", "232",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineRecycler), "#1#", "232",
                 '1', IndustryItems.circuitBasic,
                 '2', Block.dirt,
-                '3', IndustryBlocks.machineCasingBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineTrommel), new Object[]{
-                "1", "2", "3",
+                '3', IndustryBlocks.machineCasingBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.machineTrommel), "1", "2", "3",
                 '1', IndustryBlocks.machineCasingBasic,
                 '2', Block.trommelIdle,
-                '3', IndustryItems.circuitBasic
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineFurnace), new Object[]{
-                "#1#", "232", "#4#",
+                '3', IndustryItems.circuitBasic);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineFurnace), "#1#", "232", "#4#",
                 '1', IndustryItems.circuitAdvanced,
                 '2', Item.dustRedstone,
                 '3', IndustryBlocks.machineCasingAdvanced,
-                '4', Block.furnaceStoneIdle
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineMacerator), new Object[]{
-                "1", "2", "3",
+                '4', Block.furnaceStoneIdle);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineMacerator), "1", "2", "3",
                 '1', Block.spikes,
                 '2', IndustryBlocks.machineCasingAdvanced,
-                '3', IndustryItems.circuitAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineCompressor), new Object[]{
-                "121", "#3#",
+                '3', IndustryItems.circuitAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineCompressor), "121", "#3#",
                 '1', Block.obsidian,
                 '2', IndustryBlocks.machineCasingAdvanced,
-                '3', IndustryItems.circuitAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineWiremill), new Object[]{
-                "1", "2", "3",
+                '3', IndustryItems.circuitAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineWiremill), "1", "2", "3",
                 '1', Item.quartz,
                 '2', IndustryBlocks.machineCasingAdvanced,
-                '3', IndustryItems.circuitAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineExtractor), new Object[]{
-                "#1#", "232", "#4#",
+                '3', IndustryItems.circuitAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.advancedMachineExtractor), "#1#", "232", "#4#",
                 '1', IndustryItems.cellCoolant,
                 '2', IndustryItems.toolTreetap,
                 '3', IndustryBlocks.machineCasingAdvanced,
-                '4', IndustryItems.circuitAdvanced
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.hardenedCoal), new Object[]{
-                "121", "232", "121",
+                '4', IndustryItems.circuitAdvanced);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.hardenedCoal), "121", "232", "121",
                 '1', IndustryItems.dustCoal,
                 '2', Block.blockCoal,
-                '3', Block.obsidian
-        });
+                '3', Block.obsidian);
 
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearReactor), new Object[]{
-                "1", "2", "3",
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearReactor), "1", "2", "3",
                 '1', IndustryItems.circuitAdvanced,
                 '2', IndustryBlocks.nuclearChamber,
-                '3', IndustryBlocks.generator
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearChamber), new Object[]{
-                "111", "121", "111",
+                '3', IndustryBlocks.generator);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearChamber), "111", "121", "111",
                 '1', IndustryItems.reactorPlate,
-                '2', IndustryItems.batteryLapis
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearIO), new Object[]{
-                "1", "2", "1",
+                '2', IndustryItems.batteryLapis);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.nuclearIO), "1", "2", "1",
                 '1', IndustryItems.itemInsulatedCableSteel,
-                '2', IndustryBlocks.nuclearChamber
-        });
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.energyFabricator), true, new Object[]{
-                "121", "343", "151",
+                '2', IndustryBlocks.nuclearChamber);
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.energyFabricator), true, "121", "343", "151",
                 '1', IndustryItems.circuitAdvanced,
                 '2', Block.netherrack,
                 '3', Block.blockRedstone,
                 '4', IndustryBlocks.nuclearChamber,
-                '5', Block.stone
-        });
+                '5', Block.stone);
 
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), new Object[]{IndustryBlocks.logRubberWood});
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), new Object[]{IndustryBlocks.logRubberWoodResin});
-        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), new Object[]{IndustryBlocks.logRubberWoodResinFull});
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), IndustryBlocks.logRubberWood);
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), IndustryBlocks.logRubberWoodResin);
+        RecipeHelper.craftingManager.addShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 15), IndustryBlocks.logRubberWoodResinFull);
 
         RecipeHelper.Crafting.createShapelessRecipe(Block.obsidian, 1, new Object[]{IndustryItems.cellWater, IndustryItems.cellLava});
     }
