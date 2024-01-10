@@ -43,11 +43,16 @@ public class IndustryConfig {
                 .addEntry("uraniumOre", true)
                 .addEntry("treeRubberwood", true);
 
-        int blockIDs = 1000;
-        int itemIDs = 17000;
 
         properties.addCategory("Block IDs");
+        properties.addEntry("Block IDs.startingID", 1000);
         properties.addCategory("Item IDs");
+        properties.addEntry("Item IDs.startingID", 17000);
+
+        cfg = new TomlConfigHandler(updater, Industry2.MOD_ID, properties);
+
+        int blockIDs = cfg.getInt("Block IDs.startingID");
+        int itemIDs = cfg.getInt("Item IDs.startingID");
 
         List<Field> blockFields = Arrays.stream(IndustryBlocks.class.getDeclaredFields()).filter((F)-> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         for (Field blockField : blockFields) {
