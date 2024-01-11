@@ -1,51 +1,22 @@
 package baboon.industry.recipe;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.crafting.LookupFuelFurnace;
-import net.minecraft.core.item.Item;
+import net.minecraft.core.data.DataLoader;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.data.registry.recipe.RecipeNamespace;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.energy.api.LookupFuelEnergy;
-import turniplabs.halplibe.helper.RecipeHelper;
+import turniplabs.halplibe.util.RecipeEntrypoint;
 
-public class IndustryRecipes {
+public class IndustryRecipes implements RecipeEntrypoint {
 
     private void craftingRecipesItems() {
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeSpeed), "#1#", "121", "#3#",
-                '1', IndustryItems.cellCoolant,
-                '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeTransformer), "1#2", "#3#", "456",
-                '1', IndustryItems.itemInsulatedCableCopper,
-                '2', IndustryItems.itemInsulatedCableGold,
-                '3', IndustryItems.upgradePlate,
-                '4', IndustryItems.itemInsulatedCableSteel,
-                '5', IndustryItems.circuitBasic,
-                '6', IndustryItems.itemInsulatedCableTin);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeEnergy), "1", "2", "3",
-                '1', IndustryItems.batteryRedstone,
-                '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePuller), "1", "2", "3",
-                '1', Block.pistonBaseSticky,
-                '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradePusher), "1", "2", "3",
-                '1', Block.pistonBase,
-                '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.upgradeBlasting), "#1#", "121", "#3#",
-                '1', Item.nethercoal,
-                '2', IndustryItems.upgradePlate,
-                '3', IndustryItems.circuitBasic);
-        RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryItems.foodJoffos), "1", "2", "3",
-                '1', new ItemStack(Item.dye, 1, 3),
-                '2', Block.pumpkin,
-                '3', Item.wheat);
+        DataLoader.loadRecipes("/assets/industry/recipes/workbench/items.json");
     }
 
-    private void craftingRecipesBlocks() {
+    /*private void craftingRecipesBlocks() {
         // Blocks
         RecipeHelper.craftingManager.addRecipe(new ItemStack(IndustryBlocks.blockTin), "111", "111", "111",
                 '1', IndustryItems.ingotTin);
@@ -253,11 +224,15 @@ public class IndustryRecipes {
         RecipeHelper.blastingManager.addSmelting(IndustryItems.dustGold.id, new ItemStack(Item.ingotGold));
 
         RecipeHelper.blastingManager.addSmelting(Block.blockIron.id, new ItemStack(Item.ingotSteelCrude, 9));
-    }
-
-    public void initializeRecipes() {
+    }*/
+    public static final RecipeNamespace INDUSTRY = new RecipeNamespace();
+    public static final RecipeGroup<RecipeEntryCrafting<?, ?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
+    @Override
+    public void onRecipesReady() {
+        INDUSTRY.register("workbench", WORKBENCH);
+        Registries.RECIPES.register("industry", INDUSTRY);
         craftingRecipesItems();
-        craftingRecipesBlocks();
-        furnaceRecipes();
+//        craftingRecipesBlocks();
+//        furnaceRecipes();
     }
 }

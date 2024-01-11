@@ -32,7 +32,8 @@
       "baboon.industry.Industry2"
     ],
     "recipesReady": [
-      "baboon.industry.recipe.RecipesTrommel"
+      "baboon.industry.recipe.RecipesTrommel",
+      "baboon.industry.recipe.IndustryRecipes"
     ],
     "btwaila": [
       "baboon.industry.compat.btwaila.WailaPlugin"

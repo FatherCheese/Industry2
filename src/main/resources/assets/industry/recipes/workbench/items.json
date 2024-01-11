@@ -6,7 +6,63 @@
       {
         "stack": {
           "key": "item.industry.ingot.tin",
-          "amount": 9,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
           "meta": 0
         }
       }
@@ -24,7 +80,63 @@
       {
         "stack": {
           "key": "item.industry.ingot.copper",
-          "amount": 9,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
           "meta": 0
         }
       }
@@ -42,7 +154,63 @@
       {
         "stack": {
           "key": "item.industry.ingot.bronze",
-          "amount": 9,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
           "meta": 0
         }
       }
@@ -60,7 +228,63 @@
       {
         "stack": {
           "key": "item.industry.ingot.uranium",
-          "amount": 9,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.uranium",
+          "amount": 1,
           "meta": 0
         }
       }
@@ -329,7 +553,7 @@
       {
         "symbol": "1",
         "stack": {
-          "key": "item.industry.ingot.gold",
+          "key": "item.ingot.gold",
           "amount": 1,
           "meta": 0
         }
@@ -360,7 +584,7 @@
       {
         "symbol": "1",
         "stack": {
-          "key": "item.industry.ingot.steel",
+          "key": "item.ingot.steel",
           "amount": 1,
           "meta": 0
         }
@@ -401,7 +625,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.insulated.cable.tin",
+      "key": "item.industry.insulated.cable.tin",
       "amount": 1,
       "meta": 0
     }
@@ -426,7 +650,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.insulated.cable.copper",
+      "key": "item.industry.insulated.cable.copper",
       "amount": 1,
       "meta": 0
     }
@@ -451,7 +675,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.insulated.cable.gold",
+      "key": "item.industry.insulated.cable.gold",
       "amount": 1,
       "meta": 0
     }
@@ -476,7 +700,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.insulated.cable.steel",
+      "key": "item.industry.insulated.cable.steel",
       "amount": 1,
       "meta": 0
     }
@@ -752,7 +976,7 @@
       {
         "symbol": "3",
         "stack": {
-          "key": "item.industry.circuit.advanced",
+          "key": "item.industry.circuitadvanced",
           "amount": 1,
           "meta": 0
         }
@@ -857,7 +1081,7 @@
       }
     ],
     "result": {
-      "key": "item.industry.circuit.basic",
+      "key": "item.industry.circuit",
       "amount": 1,
       "meta": 0
     },
@@ -906,7 +1130,7 @@
       }
     ],
     "result": {
-      "key": "item.industry.circuit.advanced",
+      "key": "item.industry.circuitadvanced",
       "amount": 1,
       "meta": 0
     },
@@ -940,7 +1164,7 @@
       {
         "symbol": "3",
         "stack": {
-          "key": "item.industry.circuit.basic",
+          "key": "item.industry.circuit",
           "amount": 1,
           "meta": 0
         }
@@ -981,7 +1205,7 @@
       {
         "symbol": "2",
         "stack": {
-          "key": "item.industry.circuit.basic",
+          "key": "item.industry.circuit",
           "amount": 1,
           "meta": 0
         }
@@ -1102,7 +1326,7 @@
       {
         "symbol": "3",
         "stack": {
-          "key": "item.industry.reactor.plate",
+          "key": "item.industry.reactorplate",
           "amount": 1,
           "meta": 0
         }
@@ -1117,7 +1341,7 @@
       }
     ],
     "result": {
-      "key": "item.industry.tool.nano.sword",
+      "key": "item.industry.tool.nanosword",
       "amount": 1,
       "meta": 0
     },
@@ -1399,13 +1623,20 @@
       {
         "stack": {
           "key": "item.industry.plate.steel",
-          "amount": 2,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key": "tile.industry.reactor.plate",
+      "key": "item.industry.reactorplate",
       "amount": 1,
       "meta": 0
     }
@@ -1417,7 +1648,14 @@
       {
         "stack": {
           "key": "item.ingot.steel",
-          "amount": 2,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.ingot.steel",
+          "amount": 1,
           "meta": 0
         }
       },
@@ -1430,7 +1668,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.reactor.plate",
+      "key": "item.industry.reactorplate",
       "amount": 1,
       "meta": 0
     }
@@ -1442,7 +1680,21 @@
       {
         "stack": {
           "key": "item.industry.dust.copper",
-          "amount": 3,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.dust.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.dust.copper",
+          "amount": 1,
           "meta": 0
         }
       },
@@ -1455,7 +1707,7 @@
       }
     ],
     "result": {
-      "key": "tile.industry.dust.bronze",
+      "key": "item.industry.dust.bronze",
       "amount": 4,
       "meta": 0
     }
@@ -1467,13 +1719,27 @@
       {
         "stack": {
           "key": "item.industry.ingot.iridium.scrap",
-          "amount": 3,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.iridium.scrap",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.iridium.scrap",
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key": "tile.industry.ingot.iridium",
+      "key": "item.industry.ingot.iridium",
       "amount": 1,
       "meta": 0
     }
@@ -1485,13 +1751,20 @@
       {
         "stack": {
           "key": "item.industry.plate.iron",
-          "amount": 2,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.plate.iron",
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key": "tile.industry.upgrade.plate",
+      "key": "item.industry.upgrade.plate",
       "amount": 1,
       "meta": 0
     }
@@ -1503,22 +1776,340 @@
       {
         "stack": {
           "key": "item.ingot.iron",
-          "amount": 2,
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
           "meta": 0
         }
       },
       {
         "stack": {
           "key": "item.industry.tool.hammer",
-          "amount": 2,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key": "tile.industry.upgrade.plate",
+      "key": "item.industry.upgrade.plate",
       "amount": 1,
       "meta": 0
     }
+  },
+  {
+    "name": "industry:workbench/upgrade_speed",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121",
+      "#3#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.cell.coolant",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.speed",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_transformer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#2",
+      "#3#",
+      "456"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.insulated.cable.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.industry.insulated.cable.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "5",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "6",
+        "stack": {
+          "key": "item.industry.insulated.cable.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.transformer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_energy",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.battery.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.energy",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_puller",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "tile.piston.base.sticky",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.puller",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_pusher",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "tile.piston.base",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.puller",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_puller",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121",
+      "#3#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.nethercoal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.blasting",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/food_joffos",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 3
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "tile.pumpkin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.wheat",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.food.joffos",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]
