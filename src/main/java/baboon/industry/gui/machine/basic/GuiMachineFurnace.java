@@ -2,7 +2,8 @@ package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import net.minecraft.core.InventoryAction;
-import net.minecraft.core.crafting.legacy.recipe.RecipesFurnace;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -104,7 +105,11 @@ public class GuiMachineFurnace extends GuiMachineBase {
             action = InventoryAction.MOVE_SINGLE_ITEM;
 
         if (this.inventorySlots instanceof ContainerMachineBase) { // This is the only section that actually really matters
-            boolean recipes = RecipesFurnace.getInstance().getSmeltingList().containsKey(clickedItemId);
+            boolean recipes = false;
+            for (RecipeEntryFurnace furnaceEntry : Registries.RECIPES.getAllFurnaceRecipes()){
+                recipes = furnaceEntry.getInput().matches(stackInSlot);
+                if (recipes) break;
+            }
 
             if (Item.itemsList[clickedItemId] instanceof ItemEnergyContainer)
                 target = 1;

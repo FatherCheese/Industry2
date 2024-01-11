@@ -3,7 +3,8 @@ package baboon.industry.gui.machine.advanced;
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedBase;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import net.minecraft.core.InventoryAction;
-import net.minecraft.core.crafting.legacy.recipe.RecipesFurnace;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -105,7 +106,11 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
             action = InventoryAction.MOVE_SINGLE_ITEM;
 
         if (this.inventorySlots instanceof ContainerAdvancedBase) { // This is the only section that actually really matters
-            boolean recipes = RecipesFurnace.getInstance().getSmeltingList().containsKey(clickedItemId);
+            boolean recipes = false;
+            for (RecipeEntryFurnace furnaceEntry : Registries.RECIPES.getAllFurnaceRecipes()){
+                recipes = furnaceEntry.getInput().matches(stackInSlot);
+                if (recipes) break;
+            }
             boolean redstone = new AdvancedRedstoneFuel().getRedstoneList().containsKey(clickedItemId);
 
             if (Item.itemsList[clickedItemId] instanceof ItemEnergyContainer)
