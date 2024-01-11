@@ -17,8 +17,7 @@ public class IndustryConfig {
     public static ConfigUpdater updater = ConfigUpdater.fromProperties();
     private static final Toml properties = new Toml("Industry2's TOML Config");
     public static TomlConfigHandler cfg;
-
-    public IndustryConfig() {
+    static {
         properties.addCategory("Industry2")
                 .addEntry("cfgVersion", 5);
 

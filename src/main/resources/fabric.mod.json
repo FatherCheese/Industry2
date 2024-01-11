@@ -28,7 +28,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "beforeGameStart": [
       "baboon.industry.Industry2"
     ],
     "recipesReady": [
