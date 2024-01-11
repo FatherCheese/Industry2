@@ -17,11 +17,12 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.InventorySorter;
 import net.minecraft.core.util.helper.Sides;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.IItemIO;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IItemIO;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 import java.util.Random;
 
@@ -112,7 +113,12 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, z + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
+    }
+
+    @Override
+    public void sortInventory() {
+        InventorySorter.sortInventory(contents);
     }
 
     @Override
@@ -288,10 +294,10 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                     zOffset = 1;
                 }
 
-                int adjacentId = this.worldObj.getBlockId(this.xCoord + xOffset, this.y, this.z + zOffset);
+                int adjacentId = this.worldObj.getBlockId(this.x + xOffset, this.y, this.z + zOffset);
                 IInventory chest = null;
                 if (Block.blocksList[adjacentId] instanceof BlockChest) {
-                    chest = BlockChest.getInventory(this.worldObj, this.xCoord + xOffset, this.y, this.z + zOffset);
+                    chest = BlockChest.getInventory(this.worldObj, this.x + xOffset, this.y, this.z + zOffset);
                 }
 
                 if (chest != null) {
@@ -339,7 +345,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                 EntitySlime entityslime = new EntitySlime(this.worldObj);
                 entityslime.setSlimeSize(1);
                 entityslime.moveTo(
-                        (double)this.xCoord + (double)f, (double)this.yCoord + 1.0, (double)this.z + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F
+                        (double)this.x + (double)f, (double)this.y + 1.0, (double)this.z + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F
                 );
                 float f3 = 0.05F;
                 entityslime.xd = (float)this.rand.nextGaussian() * f3;
@@ -386,7 +392,7 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     private void pullFromTop() {
-        TileEntity tile = worldObj.getBlockTileEntity(x, yCoord + 1, z);
+        TileEntity tile = worldObj.getBlockTileEntity(x, y + 1, z);
         if (tile instanceof IInventory) {
             for (int tileInv = 0; tileInv < ((IInventory) tile).getSizeInventory(); tileInv++) {
                 ItemStack tileStack = ((IInventory) tile).getStackInSlot(tileInv);
@@ -418,10 +424,10 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         switch (meta) {
             default:
             case 2:
-                tile = worldObj.getBlockTileEntity(xCoord - 1, y, z);
+                tile = worldObj.getBlockTileEntity(x - 1, y, z);
                 break;
             case 3:
-                tile = worldObj.getBlockTileEntity(xCoord + 1, y, z);
+                tile = worldObj.getBlockTileEntity(x + 1, y, z);
                 break;
             case 4:
                 tile = worldObj.getBlockTileEntity(x, y, z + 1);

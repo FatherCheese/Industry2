@@ -69,13 +69,13 @@ public class TileEntityAdvancedCompressor extends TileEntityAdvancedBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
 
         if (!worldObj.isClientSide) {
             if (currentMachineTime == 0 || currentMachineTime > 0 && contents[2] != null || contents[3] != null) {
-                BlockAdvancedCompressor.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockAdvancedCompressor.updateBlockState(true, worldObj, x, y, z);
                 onInventoryChanged();
 
                 if (hasEnergy && (canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5]))) {
@@ -118,7 +118,7 @@ public class TileEntityAdvancedCompressor extends TileEntityAdvancedBase {
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.advancedMachineCompressor.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.advancedMachineCompressor.id);
         }
     }
 }

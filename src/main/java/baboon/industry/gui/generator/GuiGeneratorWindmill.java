@@ -59,7 +59,7 @@ public class GuiGeneratorWindmill extends GuiContainer {
 
         if (x > (scrnX + 102) && x < (scrnX + 106))
             if (y > (scrnY + 27) && y < (scrnY + 59)) {
-                String text = TextFormatting.WHITE + "Height: " + TextFormatting.LIGHT_GRAY + tileEntity.yCoord + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + 255;
+                String text = TextFormatting.WHITE + "Height: " + TextFormatting.LIGHT_GRAY + tileEntity.y + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + 255;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);

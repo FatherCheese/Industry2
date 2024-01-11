@@ -10,7 +10,7 @@ import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
 import org.lwjgl.input.Keyboard;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class GuiAdvancedMacerator extends GuiAdvancedBase {
 
@@ -54,11 +54,11 @@ public class GuiAdvancedMacerator extends GuiAdvancedBase {
             if (mouseButton == 1)
                 action = InventoryAction.DROP_HELD_SINGLE;
 
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
             return;
         }
-        if (!this.mc.thePlayer.getGamemode().consumeBlocks && mouseButton == 2) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
+        if (!this.mc.thePlayer.getGamemode().consumeBlocks() && mouseButton == 2) {
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
             return;
         }
 
@@ -116,11 +116,11 @@ public class GuiAdvancedMacerator extends GuiAdvancedBase {
         }
 
         if (slot != null && stackInSlot != null && slot.allowItemInteraction() && stackInSlot.getItem().hasInventoryInteraction() && mouseButton == 1) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
             return;
         }
 
         int[] args = new int[]{slotId, target};
-        this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
+        this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
     }
 }

@@ -21,7 +21,8 @@ public class TileEntityEnergyConductorDamageable extends TileEntityEnergyConduct
     private final int healAmount = 1;
     public int machineHealth = maxMachineHealth;
     private Boolean lastTickDamage = false;
-
+    public TileEntityEnergyConductorDamageable() {
+    }
     public int receive(Direction dir, int amount, boolean test) {
         if (canConnect(dir, Connection.INPUT)) {
             if (amount > maxReceive && random.nextInt(4) == 0) {

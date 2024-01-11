@@ -2,14 +2,15 @@ package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import net.minecraft.core.InventoryAction;
-import net.minecraft.core.crafting.recipe.RecipesFurnace;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
 import org.lwjgl.input.Keyboard;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class GuiMachineFurnace extends GuiMachineBase {
 
@@ -54,11 +55,11 @@ public class GuiMachineFurnace extends GuiMachineBase {
             if (mouseButton == 1)
                 action = InventoryAction.DROP_HELD_SINGLE;
 
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, null, this.mc.thePlayer);
             return;
         }
-        if (!this.mc.thePlayer.getGamemode().consumeBlocks && mouseButton == 2) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
+        if (!this.mc.thePlayer.getGamemode().consumeBlocks() && mouseButton == 2) {
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.CREATIVE_GRAB, new int[]{slotId, 64}, this.mc.thePlayer);
             return;
         }
 
@@ -104,7 +105,11 @@ public class GuiMachineFurnace extends GuiMachineBase {
             action = InventoryAction.MOVE_SINGLE_ITEM;
 
         if (this.inventorySlots instanceof ContainerMachineBase) { // This is the only section that actually really matters
-            boolean recipes = RecipesFurnace.smelting().getSmeltingList().containsKey(clickedItemId);
+            boolean recipes = false;
+            for (RecipeEntryFurnace furnaceEntry : Registries.RECIPES.getAllFurnaceRecipes()){
+                recipes = furnaceEntry.getInput().matches(stackInSlot);
+                if (recipes) break;
+            }
 
             if (Item.itemsList[clickedItemId] instanceof ItemEnergyContainer)
                 target = 1;
@@ -113,11 +118,11 @@ public class GuiMachineFurnace extends GuiMachineBase {
         }
 
         if (slot != null && stackInSlot != null && slot.allowItemInteraction() && stackInSlot.getItem().hasInventoryInteraction() && mouseButton == 1) {
-            this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
+            this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, InventoryAction.INTERACT_SLOT, new int[]{slot.id}, this.mc.thePlayer);
             return;
         }
 
         int[] args = new int[]{slotId, target};
-        this.mc.playerController.doInventoryAction(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
+        this.mc.playerController.handleInventoryMouseClick(this.inventorySlots.windowId, action, args, this.mc.thePlayer);
     }
 }

@@ -3,13 +3,16 @@ package baboon.industry.block.machines.advanced.entity;
 import baboon.industry.block.IndustryBlocks;
 import baboon.industry.block.machines.advanced.BlockAdvancedFurnace;
 import baboon.industry.item.IndustryItems;
-import net.minecraft.core.crafting.recipe.RecipesBlastFurnace;
-import net.minecraft.core.crafting.recipe.RecipesFurnace;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryBlastFurnace;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.ItemStack;
 
+import java.util.List;
+
 public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
-    private final RecipesFurnace recipesFurnace = RecipesFurnace.smelting();
-    private final RecipesBlastFurnace recipesBlastFurnace = RecipesBlastFurnace.smelting();
+    private final List<RecipeEntryFurnace> furnaceEntries = Registries.RECIPES.getAllFurnaceRecipes();
+    private final List<RecipeEntryBlastFurnace> blastFurnaceEntries = Registries.RECIPES.getAllBlastFurnaceRecipes();
     private boolean blasting = false;
 
     @Override
@@ -17,24 +20,33 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
         return "IndustryAdvancedFurnace";
     }
 
-    private boolean isProducible(ItemStack itemStack) {
-        if (blasting)
-            return recipesBlastFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
-        return recipesFurnace.getSmeltingList().containsKey(itemStack.getItem().id);
+    private ItemStack getSmeltingResult(ItemStack stack){
+        if (blasting) {
+            RecipeEntryBlastFurnace be = getBlastFurnaceEntry(stack);
+            return be != null ? be.getOutput() : null;
+        }
+        RecipeEntryFurnace fe = getFurnaceEntry(stack);
+        return fe != null ? fe.getOutput() : null;
+    }
+    private RecipeEntryFurnace getFurnaceEntry(ItemStack stack){
+        for (RecipeEntryFurnace furnaceEntry : furnaceEntries){
+            if (furnaceEntry.getInput().matches(stack)) return furnaceEntry;
+        }
+        return null;
+    }
+    private RecipeEntryBlastFurnace getBlastFurnaceEntry(ItemStack stack){
+        for (RecipeEntryBlastFurnace entryBlastFurnace : blastFurnaceEntries){
+            if (entryBlastFurnace.getInput().matches(stack)) return entryBlastFurnace;
+        }
+        return null;
     }
 
     private boolean canProduce(ItemStack input, ItemStack output) {
         if (input == null || input.getItem() == null)
             return false;
 
-        if (isProducible(input)) {
-            ItemStack resultStack;
-
-            if (blasting)
-                resultStack = recipesBlastFurnace.getSmeltingResult(input.getItem().id);
-            else
-                resultStack = recipesFurnace.getSmeltingResult(input.getItem().id);
-
+        ItemStack resultStack = getSmeltingResult(input);
+        if (resultStack != null) {
             return output == null || output.getItem() == resultStack.getItem() &&
                     output.stackSize + resultStack.stackSize <= resultStack.getMaxStackSize();
         }
@@ -43,12 +55,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
 
     private void produceFirstItem() {
         if (canProduce(contents[2], contents[4])) {
-            ItemStack itemStack;
-
-            if (blasting)
-                itemStack = recipesBlastFurnace.getSmeltingResult(contents[2].getItem().id);
-            else
-                itemStack = recipesFurnace.getSmeltingResult(contents[2].getItem().id);
+            ItemStack itemStack = getSmeltingResult(contents[2]);
 
             if (itemStack == null)
                 return;
@@ -68,12 +75,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
 
     private void produceSecondItem() {
         if (canProduce(contents[3], contents[5])) {
-            ItemStack itemStack;
-
-            if (blasting)
-                itemStack = recipesBlastFurnace.getSmeltingResult(contents[3].getItem().id);
-            else
-                itemStack = recipesFurnace.getSmeltingResult(contents[3].getItem().id);
+            ItemStack itemStack = getSmeltingResult(contents[3]);
 
             if (itemStack == null)
                 return;
@@ -104,13 +106,13 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean hasEnergy = energy > 0;
 
         if (!worldObj.isClientSide) {
             if (currentMachineTime == 0 || currentMachineTime > 0 && contents[2] != null || contents[3] != null) {
-                BlockAdvancedFurnace.updateBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                BlockAdvancedFurnace.updateBlockState(true, worldObj, x, y, z);
                 onInventoryChanged();
 
                 if (hasEnergy && (canProduce(contents[2], contents[4]) || canProduce(contents[3], contents[5]))) {
@@ -153,7 +155,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
             }
 
             if (active)
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, IndustryBlocks.advancedMachineFurnace.id);
+                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.advancedMachineFurnace.id);
         }
     }
 }

@@ -36,7 +36,8 @@ import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
-import sunsetsatellite.energyapi.EnergyAPI;
+import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.core.util.MpGuiEntry;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.EntityHelper;
 
@@ -164,70 +165,70 @@ public class IndustryBlocks {
     }
 
     private void addToGuiMap() {
-        EnergyAPI.addToNameGuiMap("IndustryGenerator", GuiGenerator.class, TileEntityGenerator.class, ContainerGenerator.class);
-        EnergyAPI.addToNameGuiMap("IndustryWatermill", GuiGeneratorWatermill.class, TileEntityGeneratorWatermill.class, ContainerGeneratorWatermill.class);
-        EnergyAPI.addToNameGuiMap("IndustryWindmill", GuiGeneratorWindmill.class, TileEntityGeneratorWindmill.class, ContainerGeneratorWindmill.class);
-        EnergyAPI.addToNameGuiMap("IndustryGeothermal", GuiGeneratorGeothermal.class, TileEntityGeneratorGeothermal.class, ContainerGeneratorGeothermal.class);
-        EnergyAPI.addToNameGuiMap("IndustrySolar", GuiGeneratorSolar.class, TileEntityGeneratorSolar.class, ContainerSolarBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryArrayLV", GuiArrayLV.class, TileEntityArrayLV.class, ContainerSolarBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryArrayMV", GuiArrayMV.class, TileEntityArrayMV.class, ContainerSolarBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryArrayHV", GuiArrayHV.class, TileEntityArrayHV.class, ContainerSolarBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryArrayEHV", GuiArrayEHV.class, TileEntityArrayEHV.class, ContainerSolarBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryBatboxLV", GuiBatboxLV.class, TileEntityBatboxLV.class, ContainerBatboxBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryBatboxMV", GuiBatboxMV.class, TileEntityBatboxMV.class, ContainerBatboxBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryBatboxHV", GuiBatboxHV.class, TileEntityBatboxHV.class, ContainerBatboxBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryBatboxEHV", GuiBatboxEHV.class, TileEntityBatboxEHV.class, ContainerBatboxBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineFurnace", GuiMachineFurnace.class, TileEntityMachineFurnace.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineMacerator", GuiMachineMacerator.class, TileEntityMachineMacerator.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineCompressor", GuiMachineCompressor.class, TileEntityMachineCompressor.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineWiremill", GuiMachineWiremill.class, TileEntityMachineWiremill.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineExtractor", GuiMachineExtractor.class, TileEntityMachineExtractor.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineRecycler", GuiMachineRecycler.class, TileEntityMachineRecycler.class, ContainerMachineBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineCannery", GuiMachineCannery.class, TileEntityMachineCannery.class, ContainerMachineCannery.class);
-        EnergyAPI.addToNameGuiMap("IndustryMachineTrommel", GuiMachineTrommel.class, TileEntityMachineTrommel.class, ContainerMachineTrommel.class);
-        EnergyAPI.addToNameGuiMap("IndustryAdvancedFurnace", GuiAdvancedFurnace.class, TileEntityAdvancedFurnace.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryAdvancedMacerator", GuiAdvancedMacerator.class, TileEntityAdvancedMacerator.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryAdvancedCompressor", GuiAdvancedCompressor.class, TileEntityAdvancedCompressor.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryAdvancedWiremill", GuiAdvancedWiremill.class, TileEntityAdvancedWiremill.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryAdvancedExtractor", GuiAdvancedExtractor.class, TIleEntityAdvancedExtractor.class, ContainerAdvancedBase.class);
-        EnergyAPI.addToNameGuiMap("IndustryReactor", GuiReactor.class, TileEntityReactorNew.class, ContainerReactor.class);
-        EnergyAPI.addToNameGuiMap("IndustryFabricator", GuiFabricator.class, TileEntityEnergyFabricator.class, ContainerFabricator.class);
+        Catalyst.GUIS.register("IndustryGenerator", new MpGuiEntry(TileEntityGenerator.class, GuiGenerator.class, ContainerGenerator.class));
+        Catalyst.GUIS.register("IndustryWatermill", new MpGuiEntry(TileEntityGeneratorWatermill.class,GuiGeneratorWatermill.class,  ContainerGeneratorWatermill.class));
+        Catalyst.GUIS.register("IndustryWindmill", new MpGuiEntry(TileEntityGeneratorWindmill.class,GuiGeneratorWindmill.class,  ContainerGeneratorWindmill.class));
+        Catalyst.GUIS.register("IndustryGeothermal", new MpGuiEntry(TileEntityGeneratorGeothermal.class,GuiGeneratorGeothermal.class,  ContainerGeneratorGeothermal.class));
+        Catalyst.GUIS.register("IndustrySolar", new MpGuiEntry(TileEntityGeneratorSolar.class,GuiGeneratorSolar.class,  ContainerSolarBase.class));
+        Catalyst.GUIS.register("IndustryArrayLV", new MpGuiEntry(TileEntityArrayLV.class,GuiArrayLV.class,  ContainerSolarBase.class));
+        Catalyst.GUIS.register("IndustryArrayMV", new MpGuiEntry(TileEntityArrayMV.class,GuiArrayMV.class,  ContainerSolarBase.class));
+        Catalyst.GUIS.register("IndustryArrayHV", new MpGuiEntry(TileEntityArrayHV.class,GuiArrayHV.class,  ContainerSolarBase.class));
+        Catalyst.GUIS.register("IndustryArrayEHV", new MpGuiEntry(TileEntityArrayEHV.class,GuiArrayEHV.class,  ContainerSolarBase.class));
+        Catalyst.GUIS.register("IndustryBatboxLV", new MpGuiEntry(TileEntityBatboxLV.class,GuiBatboxLV.class,  ContainerBatboxBase.class));
+        Catalyst.GUIS.register("IndustryBatboxMV", new MpGuiEntry(TileEntityBatboxMV.class,GuiBatboxMV.class,  ContainerBatboxBase.class));
+        Catalyst.GUIS.register("IndustryBatboxHV", new MpGuiEntry(TileEntityBatboxHV.class,GuiBatboxHV.class,  ContainerBatboxBase.class));
+        Catalyst.GUIS.register("IndustryBatboxEHV", new MpGuiEntry(TileEntityBatboxEHV.class,GuiBatboxEHV.class,  ContainerBatboxBase.class));
+        Catalyst.GUIS.register("IndustryMachineFurnace", new MpGuiEntry(TileEntityMachineFurnace.class,GuiMachineFurnace.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineMacerator", new MpGuiEntry(TileEntityMachineMacerator.class,GuiMachineMacerator.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineCompressor", new MpGuiEntry(TileEntityMachineCompressor.class,GuiMachineCompressor.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineWiremill", new MpGuiEntry(TileEntityMachineWiremill.class,GuiMachineWiremill.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineExtractor", new MpGuiEntry(TileEntityMachineExtractor.class,GuiMachineExtractor.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineRecycler", new MpGuiEntry(TileEntityMachineRecycler.class,GuiMachineRecycler.class,  ContainerMachineBase.class));
+        Catalyst.GUIS.register("IndustryMachineCannery", new MpGuiEntry(TileEntityMachineCannery.class,GuiMachineCannery.class,  ContainerMachineCannery.class));
+        Catalyst.GUIS.register("IndustryMachineTrommel", new MpGuiEntry(TileEntityMachineTrommel.class,GuiMachineTrommel.class,  ContainerMachineTrommel.class));
+        Catalyst.GUIS.register("IndustryAdvancedFurnace", new MpGuiEntry(TileEntityAdvancedFurnace.class,GuiAdvancedFurnace.class,  ContainerAdvancedBase.class));
+        Catalyst.GUIS.register("IndustryAdvancedMacerator", new MpGuiEntry(TileEntityAdvancedMacerator.class,GuiAdvancedMacerator.class,  ContainerAdvancedBase.class));
+        Catalyst.GUIS.register("IndustryAdvancedCompressor", new MpGuiEntry(TileEntityAdvancedCompressor.class,GuiAdvancedCompressor.class,  ContainerAdvancedBase.class));
+        Catalyst.GUIS.register("IndustryAdvancedWiremill", new MpGuiEntry(TileEntityAdvancedWiremill.class,GuiAdvancedWiremill.class,  ContainerAdvancedBase.class));
+        Catalyst.GUIS.register("IndustryAdvancedExtractor", new MpGuiEntry(TIleEntityAdvancedExtractor.class,GuiAdvancedExtractor.class,  ContainerAdvancedBase.class));
+        Catalyst.GUIS.register("IndustryReactor", new MpGuiEntry(TileEntityReactorNew.class,GuiReactor.class,  ContainerReactor.class));
+        Catalyst.GUIS.register("IndustryFabricator", new MpGuiEntry(TileEntityEnergyFabricator.class,GuiFabricator.class,  ContainerFabricator.class));
     }
 
     private void initializeTiles() {
-        EntityHelper.createTileEntity(TileEntityCable.class, "Cable");
-        EntityHelper.createTileEntity(TileEntityGenerator.class, "IndustryGenerator");
-        EntityHelper.createTileEntity(TileEntityGeneratorWatermill.class, "IndustryWatermill");
-        EntityHelper.createTileEntity(TileEntityGeneratorWindmill.class, "IndustryWindmill");
-        EntityHelper.createTileEntity(TileEntityGeneratorGeothermal.class, "IndustryGeothermal");
-        EntityHelper.createTileEntity(TileEntityGeneratorSolar.class, "IndustrySolar");
-        EntityHelper.createTileEntity(TileEntityArrayLV.class, "IndustryArrayLV");
-        EntityHelper.createTileEntity(TileEntityArrayMV.class, "IndustryArrayMV");
-        EntityHelper.createTileEntity(TileEntityArrayHV.class, "IndustryArrayHV");
-        EntityHelper.createTileEntity(TileEntityArrayEHV.class, "IndustryArrayEHV");
-        EntityHelper.createTileEntity(TileEntityBatboxLV.class, "IndustryBatboxLV");
-        EntityHelper.createTileEntity(TileEntityBatboxMV.class, "IndustryBatboxMV");
-        EntityHelper.createTileEntity(TileEntityBatboxHV.class, "IndustryBatboxHV");
-        EntityHelper.createTileEntity(TileEntityBatboxEHV.class, "IndustryBatboxEHV");
-        EntityHelper.createTileEntity(TileEntityTransformerMVtoLV.class, "IndustryTransformerMVtoLV");
-        EntityHelper.createTileEntity(TileEntityTransformerHVtoMV.class, "IndustryTransformerHVtoMV");
-        EntityHelper.createTileEntity(TileEntityTransformerEHVtoHV.class, "IndustryTransformerEHVtoHV");
-        EntityHelper.createTileEntity(TileEntityMachineFurnace.class, "IndustryMachineFurnace");
-        EntityHelper.createTileEntity(TileEntityMachineMacerator.class, "IndustryMachineMacerator");
-        EntityHelper.createTileEntity(TileEntityMachineCompressor.class, "IndustryMachineCompressor");
-        EntityHelper.createTileEntity(TileEntityMachineWiremill.class, "IndustryMachineWiremill");
-        EntityHelper.createTileEntity(TileEntityMachineExtractor.class, "IndustryMachineExtractor");
-        EntityHelper.createTileEntity(TileEntityMachineRecycler.class, "IndustryMachineRecycler");
-        EntityHelper.createTileEntity(TileEntityMachineCannery.class, "IndustryMachineCannery");
-        EntityHelper.createTileEntity(TileEntityMachineTrommel.class, "IndustryMachineTrommel");
-        EntityHelper.createTileEntity(TileEntityAdvancedFurnace.class, "IndustryAdvancedFurnace");
-        EntityHelper.createTileEntity(TileEntityAdvancedMacerator.class, "IndustryAdvancedMacerator");
-        EntityHelper.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
-        EntityHelper.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
-        EntityHelper.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
-        EntityHelper.createTileEntity(TileEntityReactorNew.class, "IndustryReactor");
-        EntityHelper.createTileEntity(TileEntityReactorIO.class, "IndustryReactorIO");
-        EntityHelper.createTileEntity(TileEntityEnergyFabricator.class, "IndustryFabricator");
+        EntityHelper.Core.createTileEntity(TileEntityCable.class, "Cable");
+        EntityHelper.Core.createTileEntity(TileEntityGenerator.class, "IndustryGenerator");
+        EntityHelper.Core.createTileEntity(TileEntityGeneratorWatermill.class, "IndustryWatermill");
+        EntityHelper.Core.createTileEntity(TileEntityGeneratorWindmill.class, "IndustryWindmill");
+        EntityHelper.Core.createTileEntity(TileEntityGeneratorGeothermal.class, "IndustryGeothermal");
+        EntityHelper.Core.createTileEntity(TileEntityGeneratorSolar.class, "IndustrySolar");
+        EntityHelper.Core.createTileEntity(TileEntityArrayLV.class, "IndustryArrayLV");
+        EntityHelper.Core.createTileEntity(TileEntityArrayMV.class, "IndustryArrayMV");
+        EntityHelper.Core.createTileEntity(TileEntityArrayHV.class, "IndustryArrayHV");
+        EntityHelper.Core.createTileEntity(TileEntityArrayEHV.class, "IndustryArrayEHV");
+        EntityHelper.Core.createTileEntity(TileEntityBatboxLV.class, "IndustryBatboxLV");
+        EntityHelper.Core.createTileEntity(TileEntityBatboxMV.class, "IndustryBatboxMV");
+        EntityHelper.Core.createTileEntity(TileEntityBatboxHV.class, "IndustryBatboxHV");
+        EntityHelper.Core.createTileEntity(TileEntityBatboxEHV.class, "IndustryBatboxEHV");
+        EntityHelper.Core.createTileEntity(TileEntityTransformerMVtoLV.class, "IndustryTransformerMVtoLV");
+        EntityHelper.Core.createTileEntity(TileEntityTransformerHVtoMV.class, "IndustryTransformerHVtoMV");
+        EntityHelper.Core.createTileEntity(TileEntityTransformerEHVtoHV.class, "IndustryTransformerEHVtoHV");
+        EntityHelper.Core.createTileEntity(TileEntityMachineFurnace.class, "IndustryMachineFurnace");
+        EntityHelper.Core.createTileEntity(TileEntityMachineMacerator.class, "IndustryMachineMacerator");
+        EntityHelper.Core.createTileEntity(TileEntityMachineCompressor.class, "IndustryMachineCompressor");
+        EntityHelper.Core.createTileEntity(TileEntityMachineWiremill.class, "IndustryMachineWiremill");
+        EntityHelper.Core.createTileEntity(TileEntityMachineExtractor.class, "IndustryMachineExtractor");
+        EntityHelper.Core.createTileEntity(TileEntityMachineRecycler.class, "IndustryMachineRecycler");
+        EntityHelper.Core.createTileEntity(TileEntityMachineCannery.class, "IndustryMachineCannery");
+        EntityHelper.Core.createTileEntity(TileEntityMachineTrommel.class, "IndustryMachineTrommel");
+        EntityHelper.Core.createTileEntity(TileEntityAdvancedFurnace.class, "IndustryAdvancedFurnace");
+        EntityHelper.Core.createTileEntity(TileEntityAdvancedMacerator.class, "IndustryAdvancedMacerator");
+        EntityHelper.Core.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
+        EntityHelper.Core.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
+        EntityHelper.Core.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
+        EntityHelper.Core.createTileEntity(TileEntityReactorNew.class, "IndustryReactor");
+        EntityHelper.Core.createTileEntity(TileEntityReactorIO.class, "IndustryReactorIO");
+        EntityHelper.Core.createTileEntity(TileEntityEnergyFabricator.class, "IndustryFabricator");
     }
 
     public void initializeBlocks() {
@@ -611,7 +612,7 @@ public class IndustryBlocks {
                 .setLightOpacity(1)
                 .build(new BlockLeavesRubberwood("leaves.rubber", blockID("leavesRubberWood")))
                 .withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS)
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withDisabledNeighborNotifyOnMetadataChange()
                 .withDisabledStats();
 
@@ -621,7 +622,8 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.WOOD)
                 .setHardness(2.0f)
                 .build(new BlockLog("log.rubber", blockID("logRubberWood")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         logRubberWoodResin = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("log_rubber_top.png")
@@ -630,7 +632,8 @@ public class IndustryBlocks {
                 .setHardness(2.0f)
                 .setBlockModel(new BlockModelRenderBlocks(27))
                 .build(new BlockLogResin("log.rubber.resin", blockID("logRubberWoodResin")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT, BlockTags.NOT_IN_CREATIVE_MENU);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT, BlockTags.NOT_IN_CREATIVE_MENU)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         logRubberWoodResinFull = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("log_rubber_top.png")
@@ -639,7 +642,8 @@ public class IndustryBlocks {
                 .setHardness(2.0f)
                 .setBlockModel(new BlockModelRenderBlocks(27))
                 .build(new BlockLogResinFull("log.rubber.resin", blockID("logRubberWoodResinFull")))
-                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT);
+                .withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.FENCES_CONNECT)
+                .withDisabledNeighborNotifyOnMetadataChange();
 
         saplingRubberWood = new BlockBuilder(MOD_ID)
                 .setTextures("sapling_rubber.png")
@@ -647,7 +651,7 @@ public class IndustryBlocks {
                 .setBlockModel(new BlockModelRenderBlocks(1))
                 .build(new BlockSaplingRubberwood("sapling.rubber", blockID("saplingRubberWood")))
                 .withTags(BlockTags.BROKEN_BY_FLUIDS)
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withDisabledNeighborNotifyOnMetadataChange();
 
         nuclearReactor = new BlockBuilder(MOD_ID)
@@ -699,7 +703,7 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(5.0F)
                 .build(new BlockAlarm("alarm", blockID("alarm")))
-                .setTickOnLoad(true)
+                .setTicking(true)
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         addToGuiMap();

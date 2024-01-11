@@ -1,27 +1,16 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.Industry2;
 import baboon.industry.block.reactor.entity.TileEntityReactorIO;
-import baboon.industry.block.reactor.entity.TileEntityReactorNew;
-import net.minecraft.core.block.entity.TileEntity;
-import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
-import toufoumaster.btwaila.TooltipGroup;
-import toufoumaster.btwaila.TooltipRegistry;
-import toufoumaster.btwaila.gui.GuiBlockOverlay;
+import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
+import toufoumaster.btwaila.tooltips.TileTooltip;
 
-public class TooltipReactorIO implements IBTWailaCustomBlockTooltip {
-
+public class TooltipReactorIO extends TileTooltip<TileEntityReactorIO> {
     @Override
-    public void addTooltip() {
-        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntityReactorIO.class, this);
-        tooltipGroup.addTooltip(TileEntityReactorIO.class);
-        TooltipRegistry.tooltipMap.add(tooltipGroup);
+    public void initTooltip() {
+        addClass(TileEntityReactorIO.class);
     }
-
     @Override
-    public void drawAdvancedTooltip(TileEntity tileEntity, GuiBlockOverlay guiBlockOverlay) {
-        TileEntityReactorIO tile = (TileEntityReactorIO) tileEntity;
-
-        guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
+    public void drawAdvancedTooltip(TileEntityReactorIO tile, AdvancedInfoComponent advancedInfoComponent) {
+        advancedInfoComponent.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
     }
 }

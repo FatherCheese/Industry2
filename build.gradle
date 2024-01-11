@@ -116,7 +116,7 @@ dependencies {
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	// Mod Compatability
-	modImplementation "btwaila:btwaila:1.0.0-7.1"
+	modImplementation "btwaila:btwaila:1.0.6-7.1"
 
 	modImplementation "ModMenu:ModMenu:2.0.3"
 

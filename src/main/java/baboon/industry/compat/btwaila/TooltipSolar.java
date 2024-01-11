@@ -1,32 +1,28 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.Industry2;
-import baboon.industry.block.generator.entity.*;
-import net.minecraft.core.block.entity.TileEntity;
-import toufoumaster.btwaila.IBTWailaCustomBlockTooltip;
-import toufoumaster.btwaila.TooltipGroup;
-import toufoumaster.btwaila.TooltipRegistry;
-import toufoumaster.btwaila.gui.GuiBlockOverlay;
+import baboon.industry.block.generator.entity.TileEntityArrayEHV;
+import baboon.industry.block.generator.entity.TileEntityArrayHV;
+import baboon.industry.block.generator.entity.TileEntityArrayLV;
+import baboon.industry.block.generator.entity.TileEntityArrayMV;
+import baboon.industry.block.generator.entity.TileEntityGeneratorSolar;
+import baboon.industry.block.generator.entity.TileEntitySolarBase;
+import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
+import toufoumaster.btwaila.tooltips.TileTooltip;
 
-public class TooltipSolar implements IBTWailaCustomBlockTooltip {
-
+public class TooltipSolar extends TileTooltip<TileEntitySolarBase> {
     @Override
-    public void addTooltip() {
-        TooltipGroup tooltipGroup = new TooltipGroup(Industry2.MOD_ID, TileEntitySolarBase.class, this);
-        tooltipGroup.addTooltip(TileEntityGeneratorSolar.class);
-        tooltipGroup.addTooltip(TileEntityArrayLV.class);
-        tooltipGroup.addTooltip(TileEntityArrayMV.class);
-        tooltipGroup.addTooltip(TileEntityArrayHV.class);
-        tooltipGroup.addTooltip(TileEntityArrayEHV.class);
-        TooltipRegistry.tooltipMap.add(tooltipGroup);
+    public void initTooltip() {
+        addClass(TileEntityGeneratorSolar.class);
+        addClass(TileEntityArrayLV.class);
+        addClass(TileEntityArrayMV.class);
+        addClass(TileEntityArrayHV.class);
+        addClass(TileEntityArrayEHV.class);
     }
-
     @Override
-    public void drawAdvancedTooltip(TileEntity tileEntity, GuiBlockOverlay guiBlockOverlay) {
-        TileEntitySolarBase tile = (TileEntitySolarBase) tileEntity;
-        guiBlockOverlay.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
-        guiBlockOverlay.drawStringWithShadow("Is sun visible? " + tile.getIsSkyVisible(), 0);
+    public void drawAdvancedTooltip(TileEntitySolarBase tile, AdvancedInfoComponent advancedInfoComponent) {
+        advancedInfoComponent.drawStringWithShadow("Stored Energy: " + tile.energy + " / " + tile.capacity, 0);
+        advancedInfoComponent.drawStringWithShadow("Is sun visible? " + tile.getIsSkyVisible(), 0);
 
-        guiBlockOverlay.drawInventory(tile, 0);
+        advancedInfoComponent.drawInventory(tile, 0);
     }
 }

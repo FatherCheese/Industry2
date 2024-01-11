@@ -2,9 +2,9 @@ package baboon.industry.block.reactor.entity;
 
 import baboon.industry.IndustryConfig;
 import com.mojang.nbt.CompoundTag;
-import sunsetsatellite.energyapi.impl.TileEntityEnergyConductor;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityReactorIO extends TileEntityEnergyConductor {
 

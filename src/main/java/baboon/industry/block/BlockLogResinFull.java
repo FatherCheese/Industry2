@@ -15,7 +15,7 @@ public class BlockLogResinFull extends BlockLog {
 
     public BlockLogResinFull(String key, int id) {
         super(key, id);
-        this.setTickOnLoad(true);
+        this.setTicking(true);
     }
 
     @Override

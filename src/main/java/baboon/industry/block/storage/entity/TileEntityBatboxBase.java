@@ -6,9 +6,10 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import net.minecraft.core.player.inventory.InventorySorter;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class TileEntityBatboxBase extends TileEntityEnergyConductorDamageable implements IInventory {
     private ItemStack[] contents;
@@ -74,15 +75,20 @@ public class TileEntityBatboxBase extends TileEntityEnergyConductorDamageable im
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this)
+        if (worldObj.getBlockTileEntity(x, y, z) != this)
             return false;
 
-        return entityPlayer.distanceToSqr(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
+        return entityPlayer.distanceToSqr(x + 0.5f, y + 0.5f, z + 0.5f) <= 64;
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void sortInventory() {
+        InventorySorter.sortInventory(contents);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
 
         if (!worldObj.isClientSide) {
             if (getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {

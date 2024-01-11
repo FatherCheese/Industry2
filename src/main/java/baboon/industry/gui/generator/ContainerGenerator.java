@@ -1,12 +1,11 @@
 package baboon.industry.gui.generator;
 
 import baboon.industry.block.generator.entity.TileEntityGenerator;
-import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
+import sunsetsatellite.catalyst.energy.impl.ContainerEnergy;
 
 public class ContainerGenerator extends ContainerEnergy {
     private int energy = 0;

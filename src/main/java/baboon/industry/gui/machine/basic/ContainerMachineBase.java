@@ -7,7 +7,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotFurnace;
-import sunsetsatellite.energyapi.template.containers.ContainerEnergy;
+import sunsetsatellite.catalyst.energy.impl.ContainerEnergy;
 
 import java.util.List;
 

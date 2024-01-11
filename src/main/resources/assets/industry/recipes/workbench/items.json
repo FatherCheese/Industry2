@@ -1,0 +1,1819 @@
+[
+  {
+    "name": "industry:workbench/plate_tin",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.tin",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/plate_copper",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.copper",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/plate_bronze",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.bronze",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/plate_iron",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.iron",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/plate_gold",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.gold",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/plate_steel",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.plate.steel",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/cable_tin",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.cutters",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.cable.tin",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/cable_copper",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.cutters",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.cable.copper",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/cable_gold",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.cutters",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.cable.gold",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/cable_steel",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "12"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.cutters",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.cable.steel",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/cable_tin_insulated",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.cable.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.insulated.cable.tin",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/cable_copper_insulated",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.cable.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.insulated.cable.copper",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/cable_gold_insulated",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.cable.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.insulated.cable.gold",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/cable_steel_insulated",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.cable.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.insulated.cable.steel",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/tool_tree_tap",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "111",
+      "1##"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "group": "minecraft:planks"
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.treetap",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_hammer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "121",
+      "#2#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.stick",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.hammer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_cutters",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "#1#",
+      "2#2"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.cutters",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_wrench",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "111",
+      "#1#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.wrench",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/battery_redstone",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "232",
+      "232"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.plate.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.battery.redstone",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/battery_advanced",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "232",
+      "242"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.plate.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.sulphur",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.battery.advanced",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/battery_crystal",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "121",
+      "232",
+      "121"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.diamond",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.battery.crystal",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/battery_lapis",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "121",
+      "343",
+      "121"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 4
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuitadvanced",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.diamond",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.battery.lapis",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/cell_empty",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "1#1",
+      "#1#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.ingot.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.cell.empty",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/can_empty",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "#1#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.can.empty",
+      "amount": 3,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/circuit_basic",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "232",
+      "111"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.plate.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.circuit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/circuit_advanced",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "234",
+      "111"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.quartz",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.circuitadvanced",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_chainsaw",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#11",
+      "231",
+      "42#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.industry.battery.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.chainsaw",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_drill",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121",
+      "343"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.ingot.bronze",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.industry.battery.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.drill",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_drill_gold",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.ingot.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.drill",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.drill.gold",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_drill_diamond",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.diamond",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.tool.drill",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.drill.diamond",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/tool_nano_sword",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "#2#",
+      "343"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.quartz",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dust.glowstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.reactorplate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.industry.battery.crystal",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.tool.nanosword",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_helmet_hazmat",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "121",
+      "#3#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 11
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.helmet.hazmat",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_chestplate_hazmat",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "121",
+      "111",
+      "111"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 11
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.chestplate.hazmat",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_leggings_hazmat",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "121",
+      "1#1"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 11
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.leggings.hazmat",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_boots_hazmat",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "1#1"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.rubber",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.boots.hazmat",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_helmet_iridium",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "121",
+      "131"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.iridium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.battery.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "tile.glass.tinted",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.helmet.iridium",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_chestplate_iridium",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "121",
+      "111"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.iridium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.battery.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.chestplate.iridium",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_leggings_iridium",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "111",
+      "2#2",
+      "1#1"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.iridium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.battery.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.leggings.iridium",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/armor_boots_iridium",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#1",
+      "2#2"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.plate.iridium",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.battery.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.armor.boots.iridium",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "industry:workbench/reactor_plate",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.plate.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.reactorplate",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/reactor_plate_hammer",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.ingot.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.ingot.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.reactorplate",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/dust_bronze",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.dust.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.dust.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.dust.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.dust.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.dust.bronze",
+      "amount": 4,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/ingot_iridium",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.ingot.iridium.scrap",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.iridium.scrap",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.ingot.iridium.scrap",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.ingot.iridium",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/upgrade_plate",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.industry.plate.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.plate.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.plate",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/upgrade_plate_hammer",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "stack": {
+          "key": "item.industry.tool.hammer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.plate",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "industry:workbench/upgrade_speed",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121",
+      "#3#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.cell.coolant",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.speed",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_transformer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1#2",
+      "#3#",
+      "456"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.insulated.cable.copper",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.insulated.cable.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "4",
+        "stack": {
+          "key": "item.industry.insulated.cable.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "5",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "6",
+        "stack": {
+          "key": "item.industry.insulated.cable.tin",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.transformer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_energy",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.industry.battery.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.energy",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_puller",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "tile.piston.base.sticky",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.puller",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_pusher",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "tile.piston.base",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.puller",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/upgrade_puller",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "#1#",
+      "121",
+      "#3#"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.nethercoal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "item.industry.upgrade.plate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.industry.circuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.upgrade.blasting",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "industry:workbench/food_joffos",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "1",
+      "2",
+      "3"
+    ],
+    "symbols": [
+      {
+        "symbol": "1",
+        "stack": {
+          "key": "item.dye",
+          "amount": 1,
+          "meta": 3
+        }
+      },
+      {
+        "symbol": "2",
+        "stack": {
+          "key": "tile.pumpkin",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "3",
+        "stack": {
+          "key": "item.wheat",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.industry.food.joffos",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  }
+]

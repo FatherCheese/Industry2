@@ -1,0 +1,182 @@
+[
+  {
+    "name": "minecraft:blast_furnace/copper_ores_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "group": "industry:ores_copper"
+    },
+    "output": {
+      "key": "item.industry.ingot.copper",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/tin_ores_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "group": "industry:ores_tin"
+    },
+    "output": {
+      "key": "item.industry.ingot.tin",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/rubberlog_to_charcoal",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "group": "industry:rubber_logs"
+    },
+    "output": {
+      "key": "item.coal",
+      "amount": 1,
+      "meta": 1
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/resin_to_rubber",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.resin",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.rubber",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/raw_tin_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.ore.raw.tin",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.tin",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/raw_copper_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.ore.raw.copper",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.copper",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_iron_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.dust.iron",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.ingot.iron",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_gold_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.dust.gold",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.ingot.gold",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_tin_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.dust.tin",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.tin",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_copper_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.dust.copper",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.copper",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_bronze_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.industry.dust.bronze",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.bronze",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/bulk_steel",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "tile.block.iron",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.ingot.steel",
+      "amount": 3,
+      "meta": 0
+    }
+  }
+]

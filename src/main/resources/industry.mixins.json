@@ -6,7 +6,6 @@
   "mixins": [
     "EntityMixin",
     "RenderBlocksMixin",
-    "TileEntityTrommelMixin",
     "WorldFeatureDungeonMixin",
     "achievement.SlotCraftingMixin"
   ],
