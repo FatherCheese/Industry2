@@ -4,9 +4,9 @@ Ever dreamt of having industrial machines in your Better Than Adventure world? H
 
 ## Prerequisites
 - JDK for Java 17 ([Eclipse Temurin](https://adoptium.net/temurin/releases/) recommended)
-- Halplibe 2.7.0 or later
-- EnergyAPI 1.1.9 or later.
-- TerrainAPI 1.3.0 or later
+- Halplibe 3.1.4
+- Catalyst Core 1.1.1 and Catalyst Energy 1.0.1
+- TerrainAPI 1.4.2
 
 ## Setup instructions
 
@@ -14,10 +14,10 @@ Ever dreamt of having industrial machines in your Better Than Adventure world? H
 
 2. Update HalpLibe to 2.7.0 or above in the Babric instance.
 
-3. Download TerrainAPI from here. (https://github.com/UselessBullets/TerrainAPI) or here (https://bta-modding.nouma-vallee.fr/Useless/terrainapi/)
+3. Download TerrainAPI [from here](https://github.com/UselessBullets/TerrainAPI) or [here](https://bta-modding.nouma-vallee.fr/Useless/terrainapi/).
 
-4. Download EnergyAPI from here. (https://github.com/MartinSVK12/energyapi)
+4. Download Catalyst [from here](https://github.com/MartinSVK12/catalyst).
 
-5. Download this mod from the BTA modding site from the releases tab.
+5. Download this mod from the [BTA modding site](https://bta-modding.nouma-vallee.fr/Baboonbuddy/industry2/) or from the releases tab.
 
-6. Plug the jar file into you and your server's Mods folder, and Have fun!
+6. Plug the jar file into you and your server's Mods folder, and have fun!
