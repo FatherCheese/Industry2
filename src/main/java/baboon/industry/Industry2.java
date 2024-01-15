@@ -10,10 +10,6 @@ import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
 public class Industry2 implements GameStartEntrypoint, ClientStartEntrypoint {
-
-    // TODO LIST
-    // Fix MP GUI issues
-
     public static String MOD_ID = "industry";
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);
 

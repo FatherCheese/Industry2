@@ -8,6 +8,7 @@ import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.achievement.AchievementList;
 import net.minecraft.core.util.helper.Side;
 import org.lwjgl.opengl.GL11;
+import turniplabs.halplibe.helper.AchievementHelper;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.achievements.GuiAchievements;
 
