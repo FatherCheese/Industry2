@@ -1,6 +1,7 @@
 package baboon.industry.block.reactor;
 
 import baboon.industry.block.reactor.entity.TileEntityReactorNew;
+import net.minecraft.core.block.BlockRedstoneTorch;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -8,11 +9,15 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.Catalyst;
 
 public class BlockReactor extends BlockTileEntity {
-    public BlockReactor(String key, int id, Material material) {
-        super(key, id, material);
+    public boolean halfHeat;
+
+    public BlockReactor(String key, int id, boolean halfHeat) {
+        super(key, id, Material.metal);
+        this.halfHeat = halfHeat;
     }
 
     @Override
@@ -59,5 +64,20 @@ public class BlockReactor extends BlockTileEntity {
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
         dropContents(world, x, y, z);
         super.onBlockRemoved(world, x, y, z, data);
+    }
+
+    @Override
+    public boolean canProvidePower() {
+        return halfHeat;
+    }
+
+    @Override
+    public boolean isPoweringTo(WorldSource blockAccess, int x, int y, int z, int side) {
+        return true;
+    }
+
+    @Override
+    public boolean isIndirectlyPoweringTo(World world, int x, int y, int z, int side) {
+        return isPoweringTo(world, x, y, z, side);
     }
 }

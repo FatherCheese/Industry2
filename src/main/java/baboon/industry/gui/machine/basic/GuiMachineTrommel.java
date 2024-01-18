@@ -3,12 +3,14 @@ package baboon.industry.gui.machine.basic;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineTrommel;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMachineTrommel extends GuiContainer {
     TileEntityMachineTrommel tileEntity;
+    I18n i18n = I18n.getInstance();
 
     public GuiMachineTrommel(InventoryPlayer inventory, TileEntityMachineTrommel tileEntity) {
         super(new ContainerMachineTrommel(inventory, tileEntity));
@@ -43,8 +45,8 @@ public class GuiMachineTrommel extends GuiContainer {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2 - 16;
-        drawStringCenteredNoShadow(fontRenderer, "Electric Trommel", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.t1.trommel"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class GuiMachineTrommel extends GuiContainer {
 
         if (x > (scrnX + 8) && x < (scrnX + 24))
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                String text = TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.energy") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);

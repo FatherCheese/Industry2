@@ -1,6 +1,7 @@
 package baboon.industry.gui.storage;
 
 import baboon.industry.block.storage.entity.TileEntityBatboxBase;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 
 public class GuiBatboxEHV extends GuiBatboxBase {
@@ -13,7 +14,8 @@ public class GuiBatboxEHV extends GuiBatboxBase {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2;
-        drawStringCenteredNoShadow(fontRenderer, "EHV Batbox", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        I18n i18n = I18n.getInstance();
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.batbox.ehv"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 }

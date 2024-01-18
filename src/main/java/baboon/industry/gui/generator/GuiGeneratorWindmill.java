@@ -3,12 +3,14 @@ package baboon.industry.gui.generator;
 import baboon.industry.block.generator.entity.TileEntityGeneratorWindmill;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class GuiGeneratorWindmill extends GuiContainer {
     private final TileEntityGeneratorWindmill tileEntity;
+    I18n i18n = I18n.getInstance();
 
     public GuiGeneratorWindmill(InventoryPlayer inventory, TileEntityGeneratorWindmill tileEntity) {
         super(new ContainerGeneratorWindmill(inventory, tileEntity));
@@ -35,8 +37,8 @@ public class GuiGeneratorWindmill extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer() {
         int scrnX = xSize / 2;
-        drawStringCenteredNoShadow(fontRenderer, "Windmill", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.generator.windmill"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class GuiGeneratorWindmill extends GuiContainer {
 
         if (x > (scrnX + 80) && x < (scrnX + 96))
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                String text = TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.energy") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -59,7 +61,7 @@ public class GuiGeneratorWindmill extends GuiContainer {
 
         if (x > (scrnX + 102) && x < (scrnX + 106))
             if (y > (scrnY + 27) && y < (scrnY + 59)) {
-                String text = TextFormatting.WHITE + "Height: " + TextFormatting.LIGHT_GRAY + tileEntity.y + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + 255;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.height") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.y + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + 255;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);

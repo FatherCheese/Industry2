@@ -660,7 +660,7 @@ public class IndustryBlocks {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10.0f)
                 .setResistance(0.0f)
-                .build(new BlockReactor("reactor", blockID("nuclearReactor"), Material.metal));
+                .build(new BlockReactor("reactor", blockID("nuclearReactor"), false));
 
         nuclearChamber = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("reactor_casing_top.png")

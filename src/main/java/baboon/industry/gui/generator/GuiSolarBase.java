@@ -3,6 +3,7 @@ package baboon.industry.gui.generator;
 import baboon.industry.block.generator.entity.TileEntitySolarBase;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.world.World;
@@ -10,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiSolarBase extends GuiContainer {
     private final TileEntitySolarBase tileEntity;
+    I18n i18n = I18n.getInstance();
 
     public GuiSolarBase(InventoryPlayer inventory, TileEntitySolarBase tileEntity) {
         super(new ContainerSolarBase(inventory, tileEntity));
@@ -48,7 +50,7 @@ public class GuiSolarBase extends GuiContainer {
 
         if (x > (scrnX + 8) && x < (scrnX + 24))
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                String text = TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.energy") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -60,7 +62,7 @@ public class GuiSolarBase extends GuiContainer {
 
         if (x > (scrnX + 84) && x < (scrnX + 92))
             if (y > (scrnY + 33) && y < (scrnY + 41)) {
-                String text = TextFormatting.WHITE + "Generating: " + TextFormatting.LIGHT_GRAY + tileEntity.generatedEnergy;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.generating") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.generatedEnergy;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);

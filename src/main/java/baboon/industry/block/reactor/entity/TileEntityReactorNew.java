@@ -2,9 +2,11 @@ package baboon.industry.block.reactor.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.reactor.BlockReactor;
 import baboon.industry.item.IndustryItems;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -142,13 +144,21 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         worldObj.spawnParticle("smoke", _x, _y + 0.22, _z, 0.0, 0.0, 0.0);
         worldObj.spawnParticle("flame", _x, _y + 0.22, _z, 0.0, 0.0, 0.0);
 
-        if (heat >= maxHeat)
-            for (int exploX = (int) (_x - 1); exploX < _x + 1; exploX++)
-                for (int exploY = (int) (_y - 1); exploY < _y + 1; exploY++)
+        // Set the reactor block's half heat boolean to true
+        Block block = worldObj.getBlock(x, y, z);
+        if (block instanceof BlockReactor)
+            ((BlockReactor) block).halfHeat = true;
+
+        if (heat >= maxHeat) {
+            for (int exploX = (int) (_x - 1); exploX < _x + 1; exploX++) {
+                for (int exploY = (int) (_y - 1); exploY < _y + 1; exploY++) {
                     for (int exploZ = (int) (_z - 1); exploZ < _z + 1; exploZ++) {
                         worldObj.createExplosion(null, _x, _y, _z, 6.0f);
                         worldObj.setBlock(x, y, z, 0);
                     }
+                }
+            }
+        }
     }
 
     private int adjacentUranium(int id) {

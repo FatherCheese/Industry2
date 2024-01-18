@@ -17,12 +17,12 @@ public class BlockAlarm extends BlockRotatableHorizontal {
 
     @Override
     public int tickRate() {
-        return 50;
+        return triggerAlarm ? 50 : 3;
     }
 
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
-        triggerAlarm = world.isBlockGettingPowered(x, y, z) || world.isBlockGettingPowered(x, y, z);
+        triggerAlarm = world.isBlockGettingPowered(x, y, z) || world.isBlockIndirectlyGettingPowered(x, y, z);
     }
 
     @Override

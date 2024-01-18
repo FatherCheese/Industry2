@@ -7,6 +7,7 @@ import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
@@ -23,8 +24,9 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2 - 16;
-        drawStringCenteredNoShadow(fontRenderer, "Advanced Electric Furnace", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        I18n i18n = I18n.getInstance();
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.t2.furnace"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 
 
@@ -44,7 +46,7 @@ public class GuiAdvancedFurnace extends GuiAdvancedBase {
         return slotID;
     }
 
-    // This is copied from "Better Than Better Than Adventure", so shout out to them for figuring this out.
+    // This is copied from "BTBTA", so shout out to them for figuring this out.
     @Override
     public void clickInventory(int x, int y, int mouseButton) {
         int slotId = this.getSlotID(x, y);

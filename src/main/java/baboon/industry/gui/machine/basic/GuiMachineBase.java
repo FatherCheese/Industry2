@@ -3,12 +3,14 @@ package baboon.industry.gui.machine.basic;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineBase;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMachineBase extends GuiContainer {
     private final TileEntityMachineBase tileEntity;
+    I18n i18n = I18n.getInstance();
 
     public GuiMachineBase(InventoryPlayer inventory, TileEntityMachineBase tileEntity) {
         super(new ContainerMachineBase(inventory, tileEntity));
@@ -44,7 +46,7 @@ public class GuiMachineBase extends GuiContainer {
 
         if (x > (scrnX + 8) && x < (scrnX + 24))
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                String text = TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.energy") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);

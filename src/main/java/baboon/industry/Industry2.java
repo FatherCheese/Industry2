@@ -13,6 +13,13 @@ public class Industry2 implements GameStartEntrypoint, ClientStartEntrypoint {
     public static String MOD_ID = "industry";
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);
 
+    // IDEAS
+    // Replace 'Uranium' with 'pure' radioactive redstone?
+    // Flight chestplate (i.e. gravisuite chestplate and/or jetpack)
+    // Charger items/plates that you can just walk on or wear
+    // Powered bow?
+    // Oil and plastic? Needs more than just a use as fuel
+
     @Override
     public void beforeGameStart() {
         new IndustryBlocks().initializeBlocks();

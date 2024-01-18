@@ -5,6 +5,7 @@ import baboon.industry.recipe.RecipesWiremill;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
@@ -21,8 +22,9 @@ public class GuiMachineWiremill extends GuiMachineBase {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2 - 16;
-        drawStringCenteredNoShadow(fontRenderer, "Wiremill", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        I18n i18n = I18n.getInstance();
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.t1.wiremill"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 
     private int getSlotID(int x, int y) {
@@ -41,7 +43,7 @@ public class GuiMachineWiremill extends GuiMachineBase {
         return slotID;
     }
 
-    // This is copied from "Better Than Better Than Adventure", so shout out to them for figuring this out.
+    // This is copied from "BTBTA", so shout out to them for figuring this out.
     @Override
     public void clickInventory(int x, int y, int mouseButton) {
         int slotId = this.getSlotID(x, y);

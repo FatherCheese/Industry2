@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -18,6 +19,7 @@ import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public class GuiMachineCannery extends GuiContainer {
     private final TileEntityMachineCannery tileEntity;
+    I18n i18n = I18n.getInstance();
 
     public GuiMachineCannery(InventoryPlayer inventory, TileEntityMachineCannery tileEntity) {
         super(new ContainerMachineCannery(inventory, tileEntity));
@@ -49,8 +51,8 @@ public class GuiMachineCannery extends GuiContainer {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int scrnX = xSize / 2 - 16;
-        drawStringCenteredNoShadow(fontRenderer, "Canning Machine", scrnX, 6, 4210752);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 4210752);
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.t1.cannery"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class GuiMachineCannery extends GuiContainer {
 
         if (x > (scrnX + 8) && x < (scrnX + 24))
             if (y > (scrnY + 39) && y < (scrnY + 47)) {
-                String text = TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
+                String text = TextFormatting.WHITE + i18n.translateKey("gui.industry.energy") + ": " + TextFormatting.LIGHT_GRAY + tileEntity.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tileEntity.capacity;
 
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -88,7 +90,7 @@ public class GuiMachineCannery extends GuiContainer {
         return slotID;
     }
 
-    // This is copied from "Better Than Better Than Adventure", so shout out to them for figuring this out.
+    // This is copied from "BTBTA", so shout out to them for figuring this out.
     @Override
     public void clickInventory(int x, int y, int mouseButton) {
         int slotId = this.getSlotID(x, y);

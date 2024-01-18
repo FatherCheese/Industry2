@@ -7,6 +7,7 @@ import net.minecraft.core.InventoryAction;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotCrafting;
@@ -45,8 +46,10 @@ public class GuiReactor extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        drawStringCenteredNoShadow(fontRenderer, "Nuclear Reactor", xSize / 2, 6, 4210752);
-//        fontRenderer.drawString("Inventory", 8, ySize / 2, 4210752);
+        int scrnX = xSize / 2;
+        I18n i18n = I18n.getInstance();
+        drawStringCenteredNoShadow(fontRenderer, i18n.translateKey("gui.industry.reactor"), scrnX, 6, 4210752);
+        fontRenderer.drawString(i18n.translateKey("gui.industry.inventory"), 8, (ySize - 96) + 2, 4210752);
     }
     public void clickInventory(int x, int y, int mouseButton) {
         int slotId = this.getSlotId(x, y);
