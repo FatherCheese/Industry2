@@ -11,8 +11,8 @@ import net.minecraft.core.world.World;
 
 public class ItemCell extends Item {
 
-    public ItemCell(int id) {
-        super(id);
+    public ItemCell(String name, int id) {
+        super(name, id);
     }
 
     public static boolean useCell(EntityPlayer player, ItemStack itemToGive) {

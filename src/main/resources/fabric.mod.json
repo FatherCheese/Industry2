@@ -32,6 +32,9 @@
     "beforeGameStart": [
       "baboon.industry.Industry2"
     ],
+    "beforeClientStart": [
+      "baboon.industry.Industry2"
+    ],
     "recipesReady": [
       "baboon.industry.recipe.RecipesTrommel",
       "baboon.industry.recipe.IndustryRecipes"

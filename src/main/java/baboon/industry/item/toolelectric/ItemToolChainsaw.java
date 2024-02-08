@@ -9,8 +9,8 @@ import net.minecraft.core.item.material.ToolMaterial;
 
 public class ItemToolChainsaw extends ItemToolElectric {
 
-    public ItemToolChainsaw(int id) {
-        super(id, BlockTags.MINEABLE_BY_AXE, ToolMaterial.iron);
+    public ItemToolChainsaw(String name, int id) {
+        super(name, id, BlockTags.MINEABLE_BY_AXE, ToolMaterial.iron);
         this.baseCapacity = IndustryConfig.cfg.getInt("Energy Values.lvBatteryStorage");
         this.baseReceive = IndustryConfig.cfg.getInt("Energy Values.lvIO");
     }

@@ -11,8 +11,8 @@ import net.minecraft.core.world.World;
 public class ItemRadioactive extends Item {
     int damageTimer = 0;
 
-    public ItemRadioactive(int id) {
-        super(id);
+    public ItemRadioactive(String name, int id) {
+        super(name, id);
     }
 
     private boolean isArmoured(Entity entity) {

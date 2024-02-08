@@ -4,8 +4,8 @@ import baboon.industry.IndustryConfig;
 
 public class ItemBatteryRedstone extends ItemBatteryBase {
 
-    public ItemBatteryRedstone(int i) {
-        super(i,
+    public ItemBatteryRedstone(String name, int i) {
+        super(name, i,
                 IndustryConfig.cfg.getInt("Energy Values.lvBatteryStorage"),
                 IndustryConfig.cfg.getInt("Energy Values.lvIO"),
                 IndustryConfig.cfg.getInt("Energy Values.lvIO"),

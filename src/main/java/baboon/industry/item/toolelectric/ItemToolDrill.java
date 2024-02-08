@@ -9,8 +9,8 @@ import net.minecraft.core.item.material.ToolMaterial;
 
 public class ItemToolDrill extends ItemToolElectric {
 
-    public ItemToolDrill(int id, ToolMaterial toolMaterial) {
-        super(id, BlockTags.MINEABLE_BY_PICKAXE, toolMaterial);
+    public ItemToolDrill(String name, int id, ToolMaterial toolMaterial) {
+        super(name, id, BlockTags.MINEABLE_BY_PICKAXE, toolMaterial);
         this.baseCapacity = IndustryConfig.cfg.getInt("Energy Values.lvBatteryStorage");
         this.baseReceive = IndustryConfig.cfg.getInt("Energy Values.lvIO");
     }

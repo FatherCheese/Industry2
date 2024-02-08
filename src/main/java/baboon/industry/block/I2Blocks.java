@@ -696,10 +696,7 @@ public class I2Blocks {
 
         alarm = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("block_bronze_sides.png")
-                .setNorthTexture("alarm_front.png")
-                .setEastTexture("block_bronze_sides.png")
-                .setSouthTexture("block_bronze_sides.png")
-                .setWestTexture("block_bronze_sides.png")
+                .setSideTextures("alarm_front.png")
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(5.0F)
                 .build(new BlockAlarm("alarm", blockID("alarm")))

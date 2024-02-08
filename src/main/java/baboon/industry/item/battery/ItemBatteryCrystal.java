@@ -4,8 +4,8 @@ import baboon.industry.IndustryConfig;
 
 public class ItemBatteryCrystal extends ItemBatteryBase {
 
-    public ItemBatteryCrystal(int i) {
-        super(i,
+    public ItemBatteryCrystal(String name, int i) {
+        super(name, i,
                 IndustryConfig.cfg.getInt("Energy Values.hvBatteryStorage"),
                 IndustryConfig.cfg.getInt("Energy Values.hvIO"),
                 IndustryConfig.cfg.getInt("Energy Values.hvIO"),

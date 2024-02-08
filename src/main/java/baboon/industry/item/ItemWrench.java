@@ -8,9 +8,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
 public class ItemWrench extends Item {
-    public ItemWrench(int id) {
-        super(id);
-        setMaxDamage(128);
+    public ItemWrench(String name, int id) {
+        super(name, id);
+        setMaxDamage(127);
     }
     @Override
     public boolean onBlockDestroyed(World world, ItemStack itemstack, int id, int x, int y, int z, EntityLiving entityliving) {

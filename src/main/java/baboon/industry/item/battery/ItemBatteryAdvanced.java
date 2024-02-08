@@ -4,8 +4,8 @@ import baboon.industry.IndustryConfig;
 
 public class ItemBatteryAdvanced extends ItemBatteryBase {
 
-    public ItemBatteryAdvanced(int i) {
-        super(i,
+    public ItemBatteryAdvanced(String name, int i) {
+        super(name, i,
                 IndustryConfig.cfg.getInt("Energy Values.mvBatteryStorage"),
                 IndustryConfig.cfg.getInt("Energy Values.mvIO"),
                 IndustryConfig.cfg.getInt("Energy Values.mvIO"),

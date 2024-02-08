@@ -20,8 +20,8 @@ public class ItemToolNanoSword extends ItemToolElectric {
             TextureHelper.getOrCreateItemTexture(Industry2.MOD_ID, "tool_nanosword.png")
     };
 
-    public ItemToolNanoSword(int id) {
-        super(id, BlockTags.MINEABLE_BY_SWORD, ToolMaterial.steel);
+    public ItemToolNanoSword(String name, int id) {
+        super(name, id, BlockTags.MINEABLE_BY_SWORD, ToolMaterial.steel);
         this.baseCapacity = IndustryConfig.cfg.getInt("Energy Values.hvBatteryStorage");
         this.baseReceive = IndustryConfig.cfg.getInt("Energy Values.hvIO");
         this.setHasSubtypes(true);
