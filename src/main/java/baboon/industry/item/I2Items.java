@@ -3,7 +3,7 @@ package baboon.industry.item;
 import baboon.industry.Industry2;
 import baboon.industry.IndustryConfig;
 import baboon.industry.IndustryTags;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.item.battery.ItemBatteryAdvanced;
 import baboon.industry.item.battery.ItemBatteryCrystal;
 import baboon.industry.item.battery.ItemBatteryLapis;
@@ -19,7 +19,7 @@ import net.minecraft.core.item.material.ToolMaterial;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 
-public class IndustryItems {
+public class I2Items {
     private final String MOD_ID = Industry2.MOD_ID;
 
     private int nextItemID(String itemName) {
@@ -257,42 +257,42 @@ public class IndustryItems {
                 "plate_iridium.png");
 
         itemCableTin = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.tin", nextItemID("itemCableTin"), IndustryBlocks.blockCableTin),
+                new ItemCable("cable.tin", nextItemID("itemCableTin"), I2Blocks.blockCableTin),
                 "cable.tin",
                 "cable_tin.png");
 
         itemCableCopper = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.copper", nextItemID("itemCableCopper"), IndustryBlocks.blockCableCopper),
+                new ItemCable("cable.copper", nextItemID("itemCableCopper"), I2Blocks.blockCableCopper),
                 "cable.copper",
                 "cable_copper.png");
 
         itemCableGold = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.gold", nextItemID("itemCableGold"), IndustryBlocks.blockCableGold),
+                new ItemCable("cable.gold", nextItemID("itemCableGold"), I2Blocks.blockCableGold),
                 "cable.gold",
                 "cable_gold.png");
 
         itemCableSteel = ItemHelper.createItem(MOD_ID,
-                new ItemCable("cable.steel", nextItemID("itemCableSteel"), IndustryBlocks.blockCableSteel),
+                new ItemCable("cable.steel", nextItemID("itemCableSteel"), I2Blocks.blockCableSteel),
                 "cable.steel",
                 "cable_steel.png");
 
         itemInsulatedCableTin = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.tin", nextItemID("itemInsulatedCableTin"), IndustryBlocks.blockInsulatedCableTin),
+                new ItemCable("insulated.cable.tin", nextItemID("itemInsulatedCableTin"), I2Blocks.blockInsulatedCableTin),
                 "insulated.cable.tin",
                 "cable_insulated_tin.png");
 
         itemInsulatedCableCopper = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.copper", nextItemID("itemInsulatedCableCopper"), IndustryBlocks.blockInsulatedCableCopper),
+                new ItemCable("insulated.cable.copper", nextItemID("itemInsulatedCableCopper"), I2Blocks.blockInsulatedCableCopper),
                 "insulated.cable.copper",
                 "cable_insulated_copper.png");
 
         itemInsulatedCableGold = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.gold", nextItemID("itemInsulatedCableGold"), IndustryBlocks.blockInsulatedCableGold),
+                new ItemCable("insulated.cable.gold", nextItemID("itemInsulatedCableGold"), I2Blocks.blockInsulatedCableGold),
                 "insulated.cable.gold",
                 "cable_insulated_gold.png");
 
         itemInsulatedCableSteel = ItemHelper.createItem(MOD_ID,
-                new ItemCable("insulated.cable.steel", nextItemID("itemInsulatedCableSteel"), IndustryBlocks.blockInsulatedCableSteel),
+                new ItemCable("insulated.cable.steel", nextItemID("itemInsulatedCableSteel"), I2Blocks.blockInsulatedCableSteel),
                 "insulated.cable.steel",
                 "cable_insulated_steel.png");
 

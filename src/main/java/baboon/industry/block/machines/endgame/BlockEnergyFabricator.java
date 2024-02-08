@@ -1,6 +1,6 @@
 package baboon.industry.block.machines.endgame;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
@@ -65,6 +65,6 @@ public class BlockEnergyFabricator extends BlockTileEntityRotatable {
         if (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.PROPER_TOOL)
             return new ItemStack[]{new ItemStack(this)};
         else
-            return new ItemStack[]{new ItemStack(IndustryBlocks.nuclearChamber)};
+            return new ItemStack[]{new ItemStack(I2Blocks.nuclearChamber)};
     }
 }

@@ -2,7 +2,7 @@ package baboon.industry.block.machines.endgame.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.IndustryTags;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -107,7 +107,7 @@ public class TileEntityEnergyFabricator extends TileEntityEnergyConductor implem
                 onInventoryChanged();
             }
 
-            if (contents[4] != null && contents[4].itemID == IndustryItems.scrap.id && scrap + 100 <= maxScrap) {
+            if (contents[4] != null && contents[4].itemID == I2Items.scrap.id && scrap + 100 <= maxScrap) {
                 --contents[4].stackSize;
                 scrap += 100;
 

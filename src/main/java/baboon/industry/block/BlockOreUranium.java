@@ -1,7 +1,7 @@
 package baboon.industry.block;
 
 import baboon.industry.IndustryAchievements;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -29,7 +29,7 @@ public class BlockOreUranium extends Block {
             case PICK_BLOCK:
                 return new ItemStack[]{new ItemStack(this)};
             case PROPER_TOOL:
-                return new ItemStack[]{new ItemStack(IndustryItems.oreRawUranium)};
+                return new ItemStack[]{new ItemStack(I2Items.oreRawUranium)};
             default:
                 return null;
         }

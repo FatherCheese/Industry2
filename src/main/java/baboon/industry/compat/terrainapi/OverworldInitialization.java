@@ -2,7 +2,7 @@ package baboon.industry.compat.terrainapi;
 
 import baboon.industry.Industry2;
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.world.WorldFeatureRubberTree;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
@@ -17,7 +17,7 @@ public class OverworldInitialization extends BaseInitialization {
     protected void initValues() {
         if (IndustryConfig.cfg.getBoolean("World Gen.treeRubberwood"))
             ChunkDecoratorOverworldAPI.biomeFeatures.addFeature(
-                    (Parameters x) -> new WorldFeatureRubberTree(IndustryBlocks.leavesRubberWood.id,4 + x.random.nextInt(3 - 1) + 1),
+                    (Parameters x) -> new WorldFeatureRubberTree(I2Blocks.leavesRubberWood.id,4 + x.random.nextInt(3 - 1) + 1),
                     null,
                     OverworldFunctions::getStandardBiomesDensity,
                     new Object[]{1, new Biome[]{Biomes.OVERWORLD_FOREST}},
@@ -32,13 +32,13 @@ public class OverworldInitialization extends BaseInitialization {
     @Override
     protected void initOre() {
         if (IndustryConfig.cfg.getBoolean("World Gen.copperOre"))
-            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, IndustryBlocks.oreCopperStone, 8, 20, 1/2f, true);
+            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, I2Blocks.oreCopperStone, 8, 20, 1/2f, true);
 
         if (IndustryConfig.cfg.getBoolean("World Gen.tinOre"))
-            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, IndustryBlocks.oreTinStone, 8, 20, 1/2f, true);
+            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, I2Blocks.oreTinStone, 8, 20, 1/2f, true);
 
         if (IndustryConfig.cfg.getBoolean("World Gen.uraniumOre"))
-            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, IndustryBlocks.oreUraniumStone, 2, 10, 1/4f, true);
+            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, I2Blocks.oreUraniumStone, 2, 10, 1/4f, true);
     }
 
     @Override

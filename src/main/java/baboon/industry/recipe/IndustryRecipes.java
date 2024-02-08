@@ -1,7 +1,7 @@
 package baboon.industry.recipe;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.DataLoader;
@@ -20,15 +20,15 @@ public class IndustryRecipes implements RecipeEntrypoint {
     @Override
     public void onRecipesReady() {
         INDUSTRY.register("workbench", WORKBENCH);
-        Registries.ITEM_GROUPS.register("industry:rubber_logs", Registries.stackListOf(IndustryBlocks.logRubberWood, IndustryBlocks.logRubberWoodResin, IndustryBlocks.logRubberWoodResinFull));
-        Registries.ITEM_GROUPS.register("industry:ores_copper", Registries.stackListOf(IndustryBlocks.oreCopperBasalt, IndustryBlocks.oreCopperStone, IndustryBlocks.oreCopperLimestone, IndustryBlocks.oreCopperGranite));
-        Registries.ITEM_GROUPS.register("industry:ores_tin", Registries.stackListOf(IndustryBlocks.oreTinBasalt, IndustryBlocks.oreTinStone, IndustryBlocks.oreTinLimestone, IndustryBlocks.oreTinGranite));
+        Registries.ITEM_GROUPS.register("industry:rubber_logs", Registries.stackListOf(I2Blocks.logRubberWood, I2Blocks.logRubberWoodResin, I2Blocks.logRubberWoodResinFull));
+        Registries.ITEM_GROUPS.register("industry:ores_copper", Registries.stackListOf(I2Blocks.oreCopperBasalt, I2Blocks.oreCopperStone, I2Blocks.oreCopperLimestone, I2Blocks.oreCopperGranite));
+        Registries.ITEM_GROUPS.register("industry:ores_tin", Registries.stackListOf(I2Blocks.oreTinBasalt, I2Blocks.oreTinStone, I2Blocks.oreTinLimestone, I2Blocks.oreTinGranite));
         Registries.RECIPES.register("industry", INDUSTRY);
         DataLoader.loadRecipes("/assets/industry/recipes/workbench/items.json");
         DataLoader.loadRecipes("/assets/industry/recipes/workbench/blocks.json");
         DataLoader.loadRecipes("/assets/industry/recipes/furnace.json");
         DataLoader.loadRecipes("/assets/industry/recipes/blast_furnace.json");
-        LookupFuelFurnace.instance.addFuelEntry(IndustryItems.dustCoal.id, 1600);
-        LookupFuelEnergy.fuelEnergy().addFuelEntry(IndustryItems.dustCoal.id, 8);
+        LookupFuelFurnace.instance.addFuelEntry(I2Items.dustCoal.id, 1600);
+        LookupFuelEnergy.fuelEnergy().addFuelEntry(I2Items.dustCoal.id, 8);
     }
 }

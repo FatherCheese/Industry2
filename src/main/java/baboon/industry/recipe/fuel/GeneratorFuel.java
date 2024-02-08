@@ -1,7 +1,7 @@
 package baboon.industry.recipe.fuel;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.Item;
 
@@ -21,7 +21,7 @@ public class GeneratorFuel {
         addFuel(Block.saplingOak.id, 25);
         addFuel(Block.saplingOakRetro.id, 25);
         addFuel(Block.saplingPine.id, 25);
-        addFuel(IndustryBlocks.saplingRubberWood.id, 25);
+        addFuel(I2Blocks.saplingRubberWood.id, 25);
         addFuel(Block.saplingShrub.id, 25);
         addFuel(Item.stick.id, 25);
 
@@ -40,9 +40,9 @@ public class GeneratorFuel {
         addFuel(Block.logEucalyptus.id, 75);
         addFuel(Block.logOak.id, 75);
         addFuel(Block.logOakMossy.id, 75);
-        addFuel(IndustryBlocks.logRubberWood.id, 75);
-        addFuel(IndustryBlocks.logRubberWoodResin.id, 75);
-        addFuel(IndustryBlocks.logRubberWoodResinFull.id, 75);
+        addFuel(I2Blocks.logRubberWood.id, 75);
+        addFuel(I2Blocks.logRubberWoodResin.id, 75);
+        addFuel(I2Blocks.logRubberWoodResinFull.id, 75);
         addFuel(Block.logPine.id, 75);
         addFuel(Block.planksOak.id, 75);
         addFuel(Block.planksOakPainted.id, 75);
@@ -52,7 +52,7 @@ public class GeneratorFuel {
         addFuel(Block.stairsPlanksOakPainted.id, 75);
         addFuel(Block.workbench.id, 75);
 
-        addFuel(IndustryItems.scrap.id, 87);
+        addFuel(I2Items.scrap.id, 87);
 
         addFuel(Item.coal.id, 400);
     }

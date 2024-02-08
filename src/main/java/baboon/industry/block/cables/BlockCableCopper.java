@@ -1,7 +1,7 @@
 package baboon.industry.block.cables;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.enums.EnumDropCause;
@@ -20,6 +20,6 @@ public class BlockCableCopper extends BlockCable {
 
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
-        return new ItemStack[]{new ItemStack(IndustryItems.itemCableCopper)};
+        return new ItemStack[]{new ItemStack(I2Items.itemCableCopper)};
     }
 }

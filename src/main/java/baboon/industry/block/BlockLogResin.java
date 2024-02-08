@@ -1,6 +1,6 @@
 package baboon.industry.block;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ public class BlockLogResin extends BlockLog {
         int meta = world.getBlockMetadata(x, y, z);
 
         if (rand.nextInt(100) == 0) {
-            world.setBlockAndMetadataWithNotify(x, y, z, IndustryBlocks.logRubberWoodResinFull.id, meta);
+            world.setBlockAndMetadataWithNotify(x, y, z, I2Blocks.logRubberWoodResinFull.id, meta);
         }
     }
 
@@ -31,7 +31,7 @@ public class BlockLogResin extends BlockLog {
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         ItemStack itemStack = player.getHeldItem();
 
-        if (itemStack != null && itemStack.getItem() == IndustryItems.toolTreetap)
+        if (itemStack != null && itemStack.getItem() == I2Items.toolTreetap)
             world.playSoundAtEntity(player, "industry.tap", 0.4f, 1.0f);
 
         return super.blockActivated(world, x, y, z, player);
@@ -40,8 +40,8 @@ public class BlockLogResin extends BlockLog {
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
         if (dropCause == EnumDropCause.PICK_BLOCK) {
-            return new ItemStack[]{new ItemStack(IndustryBlocks.logRubberWoodResinFull)};
+            return new ItemStack[]{new ItemStack(I2Blocks.logRubberWoodResinFull)};
         }
-        return new ItemStack[]{new ItemStack(IndustryBlocks.logRubberWood)};
+        return new ItemStack[]{new ItemStack(I2Blocks.logRubberWood)};
     }
 }

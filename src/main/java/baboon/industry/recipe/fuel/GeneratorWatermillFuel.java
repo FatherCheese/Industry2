@@ -1,6 +1,6 @@
 package baboon.industry.recipe.fuel;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.Item;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class GeneratorWatermillFuel {
 
     public GeneratorWatermillFuel() {
         addFuel(Item.bucketWater.id, 1000);
-        addFuel(IndustryItems.cellWater.id, 1000);
+        addFuel(I2Items.cellWater.id, 1000);
     }
 
     public static void addFuel(int inputItem, int outputYield) {

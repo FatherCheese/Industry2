@@ -1,9 +1,9 @@
 package baboon.industry.block.reactor.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.reactor.BlockReactor;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.block.Block;
@@ -108,13 +108,13 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
 
         for (ItemStack content : contents) {
             if (content != null) {
-                if (content.getItem() == IndustryItems.cellUranium)
+                if (content.getItem() == I2Items.cellUranium)
                     uraniumCell += 1;
 
-                if (content.getItem() == IndustryItems.cellCoolant)
+                if (content.getItem() == I2Items.cellCoolant)
                     coolantCell += 1;
 
-                if (content.getItem() == IndustryItems.reactorPlate)
+                if (content.getItem() == I2Items.reactorPlate)
                     maxHeat += 250;
             }
         }
@@ -129,8 +129,8 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
             int _x = x + side.getOffsetX();
             int _y = y + side.getOffsetY();
             int _z = z + side.getOffsetZ();
-            if (worldObj.getBlockId(_x, y, _z) != IndustryBlocks.nuclearChamber.id &&
-                    worldObj.getBlockId(x, _y, z) != IndustryBlocks.nuclearIO.id)
+            if (worldObj.getBlockId(_x, y, _z) != I2Blocks.nuclearChamber.id &&
+                    worldObj.getBlockId(x, _y, z) != I2Blocks.nuclearIO.id)
                 return false;
         }
         return true;
@@ -174,7 +174,7 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         if (id < 0) return false;
         if (id >= contents.length) return false;
         if (contents[id] == null) return false;
-        return contents[id].getItem() == IndustryItems.cellUranium;
+        return contents[id].getItem() == I2Items.cellUranium;
     }
 
     @Override
@@ -201,12 +201,12 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
                 if (stack == null)
                     continue;
 
-                if (damageUranium && stack.getItem() == IndustryItems.cellUranium) {
+                if (damageUranium && stack.getItem() == I2Items.cellUranium) {
                     heat += 4;
                     stack.damageItem(1, null);
                 }
 
-                if (damageCoolant && stack.getItem() == IndustryItems.cellCoolant) {
+                if (damageCoolant && stack.getItem() == I2Items.cellCoolant) {
                     int adjUranium = adjacentUranium(i);
                     stack.damageItem(adjUranium, null);
                     heat -= adjUranium;

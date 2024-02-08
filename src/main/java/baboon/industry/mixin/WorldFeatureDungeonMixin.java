@@ -1,6 +1,6 @@
 package baboon.industry.mixin;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.generate.feature.WorldFeatureDungeon;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +17,6 @@ public class WorldFeatureDungeonMixin {
     private void industry_iridiumLoot(Random random, CallbackInfoReturnable<ItemStack> cir) {
         int indI = random.nextInt(15);
         if (indI == 0)
-            cir.setReturnValue(new ItemStack(IndustryItems.ingotIridiumScrap));
+            cir.setReturnValue(new ItemStack(I2Items.ingotIridiumScrap));
     }
 }

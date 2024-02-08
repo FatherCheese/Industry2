@@ -1,7 +1,7 @@
 package baboon.industry.gui.machine.endgame;
 
 import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.InventoryAction;
@@ -165,7 +165,7 @@ public class GuiFabricator extends GuiContainer {
 
             if (Item.itemsList[clickedItemId] instanceof ItemEnergyContainer)
                 target = 1;
-            else if (clickedItemId == IndustryItems.scrap.id)
+            else if (clickedItemId == I2Items.scrap.id)
                 target = 2;
         }
 

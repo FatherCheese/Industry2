@@ -1,6 +1,6 @@
 package baboon.industry.block.machines.advanced.entity;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.advanced.BlockAdvancedWiremill;
 import baboon.industry.recipe.RecipesWiremill;
 import net.minecraft.core.item.ItemStack;
@@ -118,7 +118,7 @@ public class TileEntityAdvancedWiremill extends TileEntityAdvancedBase {
             }
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.advancedMachineWiremill.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.advancedMachineWiremill.id);
         }
     }
 }

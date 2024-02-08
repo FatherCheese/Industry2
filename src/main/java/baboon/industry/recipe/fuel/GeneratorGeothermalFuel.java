@@ -1,6 +1,6 @@
 package baboon.industry.recipe.fuel;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.Item;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class GeneratorGeothermalFuel {
 
     public GeneratorGeothermalFuel() {
         addFuel(Item.bucketLava.id, 1000);
-        addFuel(IndustryItems.cellLava.id, 1000);
+        addFuel(I2Items.cellLava.id, 1000);
         addFuel(Item.nethercoal.id, 250);
     }
 

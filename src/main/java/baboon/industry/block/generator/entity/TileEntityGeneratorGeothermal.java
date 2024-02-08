@@ -1,7 +1,7 @@
 package baboon.industry.block.generator.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.generator.BlockGeneratorGeothermal;
 import baboon.industry.recipe.fuel.GeneratorGeothermalFuel;
 import com.mojang.nbt.CompoundTag;
@@ -133,7 +133,7 @@ public class TileEntityGeneratorGeothermal extends TileEntityEnergyConductor imp
             }
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.generatorGeothermal.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.generatorGeothermal.id);
         }
     }
 

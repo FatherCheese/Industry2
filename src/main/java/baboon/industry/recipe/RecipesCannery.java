@@ -1,6 +1,6 @@
 package baboon.industry.recipe;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 
@@ -22,11 +22,11 @@ public class RecipesCannery {
         addRecipe(Item.foodCake.id, 6);
         addRecipe(Item.foodAppleGold.id, 21);
 
-        addSpecialRecipe(IndustryItems.ingotUranium.id, new ItemStack(IndustryItems.cellUranium, 1));
+        addSpecialRecipe(I2Items.ingotUranium.id, new ItemStack(I2Items.cellUranium, 1));
     }
 
     public static void addRecipe(int input, int outputCount) {
-        recipeList.put(input, new ItemStack(IndustryItems.canFood, outputCount));
+        recipeList.put(input, new ItemStack(I2Items.canFood, outputCount));
     }
 
     public static void addSpecialRecipe(int input, ItemStack output) {

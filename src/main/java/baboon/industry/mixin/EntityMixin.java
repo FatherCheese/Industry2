@@ -1,6 +1,6 @@
 package baboon.industry.mixin;
 
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -23,10 +23,10 @@ public abstract class EntityMixin {
             if (!(entity instanceof EntityPlayer) || ((EntityPlayer) entity).inventory.armorInventory[i] == null)
                 return false;
 
-        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == IndustryItems.armorHelmetIridium.id     &&
-                ((EntityPlayer) entity).inventory.armorInventory[2].itemID == IndustryItems.armorChestplateIridium.id &&
-                ((EntityPlayer) entity).inventory.armorInventory[1].itemID == IndustryItems.armorLeggingsIridium.id   &&
-                ((EntityPlayer) entity).inventory.armorInventory[0].itemID == IndustryItems.armorBootsIridium.id;
+        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == I2Items.armorHelmetIridium.id     &&
+                ((EntityPlayer) entity).inventory.armorInventory[2].itemID == I2Items.armorChestplateIridium.id &&
+                ((EntityPlayer) entity).inventory.armorInventory[1].itemID == I2Items.armorLeggingsIridium.id   &&
+                ((EntityPlayer) entity).inventory.armorInventory[0].itemID == I2Items.armorBootsIridium.id;
     }
 
     @Inject(method = "tick", at = @At("TAIL"))

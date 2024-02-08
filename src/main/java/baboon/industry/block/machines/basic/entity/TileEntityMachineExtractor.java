@@ -1,6 +1,6 @@
 package baboon.industry.block.machines.basic.entity;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.basic.BlockMachineExtractor;
 import baboon.industry.recipe.RecipesExtractor;
 import net.minecraft.core.item.ItemStack;
@@ -53,7 +53,7 @@ public class TileEntityMachineExtractor extends TileEntityMachineBase {
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineExtractor.id &&
+            if (worldObj.getBlockId(x, y, z) == I2Blocks.machineExtractor.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
                 BlockMachineExtractor.updateBlockState(true, worldObj, x, y, z);
@@ -83,7 +83,7 @@ public class TileEntityMachineExtractor extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineExtractor.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.machineExtractor.id);
         }
     }
 }

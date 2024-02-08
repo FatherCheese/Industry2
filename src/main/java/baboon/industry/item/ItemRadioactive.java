@@ -20,10 +20,10 @@ public class ItemRadioactive extends Item {
             if (((EntityPlayer) entity).inventory.armorInventory[i] == null)
                 return false;
 
-        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == IndustryItems.armorHelmetHazmat.id     &&
-                ((EntityPlayer) entity).inventory.armorInventory[2].itemID == IndustryItems.armorChestplateHazmat.id &&
-                ((EntityPlayer) entity).inventory.armorInventory[1].itemID == IndustryItems.armorLeggingsHazmat.id   &&
-                ((EntityPlayer) entity).inventory.armorInventory[0].itemID == IndustryItems.armorBootsHazmat.id;
+        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == I2Items.armorHelmetHazmat.id     &&
+                ((EntityPlayer) entity).inventory.armorInventory[2].itemID == I2Items.armorChestplateHazmat.id &&
+                ((EntityPlayer) entity).inventory.armorInventory[1].itemID == I2Items.armorLeggingsHazmat.id   &&
+                ((EntityPlayer) entity).inventory.armorInventory[0].itemID == I2Items.armorBootsHazmat.id;
     }
 
     @Override

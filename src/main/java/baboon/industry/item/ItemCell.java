@@ -56,13 +56,13 @@ public class ItemCell extends Item {
                     return itemstack;
 
                 if (world.getBlockMaterial(mopX, mopY, mopZ) == Material.water && world.getBlockMetadata(mopX, mopY, mopZ) == 0) {
-                    if (useCell(entityplayer, new ItemStack(IndustryItems.cellWater))) {
+                    if (useCell(entityplayer, new ItemStack(I2Items.cellWater))) {
                         world.setBlockWithNotify(mopX, mopY, mopZ, 0);
                         entityplayer.swingItem();
                     }
                 } else if (world.getBlockMaterial(mopX, mopY, mopZ) == Material.lava
                         && world.getBlockMetadata(mopX, mopY, mopZ) == 0
-                        && useCell(entityplayer, new ItemStack(IndustryItems.cellLava))) {
+                        && useCell(entityplayer, new ItemStack(I2Items.cellLava))) {
                     world.setBlockWithNotify(mopX, mopY, mopZ, 0);
                     entityplayer.swingItem();
                 }

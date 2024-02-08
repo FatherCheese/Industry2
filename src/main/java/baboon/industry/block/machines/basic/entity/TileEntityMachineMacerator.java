@@ -1,6 +1,6 @@
 package baboon.industry.block.machines.basic.entity;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.basic.BlockMachineMacerator;
 import baboon.industry.recipe.RecipesMacerator;
 import net.minecraft.core.item.ItemStack;
@@ -53,7 +53,7 @@ public class TileEntityMachineMacerator extends TileEntityMachineBase {
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineMacerator.id &&
+            if (worldObj.getBlockId(x, y, z) == I2Blocks.machineMacerator.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
                 BlockMachineMacerator.updateBlockState(true, worldObj, x, y, z);
@@ -83,7 +83,7 @@ public class TileEntityMachineMacerator extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineMacerator.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.machineMacerator.id);
         }
     }
 }

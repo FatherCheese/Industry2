@@ -41,7 +41,7 @@ import sunsetsatellite.catalyst.core.util.MpGuiEntry;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.EntityHelper;
 
-public class IndustryBlocks {
+public class I2Blocks {
     private final String MOD_ID = Industry2.MOD_ID;
 
     private int blockID(String blockName) {

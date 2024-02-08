@@ -1,7 +1,7 @@
 package baboon.industry.recipe;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.ItemStack;
 
 import java.util.HashMap;
@@ -10,13 +10,13 @@ public class RecipesExtractor {
     private static final HashMap<Integer, ItemStack> recipeList = new HashMap<>();
 
     public RecipesExtractor() {
-        addRecipe(IndustryBlocks.logRubberWood.id, new ItemStack(IndustryItems.rubber, 1));
-        addRecipe(IndustryBlocks.logRubberWoodResin.id, new ItemStack(IndustryItems.rubber, 1));
-        addRecipe(IndustryBlocks.logRubberWoodResinFull.id, new ItemStack(IndustryItems.rubber, 1));
-        addRecipe(IndustryBlocks.saplingRubberWood.id, new ItemStack(IndustryItems.rubber, 1));
-        addRecipe(IndustryItems.resin.id, new ItemStack(IndustryItems.rubber, 3));
+        addRecipe(I2Blocks.logRubberWood.id, new ItemStack(I2Items.rubber, 1));
+        addRecipe(I2Blocks.logRubberWoodResin.id, new ItemStack(I2Items.rubber, 1));
+        addRecipe(I2Blocks.logRubberWoodResinFull.id, new ItemStack(I2Items.rubber, 1));
+        addRecipe(I2Blocks.saplingRubberWood.id, new ItemStack(I2Items.rubber, 1));
+        addRecipe(I2Items.resin.id, new ItemStack(I2Items.rubber, 3));
 
-        addRecipe(IndustryItems.cellWater.id, new ItemStack(IndustryItems.cellCoolant, 1));
+        addRecipe(I2Items.cellWater.id, new ItemStack(I2Items.cellCoolant, 1));
     }
 
     public static void addRecipe(int input, ItemStack output) {

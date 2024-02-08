@@ -1,7 +1,7 @@
 package baboon.industry.block.generator.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.generator.BlockGenerator;
 import baboon.industry.recipe.fuel.GeneratorFuel;
 import com.mojang.nbt.CompoundTag;
@@ -135,7 +135,7 @@ public class TileEntityGenerator extends TileEntityEnergyConductor implements II
             }
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.generator.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.generator.id);
         }
     }
 

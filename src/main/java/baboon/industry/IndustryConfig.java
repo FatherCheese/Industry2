@@ -1,7 +1,7 @@
 package baboon.industry;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.util.ConfigUpdater;
@@ -53,11 +53,11 @@ public class IndustryConfig {
         int blockIDs = cfg.getInt("Block IDs.startingID");
         int itemIDs = cfg.getInt("Item IDs.startingID");
 
-        List<Field> blockFields = Arrays.stream(IndustryBlocks.class.getDeclaredFields()).filter((F)-> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
+        List<Field> blockFields = Arrays.stream(I2Blocks.class.getDeclaredFields()).filter((F)-> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         for (Field blockField : blockFields) {
             properties.addEntry("Block IDs." + blockField.getName(), blockIDs++);
         }
-        List<Field> itemFields = Arrays.stream(IndustryItems.class.getDeclaredFields()).filter((F)-> Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
+        List<Field> itemFields = Arrays.stream(I2Items.class.getDeclaredFields()).filter((F)-> Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         for (Field itemField : itemFields) {
             properties.addEntry("Item IDs." + itemField.getName(), itemIDs++);
         }

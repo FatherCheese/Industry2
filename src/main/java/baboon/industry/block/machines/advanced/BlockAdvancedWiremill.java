@@ -1,7 +1,7 @@
 package baboon.industry.block.machines.advanced;
 
 import baboon.industry.Industry2;
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedBase;
 import baboon.industry.block.machines.advanced.entity.TileEntityAdvancedWiremill;
 import net.minecraft.core.block.BlockTileEntityRotatable;
@@ -105,7 +105,7 @@ public class BlockAdvancedWiremill extends BlockTileEntityRotatable {
         if (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.PROPER_TOOL)
             return new ItemStack[]{new ItemStack(this)};
         else
-            return new ItemStack[]{new ItemStack(IndustryBlocks.machineCasingAdvanced)};
+            return new ItemStack[]{new ItemStack(I2Blocks.machineCasingAdvanced)};
     }
 
     // Static Methods

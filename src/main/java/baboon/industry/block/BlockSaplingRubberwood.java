@@ -16,7 +16,7 @@ public class BlockSaplingRubberwood extends BlockSaplingBase {
     public void growTree(World world, int i, int j, int k, Random random) {
         world.setBlock(i, j, k, 0);
 
-        WorldFeature tree = new WorldFeatureRubberTree(IndustryBlocks.leavesRubberWood.id,4 + random.nextInt(3 - 1) + 1);
+        WorldFeature tree = new WorldFeatureRubberTree(I2Blocks.leavesRubberWood.id,4 + random.nextInt(3 - 1) + 1);
         if (!tree.generate(world, random, i, j, k)) {
             world.setBlock(i, j, k, this.id);
         }

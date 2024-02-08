@@ -1,8 +1,8 @@
 package baboon.industry.block.machines.advanced.entity;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.advanced.BlockAdvancedFurnace;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryBlastFurnace;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
@@ -98,7 +98,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
         blasting = false;
         for (int upgradesSize = 7; upgradesSize < 11; upgradesSize++) {
             if (contents[upgradesSize] != null) {
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradeBlasting)
+                if (contents[upgradesSize].getItem() == I2Items.upgradeBlasting)
                     blasting = true;
             }
         }
@@ -155,7 +155,7 @@ public class TileEntityAdvancedFurnace extends TileEntityAdvancedBase {
             }
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.advancedMachineFurnace.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.advancedMachineFurnace.id);
         }
     }
 }

@@ -1,7 +1,7 @@
 package baboon.industry.block;
 
 import baboon.industry.IndustryAchievements;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -30,17 +30,17 @@ public class BlockLogResinFull extends BlockLog {
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         ItemStack itemStack = player.getHeldItem();
 
-            if (itemStack != null && itemStack.getItem() == IndustryItems.toolTreetap) {
+            if (itemStack != null && itemStack.getItem() == I2Items.toolTreetap) {
                 world.playSoundAtEntity(player, "mob.slime", 1.0f, 1.0f);
 
                 if (!world.isClientSide) {
                     int meta = world.getBlockMetadata(x, y, z);
                     player.addStat(IndustryAchievements.ROOT1, 1);
-                    world.setBlockAndMetadataWithNotify(x, y, z, IndustryBlocks.logRubberWoodResin.id, meta);
+                    world.setBlockAndMetadataWithNotify(x, y, z, I2Blocks.logRubberWoodResin.id, meta);
                     world.scheduleBlockUpdate(x, y, z, this.id, tickRate());
 
                     int randAmount = new Random().nextInt(4 - 1) + 1;
-                    player.inventory.insertItem(new ItemStack(IndustryItems.resin, randAmount), false);
+                    player.inventory.insertItem(new ItemStack(I2Items.resin, randAmount), false);
                     itemStack.damageItem(1, player);
 
                     return true;
@@ -54,6 +54,6 @@ public class BlockLogResinFull extends BlockLog {
         if (dropCause == EnumDropCause.PICK_BLOCK) {
             return new ItemStack[]{new ItemStack(this)};
         }
-        return new ItemStack[]{new ItemStack(IndustryBlocks.logRubberWood)};
+        return new ItemStack[]{new ItemStack(I2Blocks.logRubberWood)};
     }
 }

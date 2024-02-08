@@ -1,7 +1,7 @@
 package baboon.industry.gui.machine.basic;
 
 import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import baboon.industry.recipe.RecipesCannery;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
@@ -158,7 +158,7 @@ public class GuiMachineCannery extends GuiContainer {
                 target = 1;
             else if (recipes)
                 target = 2;
-            else if (clickedItemId == IndustryItems.canEmpty.id || clickedItemId == IndustryItems.cellEmpty.id)
+            else if (clickedItemId == I2Items.canEmpty.id || clickedItemId == I2Items.cellEmpty.id)
                 target = 3;
         }
 

@@ -1,8 +1,8 @@
 package baboon.industry.block.machines.basic.entity;
 
 import baboon.industry.IndustryTags;
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.item.ItemStack;
 
 import java.util.Random;
@@ -25,7 +25,7 @@ public class TileEntityMachineRecycler extends TileEntityMachineBase {
     private void produceItem() {
         if (canProduce()) {
             Random random = new Random();
-            ItemStack produceStack = new ItemStack(IndustryItems.scrap, 1);
+            ItemStack produceStack = new ItemStack(I2Items.scrap, 1);
 
             if (contents[3] == null) {
                 if (random.nextInt(4) == 0)
@@ -49,7 +49,7 @@ public class TileEntityMachineRecycler extends TileEntityMachineBase {
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineRecycler.id &&
+            if (worldObj.getBlockId(x, y, z) == I2Blocks.machineRecycler.id &&
                     currentMachineTime == 0 &&
                     contents[2] == null) {
                 machineUpdated = true;

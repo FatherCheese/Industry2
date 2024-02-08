@@ -1,8 +1,8 @@
 package baboon.industry.block.machines.basic.entity;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.basic.BlockMachineFurnace;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryBlastFurnace;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
@@ -72,7 +72,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
         blasting = false;
         for (int upgradesSize = 4; upgradesSize < contents.length; upgradesSize++) {
             if (contents[upgradesSize] != null) {
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradeBlasting)
+                if (contents[upgradesSize].getItem() == I2Items.upgradeBlasting)
                     blasting = true;
             }
         }
@@ -86,7 +86,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
         boolean machineUpdated = false;
 
         if (!worldObj.isClientSide) {
-            if (worldObj.getBlockId(x, y, z) == IndustryBlocks.machineFurnace.id &&
+            if (worldObj.getBlockId(x, y, z) == I2Blocks.machineFurnace.id &&
             currentMachineTime == 0 &&
             contents[2] == null) {
                 BlockMachineFurnace.updateBlockState(true, worldObj, x, y, z);
@@ -116,7 +116,7 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
                 onInventoryChanged();
 
             if (active)
-                worldObj.notifyBlockChange(x, y, z, IndustryBlocks.machineFurnace.id);
+                worldObj.notifyBlockChange(x, y, z, I2Blocks.machineFurnace.id);
         }
     }
 }

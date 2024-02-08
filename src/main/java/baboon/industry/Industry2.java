@@ -1,7 +1,7 @@
 package baboon.industry;
 
-import baboon.industry.block.IndustryBlocks;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.block.I2Blocks;
+import baboon.industry.item.I2Items;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.AchievementHelper;
@@ -22,8 +22,8 @@ public class Industry2 implements GameStartEntrypoint, ClientStartEntrypoint {
 
     @Override
     public void beforeGameStart() {
-        new IndustryBlocks().initializeBlocks();
-        new IndustryItems().initializeItems();
+        new I2Blocks().initializeBlocks();
+        new I2Items().initializeItems();
         AchievementHelper.addPage(new IndustryAchievements());
 
         logger.info("Industry2 has been initialized. Have fun automating!");

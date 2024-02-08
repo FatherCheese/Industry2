@@ -2,7 +2,7 @@ package baboon.industry.block.machines.advanced.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
-import baboon.industry.item.IndustryItems;
+import baboon.industry.item.I2Items;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
@@ -115,23 +115,23 @@ public class TileEntityAdvancedBase extends TileEntityEnergyConductorDamageable 
             capacity = IndustryConfig.cfg.getInt("Energy Values.mvMachineStorage");
 
             if (contents[upgradesSize] != null) {
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradeSpeed) {
+                if (contents[upgradesSize].getItem() == I2Items.upgradeSpeed) {
                     currentSpeed += 1;
                     maxMachineTime *= 1 - 0.3;
                 }
 
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradeEnergy) {
+                if (contents[upgradesSize].getItem() == I2Items.upgradeEnergy) {
                     currentEnergy += 1;
                     capacity += 10000;
                 }
 
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradeTransformer)
+                if (contents[upgradesSize].getItem() == I2Items.upgradeTransformer)
                     currentTransformers += 1;
 
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradePuller)
+                if (contents[upgradesSize].getItem() == I2Items.upgradePuller)
                     currentPuller = 1;
 
-                if (contents[upgradesSize].getItem() == IndustryItems.upgradePusher)
+                if (contents[upgradesSize].getItem() == I2Items.upgradePusher)
                     currentPusher = 1;
             }
         }

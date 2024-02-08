@@ -1,6 +1,6 @@
 package baboon.industry.block.machines.basic;
 
-import baboon.industry.block.IndustryBlocks;
+import baboon.industry.block.I2Blocks;
 import baboon.industry.block.machines.basic.entity.TileEntityMachineCannery;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
@@ -64,6 +64,6 @@ public class BlockMachineCannery extends BlockTileEntityRotatable {
         if (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.PROPER_TOOL)
             return new ItemStack[]{new ItemStack(this)};
         else
-            return new ItemStack[]{new ItemStack(IndustryBlocks.machineCasingBasic)};
+            return new ItemStack[]{new ItemStack(I2Blocks.machineCasingBasic)};
     }
 }
