@@ -143,13 +143,13 @@ public class I2Items {
         Item.string.withTags(IndustryTags.PREVENT_ITEM_RECYCLING);
     }
 
-    private void armorMaterials() {
+    private void initializeArmorMats() {
         armorMaterialHazmat = ArmorHelper.createArmorMaterial(MOD_ID, "hazmat", 500, 0.0f, 0.0f, 150.0f, 0.0f);
         armorMaterialIridium = ArmorHelper.createArmorMaterial(MOD_ID, "iridium", -1, 100.0f, 100.0f, 100.0f, 100.0f);
     }
 
     public void initializeItems() {
-        armorMaterials();
+        initializeArmorMats();
 
         oreRawTin = ItemHelper.createItem(MOD_ID,
                 new Item("ore.raw.tin", nextItemID("oreRawTin")),

@@ -14,7 +14,7 @@ public class Industry2 implements GameStartEntrypoint, ClientStartEntrypoint {
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);
 
     // IDEAS
-    // Replace 'Uranium' with 'pure' radioactive redstone?
+    // Replace 'Uranium' with 'pure' radioactive redstone
     // Flight chestplate (i.e. gravisuite chestplate and/or jetpack)
     // Charger items/plates that you can just walk on or wear
     // Powered bow?

@@ -1,0 +1,159 @@
+item.industry.ore.raw.tin.name=Raw Tin Ore
+item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
+item.industry.ore.raw.copper.name=Raw Copper Ore
+item.industry.ore.raw.copper.desc=A chunk of unprocessed copper. Can be smelted into a copper ingot.
+item.industry.ore.raw.uranium.name=Raw Uranium
+item.industry.ore.raw.uranium.desc=A chunk of unprocessed uranium. Can be compressed into a uranium ingot.
+
+item.industry.dust.tin.name=Tin Dust
+item.industry.dust.tin.desc=A pile of unprocessed tin. Can be smelted into a tin ingot.
+item.industry.dust.copper.name=Copper Dust
+item.industry.dust.copper.desc=A pile of unprocessed copper. Can be smelted into a copper ingot.
+item.industry.dust.bronze.name=Bronze Dust
+item.industry.dust.bronze.desc=A pile of alloyed tin and copper. Can be smelted into a bronze ingot.
+item.industry.dust.iron.name=Iron Dust
+item.industry.dust.iron.desc=A pile of unprocessed iron dust. Can be smelted into an iron ingot.
+item.industry.dust.gold.name=Gold Dust
+item.industry.dust.gold.desc=A pile of unprocessed iron dust. Can be smelted into a gold ingot.
+item.industry.dust.coal.name=Coal Dust
+item.industry.dust.coal.desc=A pile of coal dust used for fuel.
+
+item.industry.ingot.tin.name=Tin Ingot
+item.industry.ingot.tin.desc=A metal bar of tin used for casings.
+item.industry.ingot.copper.name=Copper Ingot
+item.industry.ingot.copper.desc=A metal bar of copper used for electricity.
+item.industry.ingot.bronze.name=Bronze Ingot
+item.industry.ingot.bronze.desc=Tin and copper fused into an iron-like alloy.
+item.industry.ingot.uranium.name=Uranium Ingot
+item.industry.ingot.uranium.desc=A metal bar of uranium used for nuclear science.
+item.industry.ingot.iridium.name=Iridium Ingot
+item.industry.ingot.iridium.desc=A metal bar of iridium. Can be compressed into a plate.
+
+item.industry.plate.tin.name=Tin Plate
+item.industry.plate.tin.desc=A plate of tin.
+item.industry.plate.copper.name=Copper Plate
+item.industry.plate.copper.desc=A plate of copper.
+item.industry.plate.bronze.name=Bronze Plate
+item.industry.plate.bronze.desc=A plate of bronze.
+item.industry.plate.iron.name=Iron Plate
+item.industry.plate.iron.desc=A plate of iron.
+item.industry.plate.gold.name=Gold Plate
+item.industry.plate.gold.desc=A plate of gold.
+item.industry.plate.steel.name=Steel Plate
+item.industry.plate.steel.desc=A plate of steel.
+item.industry.plate.iridium.name=Iridium Plate
+item.industry.plate.iridium.desc=A plate of iridium.
+
+item.industry.cable.tin.name=Tin Cable
+item.industry.cable.tin.desc=A bundle of tin cable.
+item.industry.cable.copper.name=Copper Cable
+item.industry.cable.copper.desc=A bundle of copper cable.
+item.industry.cable.gold.name=Gold Cable
+item.industry.cable.gold.desc=A bundle of gold cable. Sweet sweet onion rings.
+item.industry.cable.steel.name=Steel Cable
+item.industry.cable.steel.desc=A bundle of steel cable.
+
+item.industry.insulated.cable.tin.name=Insulated Tin Cable
+item.industry.insulated.cable.tin.desc=A bundle of insulated tin cable.
+item.industry.insulated.cable.copper.name=Insulated Copper Cable
+item.industry.insulated.cable.copper.desc=A bundle of insulated copper cable. Looks like a centipede...
+item.industry.insulated.cable.gold.name=Insulated Gold Cable
+item.industry.insulated.cable.gold.desc=A bundle of insulated gold cable.
+item.industry.insulated.cable.steel.name=Insulated Steel Cable
+item.industry.insulated.cable.steel.desc=A bundle of insulated steel cable.
+
+item.industry.tool.treetap.name=Tree Tap
+item.industry.tool.treetap.desc=A wooden tap used to extract fluids from trees.
+item.industry.tool.hammer.name=Hammer
+item.industry.tool.hammer.desc=A strong hammer used to smash ingots into plates.
+item.industry.tool.cutters.name=Wire Cutters
+item.industry.tool.cutters.desc=A pair of thinly made cutters used to cut ingots into cable.
+item.industry.tool.wrench.name=Wrench
+item.industry.tool.wrench.desc=A trusty wrench used to pick up machines.
+item.industry.tool.chainsaw.name=Chainsaw
+item.industry.tool.chainsaw.desc=Chop some trees with this rechargeable tool.
+item.industry.tool.drill.name=Drill
+item.industry.tool.drill.desc=Mine some stone with this rechargeable tool.
+item.industry.tool.drill.gold.name=Golden Drill
+item.industry.tool.drill.gold.desc=Mine some stone with this rechargeable gold-tipped tool.
+item.industry.tool.drill.diamond.name=Diamond Drill
+item.industry.tool.drill.diamond.desc=Mine some stone with this rechargeable diamond-tipped tool.
+item.industry.tool.nanosword.name=NanoSword
+item.industry.tool.nanosword.desc=Slay pesky monsters with this rechargeable sword.
+
+item.industry.armor.helmet.hazmat.name=Hazmat Helmet
+item.industry.armor.helmet.hazmat.desc=Protect yourself from radiation with this yellow helmet.
+item.industry.armor.chestplate.hazmat.name=Hazmat Chestplate
+item.industry.armor.chestplate.hazmat.desc=Protect yourself from radiation with this yellow chestplate.
+item.industry.armor.leggings.hazmat.name=Hazmat Leggings
+item.industry.armor.leggings.hazmat.desc=Protect yourself from radiation with these yellow leggings.
+item.industry.armor.boots.hazmat.name=Hazmat Boots
+item.industry.armor.boots.hazmat.desc=Protect yourself from radiation with these black boots.
+item.industry.armor.helmet.iridium.name=Iridium Plate Helmet
+item.industry.armor.helmet.iridium.desc=Protect yourself from everything with this indestructible helmet.
+item.industry.armor.chestplate.iridium.name=Iridium Plate Chestplate
+item.industry.armor.chestplate.iridium.desc=Protect yourself from everything with this indestructible chestplate.
+item.industry.armor.leggings.iridium.name=Iridium Plate Leggings
+item.industry.armor.leggings.iridium.desc=Protect yourself from everything with this pair of indestructible leggings.
+item.industry.armor.boots.iridium.name=Iridium Plate Boots
+item.industry.armor.boots.iridium.desc=Protect yourself from everything with this pair of indestructible boots.
+
+item.industry.battery.redstone.name=Redstone Battery
+item.industry.battery.redstone.desc=A redstone battery, with a tin casing.
+item.industry.battery.advanced.name=Advanced Battery
+item.industry.battery.advanced.desc=A sulphur and redstone battery, with a bronze casing.
+item.industry.battery.crystal.name=Crystal Battery
+item.industry.battery.crystal.desc=A diamond surrounded by redstone.
+item.industry.battery.lapis.name=Lapis Battery
+item.industry.battery.lapis.desc=A diamond surrounded by lapis. How does this contain power?
+
+item.industry.cell.empty.name=Empty Cell
+item.industry.cell.empty.desc=Used to hold various liquids. Once.
+item.industry.cell.water.name=Water Cell
+item.industry.cell.water.desc=A cell full of the deep blue.
+item.industry.cell.lava.name=Lava Cell
+item.industry.cell.lava.desc=A cell full of molten rock. Hot!
+item.industry.cell.uranium.name=Uranium Cell
+item.industry.cell.uranium.desc=A cell full of rock. Be careful!
+item.industry.cell.coolant.name=Coolant Cell
+item.industry.cell.coolant.desc=A cell full of ice. Brrr!
+
+item.industry.can.empty.name=Empty Can
+item.industry.can.empty.desc=Used to hold various food items.
+item.industry.can.food.name=Filled Can
+item.industry.can.food.desc=Holds mystery food. Yummy!
+
+item.industry.resin.name=Resin
+item.industry.resin.desc=Rubberwood blood.
+item.industry.rubber.name=Rubber
+item.industry.rubber.desc=A ball of black rubber. Boing!
+item.industry.circuit.name=Circuit
+item.industry.circuit.desc=Beeps and bloops on a piece of flat iron.
+item.industry.circuitadvanced.name=Advanced Circuit
+item.industry.circuitadvanced.desc=Advanced beeps and bloops on a piece of flat steel.
+item.industry.scrap.name=Scrap
+item.industry.scrap.desc=A ball of recycled material.
+
+item.industry.reactorplate.name=Reactor Plating
+item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.
+
+item.industry.ingot.iridium.scrap.name=Iridium Scrap
+item.industry.ingot.iridium.scrap.desc=A scrap of rare iridium, lucky you!
+
+item.industry.upgrade.plate.name=Upgrade Plate
+item.industry.upgrade.plate.desc=Add onto this base plate to make upgrades for your machines.
+item.industry.upgrade.speed.name=Speed Upgrade
+item.industry.upgrade.speed.desc=Makes your machines 30% faster in exchange for more power.
+item.industry.upgrade.transformer.name=Transformer Upgrade
+item.industry.upgrade.transformer.desc=Makes your machines handle a higher voltage.
+item.industry.upgrade.energy.name=Energy Upgrade
+item.industry.upgrade.energy.desc=Makes your machines store 10,000 more energy.
+item.industry.upgrade.pusher.name=Pusher Upgrade
+item.industry.upgrade.pusher.desc=Makes your machines automatically push items from the output slots.
+item.industry.upgrade.puller.name=Puller Upgrade
+item.industry.upgrade.puller.desc=Makes your machines automatically pull items into the input slots.
+item.industry.upgrade.blasting.name=Blasting Upgrade
+item.industry.upgrade.blasting.desc=Makes your smelting machines burn even hotter.
+
+item.industry.food.joffos.name=Joffo Cakes
+item.industry.food.joffos.desc=Delicious enough to spend an entire budget on!

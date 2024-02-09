@@ -129,7 +129,7 @@ public class I2Blocks {
 
     public static Block alarm;
 
-    private void pickaxeLevels() {
+    private void initializePickaxeLevels() {
         ItemToolPickaxe.miningLevels.put(oreTinStone, 1);
         ItemToolPickaxe.miningLevels.put(oreTinBasalt, 1);
         ItemToolPickaxe.miningLevels.put(oreTinLimestone, 1);
@@ -164,7 +164,7 @@ public class I2Blocks {
         ItemToolPickaxe.miningLevels.put(hardenedCoal, 3);
     }
 
-    private void addToGuiMap() {
+    private void registerGUIs() {
         Catalyst.GUIS.register("IndustryGenerator", new MpGuiEntry(TileEntityGenerator.class, GuiGenerator.class, ContainerGenerator.class));
         Catalyst.GUIS.register("IndustryWatermill", new MpGuiEntry(TileEntityGeneratorWatermill.class,GuiGeneratorWatermill.class,  ContainerGeneratorWatermill.class));
         Catalyst.GUIS.register("IndustryWindmill", new MpGuiEntry(TileEntityGeneratorWindmill.class,GuiGeneratorWindmill.class,  ContainerGeneratorWindmill.class));
@@ -703,8 +703,8 @@ public class I2Blocks {
                 .setTicking(true)
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
-        addToGuiMap();
+        registerGUIs();
         initializeTiles();
-        pickaxeLevels();
+        initializePickaxeLevels();
     }
 }

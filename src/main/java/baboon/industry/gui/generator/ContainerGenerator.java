@@ -8,9 +8,9 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.energy.impl.ContainerEnergy;
 
 public class ContainerGenerator extends ContainerEnergy {
-    private int energy = 0;
-    private int currentBurnTime = 0;
-    private int maxBurnTime = 0;
+    private final int energy = 0;
+    private final int currentBurnTime = 0;
+    private final int maxBurnTime = 0;
     InventoryPlayer inventory;
     TileEntityGenerator tileEntity;
 
