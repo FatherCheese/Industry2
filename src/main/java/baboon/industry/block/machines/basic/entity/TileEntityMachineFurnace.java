@@ -39,20 +39,17 @@ public class TileEntityMachineFurnace extends TileEntityMachineBase {
         }
         return null;
     }
+
     private void produceItem() {
         if (canProduce()) {
             ItemStack itemStack = Objects.requireNonNull(getSmeltingResult(contents[2]));
 
-            if (contents[3] == null)
-                contents[3] = itemStack.copy();
-            else
-            if (contents[3].itemID == itemStack.itemID)
-                contents[3].stackSize += itemStack.stackSize;
+            if (contents[3] == null) contents[3] = itemStack.copy();
+            else if (contents[3].itemID == itemStack.itemID) contents[3].stackSize += itemStack.stackSize;
 
             --contents[2].stackSize;
 
-            if (contents[2].stackSize <= 0)
-                contents[2] = null;
+            if (contents[2].stackSize <= 0) contents[2] = null;
         }
     }
 

@@ -1,6 +1,6 @@
 package baboon.industry.block.storage.entity;
 
-import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.block.energy.entity.TileEntityEnergyConductorDamageable;
 import com.mojang.nbt.CompoundTag;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;

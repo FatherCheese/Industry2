@@ -19,20 +19,21 @@ public class BlockLogResin extends BlockLog {
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
         int meta = world.getBlockMetadata(x, y, z);
-
-        if (rand.nextInt(100) == 0) {
-            world.setBlockAndMetadataWithNotify(x, y, z, I2Blocks.logRubberWoodResinFull.id, meta);
-        }
+        world.setBlockAndMetadataWithNotify(x, y, z, I2Blocks.logRubberWoodResinFull.id, meta);
     }
 
     @Override
     public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
         ItemStack itemStack = player.getHeldItem();
 
-        if (itemStack != null && itemStack.getItem() == I2Items.toolTreetap)
+        if (itemStack != null && itemStack.getItem() == I2Items.toolTreetap) {
             world.playSoundAtEntity(player, "industry.tap", 0.4f, 1.0f);
+        }
+
+        if (!world.isClientSide) {
+            world.scheduleBlockUpdate(x, y, z, this.id, world.rand.nextInt(100) + 100);
+        }
 
         return super.blockActivated(world, x, y, z, player);
     }

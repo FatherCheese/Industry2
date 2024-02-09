@@ -1,7 +1,7 @@
 package baboon.industry.block.machines.advanced.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.block.energy.entity.TileEntityEnergyConductorDamageable;
 import baboon.industry.item.I2Items;
 import baboon.industry.recipe.fuel.AdvancedRedstoneFuel;
 import com.mojang.nbt.CompoundTag;

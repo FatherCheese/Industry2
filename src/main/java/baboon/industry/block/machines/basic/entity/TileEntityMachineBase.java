@@ -1,7 +1,7 @@
 package baboon.industry.block.machines.basic.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.block.energy.entity.TileEntityEnergyConductorDamageable;
 import baboon.industry.item.I2Items;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;

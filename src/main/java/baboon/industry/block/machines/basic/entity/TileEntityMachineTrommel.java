@@ -2,7 +2,7 @@ package baboon.industry.block.machines.basic.entity;
 
 import baboon.industry.IndustryConfig;
 import baboon.industry.block.I2Blocks;
-import baboon.industry.block.entity.TileEntityEnergyConductorDamageable;
+import baboon.industry.block.energy.entity.TileEntityEnergyConductorDamageable;
 import baboon.industry.block.machines.basic.BlockMachineTrommel;
 import baboon.industry.item.I2Items;
 import com.mojang.nbt.CompoundTag;
@@ -12,9 +12,10 @@ import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockChest;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
 import net.minecraft.core.entity.monster.EntitySlime;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventorySorter;
@@ -28,15 +29,8 @@ import java.util.Random;
 
 public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageable implements IInventory, IItemIO {
     private ItemStack[] contents;
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsDirt = new WeightedRandomBag<>();
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsGravel = new WeightedRandomBag<>();
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsClay = new WeightedRandomBag<>();
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsSand = new WeightedRandomBag<>();
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsRichDirt = new WeightedRandomBag<>();
-    private static final WeightedRandomBag<WeightedRandomLootObject> trommelDropsSoulSand = new WeightedRandomBag<>();
     private final Random rand = new Random();
     private int nextToSieve = 2;
-    private boolean hasEnergyUpgrade;
     private int currentSpeed = 0;
     private int currentEnergy = 0;
     private int currentTransformers = 0;
@@ -55,8 +49,6 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
 
         for (Direction dir : Direction.values())
             setConnection(dir, Connection.INPUT);
-
-        setTrommelDrops();
     }
 
     @Override
@@ -159,61 +151,6 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         return Connection.NONE;
     }
 
-    private static void setTrommelDrops() {
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.ammoPebble), 1, 3), 50.0);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.clay), 1, 5), 20.0);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.flint), 1, 3), 10.0);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.sulphur)), 2.0);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawIron), 1), 0.5);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawCopper), 1), 0.5);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawTin), 1), 0.5);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.olivine)), 0.25);
-        trommelDropsDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.quartz)), 0.25);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.flint), 1, 2), 25.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.olivine), 1, 3), 30.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.ammoPebble), 1, 6), 25.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawIron), 1, 2), 10.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawTin), 1, 2), 10.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawCopper), 1, 2), 10.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.dye, 1, 4), 2, 6), 5.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.sulphur)), 5.0);
-        trommelDropsGravel.addEntry(new WeightedRandomLootObject(new ItemStack(Item.quartz)), 0.5);
-        trommelDropsClay.addEntry(new WeightedRandomLootObject(new ItemStack(Item.clay), 4, 8), 30.0);
-        trommelDropsClay.addEntry(new WeightedRandomLootObject(new ItemStack(Item.ammoPebble), 1, 3), 20.0);
-        trommelDropsClay.addEntry(new WeightedRandomLootObject(new ItemStack(Item.sulphur)), 10.0);
-        trommelDropsClay.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawGold), 1), 1.0);
-        trommelDropsClay.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawUranium), 1), 1.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.quartz), 1, 3), 50.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.clay), 4, 8), 30.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.ammoPebble), 1, 5), 25.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.bone), 1, 3), 10.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.flint), 1, 3), 10.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.sulphur)), 5.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawGold), 1), 1.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawUranium), 1), 1.0);
-        trommelDropsSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.olivine)), 5.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawGold), 1), 10.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawIron), 1, 2), 15.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawTin), 1, 2), 15.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawCopper), 1, 2), 15.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.quartz), 1, 4), 25.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.olivine), 1, 4), 25.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.dye, 1, 4), 2, 4), 20.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.clay), 4, 8), 10.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(Item.ammoPebble), 1, 5), 5.0);
-        trommelDropsRichDirt.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawUranium), 1), 1.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.flint), 1, 3), 20.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.bone), 1, 6), 10.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawGold), 1), 2.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.oreRawIron), 1), 1.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawTin), 1), 1.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawCopper), 1), 1.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(I2Items.oreRawUranium), 1), 2.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.dustGlowstone), 1, 6), 5.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.quartz), 1, 3), 5.0);
-        trommelDropsSoulSand.addEntry(new WeightedRandomLootObject(new ItemStack(Item.nethercoal)), 0.5);
-    }
-
     private boolean canItemBeTrommeled(ItemStack itemstack) {
         if (itemstack == null) {
             return false;
@@ -247,29 +184,16 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
     }
 
     private ItemStack getItemResult(ItemStack slotItem) {
-        if (this.rand.nextInt(2) != 0) {
-            return null;
-        } else {
-            int slotItemID = slotItem.getItem().id;
-            if (slotItemID == Block.dirt.id
-                    || slotItemID == Block.dirtScorched.id
-                    || slotItemID == Block.grass.id
-                    || slotItemID == Block.grassRetro.id
-                    || slotItemID == Block.pathDirt.id
-                    || slotItemID == Block.farmlandDirt.id) {
-                return trommelDropsDirt.getRandom().getItemStack();
-            } else if (slotItemID == Block.sand.id) {
-                return trommelDropsSand.getRandom().getItemStack();
-            } else if (slotItemID == Block.gravel.id) {
-                return trommelDropsGravel.getRandom().getItemStack();
-            } else if (slotItemID == Block.blockClay.id) {
-                return trommelDropsClay.getRandom().getItemStack();
-            } else if (slotItemID == Block.dirtScorchedRich.id) {
-                return trommelDropsRichDirt.getRandom().getItemStack();
-            } else {
-                return slotItemID == Block.soulsand.id ? trommelDropsSoulSand.getRandom().getItemStack() : null;
+        if (this.rand.nextInt(2) != 0) return null;
+        else {
+            for (RecipeEntryTrommel recipe : Registries.RECIPES.getAllTrommelRecipes()) {
+                if (recipe.getInput().matches(slotItem)) {
+                    return ((WeightedRandomLootObject)((WeightedRandomBag<?>)recipe.getOutput()).getRandom()).getItemStack();
+                }
             }
         }
+
+        return null;
     }
 
     public void sieveItem(int slotIndex) {

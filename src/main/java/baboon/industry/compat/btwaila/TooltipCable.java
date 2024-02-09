@@ -1,6 +1,6 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.block.cables.entity.TileEntityCable;
+import baboon.industry.block.energy.cables.entity.TileEntityCable;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.tooltips.TileTooltip;
 

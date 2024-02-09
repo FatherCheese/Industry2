@@ -1,6 +1,6 @@
 package baboon.industry.gui.generator;
 
-import baboon.industry.block.generator.entity.TileEntityGeneratorGeothermal;
+import baboon.industry.block.energy.generator.entity.TileEntityGeneratorGeothermal;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.lang.I18n;

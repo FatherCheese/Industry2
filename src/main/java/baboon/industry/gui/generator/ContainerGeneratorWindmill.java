@@ -1,6 +1,6 @@
 package baboon.industry.gui.generator;
 
-import baboon.industry.block.generator.entity.TileEntityGeneratorWindmill;
+import baboon.industry.block.energy.generator.entity.TileEntityGeneratorWindmill;
 import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;

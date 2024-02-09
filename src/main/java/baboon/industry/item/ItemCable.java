@@ -1,6 +1,6 @@
 package baboon.industry.item;
 
-import baboon.industry.block.cables.BlockCable;
+import baboon.industry.block.energy.cables.BlockCable;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemPlaceable;
 import net.minecraft.core.item.ItemStack;

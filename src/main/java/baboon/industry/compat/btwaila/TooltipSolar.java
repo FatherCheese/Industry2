@@ -1,11 +1,11 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.block.generator.entity.TileEntityArrayEHV;
-import baboon.industry.block.generator.entity.TileEntityArrayHV;
-import baboon.industry.block.generator.entity.TileEntityArrayLV;
-import baboon.industry.block.generator.entity.TileEntityArrayMV;
-import baboon.industry.block.generator.entity.TileEntityGeneratorSolar;
-import baboon.industry.block.generator.entity.TileEntitySolarBase;
+import baboon.industry.block.energy.generator.entity.TileEntityArrayEHV;
+import baboon.industry.block.energy.generator.entity.TileEntityArrayHV;
+import baboon.industry.block.energy.generator.entity.TileEntityArrayLV;
+import baboon.industry.block.energy.generator.entity.TileEntityArrayMV;
+import baboon.industry.block.energy.generator.entity.TileEntityGeneratorSolar;
+import baboon.industry.block.energy.generator.entity.TileEntitySolarBase;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.tooltips.TileTooltip;
 

@@ -1,6 +1,6 @@
 package baboon.industry.compat.btwaila;
 
-import baboon.industry.block.generator.entity.TileEntityGeneratorGeothermal;
+import baboon.industry.block.energy.generator.entity.TileEntityGeneratorGeothermal;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.tooltips.TileTooltip;
 

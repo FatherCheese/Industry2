@@ -1,6 +1,6 @@
 package baboon.industry.gui.generator;
 
-import baboon.industry.block.generator.entity.TileEntitySolarBase;
+import baboon.industry.block.energy.generator.entity.TileEntitySolarBase;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 
