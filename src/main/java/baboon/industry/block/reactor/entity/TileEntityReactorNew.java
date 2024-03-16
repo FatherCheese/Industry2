@@ -32,6 +32,7 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         contents = new ItemStack[9 * 6];
         setCapacity(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
         setMaxProvide(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
+        setMaxReceive(IndustryConfig.cfg.getInt("Energy Values.ehvIO"));
 
         for (Direction dir : Direction.values())
             setConnection(dir, Connection.OUTPUT);
@@ -96,10 +97,11 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
 
     @Override
     public void sortInventory() {
-        InventorySorter.sortInventory(contents);
+
     }
 
-    private static boolean sendInventoryPacket = true;
+    private static final boolean sendInventoryPacket = true;
+
     @Override
     public void onInventoryChanged() {
         uraniumCell = 0;
@@ -108,7 +110,7 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
 
         for (ItemStack content : contents) {
             if (content != null) {
-                if (content.getItem() == I2Items.cellUranium)
+                if (content.getItem() == I2Items.cellRedstoneT1)
                     uraniumCell += 1;
 
                 if (content.getItem() == I2Items.cellCoolant)
@@ -174,7 +176,7 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
         if (id < 0) return false;
         if (id >= contents.length) return false;
         if (contents[id] == null) return false;
-        return contents[id].getItem() == I2Items.cellUranium;
+        return contents[id].getItem() == I2Items.cellRedstoneT1;
     }
 
     @Override
@@ -201,7 +203,7 @@ public class TileEntityReactorNew extends TileEntityEnergyConductor implements I
                 if (stack == null)
                     continue;
 
-                if (damageUranium && stack.getItem() == I2Items.cellUranium) {
+                if (damageUranium && stack.getItem() == I2Items.cellRedstoneT1) {
                     heat += 4;
                     stack.damageItem(1, null);
                 }

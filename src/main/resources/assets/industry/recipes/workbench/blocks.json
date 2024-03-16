@@ -75,31 +75,6 @@
     "consumeContainers": false
   },
   {
-    "name": "industry:workbench/block_uranium",
-    "type": "minecraft:crafting/shaped",
-    "pattern": [
-      "111",
-      "111",
-      "111"
-    ],
-    "symbols": [
-      {
-        "symbol": "1",
-        "stack": {
-          "key": "item.industry.ingot.uranium",
-          "amount": 1,
-          "meta": 0
-        }
-      }
-    ],
-    "result": {
-      "key": "tile.industry.block.uranium",
-      "amount": 1,
-      "meta": 0
-    },
-    "consumeContainers": false
-  },
-  {
     "name": "industry:workbench/machine_casing_basic",
     "type": "minecraft:crafting/shaped",
     "pattern": [

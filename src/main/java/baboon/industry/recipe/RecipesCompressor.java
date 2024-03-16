@@ -21,7 +21,6 @@ public class RecipesCompressor {
         addRecipe(I2Items.ingotBronze.id, new ItemStack(I2Items.plateBronze, 2));
         addRecipe(I2Blocks.blockBronze.id, new ItemStack(I2Items.plateBronze, 18));
 
-        addRecipe(I2Items.oreRawUranium.id, new ItemStack(I2Items.ingotUranium, 1));
         addRecipe(I2Items.ingotIridium.id, new ItemStack(I2Items.plateIridium, 1));
 
         addRecipe(Item.ingotIron.id, new ItemStack(I2Items.plateIron, 2));

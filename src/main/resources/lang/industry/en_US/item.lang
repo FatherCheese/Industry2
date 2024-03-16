@@ -2,8 +2,6 @@ item.industry.ore.raw.tin.name=Raw Tin Ore
 item.industry.ore.raw.tin.desc=A chunk of unprocessed tin. Can be smelted into a tin ingot.
 item.industry.ore.raw.copper.name=Raw Copper Ore
 item.industry.ore.raw.copper.desc=A chunk of unprocessed copper. Can be smelted into a copper ingot.
-item.industry.ore.raw.uranium.name=Raw Uranium
-item.industry.ore.raw.uranium.desc=A chunk of unprocessed uranium. Can be compressed into a uranium ingot.
 
 item.industry.dust.tin.name=Tin Dust
 item.industry.dust.tin.desc=A pile of unprocessed tin. Can be smelted into a tin ingot.
@@ -24,10 +22,10 @@ item.industry.ingot.copper.name=Copper Ingot
 item.industry.ingot.copper.desc=A metal bar of copper used for electricity.
 item.industry.ingot.bronze.name=Bronze Ingot
 item.industry.ingot.bronze.desc=Tin and copper fused into an iron-like alloy.
-item.industry.ingot.uranium.name=Uranium Ingot
-item.industry.ingot.uranium.desc=A metal bar of uranium used for nuclear science.
 item.industry.ingot.iridium.name=Iridium Ingot
 item.industry.ingot.iridium.desc=A metal bar of iridium. Can be compressed into a plate.
+item.industry.ingot.redstone.name=Activated Redstone Ingot
+item.industry.ingot.redstone.desc=A compressed bar of redstone. Spicy!
 
 item.industry.plate.tin.name=Tin Plate
 item.industry.plate.tin.desc=A plate of tin.
@@ -113,8 +111,16 @@ item.industry.cell.water.name=Water Cell
 item.industry.cell.water.desc=A cell full of the deep blue.
 item.industry.cell.lava.name=Lava Cell
 item.industry.cell.lava.desc=A cell full of molten rock. Hot!
-item.industry.cell.uranium.name=Uranium Cell
-item.industry.cell.uranium.desc=A cell full of rock. Be careful!
+item.industry.cell.redstone.t1.name=Tier 1 Redstone Cell
+item.industry.cell.redstone.t1.desc=A cell full of active redstone. Be careful!
+item.industry.cell.redstone.t2.name=Tier 2 Redstone Cell
+item.industry.cell.redstone.t2.desc=A cell full of active redstone. Be careful!
+item.industry.cell.redstone.t3.name=Tier 3 Redstone Cell
+item.industry.cell.redstone.t3.desc=A cell full of active redstone. Be careful!
+item.industry.cell.redstone.empty.t1.name=Depleted Tier 1 Redstone Cell
+item.industry.cell.redstone.empty.t1.desc=A cell that was full of active redstone.
+item.industry.cell.redstone.empty.t2.name=Depleted Tier 2 Redstone Cell
+item.industry.cell.redstone.empty.t2.desc=A cell that was full of active redstone.
 item.industry.cell.coolant.name=Coolant Cell
 item.industry.cell.coolant.desc=A cell full of ice. Brrr!
 
@@ -136,6 +142,8 @@ item.industry.scrap.desc=A ball of recycled material.
 
 item.industry.reactorplate.name=Reactor Plating
 item.industry.reactorplate.desc=Protect your reactor with this extra-thick steel plate.
+item.industry.reactorvent.name=Reactor Vent
+item.industry.reactorvent.desc=Vent out excess heat with this steel plated vent.
 
 item.industry.ingot.iridium.scrap.name=Iridium Scrap
 item.industry.ingot.iridium.scrap.desc=A scrap of rare iridium, lucky you!

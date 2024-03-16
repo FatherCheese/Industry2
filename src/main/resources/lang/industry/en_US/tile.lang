@@ -16,23 +16,12 @@ tile.industry.ore.copper.limestone.desc=Copper nuggets embedded in limestone.
 tile.industry.ore.copper.granite.name=Granite Copper Ore
 tile.industry.ore.copper.granite.desc=Copper nuggets embedded in granite.
 
-tile.industry.ore.uranium.stone.name=Stone Uranium Ore
-tile.industry.ore.uranium.stone.desc=A chunk of uranium embedded in stone.
-tile.industry.ore.uranium.basalt.name=Basalt Uranium Ore
-tile.industry.ore.uranium.basalt.desc=A chunk of uranium embedded in basalt.
-tile.industry.ore.uranium.limestone.name=Limestone Uranium Ore
-tile.industry.ore.uranium.limestone.desc=A chunk of uranium embedded in limestone.
-tile.industry.ore.uranium.granite.name=Granite Uranium Ore
-tile.industry.ore.uranium.granite.desc=A chunk of uranium embedded in granite.
-
 tile.industry.block.tin.name=Block of Tin
 tile.industry.block.tin.desc=A solid block of tin.
 tile.industry.block.copper.name=Block of Copper
 tile.industry.block.copper.desc=A solid block of copper. Shocking!
 tile.industry.block.bronze.name=Block of Bronze
 tile.industry.block.bronze.desc=A solid block of bronze.
-tile.industry.block.uranium.name=Block of Uranium
-tile.industry.block.uranium.desc=A solid block of uranium. Be careful!
 
 tile.industry.cable.tin.name=Tin Cable
 tile.industry.cable.tin.desc=A bundle of tin cable.
@@ -130,6 +119,8 @@ tile.industry.reactor.chamber.name=Reactor Chamber
 tile.industry.reactor.chamber.desc=The part that holds the glowing rocks.
 tile.industry.reactor.io.name=Reactor I/O
 tile.industry.reactor.io.desc=The part that exports and imports power from your reactor.
+tile.industry.reactor.rtg.name=Redstone RTG
+tile.industry.reactor.rtg.desc=A below-average generator that indefinitely heats up redstone.
 
 tile.industry.fabricator.name=E2M Fabricator
 tile.industry.fabricator.desc=Turns raw energy into (almost) any block or item.

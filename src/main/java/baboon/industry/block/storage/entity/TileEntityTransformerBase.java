@@ -13,14 +13,14 @@ public class TileEntityTransformerBase extends TileEntityEnergyConductorDamageab
     }
 
     @Override
-    public void writeToNBT(CompoundTag CompoundTag) {
-        super.writeToNBT(CompoundTag);
-        CompoundTag.putInt("Energy", energy);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
+        tag.putInt("Energy", energy);
     }
 
     @Override
-    public void readFromNBT(CompoundTag CompoundTag) {
-        super.readFromNBT(CompoundTag);
-        energy = CompoundTag.getInteger("Energy");
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        energy = tag.getInteger("Energy");
     }
 }

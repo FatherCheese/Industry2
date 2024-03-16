@@ -22,7 +22,7 @@ public class RecipesCannery {
         addRecipe(Item.foodCake.id, 6);
         addRecipe(Item.foodAppleGold.id, 21);
 
-        addSpecialRecipe(I2Items.ingotUranium.id, new ItemStack(I2Items.cellUranium, 1));
+        addSpecialRecipe(I2Items.ingotActivatedRedstone.id, new ItemStack(I2Items.cellRedstoneT1, 1));
     }
 
     public static void addRecipe(int input, int outputCount) {

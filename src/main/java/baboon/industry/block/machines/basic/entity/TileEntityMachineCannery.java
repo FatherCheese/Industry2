@@ -8,6 +8,7 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.helper.Sides;
@@ -102,8 +103,8 @@ public class TileEntityMachineCannery extends TileEntityEnergyConductorDamageabl
     }
 
     private boolean isProducible(ItemStack itemStack) {
-        return (recipes.getRecipeList().containsKey(itemStack.getItem().id) && contents[2].getItem() != I2Items.ingotUranium && contents[3].getItem() == I2Items.canEmpty) ||
-                (contents[2].getItem() == I2Items.ingotUranium && contents[3].getItem() == I2Items.cellEmpty && contents[3].getItem() != I2Items.canEmpty);
+        return (recipes.getRecipeList().containsKey(itemStack.getItem().id) && contents[2].getItem() != I2Items.ingotActivatedRedstone && contents[3].getItem() == I2Items.canEmpty) ||
+                (contents[2].getItem() == I2Items.ingotActivatedRedstone && contents[3].getItem() == I2Items.cellEmpty && contents[3].getItem() != I2Items.canEmpty);
     }
 
     private boolean canProduce() {

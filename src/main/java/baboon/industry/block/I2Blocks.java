@@ -16,17 +16,19 @@ import baboon.industry.block.machines.endgame.entity.TileEntityEnergyFabricator;
 import baboon.industry.block.reactor.BlockReactor;
 import baboon.industry.block.reactor.BlockReactorChamber;
 import baboon.industry.block.reactor.BlockReactorIO;
+import baboon.industry.block.reactor.BlockReactorRTG;
 import baboon.industry.block.reactor.entity.TileEntityReactorIO;
-import baboon.industry.block.reactor.entity.TileEntityReactorNew;
+import baboon.industry.block.reactor.entity.TileEntityReactorNewer;
+import baboon.industry.block.reactor.entity.TileEntityReactorRTG;
 import baboon.industry.block.storage.*;
 import baboon.industry.block.storage.entity.*;
 import baboon.industry.gui.generator.*;
+import baboon.industry.gui.generator.reactor.ContainerReactorNewer;
+import baboon.industry.gui.generator.reactor.GuiReactorNewer;
 import baboon.industry.gui.machine.advanced.*;
 import baboon.industry.gui.machine.basic.*;
 import baboon.industry.gui.machine.endgame.ContainerFabricator;
 import baboon.industry.gui.machine.endgame.GuiFabricator;
-import baboon.industry.gui.reactor.ContainerReactor;
-import baboon.industry.gui.reactor.GuiReactor;
 import baboon.industry.gui.storage.*;
 import net.minecraft.client.render.block.color.BlockColorLeaves;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
@@ -57,16 +59,11 @@ public class I2Blocks {
     public static Block oreCopperBasalt;
     public static Block oreCopperLimestone;
     public static Block oreCopperGranite;
-    public static Block oreUraniumStone;
-    public static Block oreUraniumBasalt;
-    public static Block oreUraniumLimestone;
-    public static Block oreUraniumGranite;
 
     // Material Blocks
     public static Block blockTin;
     public static Block blockCopper;
     public static Block blockBronze;
-    public static Block blockUranium;
 
     // Cables
     public static Block blockCableTin;
@@ -123,6 +120,7 @@ public class I2Blocks {
     public static Block nuclearReactor;
     public static Block nuclearChamber;
     public static Block nuclearIO;
+    public static Block nuclearRTG;
 
     // End Game
     public static Block energyFabricator;
@@ -138,14 +136,9 @@ public class I2Blocks {
         ItemToolPickaxe.miningLevels.put(oreCopperBasalt, 1);
         ItemToolPickaxe.miningLevels.put(oreCopperLimestone, 1);
         ItemToolPickaxe.miningLevels.put(oreCopperGranite, 1);
-        ItemToolPickaxe.miningLevels.put(oreUraniumStone, 2);
-        ItemToolPickaxe.miningLevels.put(oreUraniumBasalt, 2);
-        ItemToolPickaxe.miningLevels.put(oreUraniumLimestone, 2);
-        ItemToolPickaxe.miningLevels.put(oreUraniumGranite, 2);
         ItemToolPickaxe.miningLevels.put(blockTin, 2);
         ItemToolPickaxe.miningLevels.put(blockCopper, 2);
         ItemToolPickaxe.miningLevels.put(blockBronze, 2);
-        ItemToolPickaxe.miningLevels.put(blockUranium, 2);
         ItemToolPickaxe.miningLevels.put(generator, 2);
         ItemToolPickaxe.miningLevels.put(generatorWatermill, 2);
         ItemToolPickaxe.miningLevels.put(generatorWindmill, 2);
@@ -161,6 +154,7 @@ public class I2Blocks {
         ItemToolPickaxe.miningLevels.put(transformerHVtoMV, 2);
         ItemToolPickaxe.miningLevels.put(transformerEHVtoHV, 2);
         ItemToolPickaxe.miningLevels.put(alarm, 2);
+        ItemToolPickaxe.miningLevels.put(nuclearRTG, 2);
         ItemToolPickaxe.miningLevels.put(hardenedCoal, 3);
     }
 
@@ -191,11 +185,11 @@ public class I2Blocks {
         Catalyst.GUIS.register("IndustryAdvancedCompressor", new MpGuiEntry(TileEntityAdvancedCompressor.class,GuiAdvancedCompressor.class,  ContainerAdvancedBase.class));
         Catalyst.GUIS.register("IndustryAdvancedWiremill", new MpGuiEntry(TileEntityAdvancedWiremill.class,GuiAdvancedWiremill.class,  ContainerAdvancedBase.class));
         Catalyst.GUIS.register("IndustryAdvancedExtractor", new MpGuiEntry(TIleEntityAdvancedExtractor.class,GuiAdvancedExtractor.class,  ContainerAdvancedBase.class));
-        Catalyst.GUIS.register("IndustryReactor", new MpGuiEntry(TileEntityReactorNew.class,GuiReactor.class,  ContainerReactor.class));
+        Catalyst.GUIS.register("IndustryReactor", new MpGuiEntry(TileEntityReactorNewer.class, GuiReactorNewer.class,  ContainerReactorNewer.class));
         Catalyst.GUIS.register("IndustryFabricator", new MpGuiEntry(TileEntityEnergyFabricator.class,GuiFabricator.class,  ContainerFabricator.class));
     }
 
-    private void initializeTiles() {
+    private void createTileEntities() {
         EntityHelper.Core.createTileEntity(TileEntityCable.class, "Cable");
         EntityHelper.Core.createTileEntity(TileEntityGenerator.class, "IndustryGenerator");
         EntityHelper.Core.createTileEntity(TileEntityGeneratorWatermill.class, "IndustryWatermill");
@@ -226,9 +220,10 @@ public class I2Blocks {
         EntityHelper.Core.createTileEntity(TileEntityAdvancedCompressor.class, "IndustryAdvancedCompressor");
         EntityHelper.Core.createTileEntity(TileEntityAdvancedWiremill.class, "IndustryAdvancedWiremill");
         EntityHelper.Core.createTileEntity(TIleEntityAdvancedExtractor.class, "IndustryAdvancedExtractor");
-        EntityHelper.Core.createTileEntity(TileEntityReactorNew.class, "IndustryReactor");
+        EntityHelper.Core.createTileEntity(TileEntityReactorNewer.class, "IndustryReactor");
         EntityHelper.Core.createTileEntity(TileEntityReactorIO.class, "IndustryReactorIO");
         EntityHelper.Core.createTileEntity(TileEntityEnergyFabricator.class, "IndustryFabricator");
+        EntityHelper.Core.createTileEntity(TileEntityReactorRTG.class, "IndustryReactorRTG");
     }
 
     public void initializeBlocks() {
@@ -307,22 +302,6 @@ public class I2Blocks {
                 .setTextures("ore_copper_granite.png")
                 .build(new BlockOreCopper("ore.copper.granite", blockID("oreCopperGranite"), Material.stone));
 
-        oreUraniumStone = oreBuilder
-                .setTextures("ore_uranium_stone.png")
-                .build(new BlockOreUranium("ore.uranium.stone", blockID("oreUraniumStone"), Material.stone));
-
-        oreUraniumBasalt = oreBuilder
-                .setTextures("ore_uranium_basalt.png")
-                .build(new BlockOreUranium("ore.uranium.basalt", blockID("oreUraniumBasalt"), Material.stone));
-
-        oreUraniumLimestone = oreBuilder
-                .setTextures("ore_uranium_limestone.png")
-                .build(new BlockOreUranium("ore.uranium.limestone", blockID("oreUraniumLimestone"), Material.stone));
-
-        oreUraniumGranite = oreBuilder
-                .setTextures("ore_uranium_granite.png")
-                .build(new BlockOreUranium("ore.uranium.granite", blockID("oreUraniumGranite"), Material.stone));
-
         blockTin = materialBlockBuilder
                 .setTopTexture("block_tin_top.png")
                 .setSideTextures("block_tin_sides.png")
@@ -340,12 +319,6 @@ public class I2Blocks {
                 .setSideTextures("block_bronze_sides.png")
                 .setBottomTexture("block_bronze_bottom.png")
                 .build(new Block("block.bronze", blockID("blockBronze"), Material.metal));
-
-        blockUranium = materialBlockBuilder
-                .setTopTexture("block_uranium_top.png")
-                .setSideTextures("block_uranium_sides.png")
-                .setBottomTexture("block_uranium_bottom.png")
-                .build(new Block("block.uranium", blockID("blockUranium"), Material.metal));
 
         blockCableTin = cableBuilder
                 .setTextures("block_tin_top.png")
@@ -682,6 +655,13 @@ public class I2Blocks {
                 .setResistance(0.0F)
                 .build(new BlockReactorIO("reactor.io", blockID("nuclearIO"), Material.metal));
 
+        nuclearRTG = new BlockBuilder(MOD_ID)
+                .setTextures("reactor_casing_top.png")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10.0F)
+                .setResistance(0.0F)
+                .build(new BlockReactorRTG("reactor.rtg", blockID("nuclearRTG")));
+
         energyFabricator = new BlockBuilder(MOD_ID)
                 .setTopBottomTexture("machine_casing_advanced.png")
                 .setNorthTexture("endgame_fabricator.png")
@@ -704,7 +684,7 @@ public class I2Blocks {
                 .withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         registerGUIs();
-        initializeTiles();
+        createTileEntities();
         initializePickaxeLevels();
     }
 }

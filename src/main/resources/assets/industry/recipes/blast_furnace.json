@@ -178,5 +178,37 @@
       "amount": 3,
       "meta": 0
     }
+  },
+  {
+    "name": "minecraft:blast_furnace/dust_redstone_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "item.dust.redstone",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.redstone",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "minecraft:blast_furnace/bulk_redstone_to_ingot",
+    "type": "minecraft:smelting/blast",
+    "input": {
+      "stack": {
+        "key": "tile.block.redstone",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "output": {
+      "key": "item.industry.ingot.redstone",
+      "amount": 9,
+      "meta": 0
+    }
   }
 ]

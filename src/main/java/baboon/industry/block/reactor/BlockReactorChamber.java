@@ -1,6 +1,6 @@
 package baboon.industry.block.reactor;
 
-import baboon.industry.block.reactor.entity.TileEntityReactorNew;
+import baboon.industry.block.reactor.entity.TileEntityReactorNewer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -25,9 +25,9 @@ public class BlockReactorChamber extends Block {
                 int reactorZ = z + side.getOffsetZ();
                 TileEntity tileEntity = world.getBlockTileEntity(reactorX, reactorY, reactorZ);
 
-                if (!(tileEntity instanceof TileEntityReactorNew) || !((TileEntityReactorNew) tileEntity).isAssembled())
+                if (!(tileEntity instanceof TileEntityReactorNewer) || !((TileEntityReactorNewer) tileEntity).isAssembled())
                     continue;
-                Catalyst.displayGui(player, tileEntity, ((TileEntityReactorNew) tileEntity).getInvName());
+                Catalyst.displayGui(player, tileEntity, ((TileEntityReactorNewer) tileEntity).getInvName());
                 break;
             }
         }

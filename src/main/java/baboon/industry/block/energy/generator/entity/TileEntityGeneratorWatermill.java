@@ -1,7 +1,7 @@
 package baboon.industry.block.energy.generator.entity;
 
 import baboon.industry.IndustryConfig;
-import baboon.industry.recipe.fuel.GeneratorWatermillFuel;
+import baboon.industry.recipe.fuel.WaterFuel;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.core.block.Block;
@@ -17,7 +17,7 @@ import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
 
 public class TileEntityGeneratorWatermill extends TileEntityEnergyConductor implements IInventory {
     private ItemStack[] contents;
-    private final GeneratorWatermillFuel fuel = new GeneratorWatermillFuel();
+    private final WaterFuel fuel = new WaterFuel();
     public int currentFuelTime  = 0;
     public final int maxFuelTime = 8000;
 

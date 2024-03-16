@@ -6,6 +6,7 @@ gui.industry.water=Water
 gui.industry.height=Height
 gui.industry.generating=Generating
 gui.industry.inventory=Inventory
+gui.industry.heat=Heat
 
 gui.industry.array.ehv=LV Solar Array
 gui.industry.array.ehv=MV Solar Array
@@ -38,4 +39,4 @@ gui.industry.t2.macerator=Advanced Macerator
 gui.industry.t2.wiremill=Advanced Wiremill
 
 gui.industry.fabricator=E2M Fabricator
-gui.industry.reactor=Nuclear Reactorgui.industry.inventory=Inventory
+gui.industry.reactor=Nuclear Reactor

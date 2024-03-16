@@ -23,10 +23,12 @@ public class ContainerGenerator extends ContainerEnergy {
         addSlot(new Slot(tileEntity, 1, 8, 53));
         addSlot(new Slot(tileEntity, 2, 80, 35));
 
+        // Player inventory
         for(int xSlot = 0; xSlot < 3; ++xSlot)
             for (int ySlot = 0; ySlot < 9; ++ySlot)
                 addSlot(new Slot(inventory, ySlot + xSlot * 9 + 9, 8 + ySlot * 18, 84 + xSlot * 18));
 
+        // Player hotbar
         for(int hotbar = 0; hotbar < 9; ++hotbar)
             addSlot(new Slot(inventory, hotbar, 8 + hotbar * 18, 142));
     }

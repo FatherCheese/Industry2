@@ -1,5 +1,6 @@
-package baboon.industry.item;
+package baboon.industry.item.radioactive;
 
+import baboon.industry.item.I2Items;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -20,7 +21,7 @@ public class ItemRadioactive extends Item {
             if (((EntityPlayer) entity).inventory.armorInventory[i] == null)
                 return false;
 
-        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == I2Items.armorHelmetHazmat.id     &&
+        return ((EntityPlayer) entity).inventory.armorInventory[3].itemID == I2Items.armorHelmetHazmat.id      &&
                 ((EntityPlayer) entity).inventory.armorInventory[2].itemID == I2Items.armorChestplateHazmat.id &&
                 ((EntityPlayer) entity).inventory.armorInventory[1].itemID == I2Items.armorLeggingsHazmat.id   &&
                 ((EntityPlayer) entity).inventory.armorInventory[0].itemID == I2Items.armorBootsHazmat.id;
@@ -30,16 +31,14 @@ public class ItemRadioactive extends Item {
     public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
         if (!world.isClientSide) {
             if (entity instanceof EntityPlayer && ((EntityPlayer) entity).getGamemode() != Gamemode.creative) {
-                damageTimer++;
-
-                if (damageTimer >= 20) {
+                if (damageTimer++ >= 20) {
                     if (isArmoured(entity)) {
                         ((EntityPlayer) entity).inventory.damageArmor(1, 3);
                         ((EntityPlayer) entity).inventory.damageArmor(1, 2);
                         ((EntityPlayer) entity).inventory.damageArmor(1, 1);
                         ((EntityPlayer) entity).inventory.damageArmor(1, 0);
                     } else
-                        entity.hurt(null, 1, DamageType.FIRE);
+                        entity.hurt(null, 1, DamageType.GENERIC);
 
                     damageTimer = 0;
                 }

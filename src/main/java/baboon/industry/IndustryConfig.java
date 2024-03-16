@@ -39,7 +39,6 @@ public class IndustryConfig {
         properties.addCategory("World Gen")
                 .addEntry("copperOre", true)
                 .addEntry("tinOre", true)
-                .addEntry("uraniumOre", true)
                 .addEntry("treeRubberwood", true);
 
 

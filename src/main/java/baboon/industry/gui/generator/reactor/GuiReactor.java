@@ -1,4 +1,4 @@
-package baboon.industry.gui.reactor;
+package baboon.industry.gui.generator.reactor;
 
 import baboon.industry.block.reactor.entity.TileEntityReactorNew;
 import baboon.industry.item.I2Items;
@@ -112,7 +112,7 @@ public class GuiReactor extends GuiContainer {
             action = InventoryAction.MOVE_SINGLE_ITEM;
         }
         if (this.inventorySlots instanceof ContainerReactor) { // This is the only section that actually really matters
-            if (clickedItemId == I2Items.cellUranium.id || clickedItemId == I2Items.cellCoolant.id || clickedItemId == I2Items.reactorPlate.id){
+            if (clickedItemId == I2Items.cellRedstoneT1.id || clickedItemId == I2Items.cellCoolant.id || clickedItemId == I2Items.reactorPlate.id){
                 target = 1;
             }
         }

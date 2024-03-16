@@ -1,4 +1,4 @@
-package baboon.industry.gui.reactor;
+package baboon.industry.gui.generator.reactor;
 
 import baboon.industry.block.reactor.entity.TileEntityReactorNew;
 import net.minecraft.core.InventoryAction;

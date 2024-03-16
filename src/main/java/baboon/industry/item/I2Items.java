@@ -8,6 +8,10 @@ import baboon.industry.item.battery.ItemBatteryAdvanced;
 import baboon.industry.item.battery.ItemBatteryCrystal;
 import baboon.industry.item.battery.ItemBatteryLapis;
 import baboon.industry.item.battery.ItemBatteryRedstone;
+import baboon.industry.item.radioactive.ItemCellRedstoneT1;
+import baboon.industry.item.radioactive.ItemCellRedstoneT2;
+import baboon.industry.item.radioactive.ItemCellRedstoneT3;
+import baboon.industry.item.radioactive.ItemRadioactive;
 import baboon.industry.item.toolelectric.ItemToolChainsaw;
 import baboon.industry.item.toolelectric.ItemToolDrill;
 import baboon.industry.item.toolelectric.ItemToolNanoSword;
@@ -16,6 +20,7 @@ import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemFoodStackable;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
+import net.minecraft.core.item.tag.ItemTags;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 
@@ -32,7 +37,6 @@ public class I2Items {
     // Raw Ore
     public static Item oreRawTin;
     public static Item oreRawCopper;
-    public static Item oreRawUranium;
     public static Item ingotIridium;
 
     // Dust
@@ -47,7 +51,7 @@ public class I2Items {
     public static Item ingotTin;
     public static Item ingotCopper;
     public static Item ingotBronze;
-    public static Item ingotUranium;
+    public static Item ingotActivatedRedstone;
 
     // Plates
     public static Item plateTin;
@@ -99,7 +103,11 @@ public class I2Items {
     public static Item cellEmpty;
     public static Item cellWater;
     public static Item cellLava;
-    public static Item cellUranium;
+    public static Item cellRedstoneT1;
+    public static Item cellRedstoneT2;
+    public static Item cellRedstoneT3;
+    public static Item cellRedstoneT1Empty;
+    public static Item cellRedstoneT2Empty;
     public static Item cellCoolant;
 
     // Miscellaneous
@@ -112,6 +120,7 @@ public class I2Items {
     public static Item scrap;
 
     public static Item reactorPlate;
+    public static Item reactorVent;
 
     public static Item ingotIridiumScrap;
     public static Item upgradePlate;
@@ -124,12 +133,13 @@ public class I2Items {
 
     public static Item foodJoffos;
 
-    private void taggedItems() {
+    private void tagItems() {
         batteryRedstone.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
         batteryAdvanced.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
         batteryCrystal.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
         batteryLapis.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
         scrap.withTags(IndustryTags.PREVENT_ITEM_RECYCLING, IndustryTags.PREVENT_FABRICATING);
+        ingotActivatedRedstone.withTags(ItemTags.renderFullbright);
         ingotIridium.withTags(IndustryTags.PREVENT_FABRICATING);
         plateIridium.withTags(IndustryTags.PREVENT_FABRICATING);
         armorHelmetIridium.withTags(IndustryTags.PREVENT_FABRICATING);
@@ -158,10 +168,6 @@ public class I2Items {
         oreRawCopper= ItemHelper.createItem(MOD_ID,
                 new Item("ore.raw.copper", nextItemID("oreRawCopper")),
                 "raw_copper.png");
-
-        oreRawUranium = ItemHelper.createItem(MOD_ID,
-                new Item("ore.raw.uranium", nextItemID("oreRawUranium")),
-                "raw_uranium.png");
 
         dustTin = ItemHelper.createItem(MOD_ID,
                 new Item("dust.tin", nextItemID("dustTin")),
@@ -199,9 +205,9 @@ public class I2Items {
                 new Item("ingot.bronze", nextItemID("ingotBronze")),
                 "ingot_bronze.png");
 
-        ingotUranium = ItemHelper.createItem(MOD_ID,
-                new ItemRadioactive("ingot.uranium", nextItemID("ingotUranium")),
-                "ingot_uranium.png");
+        ingotActivatedRedstone = ItemHelper.createItem(MOD_ID,
+                new ItemRadioactive("ingot.redstone", nextItemID("ingotActivatedRedstone")),
+                "ingot_activated_redstone.png");
 
         ingotIridium = ItemHelper.createItem(MOD_ID,
                 new Item("ingot.iridium", nextItemID("ingotIridium")),
@@ -358,9 +364,25 @@ public class I2Items {
                 new Item("cell.lava", nextItemID("cellLava")),
                 "cell_lava.png");
 
-        cellUranium = ItemHelper.createItem(MOD_ID,
-                new ItemCellUranium("cell.uranium", nextItemID("cellUranium")),
-                "cell_uranium.png").setMaxStackSize(1);
+        cellRedstoneT1 = ItemHelper.createItem(MOD_ID,
+                new ItemCellRedstoneT1("cell.redstone.t1", nextItemID("cellRedstoneT1")),
+                "cell_redstone_t1.png").setMaxStackSize(1);
+
+        cellRedstoneT2 = ItemHelper.createItem(MOD_ID,
+                new ItemCellRedstoneT2("cell.redstone.t2", nextItemID("cellRedstoneT2")),
+                "cell_redstone_t2.png").setMaxStackSize(1);
+
+        cellRedstoneT3 = ItemHelper.createItem(MOD_ID,
+                new ItemCellRedstoneT3("cell.redstone.t3", nextItemID("cellRedstoneT3")),
+                "cell_redstone_t3.png").setMaxStackSize(1);
+
+        cellRedstoneT1Empty = ItemHelper.createItem(MOD_ID,
+                new ItemRadioactive("cell.redstone.empty.t1", nextItemID("cellRedstoneT1Empty")),
+                "cell_redstone_empty_t1.png").setMaxStackSize(1);
+
+        cellRedstoneT2Empty = ItemHelper.createItem(MOD_ID,
+                new ItemRadioactive("cell.redstone.empty.t2", nextItemID("cellRedstoneT2Empty")),
+                "cell_redstone_empty_t2.png").setMaxStackSize(1);
 
         cellCoolant = ItemHelper.createItem(MOD_ID,
                 new ItemCellCoolant("cell.coolant", nextItemID("cellCoolant")),
@@ -397,6 +419,9 @@ public class I2Items {
         reactorPlate = ItemHelper.createItem(MOD_ID,
                 new Item("reactorplate", nextItemID("reactorPlate")),
                 "plate_reactor.png");
+        reactorVent = ItemHelper.createItem(MOD_ID,
+                new Item("reactorvent", nextItemID("reactorVent")),
+                "upgrade_vent.png");
 
         ingotIridiumScrap = ItemHelper.createItem(MOD_ID,
                 new Item("ingot.iridium.scrap", nextItemID("ingotIridiumScrap")),
@@ -428,6 +453,6 @@ public class I2Items {
                 new ItemFoodStackable("food.joffos", nextItemID("foodJoffos"), 1, false, 10),
                 "food_joffos.png");
 
-        taggedItems();
+        tagItems();
     }
 }

@@ -36,9 +36,6 @@ public class OverworldInitialization extends BaseInitialization {
 
         if (IndustryConfig.cfg.getBoolean("World Gen.tinOre"))
             ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, I2Blocks.oreTinStone, 8, 20, 1/2f, true);
-
-        if (IndustryConfig.cfg.getBoolean("World Gen.uraniumOre"))
-            ChunkDecoratorOverworldAPI.oreFeatures.addManagedOreFeature(MOD_ID, I2Blocks.oreUraniumStone, 2, 10, 1/4f, true);
     }
 
     @Override
